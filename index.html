@@ -172,6 +172,23 @@ table.ct th,table.ct td{padding:7px 8px;border-bottom:1px solid var(--line);text
 @keyframes shim{to{background-position:300% 0}}
 @keyframes hb{50%{transform:scale(1.05)}}
 .plan .pold{font-size:14px;color:var(--muted);font-family:var(--body);text-decoration:line-through;margin-left:4px}
+.payb{margin-top:14px;display:grid;gap:8px;text-align:left}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--glass2);font-size:14px}
+#surpop .prow button{margin-top:0;padding:6px 12px;font-size:13px}
+#surpop{padding:14px}
+#surpop .sbox{max-height:calc(100dvh - 28px);overflow-y:auto;display:flex;flex-direction:column;gap:10px;width:min(420px,96vw);padding:20px 16px;text-align:center}
+#surpop .sbtn{width:100%;margin:0 !important;min-height:46px}
+#surpop .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#surpop .sbig{font-size:44px}
+#surpop p{font-size:14px}
+.accs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chipbtn{appearance:none;border:1.5px solid var(--line);background:var(--glass2);color:var(--ink);border-radius:12px;padding:8px 10px;font:inherit;font-size:13px;cursor:pointer;display:grid;gap:2px;text-align:left}
+.chipbtn span{color:var(--ink);opacity:.85;font-size:12px;word-break:break-all}
+.chipbtn.on{border-color:var(--pink);box-shadow:0 0 0 2px var(--pink) inset}
+.qrbox{background:#fff;border-radius:16px;padding:12px;display:grid;justify-items:center;gap:6px}
+.qrbox #qrImg{min-height:200px;display:grid;place-items:center}
+.qrbox #qrImg img,.qrbox #qrImg canvas{display:block;margin:auto}
+.qrbox #qrAmt{color:#333;font-size:13px;margin:0}
 #madeBy .okemo{font-size:clamp(70px,18vw,130px);line-height:1;margin-bottom:8px;filter:drop-shadow(0 0 24px var(--ok));animation:okpop .6s cubic-bezier(.2,1.6,.4,1) both,okblink .42s .6s 8 alternate}
 @keyframes okpop{from{opacity:0;transform:scale(.2) rotate(-25deg)}to{opacity:1;transform:none}}
 @keyframes okblink{to{opacity:.3;transform:scale(1.16)}}
@@ -586,10 +603,27 @@ table.ct th,table.ct td{padding:7px 8px;border-bottom:1px solid var(--line);text
 </div>
 
 <div id="madeBy" hidden aria-hidden="true"></div>
-<div id="surpop" role="dialog" aria-modal="true"><div class="sbox"><div class="sbig">🎁</div><h4 id="surT"></h4><p id="surB"></p><button id="surX" type="button">Theek hai</button></div></div>
+<div id="surpop" role="dialog" aria-modal="true"><div class="sbox">
+  <div class="sbig">🎁</div>
+  <h4 id="surT"></h4>
+  <p id="surB"></p>
+  <div class="accs" id="accs"></div>
+  <div class="qrbox"><div id="qrImg"></div><p id="qrAmt"></p></div>
+  <div class="row2">
+    <button class="btn primary sbtn" data-app="phonepe" type="button">PhonePe</button>
+    <button class="btn primary sbtn" data-app="paytm" type="button">Paytm</button>
+  </div>
+  <button class="btn sbtn" data-app="any" type="button">Koi bhi UPI app</button>
+  <div class="row2">
+    <button class="btn sbtn" id="enqTg" type="button">Telegram par screenshot</button>
+    <button class="btn sbtn" id="enqMail" type="button">Email par screenshot</button>
+  </div>
+  <button class="btn sbtn" id="surX" type="button">Band karo</button>
+</div></div>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 "use strict";
 /* =====================================================================
@@ -1346,6 +1380,46 @@ const CONTACT = { telegram: "Lovevoice1018", email: "ashishkr88as@gmail.com", yo
   el("cMail").addEventListener("click", () => {
     if (!CONTACT.email) { toast("Email abhi set nahi hai"); return; }
     location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Love Voice support") + "&body=" + encodeURIComponent(text());
+  });
+})();
+
+/* ============================ plan payment: scanner + app ============================ */
+const PAY_ACCOUNTS = [
+  { name: "Mrs Sangita Devi", upi: "9939000063@ibl" },
+  { name: "Sangita Dev W/O Jhunna Sah", upi: "9939000063-2@ybl" }
+];
+(() => {
+  const g = el("planGrid"); if (!g) return;
+  let plan = 0, acc = 0;
+  const amt = () => PLANS[plan].price.replace(/[^\d]/g, "");
+  const link = () => { const a = PAY_ACCOUNTS[acc], p = PLANS[plan];
+    return "upi://pay?pa=" + encodeURIComponent(a.upi) + "&pn=" + encodeURIComponent(a.name) + "&am=" + amt() + "&cu=INR&tn=" + encodeURIComponent("Love Voice " + p.name); };
+  const msg = () => "Love Voice Plan Enquiry\n\nPlan: " + PLANS[plan].name + "\nAmount: " + PLANS[plan].price + "\n\nPayment ke baad screenshot bhej raha hun.";
+  function renderPay() {
+    el("accs").innerHTML = PAY_ACCOUNTS.map((a, k) => `<button class="chipbtn${k === acc ? " on" : ""}" data-acc="${k}" type="button"><b>${esc(a.name)}</b></button>`).join("");
+    el("qrAmt").textContent = PLANS[plan].name + " · " + PLANS[plan].price;
+    const box = el("qrImg"); box.innerHTML = "";
+    if (window.QRCode) new QRCode(box, { text: link(), width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+    else box.innerHTML = '<p class="small" style="color:#333">Scanner abhi load nahi hua. Neeche wala button use karo.</p>';
+  }
+  g.addEventListener("click", e => { const c = e.target.closest(".plan"); if (c) { plan = +c.dataset.i; renderPay(); } });
+  g.addEventListener("keydown", e => { if (e.key === "Enter") { const c = e.target.closest(".plan"); if (c) { plan = +c.dataset.i; renderPay(); } } });
+  el("accs").addEventListener("click", e => { const b = e.target.closest("[data-acc]"); if (!b) return; acc = +b.dataset.acc; renderPay(); });
+  const PKG = { phonepe: "com.phonepe.app", paytm: "net.one97.paytm" };
+  el("surpop").addEventListener("click", e => {
+    const b = e.target.closest("[data-app]"); if (!b) return;
+    const u = link(), app = b.dataset.app;
+    if (app === "any" || !PKG[app]) { window.location.href = u; return; }
+    window.location.href = "intent://" + u.slice("upi://".length) + "#Intent;scheme=upi;package=" + PKG[app] + ";end";
+  });
+  el("enqTg").addEventListener("click", () => {
+    if (!CONTACT.telegram) { toast("Telegram set nahi hai"); return; }
+    copy(msg(), "Message copy ho gaya, Telegram mein paste karo");
+    window.open("https://t.me/" + CONTACT.telegram, "_blank", "noopener");
+  });
+  el("enqMail").addEventListener("click", () => {
+    if (!CONTACT.email) { toast("Email set nahi hai"); return; }
+    location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Love Voice Plan Enquiry") + "&body=" + encodeURIComponent(msg());
   });
 })();
 
