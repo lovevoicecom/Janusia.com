@@ -2,6 +2,7 @@
 <html lang="hi">
 <head>
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="referrer" content="no-referrer">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#090410">
@@ -479,6 +480,28 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 .evrow{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border-radius:10px;background:var(--glass2);font-size:12.5px;line-height:1.45}
 .verTag{display:block;text-align:center;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold);margin-top:8px}
 .bgmBtn{min-width:44px}
+/* ===== Mind Relax + Mixer ===== */
+.rxstage{aspect-ratio:16/9;max-width:560px;width:100%;margin:0 auto;border-radius:16px;border:1px dashed var(--line);display:grid;place-items:center;background:var(--field)}
+.ytdock{position:fixed;right:12px;bottom:12px;z-index:65;width:208px;border-radius:14px;background:var(--glass);border:1px solid var(--line);box-shadow:0 10px 30px var(--shadow);backdrop-filter:blur(10px);overflow:hidden}
+@media(max-width:900px){.ytdock{bottom:92px}}
+.ytdock.big{border-radius:16px}
+.ytdock.big .ythead{display:none}
+.ythead{display:flex;align-items:center;gap:6px;padding:4px 6px 4px 10px}
+.yttitle{flex:1;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted,inherit)}
+.ythead .btn{padding:2px 8px;min-height:0;line-height:1.2}
+.ytwrap{position:relative;aspect-ratio:16/9;background:#000}
+.ytwrap #ytPlayer,.ytwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytwrap.retro{filter:sepia(.3) saturate(1.18) contrast(1.05) brightness(.97)}
+.ytwrap i{position:absolute;inset:0;pointer-events:none;display:none}
+.ytwrap.retro i{display:block}
+.ytTint{background:linear-gradient(135deg,rgba(255,170,110,.14),rgba(120,70,210,.14));mix-blend-mode:soft-light}
+.ytScan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.30) 0 1px,transparent 1px 3px);opacity:.28}
+.ytVig{background:radial-gradient(ellipse at center,transparent 55%,rgba(25,0,40,.55) 100%);opacity:.55}
+.ytOsd{position:absolute;left:7px;top:5px;pointer-events:none;display:none;font:700 10px/1 "Courier New",monospace;color:#fff;opacity:.5;letter-spacing:.08em;text-shadow:0 0 4px #f0f}
+.ytwrap.retro .ytOsd{display:block}
+.mxgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.mxv{float:right;color:var(--gold);font-weight:800}
+
 .lvfoot .lvver{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
 @media(prefers-reduced-motion:reduce){.odot{animation:none}}
 </style>
@@ -501,6 +524,8 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
       <button class="tab" role="tab" data-tab="history" aria-selected="false">🎧 History</button>
       <button class="tab" role="tab" data-tab="clone" aria-selected="false">🧬 Instant Clone</button>
       <button class="tab" role="tab" data-tab="stt" aria-selected="false">📝 Awaaz se Text</button>
+      <button class="tab" role="tab" data-tab="relax" aria-selected="false">🌿 Mind Relax</button>
+      <button class="tab" role="tab" data-tab="mixer" aria-selected="false">🎚️ Mixer &amp; Effects</button>
       <button class="tab" role="tab" data-tab="connect" aria-selected="false">🔑 Connect &amp; Key</button>
       <button class="tab" role="tab" data-tab="plans" aria-selected="false">💎 Plans &amp; Upgrade</button>
       <button class="tab" role="tab" data-tab="contact" aria-selected="false">💬 Contact</button>
@@ -509,7 +534,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
     <div class="sidefoot">
       <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button></div>
       <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="50" value="12" style="flex:1" aria-label="Music volume"></label>
-      <span class="verTag">⚡ v2.5 · Shield Pro</span>
+      <span class="verTag">⚡ v3.1 · Shield Pro</span>
     </div>
   </aside>
 
@@ -781,6 +806,140 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
   </section>
 
   <!-- ================= CONNECT & API KEY ================= -->
+  <!-- ================= MIND RELAX MODE ================= -->
+  <section id="p-relax" role="tabpanel" hidden>
+    <div class="glass grid">
+      <div class="row sb">
+        <div>
+          <h2 style="margin:0">🌿 Mind Relax Mode</h2>
+          <p class="small muted">Gaana peeche chalta rahega — kisi bhi tab mein jao, band nahi hoga. Voice banate ya sunte hi gaana apne-aap dheema ho jata hai.</p>
+        </div>
+        <span class="chip" id="rxState">Ready</span>
+      </div>
+
+      <div class="rxstage" id="rxStage"><span class="small muted">Player yahan dikhega…</span></div>
+      <div class="small muted" id="rxNow" style="text-align:center">—</div>
+
+      <div class="row" style="justify-content:center">
+        <button class="btn sm" id="rxPrev" type="button" aria-label="Pichla">⏮</button>
+        <button class="btn primary" id="rxPlay" type="button">▶ Play</button>
+        <button class="btn sm" id="rxNext" type="button" aria-label="Agla">⏭</button>
+        <button class="btn sm" id="rxBig" type="button">⤢ Player bada/chhota</button>
+      </div>
+
+      <div class="g3" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <label class="f"><b>🔊 Volume</b><input class="bgmVol" type="range" min="0" max="50" value="12" aria-label="Music volume"></label>
+        <label class="f"><b>🎵 Music source</b>
+          <select id="rxSource"><option value="yt">YouTube (Mind Relax)</option><option value="local">Janusia Lofi (bgm.mp3)</option><option value="off">Band</option></select>
+        </label>
+      </div>
+
+      <div>
+        <b class="small">Mood chuno</b>
+        <div class="row" style="margin-top:8px" id="rxMoods">
+          <button class="btn sm" data-mood="lofi" type="button">🌙 Lo-Fi Chill</button>
+          <button class="btn sm" data-mood="s90" type="button">📼 90s Slowed Reverb</button>
+          <button class="btn sm" data-mood="love" type="button">💖 Romantic Lofi</button>
+        </div>
+        <p class="small muted" style="margin-top:6px">Agar koi video embed band hui to agla apne-aap chal jata hai. Apna favourite gaana neeche link se lagao.</p>
+      </div>
+
+      <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
+        <input id="rxUrl" type="text" style="flex:1;min-width:200px" placeholder="YouTube video ya playlist ka link paste karo" aria-label="YouTube link">
+        <button class="btn primary" id="rxGo" type="button">▶ Chalao</button>
+      </div>
+
+      <div class="row">
+        <label class="check" style="gap:8px"><input id="rxAuto" type="checkbox" checked><span class="small">Website khulte hi gaana apne-aap chale (pehle touch par awaaz aati hai)</span></label>
+        <label class="check" style="gap:8px"><input id="rxRetro" type="checkbox" checked><span class="small">📼 90s VHS look</span></label>
+      </div>
+
+      <div id="rxOwnerBox" class="row" hidden style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line2)">
+        <span class="small" style="flex-basis:100%">👑 <b>Owner:</b> yahan jo gaana set karoge wo har naye visitor ko default chalega (live/viral gaana yahan lagao).</span>
+        <input id="rxDefUrl" type="text" style="flex:1;min-width:200px" placeholder="Default YouTube link (sabhi users ke liye)">
+        <button class="btn sm primary" id="rxDefSave" type="button">💾 Default Set Karo</button>
+      </div>
+      <p class="small muted">ℹ️ YouTube ke gaane download nahi ho sakte (YouTube ki policy). Download ke liye <b>Mixer &amp; Effects</b> tab mein apni file ya Janusia Lofi ke saath voice mix karo.</p>
+    </div>
+  </section>
+
+  <!-- ================= MIXER & EFFECTS ================= -->
+  <section id="p-mixer" role="tabpanel" hidden>
+    <div class="glass grid">
+      <div>
+        <h2 style="margin:0">🎚️ Voice + Music Mixer &amp; Studio Effects</h2>
+        <p class="small muted">Apni voice ke peeche music mix karo, reverb / echo / deep bass lagao, preview suno aur final audio download karo. Sab kuch aapke browser mein hota hai — koi credit nahi lagta.</p>
+      </div>
+
+      <div class="g3" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <div class="grid" style="gap:8px">
+          <b>1️⃣ Voice chuno</b>
+          <select id="mxHist" aria-label="History se voice"></select>
+          <label class="btn sm" style="cursor:pointer">📁 Ya apni voice file upload karo<input id="mxVoiceFile" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg" hidden></label>
+          <span class="small muted" id="mxVoiceName">Latest generated voice use hogi</span>
+        </div>
+        <div class="grid" style="gap:8px">
+          <b>2️⃣ Music chuno</b>
+          <select id="mxMusicSrc" aria-label="Music source"><option value="lofi">Janusia Lofi (bgm.mp3)</option><option value="file">Apni music file</option><option value="none">Music nahi (sirf effects)</option></select>
+          <label class="btn sm" style="cursor:pointer">📁 Music file upload<input id="mxMusicFile" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg" hidden></label>
+          <span class="small muted" id="mxMusicName">—</span>
+        </div>
+        <div class="grid" style="gap:8px">
+          <b>3️⃣ Effects preset</b>
+          <select id="mxPreset" aria-label="Preset">
+            <option value="original">Original (koi effect nahi)</option>
+            <option value="studio">🎙️ Studio Mic (bhari awaaz)</option>
+            <option value="hall">🕌 Hall Shayari (reverb)</option>
+            <option value="cinema">🎬 Deep Cinematic</option>
+            <option value="podcast">🎧 Podcast Clean</option>
+            <option value="retro">📼 Retro 90s Radio</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin:4px 0 0">🎛️ Mixer</h3>
+      <div class="mxgrid">
+        <label class="f"><b>Voice volume <span class="mxv" data-for="mxVoiceVol"></span></b><input id="mxVoiceVol" type="range" min="40" max="150" value="100"></label>
+        <label class="f"><b>Music volume <span class="mxv" data-for="mxMusicVol"></span></b><input id="mxMusicVol" type="range" min="0" max="100" value="22"></label>
+        <label class="f"><b>Voice bolte time music kitna rahe <span class="mxv" data-for="mxDuck"></span></b><input id="mxDuck" type="range" min="10" max="100" value="40"></label>
+        <label class="f"><b>Music pehle (sec) <span class="mxv" data-for="mxIntro"></span></b><input id="mxIntro" type="range" min="0" max="10" step="0.5" value="2"></label>
+        <label class="f"><b>Music baad mein (sec) <span class="mxv" data-for="mxTail"></span></b><input id="mxTail" type="range" min="0" max="12" step="0.5" value="3"></label>
+        <label class="f"><b>Fade in (sec) <span class="mxv" data-for="mxFin"></span></b><input id="mxFin" type="range" min="0" max="6" step="0.5" value="1.5"></label>
+        <label class="f"><b>Fade out (sec) <span class="mxv" data-for="mxFout"></span></b><input id="mxFout" type="range" min="0" max="10" step="0.5" value="3"></label>
+      </div>
+      <div class="row"><label class="check" style="gap:8px"><input id="mxLoop" type="checkbox" checked><span class="small">Music chhota ho to loop karo</span></label>
+        <label class="check" style="gap:8px"><input id="mxAutoDuck" type="checkbox" checked><span class="small">Auto-duck (voice bolte hi music dheema)</span></label></div>
+
+      <h3 style="margin:4px 0 0">✨ Studio Effects Rack</h3>
+      <div class="mxgrid">
+        <label class="f"><b>Reverb <span class="mxv" data-for="mxRev"></span></b><input id="mxRev" type="range" min="0" max="60" value="0"></label>
+        <label class="f"><b>Room size (sec) <span class="mxv" data-for="mxRoom"></span></b><input id="mxRoom" type="range" min="0.3" max="4" step="0.1" value="1.6"></label>
+        <label class="f"><b>Echo <span class="mxv" data-for="mxEcho"></span></b><input id="mxEcho" type="range" min="0" max="50" value="0"></label>
+        <label class="f"><b>Echo time (sec) <span class="mxv" data-for="mxEchoT"></span></b><input id="mxEchoT" type="range" min="0.1" max="0.8" step="0.05" value="0.3"></label>
+        <label class="f"><b>Echo repeat <span class="mxv" data-for="mxEchoFb"></span></b><input id="mxEchoFb" type="range" min="0" max="60" value="30"></label>
+        <label class="f"><b>Deep Bass (dB) <span class="mxv" data-for="mxBass"></span></b><input id="mxBass" type="range" min="0" max="12" step="0.5" value="0"></label>
+        <label class="f"><b>Voice Clarity (dB) <span class="mxv" data-for="mxClar"></span></b><input id="mxClar" type="range" min="0" max="8" step="0.5" value="0"></label>
+      </div>
+      <label class="check" style="gap:8px"><input id="mxComp" type="checkbox"><span class="small">🎚️ Studio Compressor (awaaz barabar aur bhari)</span></label>
+
+      <div class="row">
+        <button class="btn primary" id="mxPreview" type="button">🎧 Preview Banao</button>
+        <button class="btn" id="mxReset" type="button">↺ Reset</button>
+        <span class="small muted" id="mxMsg" role="status"></span>
+      </div>
+      <div class="bar" id="mxBarWrap" hidden><i id="mxBar" style="width:0"></i></div>
+
+      <div id="mxOut" hidden class="grid" style="gap:10px">
+        <audio id="mxPlayer" controls style="width:100%"></audio>
+        <div class="row">
+          <button class="btn primary" id="mxDlWav" type="button">⬇️ WAV Download</button>
+          <button class="btn primary" id="mxDlMp3" type="button">⬇️ MP3 Download</button>
+          <span class="small muted" id="mxInfo"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="p-connect" role="tabpanel" hidden>
     <div class="cols">
       <div class="grid">
@@ -1035,7 +1194,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
           </div>
           <div class="row">
             <span class="chip" id="beChip">Connecting…</span>
-            <label class="check" style="gap:6px"><input id="autoRef" type="checkbox" checked><span class="small">Auto-refresh 5s</span></label>
+            <label class="check" style="gap:6px"><input id="autoRef" type="checkbox" checked><span class="small">Auto-refresh 15s</span></label>
             <button class="btn sm" id="refreshSecBtn" type="button">🔄 Refresh</button>
           </div>
         </div>
@@ -1053,6 +1212,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
           <div class="tile"><span class="small muted">🔤 Characters</span><b id="tChars">0</b></div>
           <div class="tile"><span class="small muted">💳 Credits</span><b id="tCredits">0</b></div>
           <div class="tile"><span class="small muted">🚫 Blocked</span><b id="tBlocked" style="color:var(--bad)">0</b></div>
+          <div class="tile"><span class="small muted">🛰️ VPN users</span><b id="tVpn" style="color:var(--warn)">0</b></div>
         </div>
 
         <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
@@ -1065,7 +1225,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 
         <h3 style="margin:6px 0 0">🟢 Abhi Online Users</h3>
         <div class="tw" style="max-height:200px">
-          <table class="ct"><thead><tr><th>IP</th><th>Location</th><th>Browser</th><th>Tab</th><th>Mode</th><th>Last ping</th></tr></thead><tbody id="onlineBody"></tbody></table>
+          <table class="ct"><thead><tr><th>IP</th><th>Address</th><th>Browser</th><th>Abhi kahan</th><th>Time (is session)</th><th>Mode</th></tr></thead><tbody id="onlineBody"></tbody></table>
         </div>
 
         <div class="row sb" style="margin-top:6px">
@@ -1078,7 +1238,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
         </div>
         <div class="tw" style="max-height:420px">
           <table class="ct" id="secUsersTable">
-            <thead><tr><th>User (IP)</th><th>Visits</th><th>Voices</th><th>Free quota</th><th>VPN</th><th>Status</th><th>Action</th></tr></thead>
+            <thead><tr><th>User · Address · ISP</th><th>Website par time</th><th>Kya use kiya</th><th>Voices / Quota</th><th>VPN</th><th>Status</th><th>Action</th></tr></thead>
             <tbody id="secUsersBody"></tbody>
           </table>
         </div>
@@ -1093,6 +1253,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
           <label class="f"><b>Max / minute</b><input id="cfgMin" type="number" min="1" max="60" value="3"></label>
           <label class="f"><b>Max / din</b><input id="cfgDay" type="number" min="1" max="500" value="18"></label>
         </div>
+        <label class="check" style="gap:8px"><input id="cfgVpn" type="checkbox" checked><span>🛰️ VPN/Proxy wale ko free voice na do (sirf warning + band; apni API key wale par asar nahi)</span></label>
         <button class="btn primary" id="cfgSave" type="button">💾 Rules Save Karo</button>
       </div>
 
@@ -1132,7 +1293,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 
   <footer class="lvfoot">
     <span class="lvmade">Made with Janusia</span>
-    <span class="lvver">⚡ Version 2.5 · Shield Pro · Updated Nov 2026</span>
+    <span class="lvver">⚡ Version 3.1 · Shield Pro · Updated Nov 2026</span>
     <span class="lvby">Crafted by <b class="nm">J Ashish Gupta</b></span>
     <span class="lvlinks"><a href="https://youtube.com/@janusiacom?si=QOYkAo7UzLwhLaLL" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#fff"/><rect x="4" y="11" width="40" height="26" rx="8" fill="#FF0000"/><path d="M20 18l12 6-12 6z" fill="#fff"/></svg></span>YouTube</a> <a href="https://www.instagram.com/janusiacom?xtok=MTVicjQ2YW8yNXA3Yg==" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><radialGradient id="gIg" cx=".25" cy="1.05" r="1.2"><stop offset="0" stop-color="#FEDA75"/><stop offset=".25" stop-color="#FA7E1E"/><stop offset=".5" stop-color="#D62976"/><stop offset=".75" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs><rect width="48" height="48" rx="13" fill="url(#gIg)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.500" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg></span>Instagram</a> <a href="https://t.me/Janusia10" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><linearGradient id="gTg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#37AEE2"/><stop offset="1" stop-color="#1E96C8"/></linearGradient></defs><circle cx="24" cy="24" r="24" fill="url(#gTg)"/><g transform="translate(9 9) scale(1.250)"><path fill="#fff" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></g></svg></span>Telegram</a></span>
   </footer>
@@ -1190,6 +1351,14 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- floating Mind Relax mini-player: kisi bhi tab mein gaana chalta rahe -->
+<div id="ytDock" class="ytdock mini" hidden aria-label="Mind Relax player">
+  <div class="ythead"><span id="ytTitle" class="yttitle">Mind Relax</span><button class="btn sm" id="ytExpand" type="button" aria-label="Bada/chhota">⤢</button></div>
+  <div class="ytwrap retro" id="ytWrap">
+    <div id="ytPlayer"></div>
+    <i class="ytTint"></i><i class="ytScan"></i><i class="ytVig"></i><span class="ytOsd">▶ PLAY · SP · 90s</span>
+  </div>
+</div>
 <script>
 "use strict";
 /* =====================================================================
@@ -1202,8 +1371,8 @@ const JanusiaConfig = {
   DEFAULT_API_KEY: "sk_car_x5S6WdwjShAgGXh45hDrRm",
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
-  VERSION: "2.5",
-  VERSION_LABEL: "v2.5 · Shield Pro · Nov 2026",
+  VERSION: "3.1",
+  VERSION_LABEL: "v3.1 · Shield Pro · Nov 2026",
   BACKEND_URL: "https://janusia-shield.polished-haze-db97.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
   CHAR_LIMIT_FREE: 250,
   CHAR_LIMIT_PRO: 20000,
@@ -1316,48 +1485,36 @@ async function speakWelcomeFemale() {
   } catch (_) {}
 }
 
-/* ============================ BACKGROUND MUSIC (lofi, halki awaaz; voice chalte hi apne-aap dheemi) ============================ */
+/* ============================ LOCAL LOFI (bgm.mp3) — Mind Relax Mode isko control karta hai ============================ */
 const Music = (() => {
   const SRC = "bgm.mp3", DUCK_RATIO = 0.25;
-  let au = null, on = true, started = false, cur = 0, timer = 0, vol = 0.12, warned = false;
-  try { on = localStorage.getItem("janusia_bgm") !== "0"; const v = parseFloat(localStorage.getItem("janusia_bgm_vol")); if (v >= 0 && v <= 0.5) vol = v; } catch (_) {}
-  const voiceActive = () => {
-    try { if (S.busy) return true; } catch (_) {}
-    return $$("audio").some(a => a !== au && !a.paused && !a.ended && a.currentTime > 0);
-  };
+  let au = null, active = false, started = false, cur = 0, timer = 0, warned = false;
   function ensure() {
     if (au) return au;
     au = new Audio(); au.loop = true; au.preload = "auto"; au.volume = 0;
     au.addEventListener("error", () => { if (!warned) { warned = true; toast("🎵 bgm.mp3 nahi mila — use GitHub mein index.html ke saath, usi main folder mein upload karo"); } });
-    au.src = SRC;
-    return au;
+    au.src = SRC; return au;
   }
   function tick() {
     if (!au) return;
-    const tgt = on && !document.hidden ? (voiceActive() ? vol * DUCK_RATIO : vol) : 0;
+    const v = Relax.vol(), tgt = active && !document.hidden ? (voiceActive() ? v * DUCK_RATIO : v) : 0;
     cur += (tgt - cur) * 0.1; if (Math.abs(tgt - cur) < 0.002) cur = tgt;
     try { au.volume = Math.max(0, Math.min(1, cur)); } catch (_) {}
     if (tgt === 0 && cur === 0 && !au.paused) au.pause();
     else if (tgt > 0 && au.paused && started) au.play().catch(() => {});
   }
   function start() {
-    if (!on) return;
-    const p = ensure().play();
+    active = true; const p = ensure().play();
     if (p && p.then) p.then(() => { started = true; if (!timer) timer = setInterval(tick, 80); }).catch(() => {});
   }
-  function paint() {
-    $$(".bgmBtn").forEach(b => { b.textContent = on ? "🎵" : "🔇"; b.setAttribute("aria-pressed", String(on)); b.title = on ? "Music band karo" : "Music chalu karo"; });
-    $$(".bgmVol").forEach(r => { r.value = Math.round(vol * 100); });
-  }
-  function toggle() { on = !on; try { localStorage.setItem("janusia_bgm", on ? "1" : "0"); } catch (_) {} paint(); if (on) start(); }
-  function setVol(v) { vol = Math.max(0, Math.min(0.5, v)); try { localStorage.setItem("janusia_bgm_vol", String(vol)); } catch (_) {} if (!started) start(); }
-  // Browser autoplay tabhi deta hai jab asli click/touch (touchend/click) ho — isliye sab try karte hain
-  const first = () => { start(); if (started) ["click", "touchend", "pointerup", "keydown"].forEach(e => removeEventListener(e, first, true)); };
-  ["click", "touchend", "pointerup", "keydown"].forEach(e => addEventListener(e, first, true));
-  document.addEventListener("visibilitychange", () => { if (!document.hidden && on && au && au.paused && started) au.play().catch(() => {}); });
-  document.addEventListener("DOMContentLoaded", () => { paint(); $$(".bgmVol").forEach(r => r.addEventListener("input", () => setVol(r.value / 100))); });
-  return { toggle, paint };
+  function stop() { active = false; }
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && active && au && au.paused && started) au.play().catch(() => {}); });
+  return { start, stop, get started() { return started; } };
 })();
+function voiceActive() {
+  try { if (S.busy) return true; } catch (_) {}
+  return $$("audio").some(a => !a.paused && !a.ended && a.currentTime > 0);
+}
 
 /* ============================ JANUSIA SECURITY SHIELD v2 ============================
    BACKEND_URL set ho to: IP, quota, block, online users, history sab SERVER par rehta hai
@@ -1400,6 +1557,9 @@ const JanusiaShield = (() => {
 
   const curTab = () => { const b = document.querySelector(".tab[aria-selected=true]"); return b ? b.dataset.tab : ""; };
   const ago = ts => { if (!ts) return "-"; const s = Math.max(0, Math.round((Date.now() - ts) / 1000)); return s < 60 ? s + "s pehle" : s < 3600 ? Math.floor(s / 60) + "m pehle" : s < 86400 ? Math.floor(s / 3600) + "h pehle" : Math.floor(s / 86400) + "d pehle"; };
+  const dur = sec => { sec = Math.round(sec || 0); if (sec < 60) return sec + " sec"; if (sec < 3600) return Math.floor(sec / 60) + " min"; const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60); return h + "h " + m + "m"; };
+  const tabName = id => { const b = document.querySelector('.tab[data-tab="' + id + '"]'); return b ? b.textContent.replace(/\s+/g, " ").trim() : (id || "-"); };
+  const addr = u => [u.city, u.region, u.postal, u.country].filter(Boolean).join(", ") || "location ?";
   const when = ts => ts ? new Date(ts).toLocaleString("en-IN", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }) : "-";
 
   /* ---------------- local DB (sirf fallback / mirror) ---------------- */
@@ -1437,10 +1597,12 @@ const JanusiaShield = (() => {
 
   function applyStatus(st) {
     if (!st || !st.ip) return;
+    try { Relax.serverDefault(st.yt); } catch (_) {}
     remote = st; ip = st.ip; vpnRisk = st.vpnRisk || "Low"; vpnReasons = [];
     beState = "live";
     updateStatusUI(); syncPauseUI(); updateCharLimitUI();
     if (st.blocked) { blockShown = true; showBanner("Owner ne aapka IP/Device (" + st.ip + ") block kar diya hai.", st.ip); }
+    else if (st.vpn && st.vpnBlocked && !S.isCustomKey) { blockShown = true; showBanner("⚠️ VPN/Proxy detect hua. Free voice tab tak band hai jab tak VPN chalu hai — VPN band karke page refresh karein, ya Connect tab mein apni API key lagayein.", st.ip); }
     else if (blockShown) { blockShown = false; hideBanner(); }
   }
   async function refreshStatus(kind) {
@@ -1454,7 +1616,7 @@ const JanusiaShield = (() => {
   async function initNetworkAndVpnCheck() {
     if (BE) {
       await refreshStatus("hello");
-      setInterval(() => { if (!document.hidden) refreshStatus("ping"); }, 20000);
+      setInterval(() => { if (!document.hidden) refreshStatus("ping"); }, 60000);
       document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshStatus("ping"); });
       if (beState === "live") return;
     }
@@ -1639,6 +1801,9 @@ const JanusiaShield = (() => {
     }
     saveDB(db); renderAdminPanel();
   }
+  async function vpnAllow(target, allow) {
+    try { await adminFetch("/api/admin/vpn-allow", { target, allow: !!allow }); toast(allow ? "✅ VPN ki ijazat di: " + target : "VPN ijazat hata di"); await loadAdmin(); } catch (e) { toast("❌ " + e.message); }
+  }
   async function resetUser(target) {
     if (BE) { try { await adminFetch("/api/admin/reset-user", { ip: target }); toast("♻️ Free quota reset: " + target); await loadAdmin(); } catch (e) { toast("❌ " + e.message); } return; }
     const db = loadDB(); Object.values(db.users).forEach(u => { if (u.ip === target) { u.freeUsed = 0; u.hits = []; u.tempBlockedUntil = 0; u.strikes = 0; } }); saveDB(db); renderAdminPanel(); toast("♻️ Free quota reset");
@@ -1655,7 +1820,7 @@ const JanusiaShield = (() => {
     if (BE) { try { const r = await adminFetch("/api/admin/wipe"); await loadAdmin(); toast("Server ka saara log saaf (" + (r.deleted || 0) + " records)"); } catch (e) { toast("❌ " + e.message); } return; }
     localStorage.removeItem(LS_KEY); renderAdminPanel(); toast("Security logs reset ho gaye");
   }
-  setInterval(() => { if (BE && S.owner && !adminHalt && !document.hidden && curTab() === "owner" && (!el("autoRef") || el("autoRef").checked)) loadAdmin(); }, 5000);
+  setInterval(() => { if (BE && S.owner && !adminHalt && !document.hidden && curTab() === "owner" && (!el("autoRef") || el("autoRef").checked)) loadAdmin(); }, 15000);
 
   /* ---------------- UI ---------------- */
   function showBanner(msg, idRef) {
@@ -1702,8 +1867,9 @@ const JanusiaShield = (() => {
     set("tVisitors", visitors); set("tVisits", D ? (D.global.visits || 0) + " total visits" : "");
     set("tGens", g.generations); set("tChars", g.usedChars.toLocaleString("en-IN")); set("tCredits", g.usedCredits.toLocaleString("en-IN"));
     const rows = D ? D.users : localRows(); lastRows = rows;
-    set("tBlocked", rows.filter(r => r.blocked || r.tempBlocked).length);
+    set("tBlocked", rows.filter(r => r.blocked || r.tempBlocked).length); set("tVpn", rows.filter(r => r.vpn).length);
     if (D && D.cfg) {
+      if (el("cfgVpn")) el("cfgVpn").checked = D.cfg.vpnBlock !== false;
       [["cfgFree", D.cfg.freeChars], ["cfgGap", D.cfg.minGapSec], ["cfgMin", D.cfg.maxPerMin], ["cfgDay", D.cfg.maxPerDay]].forEach(([id, v]) => { if (el(id) && document.activeElement !== el(id)) el(id).value = v; });
     }
     updateStatusUI();
@@ -1727,7 +1893,7 @@ const JanusiaShield = (() => {
       const items = evs.filter(e => e.kind !== "alert").slice(0, 30);
       ef.innerHTML = items.length ? items.map(e => {
         const who = `<b>${esc(e.ip || "")}</b>${e.country ? " (" + esc(e.country) + ")" : ""}`;
-        const txt = e.kind === "gen" ? `${who} ne <b>${e.chars}</b> chars ki awaaz banayi · ${e.credits} credits · ${esc(e.voice || "")} · ${esc(e.key || "")}` : e.kind === "visit" ? `${who} ne website kholi${e.browser ? " (" + esc(e.browser) + ")" : ""}` : `${who} ka request roka gaya (${esc(e.why || "")})`;
+        const txt = e.kind === "gen" ? `${who} ne <b>${e.chars}</b> chars ki awaaz banayi · ${e.credits} credits · ${esc(e.voice || "")} · ${esc(e.key || "")}` : e.kind === "visit" ? `${who} ne website kholi${e.city ? " · " + esc(e.city) : ""}${e.browser ? " (" + esc(e.browser) + ")" : ""}${e.vpn ? " · <b style='color:var(--bad)'>VPN</b>" : ""}` : `${who} ka request roka gaya (${esc(e.why || "")})`;
         return `<div class="evrow"><span>${icon[e.kind] || "•"}</span><span style="flex:1">${txt}</span><span class="muted">${esc(ago(e.t))}</span></div>`;
       }).join("") : '<div class="muted small">Abhi koi activity nahi.</div>';
     }
@@ -1735,8 +1901,8 @@ const JanusiaShield = (() => {
     // online table
     const ob = el("onlineBody");
     if (ob) {
-      const on = D ? D.online : [{ ip, ts: Date.now(), tab: curTab(), browser: "This browser", country: "", city: "", custom: S.isCustomKey }];
-      ob.innerHTML = on.length ? on.map(o => `<tr><td><span class="odot"></span><b>${esc(o.ip)}</b></td><td>${esc([o.city, o.country].filter(Boolean).join(", ") || "-")}</td><td>${esc(o.browser || "-")}</td><td>${esc(o.tab || "-")}</td><td>${o.custom ? '<span class="chip ok">Own key</span>' : '<span class="chip gold">Free</span>'}</td><td class="muted">${esc(ago(o.ts))}</td></tr>`).join("") : '<tr><td colspan="6" class="muted">Abhi koi online nahi.</td></tr>';
+      const on = D ? D.online : [{ ip, ts: Date.now(), since: pageBootTime, tab: curTab(), browser: "This browser", country: "", city: "", custom: S.isCustomKey }];
+      ob.innerHTML = on.length ? on.map(o => `<tr><td><span class="odot"></span><b>${esc(o.ip)}</b>${o.vpn ? ' <span class="chip bad">VPN</span>' : ""}<br><span class="muted">${esc(o.isp || "")}</span></td><td>${esc(addr(o))}</td><td>${esc(o.browser || "-")}</td><td>${esc(tabName(o.tab))}</td><td><b>${esc(dur((Date.now() - (o.since || Date.now())) / 1000))}</b><br><span class="muted">is session mein</span></td><td>${o.custom ? '<span class="chip ok">Own key</span>' : '<span class="chip gold">Free</span>'}</td></tr>`).join("") : '<tr><td colspan="6" class="muted">Abhi koi online nahi.</td></tr>';
     }
 
     // users table
@@ -1744,19 +1910,19 @@ const JanusiaShield = (() => {
     if (tb) {
       const q = (el("userSearch") && el("userSearch").value || "").trim().toLowerCase();
       const freeLim = D ? D.cfg.freeChars : JanusiaConfig.CHAR_LIMIT_FREE;
-      const list = rows.filter(r => !q || (r.ip + " " + (r.country || "") + " " + (r.city || "") + " " + (r.browsers || []).join(" ")).toLowerCase().includes(q));
+      const list = rows.filter(r => !q || (r.ip + " " + addr(r) + " " + (r.isp || "") + " " + (r.browsers || []).join(" ")).toLowerCase().includes(q));
       tb.innerHTML = list.length ? list.map(u => {
-        const st = u.blocked ? '<span class="chip bad">Blocked</span>' : u.tempBlocked ? '<span class="chip warn">Temp Blocked</span>' : (u.freeChars >= freeLim && !u.custom) ? '<span class="chip gold">Free limit done</span>' : '<span class="chip ok">Active</span>';
-        const fp = Math.min(100, ((u.freeChars || 0) / Math.max(1, freeLim)) * 100);
-        const ids = (u.cids || []).length;
+        const st = u.blocked ? '<span class="chip bad">Blocked</span>' : u.tempBlocked ? '<span class="chip warn">Temp Blocked</span>' : (u.vpn && !u.vpnAllowed) ? '<span class="chip bad">VPN — free band</span>' : (u.freeChars >= freeLim && !u.custom) ? '<span class="chip gold">Free limit done</span>' : '<span class="chip ok">Active</span>';
+        const fp = Math.min(100, ((u.freeChars || 0) / Math.max(1, freeLim)) * 100), ids = (u.cids || []).length;
+        const tabs = Object.entries(u.tabSec || {}).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([t, sec]) => `${esc(tabName(t))} <b>${esc(dur(sec))}</b>`).join("<br>") || "-";
         return `<tr>
-          <td><span class="${u.onlineNow ? "odot" : "odot off"}"></span><b>${esc(u.ip)}</b><br><span class="muted">${esc([u.city, u.country].filter(Boolean).join(", ") || "location ?")} · ${esc((u.browsers || []).slice(-3).join(", ") || "-")}</span></td>
-          <td>${(u.visits || 0)} visit${ids > 1 ? ` <span class="chip warn">${ids} browser</span>` : ""}<br><span class="muted">pehli: ${esc(when(u.firstSeen))}<br>aakhri: ${esc(ago(u.lastSeen))}</span></td>
-          <td><b style="font-size:16px">${u.gens || 0}</b> voices<br><span class="muted">${(u.chars || 0).toLocaleString("en-IN")} chars · ${u.credits || 0} cr</span></td>
-          <td style="min-width:120px"><div class="bar" style="height:7px"><i style="width:${fp.toFixed(0)}%"></i></div><span class="muted">${u.freeChars || 0} / ${freeLim} free</span></td>
-          <td><span class="chip ${u.vpnRisk === "Low" ? "ok" : "warn"}">${esc(u.vpnRisk || "Low")}</span></td>
+          <td><span class="${u.onlineNow ? "odot" : "odot off"}"></span><b>${esc(u.ip)}</b><br><span class="muted">📍 ${esc(addr(u))}<br>🌐 ${esc(u.isp || "ISP ?")}<br>${esc((u.browsers || []).slice(-3).join(", ") || "-")} · ${esc(u.device || "")}</span></td>
+          <td><b style="font-size:15px">⏱ ${esc(dur(u.timeSec))}</b> total<br><span class="muted">${(u.visits || 0)} visit · ${(u.sessions || 0)} session${ids > 1 ? ` · <span class="chip warn">${ids} browser</span>` : ""}<br>pehli: ${esc(when(u.firstSeen))}<br>aakhri: ${esc(u.onlineNow ? "abhi online" : ago(u.lastSeen))}</span></td>
+          <td class="small">${tabs}</td>
+          <td><b style="font-size:16px">${u.gens || 0}</b> voices<br><span class="muted">${(u.chars || 0).toLocaleString("en-IN")} chars · ${u.credits || 0} cr</span><div class="bar" style="height:6px;margin:5px 0 2px"><i style="width:${fp.toFixed(0)}%"></i></div><span class="muted">${u.freeChars || 0} / ${freeLim} free</span></td>
+          <td><span class="chip ${u.vpn ? "bad" : (u.vpnRisk === "Low" ? "ok" : "warn")}">${u.vpn ? "VPN" : esc(u.vpnRisk || "Low")}</span>${u.vpn ? `<br><span class="muted">${esc((u.vpnReasons || []).join(", "))}</span>` : ""}</td>
           <td>${st}</td>
-          <td><div class="row" style="gap:6px;flex-wrap:nowrap">${u.blocked ? `<button class="btn sm" data-unblk="${esc(u.ip)}">Unblock</button>` : `<button class="btn sm danger" data-blk="${esc(u.ip)}">🚫 Block</button>`}<button class="btn sm" data-rst="${esc(u.ip)}" title="Free quota reset">♻️</button></div></td>
+          <td><div class="grid" style="gap:6px">${u.blocked ? `<button class="btn sm" data-unblk="${esc(u.ip)}">Unblock</button>` : `<button class="btn sm danger" data-blk="${esc(u.ip)}">🚫 Block</button>`}<button class="btn sm" data-rst="${esc(u.ip)}" title="Free quota reset">♻️ Quota</button>${u.vpn ? (u.vpnAllowed ? `<button class="btn sm" data-vpnno="${esc(u.ip)}">VPN ijazat hatao</button>` : `<button class="btn sm" data-vpnok="${esc(u.ip)}">VPN ok do</button>`) : ""}</div></td>
         </tr>`;
       }).join("") : '<tr><td colspan="7" class="muted">Abhi koi user activity record nahi hai.</td></tr>';
     }
@@ -1764,15 +1930,15 @@ const JanusiaShield = (() => {
   }
 
   function exportCsv() {
-    const head = ["ip", "country", "city", "browsers", "visits", "voices", "chars", "credits", "free_used", "first_seen", "last_seen", "vpn_risk", "blocked"];
+    const head = ["ip", "country", "city", "region", "postal", "isp", "time_on_site_sec", "browsers", "visits", "voices", "chars", "credits", "free_used", "first_seen", "last_seen", "vpn_risk", "blocked"];
     const q = v => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
-    const lines = [head.join(",")].concat(lastRows.map(r => [r.ip, r.country, r.city, (r.browsers || []).join("|"), r.visits, r.gens, r.chars, r.credits, r.freeChars, r.firstSeen ? new Date(r.firstSeen).toISOString() : "", r.lastSeen ? new Date(r.lastSeen).toISOString() : "", r.vpnRisk, r.blocked].map(q).join(",")));
+    const lines = [head.join(",")].concat(lastRows.map(r => [r.ip, r.country, r.city, r.region, r.postal, r.isp, Math.round(r.timeSec || 0), (r.browsers || []).join("|"), r.visits, r.gens, r.chars, r.credits, r.freeChars, r.firstSeen ? new Date(r.firstSeen).toISOString() : "", r.lastSeen ? new Date(r.lastSeen).toISOString() : "", r.vpnRisk, r.blocked].map(q).join(",")));
     saveBlob(new Blob(["﻿" + lines.join("\n")], { type: "text/csv;charset=utf-8" }), "janusia-users-" + stamp() + ".csv");
   }
 
   return {
     initNetworkAndVpnCheck, checkBeforeGenerate, setConcurrency, finish, freeInfo, hasBackend: !!BE,
-    setApiPause, syncPauseUI, manualBlock, resetUser, saveConfig, resetUsage, resetAll, loadAdmin, resumeAdmin, setServerPass, renderAdminPanel, exportCsv,
+    setApiPause, syncPauseUI, manualBlock, resetUser, vpnAllow, saveConfig, resetUsage, resetAll, loadAdmin, resumeAdmin, setServerPass, renderAdminPanel, exportCsv,
     refreshStatus, getApiPause, get ip() { return ip; }
   };
 })();
@@ -2461,6 +2627,7 @@ function addHistory(blob, ext, dur, text) {
   const it = { id: ++hseq, url: URL.createObjectURL(blob), blob, ext, dur, voice: S.voiceName, text, t: new Date() };
   S.hist.unshift(it); while (S.hist.length > 40) { const old = S.hist.pop(); if (S.lastBlob !== old.blob) URL.revokeObjectURL(old.url); }
   setCurrent(it); renderHist();
+  try { Mixer.refresh(); } catch (_) {}
 }
 function setCurrent(it) {
   S.lastBlob = it.blob; S.lastExt = it.ext; el("player").src = it.url; el("dl").disabled = false;
@@ -2854,12 +3021,14 @@ const CONTACT = { telegram: "Janusia10", email: "ashishkr88as@gmail.com", youtub
 })();
 
 /* ============================ TABS & THEME ============================ */
-const TABS = ["studio", "voices", "history", "clone", "stt", "connect", "plans", "contact", "owner"];
+const TABS = ["studio", "voices", "history", "clone", "stt", "relax", "mixer", "connect", "plans", "contact", "owner"];
 function showTab(n) {
   TABS.forEach(t => { el("p-" + t).hidden = t !== n; });
   $$(".tab").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === n));
   if (n === "voices") renderVoices();
   if (n === "history") renderHist();
+  if (n === "relax") Relax.enterTab(); else Relax.leaveTab();
+  if (n === "mixer") Mixer.refresh();
   if (n === "owner" && S.owner) { JanusiaShield.renderAdminPanel(); JanusiaShield.loadAdmin(); }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -2962,6 +3131,9 @@ el("secUsersTable").addEventListener("click", e => {
   if (blk) { if (confirm("Is IP ko block karein?\n" + blk.dataset.blk)) JanusiaShield.manualBlock(blk.dataset.blk, true); }
   if (unblk) JanusiaShield.manualBlock(unblk.dataset.unblk, false);
   if (rst) JanusiaShield.resetUser(rst.dataset.rst);
+  const vok = e.target.closest("[data-vpnok]"), vno = e.target.closest("[data-vpnno]");
+  if (vok) JanusiaShield.vpnAllow(vok.dataset.vpnok, true);
+  if (vno) JanusiaShield.vpnAllow(vno.dataset.vpnno, false);
 });
 el("refreshSecBtn").addEventListener("click", async () => { await JanusiaShield.loadAdmin(true); JanusiaShield.renderAdminPanel(); toast("Live data refresh kiya"); });
 el("srvPassGo").addEventListener("click", async () => {
@@ -2970,9 +3142,9 @@ el("srvPassGo").addEventListener("click", async () => {
 });
 el("userSearch").addEventListener("input", () => JanusiaShield.renderAdminPanel());
 el("exportCsvBtn").addEventListener("click", () => JanusiaShield.exportCsv());
-el("cfgSave").addEventListener("click", () => JanusiaShield.saveConfig({ freeChars: +el("cfgFree").value, minGapSec: +el("cfgGap").value, maxPerMin: +el("cfgMin").value, maxPerDay: +el("cfgDay").value }));
+el("cfgSave").addEventListener("click", () => JanusiaShield.saveConfig({ freeChars: +el("cfgFree").value, minGapSec: +el("cfgGap").value, maxPerMin: +el("cfgMin").value, maxPerDay: +el("cfgDay").value, vpnBlock: el("cfgVpn").checked }));
 el("resetAllSecBtn").addEventListener("click", () => { if (confirm("Saare users ka data, history aur logs server se hamesha ke liye saaf karein? (Blocked list bachi rahegi)")) JanusiaShield.resetAll(); });
-$$(".bgmBtn").forEach(b => b.addEventListener("click", () => Music.toggle()));
+$$(".bgmBtn").forEach(b => b.addEventListener("click", () => Relax.toggleAll()));
 
 
 /* ============================ API CREDIT CHECKER (owner) ============================ */
@@ -3005,6 +3177,385 @@ $$(".bgmBtn").forEach(b => b.addEventListener("click", () => Music.toggle()));
     } catch (e) { msg.textContent = "❌ " + (e.name === "TypeError" ? "Browser ne request roki (network/CORS). Cartesia dashboard par subscription page dekhein." : e.message); }
     el("crCheck").disabled = false;
   });
+})();
+
+/* ============================ MIND RELAX MODE (YouTube IFrame API) ============================ */
+const Relax = (() => {
+  const LSget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
+  const LSset = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
+  // Starter moods. Agar koi video embed band ho to agla apne-aap chalta hai. Asli favourite Owner tab / link se set hota hai.
+  const MOODS = { lofi: ["jfKfPfyJRdk"], s90: ["W6o5yisE_AQ"], love: ["EXCkE3jYQfk"] };
+  const FALLBACK = "jfKfPfyJRdk";
+  let src = LSget("jn_src", LSget("janusia_bgm", "1") === "0" ? "off" : "yt");
+  if (!["yt", "local", "off"].includes(src)) src = "yt";
+  let prevSrc = src === "off" ? "yt" : src;
+  let volPct = parseFloat(LSget("janusia_bgm_vol", "0.12")); if (!(volPct >= 0 && volPct <= 0.5)) volPct = 0.12;
+  let auto = LSget("jn_rx_auto", "1") === "1", retro = LSget("jn_rx_retro", "1") === "1";
+  let player = null, ready = false, apiState = "idle", unlocked = false, curVol = 0, onTab = false, bigPref = true, srvDefault = "", errCount = 0, lastTarget = null, state = -1, apiTimer = 0;
+  const dock = () => el("ytDock");
+  const ytVol = () => Math.round(volPct * 200);
+
+  function parseYT(u) {
+    u = String(u || "").trim(); if (!u) return null;
+    const list = (u.match(/[?&]list=([\w-]{10,})/) || [])[1];
+    const id = (u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/) || [])[1] || (/^[\w-]{11}$/.test(u) ? u : null);
+    if (list && !/^(RD|UL)/.test(list)) return { list };
+    if (id) return { ids: [id] };
+    return null;
+  }
+  function desired() {
+    try { const l = JSON.parse(LSget("jn_yt_last", "null")); if (l && (l.ids || l.list)) return l; } catch (_) {}
+    const d = parseYT(srvDefault || LSget("jn_yt_def", "")); if (d) return d;
+    return { ids: MOODS.lofi };
+  }
+
+  /* ---------- API load ---------- */
+  function loadApi() {
+    if (apiState === "loading" || apiState === "ready") return;
+    if (window.YT && window.YT.Player) { apiState = "ready"; build(); return; }
+    apiState = "loading";
+    window.onYouTubeIframeAPIReady = () => { clearTimeout(apiTimer); apiState = "ready"; build(); };
+    const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; s.async = true; s.onerror = apiFail;
+    document.head.appendChild(s); apiTimer = setTimeout(() => { if (apiState !== "ready") apiFail(); }, 12000);
+  }
+  function apiFail() {
+    if (apiState === "ready") return; apiState = "failed"; clearTimeout(apiTimer);
+    if (src === "yt") { toast("YouTube load nahi hua — Janusia Lofi chala raha hoon"); setSrc("local"); }
+  }
+
+  /* ---------- player ---------- */
+  function build() {
+    if (player || apiState !== "ready" || src !== "yt") return;
+    const t = desired(); lastTarget = t;
+    const pv = { autoplay: auto ? 1 : 0, mute: 1, controls: 1, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3, loop: 1 };
+    if (/^https?:$/.test(location.protocol)) pv.origin = location.origin;
+    const cfg = { width: "100%", height: "100%", playerVars: pv, events: { onReady, onStateChange, onError: onErr } };
+    if (t.list) { pv.listType = "playlist"; pv.list = t.list; } else { cfg.videoId = t.ids[0]; pv.playlist = t.ids.join(","); }
+    showDock(true);
+    try { player = new YT.Player("ytPlayer", cfg); } catch (_) { apiFail(); }
+  }
+  function onReady() { ready = true; try { player.setVolume(ytVol()); } catch (_) {} if (unlocked) { try { player.unMute(); if (src === "yt") player.playVideo(); } catch (_) {} } paint(); }
+  function onStateChange(e) {
+    state = e.data;
+    if (state === 1) { errCount = 0; title(); if (unlocked) { try { player.unMute(); } catch (_) {} } }
+    if (state === 0 && lastTarget && lastTarget.ids && lastTarget.ids.length === 1) { try { player.seekTo(0); player.playVideo(); } catch (_) {} }
+    paint();
+  }
+  function onErr() {
+    errCount++;
+    if (errCount > 6) { toast("YouTube video nahi chal pa rahi — Janusia Lofi chala raha hoon"); setSrc("local"); return; }
+    toast("⚠️ Ye video embed nahi ho sakti, agla chala raha hoon");
+    try {
+      const pl = player.getPlaylist && player.getPlaylist();
+      if (pl && pl.length > 1) { player.nextVideo(); return; }
+    } catch (_) {}
+    if (!(lastTarget && lastTarget.ids && lastTarget.ids[0] === FALLBACK)) load({ ids: [FALLBACK] }, false); else setSrc("local");
+  }
+  function title() {
+    try { const d = player.getVideoData(); const t = (d && d.title) || ""; if (t) { el("ytTitle").textContent = t; el("rxNow").textContent = "🎵 " + t; } } catch (_) {}
+  }
+  function load(t, persist) {
+    lastTarget = t; if (persist) LSset("jn_yt_last", JSON.stringify(t));
+    if (src !== "yt") setSrc("yt");
+    if (!player || !ready) { if (apiState === "idle") loadApi(); return; }
+    try {
+      if (t.list) player.loadPlaylist({ list: t.list, listType: "playlist", index: 0 }); else player.loadPlaylist(t.ids, 0);
+      player.setLoop(true);
+      if (unlocked) { player.unMute(); player.setVolume(ytVol()); }
+    } catch (_) {}
+  }
+
+  /* ---------- play / pause / source ---------- */
+  function play() {
+    if (src === "off") setSrc(prevSrc || "yt");
+    if (src === "local") { Music.start(); return; }
+    unlocked = true;
+    if (!player) { loadApi(); return; }
+    if (ready) { try { player.unMute(); player.setVolume(ytVol()); player.playVideo(); } catch (_) {} }
+  }
+  function pause() { if (src === "local") Music.stop(); else if (player && ready) { try { player.pauseVideo(); } catch (_) {} } }
+  const isPlaying = () => (src === "yt" && state === 1) || (src === "local" && Music.started);
+  function setSrc(v) {
+    if (src !== "off") prevSrc = src; src = v; LSset("jn_src", v); if (v !== "off") LSset("janusia_bgm", "1"); else LSset("janusia_bgm", "0");
+    applySource(); paint();
+  }
+  function applySource() {
+    if (src === "yt") {
+      Music.stop(); showDock(true);
+      if (auto || unlocked) { if (!player) loadApi(); else if (ready && unlocked) { try { player.unMute(); player.playVideo(); } catch (_) {} } }
+    } else if (src === "local") {
+      if (player && ready) { try { player.pauseVideo(); } catch (_) {} }
+      showDock(false); if (unlocked || Music.started) Music.start();
+    } else {
+      if (player && ready) { try { player.pauseVideo(); } catch (_) {} }
+      Music.stop(); showDock(false);
+    }
+  }
+  function toggleAll() { if (src === "off") setSrc(prevSrc || "yt"); else setSrc("off"); if (src !== "off") play(); }
+
+  // browser: awaaz asli click/touch ke baad hi chalti hai
+  function unlock() {
+    if (unlocked) return;
+    unlocked = true;
+    if (src === "local") Music.start();
+    else if (src === "yt") { if (!player) { if (auto) loadApi(); } else if (ready) { try { player.unMute(); player.setVolume(ytVol()); player.playVideo(); } catch (_) {} } }
+  }
+  ["click", "touchend", "keydown"].forEach(e => addEventListener(e, unlock, { capture: true, passive: true }));
+
+  /* ---------- dock layout ---------- */
+  function showDock(v) { const d = dock(); if (d) d.hidden = !v; layout(); }
+  function layout() {
+    const d = dock(); if (!d || d.hidden) return;
+    const st = el("rxStage");
+    if (onTab && bigPref && st) {
+      const r = st.getBoundingClientRect();
+      d.classList.add("big"); d.classList.remove("mini");
+      d.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;right:auto;bottom:auto`;
+    } else { d.classList.remove("big"); d.classList.add("mini"); d.style.cssText = ""; }
+  }
+  let raf = 0; const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; layout(); }); };
+  addEventListener("scroll", sched, { passive: true }); addEventListener("resize", sched);
+  function enterTab() { onTab = true; el("rxOwnerBox").hidden = !S.owner; requestAnimationFrame(() => { layout(); sched(); }); setTimeout(layout, 350); paint(); if (src === "yt" && apiState === "idle") loadApi(); }
+  function leaveTab() { if (!onTab) return; onTab = false; layout(); }
+
+  /* ---------- awaaz ducking + volume ---------- */
+  setInterval(() => {
+    if (!player || !ready || src !== "yt" || !unlocked || state !== 1) return;
+    const tgt = voiceActive() ? ytVol() * 0.25 : ytVol();
+    curVol += (tgt - curVol) * 0.25; if (Math.abs(tgt - curVol) < 1) curVol = tgt;
+    try { if (Math.round(curVol) !== Math.round(player.getVolume())) player.setVolume(Math.round(curVol)); } catch (_) {}
+  }, 120);
+
+  /* ---------- UI ---------- */
+  function paint() {
+    $$(".bgmBtn").forEach(b => { const on = src !== "off"; b.textContent = on ? "🎵" : "🔇"; b.setAttribute("aria-pressed", String(on)); b.title = on ? "Music band karo" : "Music chalu karo"; });
+    $$(".bgmVol").forEach(r => { r.value = Math.round(volPct * 100); });
+    if (el("rxSource")) el("rxSource").value = src;
+    if (el("rxAuto")) el("rxAuto").checked = auto;
+    if (el("rxRetro")) el("rxRetro").checked = retro;
+    const w = el("ytWrap"); if (w) w.classList.toggle("retro", retro);
+    const pl = isPlaying();
+    if (el("rxPlay")) el("rxPlay").textContent = pl ? "⏸ Pause" : "▶ Play";
+    if (el("rxState")) { el("rxState").className = pl ? "chip ok" : "chip"; el("rxState").textContent = src === "off" ? "Music band" : pl ? "▶ Chal raha hai" : (src === "yt" && apiState === "loading" ? "Loading…" : "Ruka hua"); }
+    if (src === "local" && el("rxNow")) el("rxNow").textContent = "🎵 Janusia Lofi (bgm.mp3)";
+  }
+  setInterval(paint, 1500);
+
+  el("rxPlay").addEventListener("click", () => { if (isPlaying()) pause(); else play(); setTimeout(paint, 400); });
+  el("rxNext").addEventListener("click", () => { try { if (src === "yt" && player && ready) player.nextVideo(); } catch (_) {} });
+  el("rxPrev").addEventListener("click", () => { try { if (src === "yt" && player && ready) player.previousVideo(); } catch (_) {} });
+  el("rxBig").addEventListener("click", () => { bigPref = !bigPref; layout(); });
+  el("ytExpand").addEventListener("click", () => { bigPref = true; showTab("relax"); });
+  el("rxSource").addEventListener("change", e => { setSrc(e.target.value); if (src !== "off") play(); });
+  el("rxAuto").addEventListener("change", e => { auto = e.target.checked; LSset("jn_rx_auto", auto ? "1" : "0"); });
+  el("rxRetro").addEventListener("change", e => { retro = e.target.checked; LSset("jn_rx_retro", retro ? "1" : "0"); paint(); });
+  $$(".bgmVol").forEach(r => r.addEventListener("input", () => { volPct = Math.max(0, Math.min(0.5, r.value / 100)); LSset("janusia_bgm_vol", String(volPct)); $$(".bgmVol").forEach(o => { if (o !== r) o.value = r.value; }); if (player && ready && unlocked) { try { player.setVolume(ytVol()); curVol = ytVol(); } catch (_) {} } }));
+  el("rxMoods").addEventListener("click", e => { const b = e.target.closest("[data-mood]"); if (!b) return; unlocked = true; load({ ids: MOODS[b.dataset.mood] }, true); play(); toast("🎶 " + b.textContent.trim()); });
+  el("rxGo").addEventListener("click", () => {
+    const t = parseYT(el("rxUrl").value);
+    if (!t) { toast("Sahi YouTube link daalo (youtube.com/watch?v=… ya youtu.be/…)"); return; }
+    unlocked = true; load(t, true); play(); el("rxUrl").value = ""; toast("▶ Chal raha hai");
+  });
+  el("rxUrl").addEventListener("keydown", e => { if (e.key === "Enter") el("rxGo").click(); });
+  el("rxDefSave").addEventListener("click", async () => {
+    const url = el("rxDefUrl").value.trim(), t = parseYT(url);
+    if (!t) { toast("Sahi YouTube link daalo"); return; }
+    LSset("jn_yt_def", url); srvDefault = url; LSset("jn_yt_last", "null");
+    await JanusiaShield.saveConfig({ yt: url });
+    unlocked = true; load(t, false); play(); toast("✅ Default gaana set ho gaya");
+  });
+
+  /* ---------- init ---------- */
+  function serverDefault(url) {
+    url = String(url || ""); if (url === srvDefault) return; srvDefault = url;
+    if (el("rxDefUrl") && url && document.activeElement !== el("rxDefUrl")) el("rxDefUrl").value = url;
+    const personal = LSget("jn_yt_last", "null") !== "null";
+    const t = parseYT(url);
+    if (t && !personal && player && ready) load(t, false);
+  }
+  setTimeout(() => { if (src === "yt" && auto) loadApi(); applySource(); paint(); }, 400);
+  return { vol: () => volPct, toggleAll, enterTab, leaveTab, serverDefault, paint };
+})();
+
+/* ============================ MIXER & STUDIO EFFECTS ============================ */
+const Mixer = (() => {
+  const g = id => el(id);
+  const SL = ["mxVoiceVol", "mxMusicVol", "mxDuck", "mxIntro", "mxTail", "mxFin", "mxFout", "mxRev", "mxRoom", "mxEcho", "mxEchoT", "mxEchoFb", "mxBass", "mxClar"];
+  const FMT = { mxVoiceVol: v => v + "%", mxMusicVol: v => v + "%", mxDuck: v => v + "%", mxIntro: v => v + "s", mxTail: v => v + "s", mxFin: v => v + "s", mxFout: v => v + "s", mxRev: v => v + "%", mxRoom: v => v + "s", mxEcho: v => v + "%", mxEchoT: v => v + "s", mxEchoFb: v => v + "%", mxBass: v => "+" + v + " dB", mxClar: v => "+" + v + " dB" };
+  const DEF = {}; SL.forEach(i => DEF[i] = g(i).value);
+  const PRESETS = {
+    original: { mxRev: 0, mxRoom: 1.6, mxEcho: 0, mxEchoT: .3, mxEchoFb: 30, mxBass: 0, mxClar: 0, comp: false },
+    studio: { mxRev: 10, mxRoom: .8, mxEcho: 0, mxEchoT: .3, mxEchoFb: 30, mxBass: 4, mxClar: 3, comp: true },
+    hall: { mxRev: 38, mxRoom: 3, mxEcho: 12, mxEchoT: .35, mxEchoFb: 30, mxBass: 1, mxClar: 1.5, comp: true },
+    cinema: { mxRev: 22, mxRoom: 2.2, mxEcho: 0, mxEchoT: .3, mxEchoFb: 30, mxBass: 9, mxClar: 1, comp: true },
+    podcast: { mxRev: 0, mxRoom: .5, mxEcho: 0, mxEchoT: .3, mxEchoFb: 30, mxBass: 2, mxClar: 4, comp: true },
+    retro: { mxRev: 12, mxRoom: 1, mxEcho: 14, mxEchoT: .22, mxEchoFb: 25, mxBass: 3, mxClar: 0, comp: true },
+  };
+  let voiceFile = null, musicFile = null, lofiBuf = null, outBuf = null, outBlob = null, stale = true, busy = false, wavUrl = "";
+  const v = id => parseFloat(g(id).value);
+  const AC = () => window.AudioContext || window.webkitAudioContext;
+  const OAC = () => window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  const msg = t => { g("mxMsg").textContent = t || ""; };
+
+  function paintVals() { $$(".mxv").forEach(s => { const f = FMT[s.dataset.for] || (x => x); s.textContent = f(g(s.dataset.for).value); }); }
+  function applyPreset(name) {
+    const p = PRESETS[name] || PRESETS.original;
+    SL.forEach(i => { if (p[i] != null) g(i).value = p[i]; });
+    g("mxComp").checked = !!p.comp; paintVals(); stale = true;
+  }
+  function refresh() {
+    const cur = g("mxHist").value, h = S.hist;
+    g("mxHist").innerHTML = h.length ? h.map(it => `<option value="${it.id}">${esc((it.voice || "Voice") + " — " + String(it.text || "").slice(0, 28))}${it.dur ? " (" + fmtT(it.dur) + ")" : ""}</option>`).join("") : '<option value="">(History khaali — pehle voice banao ya file upload karo)</option>';
+    if (cur && h.some(x => String(x.id) === cur)) g("mxHist").value = cur;
+    g("mxVoiceName").textContent = voiceFile ? "📁 " + voiceFile.name : (h.length ? "History se voice use hogi" : "—");
+    g("mxMusicName").textContent = g("mxMusicSrc").value === "file" ? (musicFile ? "📁 " + musicFile.name : "File chuno") : g("mxMusicSrc").value === "lofi" ? "Janusia Lofi (bgm.mp3)" : "Music nahi";
+  }
+
+  async function decode(ab) {
+    const ctx = new (AC())();
+    try { return await new Promise((res, rej) => ctx.decodeAudioData(ab, res, rej)); }
+    catch (_) { throw new Error("Ye audio file samajh nahi aayi. WAV ya MP3 file try karo."); }
+    finally { try { ctx.close(); } catch (_) {} }
+  }
+  async function getVoice() {
+    let ab;
+    if (voiceFile) ab = await voiceFile.arrayBuffer();
+    else { const it = S.hist.find(x => String(x.id) === g("mxHist").value) || S.hist[0]; if (!it) throw new Error("Pehle Text to Speech mein voice banao, ya apni voice file upload karo."); ab = await it.blob.arrayBuffer(); }
+    return decode(ab);
+  }
+  async function getMusic() {
+    const m = g("mxMusicSrc").value;
+    if (m === "none") return null;
+    if (m === "file") { if (!musicFile) throw new Error("Music file upload karo ya 'Music nahi' chuno."); return decode(await musicFile.arrayBuffer()); }
+    if (lofiBuf) return lofiBuf;
+    let r; try { r = await fetch("bgm.mp3"); } catch (_) { r = null; }
+    if (!r || !r.ok) throw new Error("bgm.mp3 nahi mila. Use GitHub mein index.html ke saath upload karo, ya apni music file chuno.");
+    lofiBuf = await decode(await r.arrayBuffer()); return lofiBuf;
+  }
+
+  function speechSegments(buf) {
+    const sr = buf.sampleRate, ch = buf.getChannelData(0), win = Math.max(1, Math.floor(sr * 0.05)), n = Math.floor(ch.length / win), rms = new Float32Array(n);
+    let peak = 0;
+    for (let i = 0; i < n; i++) { let s = 0; const o = i * win; for (let j = 0; j < win; j++) { const x = ch[o + j]; s += x * x; } rms[i] = Math.sqrt(s / win); if (rms[i] > peak) peak = rms[i]; }
+    const thr = Math.max(0.008, peak * 0.08), segs = []; let st = -1, last = -1;
+    for (let i = 0; i < n; i++) {
+      if (rms[i] > thr) { if (st < 0) st = i; last = i; }
+      else if (st >= 0 && (i - last) * 0.05 > 0.35) { segs.push([st * 0.05, (last + 1) * 0.05]); st = -1; }
+    }
+    if (st >= 0) segs.push([st * 0.05, (last + 1) * 0.05]);
+    return segs;
+  }
+  function makeIR(ctx, sec) {
+    const sr = ctx.sampleRate, len = Math.max(1, Math.floor(sr * sec)), ir = ctx.createBuffer(2, len, sr), pre = Math.floor(sr * 0.012);
+    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); let lp = 0; for (let i = pre; i < len; i++) { const t = (i - pre) / (len - pre); lp += ((Math.random() * 2 - 1) - lp) * (0.55 - 0.4 * t); d[i] = lp * Math.pow(1 - t, 2.4) * 1.6; } }
+    return ir;
+  }
+
+  async function render() {
+    const voice = await getVoice(), music = await getMusic();
+    const sr = 44100, rev = v("mxRev") / 100, echo = v("mxEcho") / 100, room = v("mxRoom"), echoT = v("mxEchoT"), fb = v("mxEchoFb") / 100;
+    const intro = music ? v("mxIntro") : 0, tailUser = music ? v("mxTail") : 0;
+    const fxTail = Math.max(rev > 0 ? room * 0.9 : 0, echo > 0 ? Math.min(3, echoT * 5) : 0, 0.4);
+    const total = intro + voice.duration + Math.max(tailUser, fxTail);
+    if (total > 20 * 60) throw new Error("Audio 20 minute se lambi hai, chhoti voice chuno.");
+    const off = new (OAC())(2, Math.ceil(total * sr), sr);
+
+    // ---- voice chain ----
+    const vs = off.createBufferSource(); vs.buffer = voice;
+    const vg = off.createGain(); vg.gain.value = v("mxVoiceVol") / 100; vs.connect(vg);
+    let node = vg;
+    const chain = n => { node.connect(n); node = n; };
+    if (g("mxPreset").value === "retro") { const lp = off.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 6500; chain(lp); const hp = off.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 90; chain(hp); }
+    if (v("mxBass") > 0) { const b = off.createBiquadFilter(); b.type = "lowshelf"; b.frequency.value = 140; b.gain.value = v("mxBass"); chain(b); }
+    if (v("mxClar") > 0) { const c = off.createBiquadFilter(); c.type = "peaking"; c.frequency.value = 3200; c.Q.value = 0.9; c.gain.value = v("mxClar"); chain(c); const h = off.createBiquadFilter(); h.type = "highshelf"; h.frequency.value = 8500; h.gain.value = v("mxClar") * 0.4; chain(h); }
+    if (g("mxComp").checked) { const cp = off.createDynamicsCompressor(); cp.threshold.value = -24; cp.knee.value = 18; cp.ratio.value = 3.5; cp.attack.value = 0.01; cp.release.value = 0.2; chain(cp); const mk = off.createGain(); mk.gain.value = 1.35; chain(mk); }
+
+    const master = off.createGain(); master.gain.value = 0.95;
+    const dry = off.createGain(); dry.gain.value = 1; node.connect(dry); dry.connect(master);
+    if (rev > 0) { const cv = off.createConvolver(); cv.buffer = makeIR(off, room); const w = off.createGain(); w.gain.value = rev * 1.1; node.connect(cv); cv.connect(w); w.connect(master); }
+    if (echo > 0) { const d = off.createDelay(1.5); d.delayTime.value = echoT; const f = off.createGain(); f.gain.value = Math.min(0.7, fb); const em = off.createGain(); em.gain.value = echo; node.connect(d); d.connect(f); f.connect(d); d.connect(em); em.connect(master); }
+
+    // ---- music chain ----
+    if (music) {
+      const ms = off.createBufferSource(); ms.buffer = music; ms.loop = g("mxLoop").checked;
+      const mg = off.createGain(); mg.gain.value = v("mxMusicVol") / 100;
+      const duck = off.createGain(); duck.gain.setValueAtTime(1, 0);
+      const fade = off.createGain(), fin = v("mxFin"), fout = v("mxFout");
+      fade.gain.setValueAtTime(fin > 0 ? 0 : 1, 0); if (fin > 0) fade.gain.linearRampToValueAtTime(1, fin);
+      if (fout > 0) { fade.gain.setValueAtTime(1, Math.max(fin, total - fout)); fade.gain.linearRampToValueAtTime(0, total); }
+      if (g("mxAutoDuck").checked) {
+        const lvl = v("mxDuck") / 100;
+        for (const [s, e] of speechSegments(voice)) { duck.gain.setTargetAtTime(lvl, Math.max(0, intro + s - 0.08), 0.1); duck.gain.setTargetAtTime(1, intro + e, 0.3); }
+      }
+      ms.connect(mg); mg.connect(duck); duck.connect(fade); fade.connect(master); ms.start(0);
+    }
+    vs.start(intro);
+
+    const lim = off.createDynamicsCompressor(); lim.threshold.value = -2; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = 0.003; lim.release.value = 0.12;
+    master.connect(lim); lim.connect(off.destination);
+    return off.startRendering();
+  }
+
+  function abToWav(buf) {
+    const ch = buf.numberOfChannels, len = buf.length, sr = buf.sampleRate, data = new DataView(new ArrayBuffer(44 + len * ch * 2));
+    const w = (o, s) => { for (let i = 0; i < s.length; i++) data.setUint8(o + i, s.charCodeAt(i)); };
+    w(0, "RIFF"); data.setUint32(4, 36 + len * ch * 2, true); w(8, "WAVE"); w(12, "fmt "); data.setUint32(16, 16, true); data.setUint16(20, 1, true); data.setUint16(22, ch, true);
+    data.setUint32(24, sr, true); data.setUint32(28, sr * ch * 2, true); data.setUint16(32, ch * 2, true); data.setUint16(34, 16, true); w(36, "data"); data.setUint32(40, len * ch * 2, true);
+    const cs = []; for (let c = 0; c < ch; c++) cs.push(buf.getChannelData(c));
+    let o = 44; for (let i = 0; i < len; i++) for (let c = 0; c < ch; c++) { const x = Math.max(-1, Math.min(1, cs[c][i])); data.setInt16(o, x < 0 ? x * 0x8000 : x * 0x7fff, true); o += 2; }
+    return new Blob([data], { type: "audio/wav" });
+  }
+  function loadLame() {
+    if (window.lamejs) return Promise.resolve();
+    return new Promise((res, rej) => {
+      const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"; s.onload = () => (window.lamejs ? res() : rej(new Error("x"))); s.onerror = () => rej(new Error("x"));
+      document.head.appendChild(s); setTimeout(() => rej(new Error("timeout")), 15000);
+    });
+  }
+  async function toMp3(buf) {
+    await loadLame();
+    const f16 = a => { const o = new Int16Array(a.length); for (let i = 0; i < a.length; i++) { const x = Math.max(-1, Math.min(1, a[i])); o[i] = x < 0 ? x * 0x8000 : x * 0x7fff; } return o; };
+    const l = f16(buf.getChannelData(0)), r = buf.numberOfChannels > 1 ? f16(buf.getChannelData(1)) : l;
+    const enc = new lamejs.Mp3Encoder(2, buf.sampleRate, 128), out = [], bs = 1152;
+    for (let i = 0; i < l.length; i += bs) { const a = enc.encodeBuffer(l.subarray(i, i + bs), r.subarray(i, i + bs)); if (a.length) out.push(new Int8Array(a)); if (i % (bs * 300) === 0) await new Promise(r2 => setTimeout(r2, 0)); }
+    const fl = enc.flush(); if (fl.length) out.push(new Int8Array(fl));
+    return new Blob(out, { type: "audio/mpeg" });
+  }
+
+  async function ensureRender() {
+    if (outBuf && !stale) return true;
+    if (busy) return false; busy = true; g("mxPreview").disabled = true; g("mxBarWrap").hidden = false;
+    let p = 6; g("mxBar").style.width = p + "%"; const iv = setInterval(() => { p = Math.min(92, p + 4); g("mxBar").style.width = p + "%"; }, 220);
+    msg("⏳ Mix ho raha hai…");
+    try {
+      outBuf = await render(); outBlob = abToWav(outBuf);
+      if (wavUrl) URL.revokeObjectURL(wavUrl); wavUrl = URL.createObjectURL(outBlob);
+      const pl = g("mxPlayer"); pl.src = wavUrl; g("mxOut").hidden = false;
+      g("mxInfo").textContent = fmtT(outBuf.duration) + " min · " + fmtB(outBlob.size) + " (WAV)";
+      stale = false; msg("✅ Taiyaar! Neeche suno aur download karo."); g("mxBar").style.width = "100%";
+      return true;
+    } catch (e) { msg("❌ " + (e && e.message ? e.message : "Mix nahi ho paya")); return false; }
+    finally { clearInterval(iv); busy = false; g("mxPreview").disabled = false; setTimeout(() => { g("mxBarWrap").hidden = true; }, 700); }
+  }
+
+  // ---- events ----
+  SL.forEach(i => g(i).addEventListener("input", () => { paintVals(); stale = true; }));
+  ["mxComp", "mxLoop", "mxAutoDuck", "mxMusicSrc"].forEach(i => g(i).addEventListener("change", () => { stale = true; refresh(); }));
+  g("mxHist").addEventListener("change", () => { voiceFile = null; stale = true; refresh(); });
+  g("mxPreset").addEventListener("change", e => applyPreset(e.target.value));
+  g("mxVoiceFile").addEventListener("change", e => { voiceFile = e.target.files[0] || null; stale = true; refresh(); });
+  g("mxMusicFile").addEventListener("change", e => { musicFile = e.target.files[0] || null; if (musicFile) g("mxMusicSrc").value = "file"; stale = true; refresh(); });
+  g("mxPreview").addEventListener("click", async () => { stale = true; if (await ensureRender()) { try { g("mxPlayer").play(); } catch (_) {} } });
+  g("mxReset").addEventListener("click", () => { SL.forEach(i => g(i).value = DEF[i]); g("mxPreset").value = "original"; g("mxComp").checked = false; paintVals(); stale = true; msg("Sab settings reset ho gayi"); });
+  g("mxDlWav").addEventListener("click", async () => { if (await ensureRender()) { saveBlob(outBlob, "janusia-mix-" + stamp() + ".wav"); toast("⬇️ WAV download shuru"); } });
+  g("mxDlMp3").addEventListener("click", async () => {
+    if (!(await ensureRender())) return;
+    msg("⏳ MP3 ban raha hai…");
+    try { const b = await toMp3(outBuf); saveBlob(b, "janusia-mix-" + stamp() + ".mp3"); msg("✅ MP3 download shuru (" + fmtB(b.size) + ")"); toast("⬇️ MP3 download shuru"); }
+    catch (_) { saveBlob(outBlob, "janusia-mix-" + stamp() + ".wav"); msg("MP3 engine load nahi hua, isliye WAV de diya (same quality)."); toast("MP3 nahi bana — WAV download kiya"); }
+  });
+  paintVals();
+  return { refresh };
 })();
 
 /* ============================ AI LIVE EDITOR ============================ */
