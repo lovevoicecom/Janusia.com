@@ -482,13 +482,30 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 .bgmBtn{min-width:44px}
 /* ===== Mind Relax + Mixer ===== */
 .rxstage{aspect-ratio:16/9;max-width:560px;width:100%;margin:0 auto;border-radius:16px;border:1px dashed var(--line);display:grid;place-items:center;background:var(--field)}
-.ytdock{position:fixed;right:12px;bottom:12px;z-index:65;width:208px;border-radius:14px;background:var(--glass);border:1px solid var(--line);box-shadow:0 10px 30px var(--shadow);backdrop-filter:blur(10px);overflow:hidden}
-@media(max-width:900px){.ytdock{bottom:92px}}
-.ytdock.big{border-radius:16px}
-.ytdock.big .ythead{display:none}
-.ythead{display:flex;align-items:center;gap:6px;padding:4px 6px 4px 10px}
-.yttitle{flex:1;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted,inherit)}
-.ythead .btn{padding:2px 8px;min-height:0;line-height:1.2}
+.ytdock{position:fixed;z-index:65;border-radius:16px;background:var(--glass);border:1px solid var(--line);box-shadow:0 14px 38px var(--shadow);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden;opacity:var(--ytop,1);transition:opacity .3s,width .25s,transform .25s}
+.ytdock.off{opacity:0 !important;pointer-events:none !important;transform:scale(.96)}
+.ytdock.mini{width:min(228px,70vw)}
+.ytdock.rect{width:min(var(--rw,380px),94vw)}
+.ytdock[data-pos=br]{right:12px;bottom:12px}
+.ytdock[data-pos=bl]{left:12px;bottom:12px}
+.ytdock[data-pos=tr]{right:12px;top:12px}
+.ytdock[data-pos=tl]{left:12px;top:12px}
+@media(max-width:900px){.ytdock[data-pos=br],.ytdock[data-pos=bl]{bottom:92px}}
+/* poori screen background: sabse peeche, click ke aar-paar, 16:9 ko screen par "cover" karta hai */
+.ytdock.bg{inset:0;width:auto;height:auto;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;z-index:1;pointer-events:none}
+.ytdock.bg .ythead{display:none}
+.ytdock.bg .ytwrap{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);aspect-ratio:auto;transform:translate(-50%,-50%);background:transparent;pointer-events:none}
+.ytdock.bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(9,4,16,.55) 100%)}
+.ytwrap:fullscreen{position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;transform:none !important;pointer-events:auto !important;background:#000}
+.ythead{display:flex;align-items:center;gap:6px;padding:5px 7px 5px 12px;cursor:grab;touch-action:none;user-select:none}
+.ythead:active{cursor:grabbing}
+.yttitle{flex:1;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted,inherit)}
+.ytb{appearance:none;border:1px solid var(--line);background:var(--glass2);color:var(--ink);width:26px;height:26px;border-radius:8px;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .15s,transform .15s}
+.ytb:hover{background:var(--glass3);transform:scale(1.08)}
+.ytb.x:hover{background:rgba(248,113,113,.3);border-color:var(--bad)}
+.ytbgx{position:fixed;right:12px;bottom:12px;z-index:66;appearance:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--ink);font-size:12px;line-height:1;cursor:pointer;opacity:.55;display:grid;place-items:center;backdrop-filter:blur(8px);transition:opacity .2s,transform .2s,background .2s}
+.ytbgx:hover{opacity:1;transform:scale(1.12);background:rgba(248,113,113,.35)}
+@media(max-width:900px){.ytbgx{bottom:92px}}
 .ytwrap{position:relative;aspect-ratio:16/9;background:#000}
 .ytwrap #ytPlayer,.ytwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .ytwrap.retro{filter:sepia(.3) saturate(1.18) contrast(1.05) brightness(.97)}
@@ -499,11 +516,51 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 .ytVig{background:radial-gradient(ellipse at center,transparent 55%,rgba(25,0,40,.55) 100%);opacity:.55}
 .ytOsd{position:absolute;left:7px;top:5px;pointer-events:none;display:none;font:700 10px/1 "Courier New",monospace;color:#fff;opacity:.5;letter-spacing:.08em;text-shadow:0 0 4px #f0f}
 .ytwrap.retro .ytOsd{display:block}
+.rxset{display:grid;gap:12px;padding:14px;border-radius:16px;background:var(--field);border:1px solid var(--line)}
 .mxgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .mxv{float:right;color:var(--gold);font-weight:800}
 
 .lvfoot .lvver{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
 @media(prefers-reduced-motion:reduce){.odot{animation:none}}
+/* ===== v4.0 Pro polish: key manager, merge, smooth UI ===== */
+html{scrollbar-width:thin;scrollbar-color:rgba(236,72,153,.5) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--pink),var(--violet));border-radius:99px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-track{background:transparent}
+::selection{background:rgba(236,72,153,.4);color:#fff}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+section[role=tabpanel]:not([hidden]){animation:panelIn .34s cubic-bezier(.2,.8,.2,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.045),transparent 38%),var(--glass)}
+body.light .glass{background:var(--glass)}
+.glass:hover{transform:none}
+.side{background:linear-gradient(200deg,rgba(236,72,153,.10),transparent 40%),var(--glass)}
+body.light .side{background:var(--glass)}
+.tab{position:relative;transition:transform .2s cubic-bezier(.2,.8,.2,1),background .2s,color .2s,box-shadow .2s}
+.tab:not([aria-selected=true]):hover{background:var(--glass2);transform:translateX(4px)}
+.tab[aria-selected=true]{box-shadow:0 6px 18px rgba(139,92,246,.45), inset 0 1px 0 rgba(255,255,255,.3)}
+.btn{transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s,filter .18s,background .2s,border-color .2s}
+.btn:not(.primary):not(.gold):not(.danger):hover:not(:disabled){border-color:var(--pink2);background:var(--glass3)}
+.btn.primary{position:relative;overflow:hidden}
+.btn.primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s}
+.btn.primary:hover:not(:disabled)::after{transform:translateX(120%)}
+.vcard,.hitem,.keyrow,.mgrow{transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
+.vcard:hover,.hitem:hover{transform:translateY(-3px);border-color:rgba(244,114,182,.5);box-shadow:0 14px 30px var(--shadow)}
+.chip{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+audio{border-radius:14px;max-width:100%}
+.keyrow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line)}
+.keyrow.on{border-color:var(--ok);box-shadow:0 0 0 1px rgba(16,185,129,.45) inset,0 8px 22px rgba(16,185,129,.12)}
+.keyrow b{display:block;font-size:14.5px}
+.mgrow{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:13px;background:var(--field);border:1px solid var(--line)}
+.mgrow .mgn{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none;font-weight:800;font-size:12.5px;background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff}
+.mgrow .mgt{flex:1;min-width:0;display:grid}
+.mgrow .mgt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13.5px}
+.mgbox{display:grid;gap:12px;padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,.07),rgba(236,72,153,.07));border:1px solid var(--line2)}
+.tmr{font-variant-numeric:tabular-nums;font-weight:800}
+@media(max-width:900px){.ytdock.rect{width:min(var(--rw,380px),72vw)}.ytdock.mini{width:min(190px,56vw)}}
+@media(prefers-reduced-motion:reduce){section[role=tabpanel]:not([hidden]){animation:none}.btn.primary::after{display:none}}
+.rxv{float:right;color:var(--gold);font-weight:800}
+.rxstage{aspect-ratio:auto;max-width:none;min-height:56px;padding:12px;text-align:center}
 </style>
 </head>
 <body>
@@ -532,9 +589,9 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
       <button class="tab" role="tab" data-tab="owner" aria-selected="false">👑 Owner</button>
     </nav>
     <div class="sidefoot">
-      <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button></div>
-      <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="50" value="12" style="flex:1" aria-label="Music volume"></label>
-      <span class="verTag">⚡ v3.1 · Shield Pro</span>
+      <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button><button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button></div>
+      <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="100" value="35" style="flex:1" aria-label="Music volume"></label>
+      <span class="verTag">⚡ v4.0 · Shield Pro</span>
     </div>
   </aside>
 
@@ -543,6 +600,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
      <div class="brand-orb" style="width:32px;height:32px;font-size:16px" aria-hidden="true">J</div>
      <h1 class="brand-name" style="flex:1;font-size:23px">Janusia</h1>
      <button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button>
+     <button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button>
      <button class="btn sm" id="themeBtn2" type="button">🌓 Theme</button>
    </div>
 
@@ -655,7 +713,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
               <label class="f"><b>Ek hissa (characters)</b><input id="chunk" type="number" min="200" max="3000" step="100" value="1000" inputmode="numeric"></label>
               <label class="f"><b>Hisson ke beech pause</b>
                 <select id="gap"><option value="0">Koi nahi</option><option value="0.15" selected>0.15 sec</option><option value="0.4">0.4 sec</option><option value="0.8">0.8 sec</option></select></label>
-              <label class="check" style="align-self:end"><input id="live" type="checkbox" checked><span>Live chalao (WAV mein, banate hi sunai de)</span></label>
+              <p class="small muted" style="align-self:end">🔇 Awaaz banne ke baad apne-aap nahi chalegi — jab chaho ▶ dabakar suno. Banate waqt gaana/music pura ruk jata hai.</p><input id="live" type="checkbox" hidden>
             </div>
           </details>
         </div>
@@ -701,7 +759,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
         <div class="row"><span class="chip" id="hCount">0 awaazein</span><button class="btn sm" id="hAll" type="button">Sab download</button><button class="btn sm danger" id="hClear" type="button">Sab hatao</button></div>
       </div>
       <input id="hq" type="text" placeholder="History mein dhundho (text ya awaaz ka naam)" aria-label="History search">
-      <p class="small muted" style="margin:10px 0 14px">Audio browser ki memory mein rehti hai, isliye page refresh karne par history saaf ho jati hai. Zaroori awaaz pehle download kar lo.</p>
+      <p class="small muted" style="margin:10px 0 14px">💾 History aapke browser mein save rehti hai — page refresh karne par bhi nahi jayegi (aakhri 40 awaazein). Sirf tab jayegi jab aap <b>Hatao</b> dabao ya browser ka site-data clear karo.</p>
       <div class="hgrid" id="hlist"></div>
     </div>
   </section>
@@ -812,26 +870,43 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
       <div class="row sb">
         <div>
           <h2 style="margin:0">🌿 Mind Relax Mode</h2>
-          <p class="small muted">Gaana peeche chalta rahega — kisi bhi tab mein jao, band nahi hoga. Voice banate ya sunte hi gaana apne-aap dheema ho jata hai.</p>
+          <p class="small muted">YouTube ka gaana/video poori website ke peeche halka (25%) chalta rahta hai — kisi bhi tab mein jao, band nahi hoga. Voice banate waqt sab kuch ruk jata hai, aur suntey waqt gaana dheema ho jata hai.</p>
         </div>
         <span class="chip" id="rxState">Ready</span>
       </div>
 
-      <div class="rxstage" id="rxStage"><span class="small muted">Player yahan dikhega…</span></div>
+      <div class="rxstage" id="rxStage"><span class="small muted">Video background mein chal raha hai…</span></div>
       <div class="small muted" id="rxNow" style="text-align:center">—</div>
 
       <div class="row" style="justify-content:center">
         <button class="btn sm" id="rxPrev" type="button" aria-label="Pichla">⏮</button>
         <button class="btn primary" id="rxPlay" type="button">▶ Play</button>
         <button class="btn sm" id="rxNext" type="button" aria-label="Agla">⏭</button>
-        <button class="btn sm" id="rxBig" type="button">⤢ Player bada/chhota</button>
+        <button class="btn sm" id="rxShow" type="button">📺 Video hatao</button>
+        <button class="btn sm" id="rxFs" type="button">⛶ Fullscreen</button>
       </div>
 
-      <div class="g3" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
-        <label class="f"><b>🔊 Volume</b><input class="bgmVol" type="range" min="0" max="50" value="12" aria-label="Music volume"></label>
-        <label class="f"><b>🎵 Music source</b>
-          <select id="rxSource"><option value="yt">YouTube (Mind Relax)</option><option value="local">Janusia Lofi (bgm.mp3)</option><option value="off">Band</option></select>
-        </label>
+      <div class="rxset">
+        <h3 style="margin:0">🎛️ Video Customize</h3>
+        <div class="g3" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+          <label class="f"><b>🖼️ Video kaise dikhe</b>
+            <select id="rxMode">
+              <option value="bg">Poori screen (background)</option>
+              <option value="rect">Rectangle window</option>
+              <option value="mini">Chhota corner</option>
+            </select></label>
+          <label class="f"><b>💧 Opacity <span class="rxv" id="rxOpV">25%</span></b><input id="rxOp" type="range" min="5" max="100" value="25"></label>
+          <label class="f"><b>🔊 Volume <span class="rxv" id="rxVolV">35%</span></b><input class="bgmVol" type="range" min="0" max="100" value="35" aria-label="Music volume"></label>
+          <label class="f" id="rxSizeBox"><b>📐 Window size</b>
+            <select id="rxSize"><option value="s">Chhota</option><option value="m">Medium</option><option value="l">Bada</option><option value="xl">Bahut bada</option></select></label>
+          <label class="f" id="rxPosBox"><b>📍 Jagah</b>
+            <select id="rxPos"><option value="br">Neeche-Right</option><option value="bl">Neeche-Left</option><option value="tr">Upar-Right</option><option value="tl">Upar-Left</option></select></label>
+          <label class="f"><b>🎞️ Video quality</b>
+            <select id="rxQ"><option value="auto">Auto</option><option value="hd720">720p HD</option><option value="hd1080" selected>1080p Full HD</option><option value="hd1440">1440p (2K)</option><option value="hd2160">2160p (4K)</option><option value="highres">Best (8K tak)</option></select></label>
+          <label class="f"><b>🎵 Music source</b>
+            <select id="rxSource"><option value="yt">YouTube (Mind Relax)</option><option value="local">Janusia Lofi (bgm.mp3)</option><option value="off">Band</option></select></label>
+        </div>
+        <p class="small muted">4K/8K tabhi chalega jab video us quality mein ho aur aapka device + internet support kare — aakhri faisla YouTube ka hota hai. Rectangle mode mein window ko upar wali patti se kheench kar kahin bhi rakh sakte ho. Video par chhota ✕ dabao to video screen se hat jata hai (gaana chalta rahta hai); wapas laane ke liye yahan <b>📺 Video dikhao</b> dabao.</p>
       </div>
 
       <div>
@@ -852,6 +927,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
       <div class="row">
         <label class="check" style="gap:8px"><input id="rxAuto" type="checkbox" checked><span class="small">Website khulte hi gaana apne-aap chale (pehle touch par awaaz aati hai)</span></label>
         <label class="check" style="gap:8px"><input id="rxRetro" type="checkbox" checked><span class="small">📼 90s VHS look</span></label>
+        <label class="check" style="gap:8px"><input class="sfxChk" type="checkbox" checked><span class="small">🔔 Click sound</span></label>
       </div>
 
       <div id="rxOwnerBox" class="row" hidden style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line2)">
@@ -869,6 +945,41 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
       <div>
         <h2 style="margin:0">🎚️ Voice + Music Mixer &amp; Studio Effects</h2>
         <p class="small muted">Apni voice ke peeche music mix karo, reverb / echo / deep bass lagao, preview suno aur final audio download karo. Sab kuch aapke browser mein hota hai — koi credit nahi lagta.</p>
+      </div>
+
+      <div class="mgbox">
+        <div>
+          <h3 style="margin:0">🔗 Audio Merge — kai audio ek file mein jodo</h3>
+          <p class="small muted">History ki voices ya apni files jodo, ▲▼ se order badlo, beech ka gap chuno — fir ek final audio download karo. Sab kuch browser mein hota hai, credit nahi lagta.</p>
+        </div>
+        <div class="row">
+          <select id="mgHist" aria-label="History se chuno" style="flex:1;min-width:200px"></select>
+          <button class="btn sm" id="mgAddH" type="button">➕ Jodo</button>
+          <button class="btn sm" id="mgAddAll" type="button">➕ Poori history</button>
+          <label class="btn sm" style="cursor:pointer">📁 Files jodo<input id="mgFiles" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg" multiple hidden></label>
+        </div>
+        <div id="mgList" class="grid" style="gap:8px"></div>
+        <div class="row">
+          <label class="f" style="min-width:200px;flex:1"><b>Beech ka gap <span class="rxv" id="mgGapV">0.4s</span></b><input id="mgGap" type="range" min="0" max="3" step="0.1" value="0.4"></label>
+          <label class="check" style="gap:8px"><input id="mgNorm" type="checkbox" checked><span class="small">Sabki awaaz barabar karo</span></label>
+        </div>
+        <div class="row">
+          <button class="btn primary" id="mgGo" type="button">🔗 Merge Karo</button>
+          <button class="btn" id="mgClear" type="button">Saaf</button>
+          <span class="chip tmr" id="mgTimer" hidden></span>
+          <span class="small muted" id="mgMsg" role="status"></span>
+        </div>
+        <div class="bar" id="mgBarWrap" hidden><i id="mgBar" style="width:0"></i></div>
+        <div id="mgOut" hidden class="grid" style="gap:10px">
+          <audio id="mgPlayer" controls style="width:100%"></audio>
+          <div class="row">
+            <button class="btn primary" id="mgDlWav" type="button">⬇️ WAV Download</button>
+            <button class="btn primary" id="mgDlMp3" type="button">⬇️ MP3 Download</button>
+            <button class="btn" id="mgUse" type="button">🎚️ Mixer mein use karo</button>
+            <button class="btn" id="mgSave" type="button">📚 History mein save</button>
+            <span class="small muted" id="mgInfo"></span>
+          </div>
+        </div>
       </div>
 
       <div class="g3" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
@@ -925,6 +1036,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
       <div class="row">
         <button class="btn primary" id="mxPreview" type="button">🎧 Preview Banao</button>
         <button class="btn" id="mxReset" type="button">↺ Reset</button>
+        <span class="chip tmr" id="mxTimer" hidden></span>
         <span class="small muted" id="mxMsg" role="status"></span>
       </div>
       <div class="bar" id="mxBarWrap" hidden><i id="mxBar" style="width:0"></i></div>
@@ -949,6 +1061,12 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
             <span class="chip gold" id="connModeChip">Default: 250 Chars</span>
           </div>
           <p class="small muted">Default key automatic connected hai (250 characters limit). <b>20,000 characters</b> unlock karne ke liye neeche encrypted key file upload karein (bina password) ya password ke saath API key daalein.</p>
+
+          <div class="grid" style="gap:10px;padding:15px;border-radius:16px;background:var(--glass2);border:1px solid var(--line2)">
+            <div class="row sb"><b>🗝️ Meri Keys (Key Manager)</b><span class="chip ok">Default hamesha rahegi</span></div>
+            <p class="small muted">Website ki apni key hamesha yahan jodi rehti hai. Aap apni key bhi jod sakte ho — jo key <b>Active</b> hai usi se voice banegi aur usi key ki <b>saari voices</b> Voices Library mein dikhengi. Keys sirf aapke browser mein encrypted save hoti hain.</p>
+            <div id="keyList" class="grid" style="gap:8px"></div>
+          </div>
 
           <!-- Option 1: Upload File (NO PASSWORD + Female Voice Welcome) -->
           <div class="grid" style="gap:8px;padding:15px;border-radius:16px;background:var(--glass2);border:1px solid var(--line)">
@@ -1193,6 +1311,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
             <p class="small muted">Saare visitors (Chrome, Brave, Incognito — sab) ek hi jagah. Kaun online hai, kisne kitni voice banayi, aur block karne ka control.</p>
           </div>
           <div class="row">
+            <select id="beSel" hidden style="width:auto;min-width:150px;padding:6px 10px" aria-label="Backend server"></select>
             <span class="chip" id="beChip">Connecting…</span>
             <label class="check" style="gap:6px"><input id="autoRef" type="checkbox" checked><span class="small">Auto-refresh 15s</span></label>
             <button class="btn sm" id="refreshSecBtn" type="button">🔄 Refresh</button>
@@ -1352,13 +1471,14 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <!-- floating Mind Relax mini-player: kisi bhi tab mein gaana chalta rahe -->
-<div id="ytDock" class="ytdock mini" hidden aria-label="Mind Relax player">
-  <div class="ythead"><span id="ytTitle" class="yttitle">Mind Relax</span><button class="btn sm" id="ytExpand" type="button" aria-label="Bada/chhota">⤢</button></div>
+<div id="ytDock" class="ytdock bg" hidden aria-label="Mind Relax video">
+  <div class="ythead"><span id="ytTitle" class="yttitle">Mind Relax</span><button class="ytb" id="ytMode" type="button" title="Video ka style badlo (background / rectangle / mini)" aria-label="Video style">▭</button><button class="ytb x" id="ytX" type="button" title="Video hatao (gaana chalta rahega)" aria-label="Video hatao">✕</button></div>
   <div class="ytwrap retro" id="ytWrap">
     <div id="ytPlayer"></div>
     <i class="ytTint"></i><i class="ytScan"></i><i class="ytVig"></i><span class="ytOsd">▶ PLAY · SP · 90s</span>
   </div>
 </div>
+<button id="ytBgX" class="ytbgx" type="button" hidden title="Video hatao (gaana chalta rahega)" aria-label="Video hatao">✕</button>
 <script>
 "use strict";
 /* =====================================================================
@@ -1371,9 +1491,11 @@ const JanusiaConfig = {
   DEFAULT_API_KEY: "sk_car_x5S6WdwjShAgGXh45hDrRm",
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
-  VERSION: "3.1",
-  VERSION_LABEL: "v3.1 · Shield Pro · Nov 2026",
-  BACKEND_URL: "https://janusia-shield.polished-haze-db97.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
+  VERSION: "4.0",
+  VERSION_LABEL: "v4.0 · Shield Pro · Nov 2026",
+  // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
+  BACKEND_URLS: ["https://janusia-shield.th6tfjh.workers.dev", "https://janusia-shield.polished-haze-db97.workers.dev"],
+  BACKEND_URL: "https://janusia-shield.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
   CHAR_LIMIT_FREE: 250,
   CHAR_LIMIT_PRO: 20000,
   VAULT_SECRET: "Janusia::VaultV2::SITARAM1018::jashishJAH",
@@ -1516,11 +1638,74 @@ function voiceActive() {
   return $$("audio").some(a => !a.paused && !a.ended && a.currentTime > 0);
 }
 
+/* ============================ CLICK SOUND (smooth, halka, awaaz ko disturb nahi karta) ============================ */
+const Sfx = (() => {
+  const get = () => { try { return localStorage.getItem("jn_sfx") !== "0"; } catch (_) { return true; } };
+  let on = get(), ctx = null, last = 0;
+  function ac() {
+    if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; try { ctx = new C(); } catch (_) { return null; } }
+    if (ctx.state === "suspended") ctx.resume().catch(() => {});
+    return ctx;
+  }
+  function blip(kind) {
+    const c = ac(); if (!c) return;
+    const t = c.currentTime + 0.004, out = c.createGain(), lp = c.createBiquadFilter();
+    out.gain.value = 0.9; lp.type = "lowpass"; lp.frequency.value = 5200; lp.Q.value = 0.5; out.connect(lp); lp.connect(c.destination);
+    const notes = kind === "soft" ? [[660, 0, 0.05]] : [[523.25, 0, 0.075], [783.99, 0.05, 0.065]];
+    notes.forEach(([f, d, vol]) => {
+      const o = c.createOscillator(), gn = c.createGain();
+      o.type = "sine"; o.frequency.setValueAtTime(f, t + d); o.frequency.exponentialRampToValueAtTime(f * 1.35, t + d + 0.1);
+      gn.gain.setValueAtTime(0.0001, t + d); gn.gain.exponentialRampToValueAtTime(vol, t + d + 0.007); gn.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.17);
+      o.connect(gn); gn.connect(out); o.start(t + d); o.stop(t + d + 0.2);
+    });
+  }
+  document.addEventListener("pointerdown", e => {
+    if (!on || (e.button != null && e.button > 0)) return;
+    const n = performance.now(); if (n - last < 70) return; last = n;
+    if (voiceActive()) return;   // awaaz chal rahi ho / ban rahi ho to koi sound nahi
+    try { blip(e.target && e.target.closest && e.target.closest("button,.tab,a,select,summary,label.btn,.vcard,[role=tab]") ? "chime" : "soft"); } catch (_) {}
+  }, true);
+  function paint() { $$(".sfxChk").forEach(c => { c.checked = on; }); $$(".sfxBtn").forEach(b => { b.textContent = on ? "🔔" : "🔕"; b.title = on ? "Click sound band karo" : "Click sound chalu karo"; }); }
+  function set(v) { on = !!v; try { localStorage.setItem("jn_sfx", on ? "1" : "0"); } catch (_) {} paint(); if (on) blip("chime"); }
+  $$(".sfxChk").forEach(c => c.addEventListener("change", () => set(c.checked)));
+  $$(".sfxBtn").forEach(b => b.addEventListener("click", () => set(!on)));
+  paint();
+  return { set };
+})();
+
+/* ============================ HISTORY STORAGE (IndexedDB) — refresh par bhi history bani rahe ============================ */
+const HistDB = (() => {
+  let db = null;
+  const open = () => new Promise(res => {
+    try {
+      const r = indexedDB.open("janusia_v4", 1);
+      r.onupgradeneeded = () => { if (!r.result.objectStoreNames.contains("hist")) r.result.createObjectStore("hist", { keyPath: "id" }); };
+      r.onsuccess = () => { db = r.result; res(db); };
+      r.onerror = r.onblocked = () => res(null);
+    } catch (_) { res(null); }
+  });
+  const tx = (mode, fn) => new Promise(res => {
+    if (!db) return res(null);
+    try { const t = db.transaction("hist", mode), r = fn(t.objectStore("hist")); t.oncomplete = () => res(r && r.result !== undefined ? r.result : true); t.onerror = t.onabort = () => res(null); }
+    catch (_) { res(null); }
+  });
+  return {
+    async init() { await open(); try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (_) {} return !!db; },
+    put: it => tx("readwrite", s => s.put({ id: it.id, blob: it.blob, ext: it.ext, dur: it.dur, voice: it.voice, text: it.text, t: +it.t, key: it.key || "" })),
+    del: id => tx("readwrite", s => s.delete(id)),
+    clear: () => tx("readwrite", s => s.clear()),
+    all: () => tx("readonly", s => s.getAll()),
+    get ok() { return !!db; }
+  };
+})();
+
+
 /* ============================ JANUSIA SECURITY SHIELD v2 ============================
    BACKEND_URL set ho to: IP, quota, block, online users, history sab SERVER par rehta hai
    (har browser/device ek hi data dekhta hai). Set na ho to purana local-only mode chalta hai. */
 const JanusiaShield = (() => {
-  const BE = String(JanusiaConfig.BACKEND_URL || "").trim().replace(/\/+$/, "");
+  const BES = [...new Set((Array.isArray(JanusiaConfig.BACKEND_URLS) && JanusiaConfig.BACKEND_URLS.length ? JanusiaConfig.BACKEND_URLS : [JanusiaConfig.BACKEND_URL]).map(u => String(u || "").trim().replace(/\/+$/, "")).filter(Boolean))];
+  let BE = BES[0] || "", pendingBE = "";
   const LS_KEY = "janusia_shield_db_v2", PAUSE_KEY = "janusia_api_pause_v2", USAGE_KEY = "janusia_api_usage_v2", CID_KEY = "janusia_cid_v1";
   let ip = "Detecting...", vpnRisk = "Low", vpnReasons = [];
   let inFlight = 0, inFlightAt = 0, humanScore = 0;
@@ -1583,12 +1768,12 @@ const JanusiaShield = (() => {
   function saveGlobalUsage(g) { try { localStorage.setItem(USAGE_KEY, JSON.stringify(g)); } catch (_) {} }
 
   /* ---------------- backend calls ---------------- */
-  async function call(path, extra, admin) {
+  async function call(path, extra, admin, base) {
     const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 9000);
     const headers = { "content-type": "application/json" };
     if (admin) headers["x-admin-pass"] = OW.srvPass || OW.pass || "";
     try {
-      const r = await fetch(BE + path, { method: "POST", headers, signal: ctrl.signal, cache: "no-store",
+      const r = await fetch((base || BE) + path, { method: "POST", headers, signal: ctrl.signal, cache: "no-store",
         body: JSON.stringify({ cid, dev: devSig, device: devInfo, tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "", webdriver: !!navigator.webdriver, brave: !!navigator.brave, tab: curTab(), custom: !!S.isCustomKey, ...extra }) });
       const data = await r.json().catch(() => ({}));
       return { status: r.status, data };
@@ -1605,10 +1790,20 @@ const JanusiaShield = (() => {
     else if (st.vpn && st.vpnBlocked && !S.isCustomKey) { blockShown = true; showBanner("⚠️ VPN/Proxy detect hua. Free voice tab tak band hai jab tak VPN chalu hai — VPN band karke page refresh karein, ya Connect tab mein apni API key lagayein.", st.ip); }
     else if (blockShown) { blockShown = false; hideBanner(); }
   }
+  // pehle chuna hua backend, na chale to baaki sab — jo pehle jawab de wahi use hota hai
+  async function callAny(path, extra) {
+    for (const u of [BE, ...BES.filter(x => x !== BE)]) {
+      try {
+        const r = await call(path, extra, false, u);
+        if (r.status < 500 && r.data && (r.data.ip || r.data.ok !== undefined)) { if (u !== BE) { BE = u; log("info", "Backend badla: " + u); } return r; }
+      } catch (_) {}
+    }
+    throw new Error("backend down");
+  }
   async function refreshStatus(kind) {
     if (!BE) return;
     try {
-      const { data } = await call(kind === "hello" ? "/api/hello" : "/api/ping");
+      const { data } = await callAny(kind === "hello" ? "/api/hello" : "/api/ping");
       if (data && data.ip) applyStatus(data); else throw new Error("bad");
     } catch (_) { beState = "down"; updateStatusUI(); }
   }
@@ -1676,7 +1871,7 @@ const JanusiaShield = (() => {
     }
     if (BE) {
       let res = null;
-      for (let i = 0; i < 2 && !res; i++) { try { res = (await call("/api/gate", { chars: textLen, custom: !!isCustomKey })).data; if (!res || (res.ok === undefined)) res = null; } catch (_) { res = null; } }
+      for (let i = 0; i < 2 && !res; i++) { try { res = (await callAny("/api/gate", { chars: textLen, custom: !!isCustomKey })).data; pendingBE = BE; if (!res || (res.ok === undefined)) res = null; } catch (_) { res = null; } }
       if (res) {
         applyStatus(res);
         if (res.ok) { pendingToken = res.token; blockShown = false; hideBanner(); return true; }
@@ -1728,7 +1923,7 @@ const JanusiaShield = (() => {
       db.users[k] = u; saveDB(db);
       const g = getGlobalUsage(); g.usedChars += chars; g.usedCredits += credits; g.generations += 1; saveGlobalUsage(g);
     }
-    if (BE && tk) { try { await call("/api/done", { token: tk, ok: !!ok, voice: voice || "" }); } catch (_) {} await refreshStatus("ping"); }
+    if (BE && tk) { try { await call("/api/done", { token: tk, ok: !!ok, voice: voice || "" }, false, pendingBE || BE); } catch (_) {} await refreshStatus("ping"); }
     updateStatusUI(); updateCharLimitUI(); renderAdminPanel();
   }
 
@@ -1873,6 +2068,8 @@ const JanusiaShield = (() => {
       [["cfgFree", D.cfg.freeChars], ["cfgGap", D.cfg.minGapSec], ["cfgMin", D.cfg.maxPerMin], ["cfgDay", D.cfg.maxPerDay]].forEach(([id, v]) => { if (el(id) && document.activeElement !== el(id)) el(id).value = v; });
     }
     updateStatusUI();
+    const bs = el("beSel");
+    if (bs) { bs.hidden = BES.length < 2; if (bs.options.length !== BES.length) bs.innerHTML = BES.map((u, i) => `<option value="${esc(u)}">${i ? "Backup" : "Main"}: ${esc(u.replace(/^https?:\/\//, "").split(".").slice(0, 2).join("."))}</option>`).join(""); bs.value = BE; }
 
     if (el("srvPassRow")) el("srvPassRow").hidden = !(BE && S.owner && adminStatus === 401);
     const warn = el("beNotice");
@@ -1929,6 +2126,9 @@ const JanusiaShield = (() => {
     syncPauseUI();
   }
 
+  function setBackend(u) { if (!BES.includes(u) || u === BE) return; BE = u; adminData = null; adminHalt = false; adminErr = ""; renderAdminPanel(); loadAdmin(true); refreshStatus("ping"); }
+  if (el("beSel")) el("beSel").addEventListener("change", e => setBackend(e.target.value));
+
   function exportCsv() {
     const head = ["ip", "country", "city", "region", "postal", "isp", "time_on_site_sec", "browsers", "visits", "voices", "chars", "credits", "free_used", "first_seen", "last_seen", "vpn_risk", "blocked"];
     const q = v => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
@@ -1947,7 +2147,7 @@ const JanusiaShield = (() => {
 const HOST = atob("aHR0cHM6Ly9hcGkuY2FydGVzaWEuYWk=");
 const H_VER = atob("Q2FydGVzaWEtVmVyc2lvbg==");
 const S = {
-  key: "", isCustomKey: false, keyLabel: "Default Studio Key", keyExp: 0,
+  key: "", isCustomKey: false, keyLabel: "Default Studio Key", keyExp: 0, keyId: "default", prevKeyId: "default", defKey: "", defLabel: "Default Studio Key",
   version: "2025-04-16", proxy: "", connected: false, state: "idle", err: null,
   voices: [], favs: new Set(), vShow: 48,
   voiceId: "db6b0ed5-d5d3-463d-ae85-518a07d3c2b4", voiceName: "Skylar - Friendly Guide", voiceLang: "en",
@@ -2211,6 +2411,26 @@ const JanusiaVault = (() => {
   return { seal, open };
 })();
 
+/* ============================ KEY MANAGER (Default key hamesha + apni keys, browser mein encrypted) ============================ */
+const KeyStore = (() => {
+  const LS = "jn_keys_v1", ACT = "jn_key_active";
+  const rd = () => { try { const a = JSON.parse(localStorage.getItem(LS) || "[]"); return Array.isArray(a) ? a.filter(x => x && x.id && x.sealed) : []; } catch (_) { return []; } };
+  const wr = a => { try { localStorage.setItem(LS, JSON.stringify(a)); } catch (_) {} };
+  const active = () => { try { return localStorage.getItem(ACT) || "default"; } catch (_) { return "default"; } };
+  const setActive = id => { try { localStorage.setItem(ACT, id); } catch (_) {} };
+  async function add(key, label, exp) {
+    const id = "k" + sha256(String(key)).slice(0, 10), sealed = await JanusiaVault.seal(String(key), label, 0);
+    wr([{ id, label, exp: exp || 0, added: Date.now(), tail: String(key).slice(-4), sealed }, ...rd().filter(x => x.id !== id)].slice(0, 12));
+    return id;
+  }
+  async function open(id) {
+    const e = rd().find(x => x.id === id); if (!e) return null;
+    const p = await JanusiaVault.open(e.sealed, e.label); return { k: p.k, l: e.label, e: e.exp || 0 };
+  }
+  const remove = id => { wr(rd().filter(x => x.id !== id)); if (active() === id) setActive("default"); };
+  return { list: rd, add, open, remove, active, setActive };
+})();
+
 /* ============================ CONNECT & GITHUB AUTO-SYNC ============================ */
 function renderKeyInfo() {
   const i = el("kfInfo");
@@ -2244,14 +2464,63 @@ async function initDefaultConnection() {
     sourceLabel = "GitHub Synced Key";
     log("info", "GitHub se updated key auto-sync hui");
   }
+  S.defKey = activeKey; S.defLabel = sourceLabel;
   S.key = activeKey;
   S.isCustomKey = false;
   S.keyLabel = sourceLabel;
   S.keyExp = 0;
+  S.keyId = "default";
+  // pichli baar jo key Active thi wahi wapas aa jaye (refresh par bhi)
+  const act = KeyStore.active();
+  if (act !== "default") {
+    try {
+      const o = await KeyStore.open(act);
+      if (o && !(o.e && Date.now() > o.e)) { S.key = o.k; S.isCustomKey = true; S.keyLabel = o.l; S.keyExp = o.e; S.keyId = act; }
+      else KeyStore.setActive("default");
+    } catch (_) { KeyStore.setActive("default"); }
+  }
   updateCharLimitUI();
-  renderKeyInfo();
+  renderKeyInfo(); renderKeyList();
   await connect(true, true, false);
+  if (S.keyId !== "default" && S.state === "error" && S.err && (S.err.status === 401 || S.err.status === 403)) {
+    toast("Saved key kaam nahi kar rahi — Default key par wapas"); await switchKey("default");
+  }
 }
+
+/* Key badlo: voices, limit, history-tag sab us key ke hisaab se */
+async function switchKey(id) {
+  if (S.busy) { toast("Voice ban rahi hai — pehle poori hone do ya Stop karo"); return; }
+  if (id === "default" || !id) {
+    S.key = S.defKey || JanusiaConfig.DEFAULT_API_KEY; S.isCustomKey = false; S.keyLabel = S.defLabel || "Default Studio Key"; S.keyExp = 0; S.keyId = "default";
+  } else {
+    let o = null; try { o = await KeyStore.open(id); } catch (_) {}
+    if (!o) { toast("Ye key nahi mili"); return; }
+    S.key = o.k; S.isCustomKey = true; S.keyLabel = o.l; S.keyExp = o.e; S.keyId = id;
+  }
+  KeyStore.setActive(S.keyId);
+  S.voices = []; renderVoices(); renderVsum();
+  updateCharLimitUI(); renderKeyInfo(); renderKeyList();
+  await connect(true, true, false);
+  if (S.keyId !== "default" && S.state === "error" && S.err && (S.err.status === 401 || S.err.status === 403)) {
+    toast("Ye key kaam nahi kar rahi — Default key par wapas"); await switchKey("default"); return;
+  }
+  if (S.state === "ok") toast("🔑 " + S.keyLabel + " active — " + S.voices.length + " voices");
+}
+function renderKeyList() {
+  const box = el("keyList"); if (!box) return;
+  const cur = S.keyId || "default";
+  const rows = [{ id: "default", label: S.defLabel || "Default Studio Key", def: true }, ...KeyStore.list()];
+  box.innerHTML = rows.map(r => `<div class="keyrow${r.id === cur ? " on" : ""}"><div><b>${r.def ? "🌐" : "🔑"} ${esc(r.label)}</b><span class="small muted">${r.def ? "Website ki apni key · hamesha jodi rehti hai · 250 free chars" : "Is browser mein encrypted · ••" + esc(r.tail || "") + (r.exp ? " · " + esc(new Date(r.exp).toLocaleDateString()) + " tak" : "") + " · 20,000 chars"}</span></div><div class="row" style="gap:6px;flex-wrap:nowrap">${r.id === cur ? '<span class="chip ok">Active ✓</span>' : `<button class="btn sm primary" type="button" data-k="use" data-id="${esc(r.id)}">Use karo</button>`}${r.def ? "" : `<button class="btn sm danger" type="button" data-k="rm" data-id="${esc(r.id)}">Hatao</button>`}</div></div>`).join("");
+}
+el("keyList").addEventListener("click", async e => {
+  const b = e.target.closest("[data-k]"); if (!b) return; const id = b.dataset.id;
+  if (b.dataset.k === "use") await switchKey(id);
+  else if (b.dataset.k === "rm") {
+    if (!confirm("Ye saved key is browser se hata dein?")) return;
+    const was = S.keyId === id; KeyStore.remove(id); if (was) await switchKey("default"); else renderKeyList();
+    toast("Key hata di");
+  }
+});
 
 async function connect(fromFileOrAuto, isSilentDefault = false, playFemaleGreeting = false) {
   if (!fromFileOrAuto) {
@@ -2264,10 +2533,12 @@ async function connect(fromFileOrAuto, isSilentDefault = false, playFemaleGreeti
       el("connPw").value = ""; el("connPw").focus();
       return;
     }
+    S.prevKeyId = S.keyId || "default";
     S.key = k;
     S.isCustomKey = true;
-    S.keyLabel = "Master Password Key";
+    S.keyLabel = "My Key ••" + k.slice(-4);
     S.keyExp = 0;
+    S.keyId = "new";
     el("connPw").value = "";
   }
   S.version = el("verInp").value.trim() || "2025-04-16";
@@ -2282,6 +2553,7 @@ async function connect(fromFileOrAuto, isSilentDefault = false, playFemaleGreeti
     setState("ok");
     if (!isSilentDefault) toast("✅ Connected! 20,000 characters unlock ho gaye!");
     log("ok", "Connected (" + S.keyLabel + "), ping " + Math.round(S.lastLat) + " ms");
+    if (S.keyId === "new") { try { S.keyId = await KeyStore.add(S.key, S.keyLabel, S.keyExp); KeyStore.setActive(S.keyId); } catch (_) { S.keyId = "temp"; } renderKeyList(); renderKeyInfo(); }
     await loadVoices();
     if (playFemaleGreeting) speakWelcomeFemale();
   } catch (e) {
@@ -2289,13 +2561,14 @@ async function connect(fromFileOrAuto, isSilentDefault = false, playFemaleGreeti
     setState("error", e);
     log("error", "Connect fail: " + (e.status || e.code) + " " + e.message);
     if (!isSilentDefault) toast(friendly(e).short);
+    if (S.keyId === "new") { toast("Ye key connect nahi hui — pichli key par wapas"); await switchKey(S.prevKeyId || "default"); }
   }
 }
 
 function resetToDefaultKey() {
   el("keyInp").value = "";
   el("connPw").value = "";
-  initDefaultConnection();
+  switchKey("default");
   toast("Default Studio Key par wapas aa gaye (250 chars limit)");
 }
 
@@ -2303,10 +2576,12 @@ el("kfFile").addEventListener("change", async e => {
   const f = e.target.files[0]; e.target.value = ""; if (!f) return;
   try {
     const p = await JanusiaVault.open(await f.text(), f.name);
+    S.prevKeyId = S.keyId || "default";
     S.key = p.k;
     S.isCustomKey = true;
     S.keyLabel = p.l;
     S.keyExp = p.e || 0;
+    S.keyId = "new";
     el("keyInp").value = "";
     el("connPw").value = "";
     await connect(true, false, true);
@@ -2359,6 +2634,8 @@ async function loadVoices() {
     S.voices = all;
     log("ok", all.length + " voices load hui");
 
+    let sv = null; try { sv = JSON.parse(localStorage.getItem("jn_kv_" + (S.keyId || "default")) || "null"); } catch (_) {}
+    if (sv && sv.id && sv.id !== S.voiceId && all.some(v => v.id === sv.id)) selectVoice(all.find(v => v.id === sv.id));
     if (all.length && !all.some(v => v.id === S.voiceId)) {
       const preferred = all.find(v => v.language === "hi") || all.find(v => v.language === "en") || all[0];
       selectVoice(preferred);
@@ -2381,7 +2658,7 @@ function renderVoices() {
   const q = el("vq").value.trim().toLowerCase(), lang = el("vlang").value, g = el("vgender").value, own = el("vown").checked, fav = el("vfav").checked;
   const list = S.voices.filter(v => (!lang || v.language === lang) && (!g || v.gender === g) && (!own || v.is_owner) && (!fav || S.favs.has(v.id)) &&
     (!q || (v.name + " " + v.description + " " + v.language + " " + LN(v.language) + " " + v.country + " " + v.id).toLowerCase().includes(q)));
-  el("vcount").textContent = list.length + " / " + S.voices.length + " voices";
+  el("vcount").textContent = list.length + " / " + S.voices.length + " voices · 🔑 " + S.keyLabel;
   if (S.key && !S.voices.length && S.state === "ok") el("vstate").textContent = "Koi voice nahi mili.";
   else if (S.voices.length) el("vstate").textContent = "";
   else if (!S.key) el("vstate").textContent = "Voices load karne ke liye Connect tab check karein.";
@@ -2420,7 +2697,7 @@ el("vlist").addEventListener("click", async e => {
 el("vmore").addEventListener("click", () => { S.vShow += 48; renderVoices(); });
 el("vreload").addEventListener("click", () => { if (!keyOk()) { toast("Pehle connect karo"); return; } loadVoices(); });
 
-function selectVoice(v) { S.voiceId = v.id; S.voiceName = v.name; S.voiceLang = v.language || ""; renderVsum(); renderVoices(); }
+function selectVoice(v) { S.voiceId = v.id; S.voiceName = v.name; S.voiceLang = v.language || ""; try { localStorage.setItem("jn_kv_" + (S.keyId || "default"), JSON.stringify({ id: v.id })); } catch (_) {} renderVsum(); renderVoices(); }
 function renderVsum() {
   const v = S.voices.find(x => x.id === S.voiceId);
   el("vsum").innerHTML = `<div class="vn" style="font-size:18px;font-weight:800;color:var(--pink2)">${esc(S.voiceName)}</div>
@@ -2566,6 +2843,12 @@ function fmtSpec(v) {
   if (m[v]) return { kind: "wav", sr: m[v], format: { container: "raw", encoding: "pcm_s16le", sample_rate: m[v] } };
   return { kind: "mp3", sr: 44100, format: { container: "mp3", sample_rate: 44100, bit_rate: v === "mp3192" ? 192000 : 128000 } };
 }
+function stopAllAudio() {
+  $$("audio").forEach(a => { try { a.pause(); } catch (_) {} });
+  try { if (prevAudio) prevAudio.pause(); } catch (_) {}
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (_) {}
+  liveStop();
+}
 async function generate() {
   if (S.busy || S.gating) return;
   const text = el("txt").value.trim();
@@ -2576,18 +2859,19 @@ async function generate() {
   if (!allowed) { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
   if (!keyOk()) { JanusiaShield.finish(false, 0); toast("Pehle Connect tab mein key lagao"); showTab("connect"); return; }
 
-  const spec = fmtSpec(el("fmt").value), live = el("live").checked && spec.kind === "wav";
+  const spec = fmtSpec(el("fmt").value), live = false;   // awaaz ab apne-aap nahi chalti
   const lang = el("lang").value === "auto" ? (S.voiceLang || "") : el("lang").value;
   const gen = { speed: +el("spd").value, volume: +el("vol").value }; if (el("emo").value) gen.emotion = el("emo").value;
   const o = { model: el("model").value, voiceId: S.voiceId, language: lang, format: spec.format, gen };
   const chunks = splitText(text, Math.min(3000, Math.max(200, +el("chunk").value || 1000))), gapSec = +el("gap").value || 0;
   const ctrl = new AbortController(); S.abort = ctrl; S.busy = true;
+  Relax.hold(); stopAllAudio();   // banate waqt gaana + har awaaz pura band
   JanusiaShield.setConcurrency(true);
   el("gen").disabled = true; el("stop").hidden = false;
   el("prog").hidden = false; el("progBar").style.width = "0%"; el("dl").disabled = true;
   const parts = [], t0 = performance.now(); let bytes = 0, idx = 0;
   log("info", "Generate shuru: " + chunks.length + " hissa, " + text.length + " chars");
-  try { el("player").pause(); } catch (_) {} liveStop(); if (live) liveStart(); else ensureAC();
+  ensureAC();
   const progText = () => `Hissa ${Math.min(idx + 1, chunks.length)}/${chunks.length}, ${fmtB(bytes)}, ${((performance.now() - t0) / 1000).toFixed(1)} sec`;
   const tick = setInterval(() => { el("progTxt").textContent = progText(); }, 500);
   try {
@@ -2605,7 +2889,6 @@ async function generate() {
     el("progTxt").textContent = "Poora hua! " + fmtB(blob.size) + " (" + ((performance.now() - t0) / 1000).toFixed(1) + " sec)";
     log("ok", "Generate poora: " + fmtB(blob.size));
     madeWith(); successFx();
-    if (!live) el("player").play().catch(() => {});
   } catch (e) {
     liveStop();
     JanusiaShield.finish(parts.length > 0, text.length, S.voiceName);   // kuch bana hi nahi to chars wapas
@@ -2613,6 +2896,7 @@ async function generate() {
     else { const f = friendly(e); el("progTxt").textContent = f.short + ". " + f.long; toast(f.short); log("error", "Generate fail: " + (e.status || e.code) + " " + e.message); if (e.status === 401 || e.status === 403) setState("error", e); }
   } finally {
     clearInterval(tick); S.busy = false; S.abort = null;
+    Relax.release();
     JanusiaShield.setConcurrency(false);
     el("gen").disabled = false; el("stop").hidden = true;
   }
@@ -2623,11 +2907,28 @@ el("dl").addEventListener("click", () => { if (S.lastBlob) saveBlob(S.lastBlob, 
 
 /* ============================ HISTORY ============================ */
 let hseq = 0;
-function addHistory(blob, ext, dur, text) {
-  const it = { id: ++hseq, url: URL.createObjectURL(blob), blob, ext, dur, voice: S.voiceName, text, t: new Date() };
-  S.hist.unshift(it); while (S.hist.length > 40) { const old = S.hist.pop(); if (S.lastBlob !== old.blob) URL.revokeObjectURL(old.url); }
+function addHistory(blob, ext, dur, text, voiceName) {
+  const it = { id: (hseq = Math.max(Date.now(), hseq + 1)), url: URL.createObjectURL(blob), blob, ext, dur, voice: voiceName || S.voiceName, text, t: new Date(), key: S.keyLabel };
+  S.hist.unshift(it); while (S.hist.length > 40) { const old = S.hist.pop(); HistDB.del(old.id); if (S.lastBlob !== old.blob) URL.revokeObjectURL(old.url); }
   setCurrent(it); renderHist();
+  HistDB.put(it).then(r => { if (!r && !addHistory._w) { addHistory._w = 1; toast("⚠️ History is browser mein save nahi ho pa rahi (private mode / storage full). Awaaz download kar lo."); } });
   try { Mixer.refresh(); } catch (_) {}
+}
+async function loadHistory() {
+  const ok = await HistDB.init();
+  if (!ok) { renderHist(); return; }
+  const rows = (await HistDB.all()) || [];
+  rows.sort((a, b) => b.t - a.t);
+  const have = new Set(S.hist.map(x => x.id));
+  rows.slice(0, 40).forEach(r => {
+    if (have.has(r.id) || !r.blob) return;
+    S.hist.push({ id: r.id, url: URL.createObjectURL(r.blob), blob: r.blob, ext: r.ext, dur: r.dur, voice: r.voice, text: r.text, t: new Date(r.t), key: r.key || "" });
+    hseq = Math.max(hseq, r.id);
+  });
+  rows.slice(40).forEach(r => HistDB.del(r.id));
+  S.hist.sort((a, b) => b.t - a.t);
+  if (S.hist.length && !S.lastBlob) setCurrent(S.hist[0]);   // sirf load, chalegi nahi
+  renderHist(); try { Mixer.refresh(); } catch (_) {}
 }
 function setCurrent(it) {
   S.lastBlob = it.blob; S.lastExt = it.ext; el("player").src = it.url; el("dl").disabled = false;
@@ -2642,7 +2943,7 @@ function renderHist() {
   el("hlist").innerHTML = list.map(it => `<article class="hitem" data-id="${it.id}">
     <div class="row sb" style="flex-wrap:nowrap"><b>${esc(it.voice)}</b><span class="small muted">${esc(it.t.toLocaleDateString())} ${esc(it.t.toLocaleTimeString())}</span></div>
     <p class="tx">${esc(it.text)}</p>
-    <div class="row" style="gap:6px"><span class="chip">${fmtB(it.blob.size)}</span>${it.dur ? `<span class="chip">${fmtT(it.dur)} min</span>` : ""}<span class="chip">${it.ext.toUpperCase()}</span></div>
+    <div class="row" style="gap:6px"><span class="chip">${fmtB(it.blob.size)}</span>${it.key ? `<span class="chip">🔑 ${esc(it.key)}</span>` : ""}${it.dur ? `<span class="chip">${fmtT(it.dur)} min</span>` : ""}<span class="chip">${it.ext.toUpperCase()}</span></div>
     <div class="hplay"></div>
     <div class="row" style="gap:8px"><button class="btn sm primary" data-h="play">Chalao</button><button class="btn sm" data-h="dl">Download</button><button class="btn sm" data-h="copy">Text copy</button><button class="btn sm" data-h="reuse">Dobara use</button><button class="btn sm danger" data-h="rm">Hatao</button></div>
   </article>`).join("");
@@ -2656,7 +2957,7 @@ el("hlist").addEventListener("click", e => {
   } else if (a === "dl") saveBlob(it.blob, "janusia-" + stamp() + "-" + it.id + "." + it.ext);
   else if (a === "copy") copy(it.text, "Text copy ho gaya");
   else if (a === "reuse") { el("txt").value = it.text.slice(0, currentCharLimit()); upTxt(); showTab("studio"); toast("Text Studio mein aa gaya"); }
-  else if (a === "rm") { dropItem(it); S.hist = S.hist.filter(x => x !== it); renderHist(); }
+  else if (a === "rm") { dropItem(it); HistDB.del(it.id); S.hist = S.hist.filter(x => x !== it); renderHist(); try { Mixer.refresh(); } catch (_) {} }
 });
 function dropItem(it) {
   $$("#hlist audio").forEach(x => { try { x.pause(); x.removeAttribute("src"); x.load(); } catch (_) {} });
@@ -2664,7 +2965,7 @@ function dropItem(it) {
   URL.revokeObjectURL(it.url);
 }
 el("hq").addEventListener("input", renderHist);
-el("hClear").addEventListener("click", () => { if (S.hist.length && !confirm("Poori history hata dein?")) return; S.hist.forEach(dropItem); S.hist = []; renderHist(); });
+el("hClear").addEventListener("click", () => { if (S.hist.length && !confirm("Poori history hata dein?")) return; S.hist.forEach(dropItem); S.hist = []; HistDB.clear(); renderHist(); try { Mixer.refresh(); } catch (_) {} });
 el("hAll").addEventListener("click", async () => {
   if (!S.hist.length) { toast("History khaali hai"); return; }
   for (const it of [...S.hist].reverse()) { saveBlob(it.blob, "janusia-" + stamp() + "-" + it.id + "." + it.ext); await sleep(450); }
@@ -3028,7 +3329,7 @@ function showTab(n) {
   if (n === "voices") renderVoices();
   if (n === "history") renderHist();
   if (n === "relax") Relax.enterTab(); else Relax.leaveTab();
-  if (n === "mixer") Mixer.refresh();
+  if (n === "mixer") { Mixer.refresh(); Mixer.warm(); }
   if (n === "owner" && S.owner) { JanusiaShield.renderAdminPanel(); JanusiaShield.loadAdmin(); }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -3189,11 +3490,21 @@ const Relax = (() => {
   let src = LSget("jn_src", LSget("janusia_bgm", "1") === "0" ? "off" : "yt");
   if (!["yt", "local", "off"].includes(src)) src = "yt";
   let prevSrc = src === "off" ? "yt" : src;
-  let volPct = parseFloat(LSget("janusia_bgm_vol", "0.12")); if (!(volPct >= 0 && volPct <= 0.5)) volPct = 0.12;
+  let volPct = parseFloat(LSget("jn_vol2", "35")); if (!(volPct >= 0 && volPct <= 100)) volPct = 35;
   let auto = LSget("jn_rx_auto", "1") === "1", retro = LSget("jn_rx_retro", "1") === "1";
-  let player = null, ready = false, apiState = "idle", unlocked = false, curVol = 0, onTab = false, bigPref = true, srvDefault = "", errCount = 0, lastTarget = null, state = -1, apiTimer = 0;
+  const DEFCFG = { mode: "bg", op: { bg: 25, rect: 100, mini: 100 }, size: "m", pos: "br", q: "hd1080", show: true, x: null, y: null };
+  let cfg = (() => {
+    try { const j = JSON.parse(LSget("jn_rx_cfg2", "null")); if (j && typeof j === "object") return { ...DEFCFG, ...j, op: { ...DEFCFG.op, ...(j.op || {}) } }; } catch (_) {}
+    return JSON.parse(JSON.stringify(DEFCFG));
+  })();
+  if (!["bg", "rect", "mini"].includes(cfg.mode)) cfg.mode = "bg";
+  const saveCfg = () => LSset("jn_rx_cfg2", JSON.stringify(cfg));
+  const SIZES = { s: 260, m: 380, l: 560, xl: 820 };
+  const QNAME = { tiny: "144p", small: "240p", medium: "360p", large: "480p", hd720: "720p", hd1080: "1080p", hd1440: "1440p", hd2160: "4K", hd2880: "5K", highres: "8K" };
+  let player = null, ready = false, apiState = "idle", unlocked = false, curVol = 0, srvDefault = "", errCount = 0, lastTarget = null, state = -1, apiTimer = 0;
+  let held = false, heldWas = false;
   const dock = () => el("ytDock");
-  const ytVol = () => Math.round(volPct * 200);
+  const ytVol = () => Math.round(volPct);
 
   function parseYT(u) {
     u = String(u || "").trim(); if (!u) return null;
@@ -3227,18 +3538,32 @@ const Relax = (() => {
   function build() {
     if (player || apiState !== "ready" || src !== "yt") return;
     const t = desired(); lastTarget = t;
-    const pv = { autoplay: auto ? 1 : 0, mute: 1, controls: 1, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3, loop: 1 };
+    const pv = { autoplay: auto && !held ? 1 : 0, mute: 1, controls: 1, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3, loop: 1, disablekb: 1, fs: 1, cc_load_policy: 0 };
     if (/^https?:$/.test(location.protocol)) pv.origin = location.origin;
-    const cfg = { width: "100%", height: "100%", playerVars: pv, events: { onReady, onStateChange, onError: onErr } };
-    if (t.list) { pv.listType = "playlist"; pv.list = t.list; } else { cfg.videoId = t.ids[0]; pv.playlist = t.ids.join(","); }
-    showDock(true);
-    try { player = new YT.Player("ytPlayer", cfg); } catch (_) { apiFail(); }
+    const cfgY = { width: "100%", height: "100%", playerVars: pv, events: { onReady, onStateChange, onError: onErr } };
+    if (t.list) { pv.listType = "playlist"; pv.list = t.list; } else { cfgY.videoId = t.ids[0]; pv.playlist = t.ids.join(","); }
+    applyMode();
+    try { player = new YT.Player("ytPlayer", cfgY); } catch (_) { apiFail(); }
   }
-  function onReady() { ready = true; try { player.setVolume(ytVol()); } catch (_) {} if (unlocked) { try { player.unMute(); if (src === "yt") player.playVideo(); } catch (_) {} } paint(); }
+  function applyQuality() {
+    if (!player || !ready) return;
+    const q = cfg.q === "auto" ? "default" : cfg.q;
+    try { if (player.setPlaybackQualityRange && q !== "default") player.setPlaybackQualityRange(q, q); } catch (_) {}
+    try { player.setPlaybackQuality(q); } catch (_) {}
+  }
+  function onReady() {
+    ready = true; try { player.setVolume(ytVol()); curVol = ytVol(); } catch (_) {}
+    applyQuality();
+    if (unlocked && !held) { try { player.unMute(); if (src === "yt") player.playVideo(); } catch (_) {} }
+    paint();
+  }
   function onStateChange(e) {
     state = e.data;
-    if (state === 1) { errCount = 0; title(); if (unlocked) { try { player.unMute(); } catch (_) {} } }
-    if (state === 0 && lastTarget && lastTarget.ids && lastTarget.ids.length === 1) { try { player.seekTo(0); player.playVideo(); } catch (_) {} }
+    if (state === 1) {
+      if (held) { try { player.pauseVideo(); } catch (_) {} paint(); return; }
+      errCount = 0; title(); applyQuality(); if (unlocked) { try { player.unMute(); } catch (_) {} }
+    }
+    if (state === 0 && lastTarget && lastTarget.ids && lastTarget.ids.length === 1) { try { player.seekTo(0); if (!held) player.playVideo(); } catch (_) {} }
     paint();
   }
   function onErr() {
@@ -3251,8 +3576,9 @@ const Relax = (() => {
     } catch (_) {}
     if (!(lastTarget && lastTarget.ids && lastTarget.ids[0] === FALLBACK)) load({ ids: [FALLBACK] }, false); else setSrc("local");
   }
+  let vTitle = "";
   function title() {
-    try { const d = player.getVideoData(); const t = (d && d.title) || ""; if (t) { el("ytTitle").textContent = t; el("rxNow").textContent = "🎵 " + t; } } catch (_) {}
+    try { const d = player.getVideoData(); const t = (d && d.title) || ""; if (t) { vTitle = t; el("ytTitle").textContent = t; } } catch (_) {}
   }
   function load(t, persist) {
     lastTarget = t; if (persist) LSset("jn_yt_last", JSON.stringify(t));
@@ -3267,6 +3593,7 @@ const Relax = (() => {
 
   /* ---------- play / pause / source ---------- */
   function play() {
+    if (held) { heldWas = true; return; }
     if (src === "off") setSrc(prevSrc || "yt");
     if (src === "local") { Music.start(); return; }
     unlocked = true;
@@ -3274,54 +3601,87 @@ const Relax = (() => {
     if (ready) { try { player.unMute(); player.setVolume(ytVol()); player.playVideo(); } catch (_) {} }
   }
   function pause() { if (src === "local") Music.stop(); else if (player && ready) { try { player.pauseVideo(); } catch (_) {} } }
-  const isPlaying = () => (src === "yt" && state === 1) || (src === "local" && Music.started);
+  const isPlaying = () => (src === "yt" && state === 1) || (src === "local" && Music.started && !held);
   function setSrc(v) {
     if (src !== "off") prevSrc = src; src = v; LSset("jn_src", v); if (v !== "off") LSset("janusia_bgm", "1"); else LSset("janusia_bgm", "0");
     applySource(); paint();
   }
   function applySource() {
     if (src === "yt") {
-      Music.stop(); showDock(true);
-      if (auto || unlocked) { if (!player) loadApi(); else if (ready && unlocked) { try { player.unMute(); player.playVideo(); } catch (_) {} } }
+      Music.stop(); applyMode();
+      if (!held && (auto || unlocked)) { if (!player) loadApi(); else if (ready && unlocked) { try { player.unMute(); player.playVideo(); } catch (_) {} } }
     } else if (src === "local") {
       if (player && ready) { try { player.pauseVideo(); } catch (_) {} }
-      showDock(false); if (unlocked || Music.started) Music.start();
+      applyMode(); if (!held && (unlocked || Music.started)) Music.start();
     } else {
       if (player && ready) { try { player.pauseVideo(); } catch (_) {} }
-      Music.stop(); showDock(false);
+      Music.stop(); applyMode();
     }
   }
   function toggleAll() { if (src === "off") setSrc(prevSrc || "yt"); else setSrc("off"); if (src !== "off") play(); }
+
+  // voice banate waqt sab kuch pura ruk jaye, khatam hote hi wapas chale
+  function hold() { if (held) return; held = true; heldWas = isPlaying() || (src !== "off" && unlocked); if (heldWas) pause(); paint(); }
+  function release() { if (!held) return; held = false; const w = heldWas; heldWas = false; if (w && src !== "off") play(); paint(); }
 
   // browser: awaaz asli click/touch ke baad hi chalti hai
   function unlock() {
     if (unlocked) return;
     unlocked = true;
+    if (held) return;
     if (src === "local") Music.start();
     else if (src === "yt") { if (!player) { if (auto) loadApi(); } else if (ready) { try { player.unMute(); player.setVolume(ytVol()); player.playVideo(); } catch (_) {} } }
   }
   ["click", "touchend", "keydown"].forEach(e => addEventListener(e, unlock, { capture: true, passive: true }));
 
-  /* ---------- dock layout ---------- */
-  function showDock(v) { const d = dock(); if (d) d.hidden = !v; layout(); }
-  function layout() {
-    const d = dock(); if (!d || d.hidden) return;
-    const st = el("rxStage");
-    if (onTab && bigPref && st) {
-      const r = st.getBoundingClientRect();
-      d.classList.add("big"); d.classList.remove("mini");
-      d.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;right:auto;bottom:auto`;
-    } else { d.classList.remove("big"); d.classList.add("mini"); d.style.cssText = ""; }
+  /* ---------- video window (background / rectangle / mini) ---------- */
+  function clampPos() {
+    const d = dock(); if (!d || cfg.x == null || cfg.mode === "bg") return;
+    const w = d.offsetWidth || 300, h = d.offsetHeight || 200;
+    cfg.x = Math.max(0, Math.min(innerWidth - Math.min(w, innerWidth), cfg.x));
+    cfg.y = Math.max(0, Math.min(innerHeight - Math.min(h, innerHeight), cfg.y));
   }
-  let raf = 0; const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; layout(); }); };
-  addEventListener("scroll", sched, { passive: true }); addEventListener("resize", sched);
-  function enterTab() { onTab = true; el("rxOwnerBox").hidden = !S.owner; requestAnimationFrame(() => { layout(); sched(); }); setTimeout(layout, 350); paint(); if (src === "yt" && apiState === "idle") loadApi(); }
-  function leaveTab() { if (!onTab) return; onTab = false; layout(); }
+  function applyMode() {
+    const d = dock(); if (!d) return;
+    const vis = src === "yt";
+    d.hidden = !vis;
+    d.classList.remove("bg", "rect", "mini"); d.classList.add(cfg.mode);
+    d.classList.toggle("off", !cfg.show);
+    d.dataset.pos = cfg.pos;
+    d.style.setProperty("--ytop", String((cfg.op[cfg.mode] || 25) / 100));
+    d.style.setProperty("--rw", (SIZES[cfg.size] || 380) + "px");
+    if (cfg.mode !== "bg" && cfg.x != null) { clampPos(); d.style.left = cfg.x + "px"; d.style.top = cfg.y + "px"; d.style.right = "auto"; d.style.bottom = "auto"; }
+    else { d.style.left = d.style.top = d.style.right = d.style.bottom = ""; }
+    const bx = el("ytBgX"); if (bx) bx.hidden = !(vis && cfg.show && cfg.mode === "bg");
+    const w = el("ytWrap"); if (w) w.classList.toggle("retro", retro);
+  }
+  addEventListener("resize", () => { clampPos(); applyMode(); });
+  function enterTab() { el("rxOwnerBox").hidden = !S.owner; paint(); if (src === "yt" && apiState === "idle") loadApi(); }
+  function leaveTab() {}
+
+  // rectangle / mini window ko upar wali patti se kheencho
+  (() => {
+    const d = dock(), hd = d && d.querySelector(".ythead"); if (!hd) return;
+    let drag = null;
+    hd.addEventListener("pointerdown", e => {
+      if (cfg.mode === "bg" || e.target.closest("button")) return;
+      const r = d.getBoundingClientRect(); drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+      try { hd.setPointerCapture(e.pointerId); } catch (_) {}
+      e.preventDefault();
+    });
+    hd.addEventListener("pointermove", e => {
+      if (!drag) return;
+      cfg.x = e.clientX - drag.dx; cfg.y = e.clientY - drag.dy; clampPos();
+      d.style.left = cfg.x + "px"; d.style.top = cfg.y + "px"; d.style.right = "auto"; d.style.bottom = "auto";
+    });
+    const end = () => { if (drag) { drag = null; saveCfg(); } };
+    hd.addEventListener("pointerup", end); hd.addEventListener("pointercancel", end);
+  })();
 
   /* ---------- awaaz ducking + volume ---------- */
   setInterval(() => {
-    if (!player || !ready || src !== "yt" || !unlocked || state !== 1) return;
-    const tgt = voiceActive() ? ytVol() * 0.25 : ytVol();
+    if (!player || !ready || src !== "yt" || !unlocked || state !== 1 || held) return;
+    const tgt = voiceActive() ? ytVol() * 0.22 : ytVol();
     curVol += (tgt - curVol) * 0.25; if (Math.abs(tgt - curVol) < 1) curVol = tgt;
     try { if (Math.round(curVol) !== Math.round(player.getVolume())) player.setVolume(Math.round(curVol)); } catch (_) {}
   }, 120);
@@ -3329,27 +3689,56 @@ const Relax = (() => {
   /* ---------- UI ---------- */
   function paint() {
     $$(".bgmBtn").forEach(b => { const on = src !== "off"; b.textContent = on ? "🎵" : "🔇"; b.setAttribute("aria-pressed", String(on)); b.title = on ? "Music band karo" : "Music chalu karo"; });
-    $$(".bgmVol").forEach(r => { r.value = Math.round(volPct * 100); });
+    $$(".bgmVol").forEach(r => { r.value = Math.round(volPct); });
+    if (el("rxVolV")) el("rxVolV").textContent = Math.round(volPct) + "%";
     if (el("rxSource")) el("rxSource").value = src;
     if (el("rxAuto")) el("rxAuto").checked = auto;
     if (el("rxRetro")) el("rxRetro").checked = retro;
+    if (el("rxMode")) el("rxMode").value = cfg.mode;
+    if (el("rxOp")) { el("rxOp").value = cfg.op[cfg.mode]; el("rxOpV").textContent = cfg.op[cfg.mode] + "%"; }
+    if (el("rxSize")) { el("rxSize").value = cfg.size; el("rxSizeBox").hidden = cfg.mode !== "rect"; }
+    if (el("rxPos")) { el("rxPos").value = cfg.pos; el("rxPosBox").hidden = cfg.mode === "bg"; }
+    if (el("rxQ")) el("rxQ").value = cfg.q;
+    if (el("rxShow")) el("rxShow").textContent = cfg.show ? "📺 Video hatao" : "📺 Video dikhao";
     const w = el("ytWrap"); if (w) w.classList.toggle("retro", retro);
     const pl = isPlaying();
     if (el("rxPlay")) el("rxPlay").textContent = pl ? "⏸ Pause" : "▶ Play";
-    if (el("rxState")) { el("rxState").className = pl ? "chip ok" : "chip"; el("rxState").textContent = src === "off" ? "Music band" : pl ? "▶ Chal raha hai" : (src === "yt" && apiState === "loading" ? "Loading…" : "Ruka hua"); }
-    if (src === "local" && el("rxNow")) el("rxNow").textContent = "🎵 Janusia Lofi (bgm.mp3)";
+    if (el("rxState")) { el("rxState").className = held ? "chip warn" : pl ? "chip ok" : "chip"; el("rxState").textContent = src === "off" ? "Music band" : held ? "⏸ Voice ban rahi hai" : pl ? "▶ Chal raha hai" : (src === "yt" && apiState === "loading" ? "Loading…" : "Ruka hua"); }
+    let qn = ""; try { if (player && ready && src === "yt") qn = QNAME[player.getPlaybackQuality()] || ""; } catch (_) {}
+    if (el("rxNow")) el("rxNow").textContent = src === "local" ? "🎵 Janusia Lofi (bgm.mp3)" : (vTitle ? "🎵 " + vTitle + (qn ? " · " + qn : "") : "—");
+    if (el("rxStage")) el("rxStage").innerHTML = src !== "yt" ? '<span class="small muted">Abhi YouTube video off hai (source badla hua hai).</span>' : !cfg.show ? '<span class="small muted">Video screen se hata di gayi hai — gaana chal raha hai. <b>📺 Video dikhao</b> dabao.</span>' : '<span class="small">✅ Video ' + ({ bg: "poori screen par peeche", rect: "rectangle window mein", mini: "chhote corner player mein" }[cfg.mode]) + " dikh raha hai (" + cfg.op[cfg.mode] + "% opacity)</span>";
   }
   setInterval(paint, 1500);
+  const sync = () => { saveCfg(); applyMode(); paint(); };
 
   el("rxPlay").addEventListener("click", () => { if (isPlaying()) pause(); else play(); setTimeout(paint, 400); });
   el("rxNext").addEventListener("click", () => { try { if (src === "yt" && player && ready) player.nextVideo(); } catch (_) {} });
   el("rxPrev").addEventListener("click", () => { try { if (src === "yt" && player && ready) player.previousVideo(); } catch (_) {} });
-  el("rxBig").addEventListener("click", () => { bigPref = !bigPref; layout(); });
-  el("ytExpand").addEventListener("click", () => { bigPref = true; showTab("relax"); });
+  el("rxMode").addEventListener("change", e => { cfg.mode = e.target.value; cfg.x = cfg.y = null; cfg.show = true; sync(); });
+  el("rxOp").addEventListener("input", e => { cfg.op[cfg.mode] = Math.max(5, Math.min(100, +e.target.value || 25)); el("rxOpV").textContent = cfg.op[cfg.mode] + "%"; applyMode(); saveCfg(); });
+  el("rxSize").addEventListener("change", e => { cfg.size = e.target.value; cfg.x = cfg.y = null; sync(); });
+  el("rxPos").addEventListener("change", e => { cfg.pos = e.target.value; cfg.x = cfg.y = null; sync(); });
+  el("rxQ").addEventListener("change", e => { cfg.q = e.target.value; saveCfg(); applyQuality(); toast("🎞️ Quality: " + e.target.options[e.target.selectedIndex].text); });
+  function setShow(v) { cfg.show = v; sync(); if (!v) toast("Video hata di — gaana chal raha hai. Wapas laane ke liye Mind Relax tab → 📺 Video dikhao"); }
+  el("rxShow").addEventListener("click", () => setShow(!cfg.show));
+  el("ytX").addEventListener("click", () => setShow(false));
+  el("ytBgX").addEventListener("click", () => setShow(false));
+  el("ytMode").addEventListener("click", () => { cfg.mode = cfg.mode === "bg" ? "rect" : cfg.mode === "rect" ? "mini" : "bg"; cfg.x = cfg.y = null; cfg.show = true; sync(); });
+  el("rxFs").addEventListener("click", () => {
+    if (src !== "yt") { toast("Pehle source YouTube karo"); return; }
+    cfg.show = true; applyMode();
+    const w = el("ytWrap"), f = w.requestFullscreen || w.webkitRequestFullscreen;
+    if (f) { try { const p = f.call(w); if (p && p.catch) p.catch(() => toast("Fullscreen nahi khula")); } catch (_) { toast("Fullscreen nahi khula"); } } else toast("Is browser mein fullscreen nahi hai");
+  });
   el("rxSource").addEventListener("change", e => { setSrc(e.target.value); if (src !== "off") play(); });
   el("rxAuto").addEventListener("change", e => { auto = e.target.checked; LSset("jn_rx_auto", auto ? "1" : "0"); });
   el("rxRetro").addEventListener("change", e => { retro = e.target.checked; LSset("jn_rx_retro", retro ? "1" : "0"); paint(); });
-  $$(".bgmVol").forEach(r => r.addEventListener("input", () => { volPct = Math.max(0, Math.min(0.5, r.value / 100)); LSset("janusia_bgm_vol", String(volPct)); $$(".bgmVol").forEach(o => { if (o !== r) o.value = r.value; }); if (player && ready && unlocked) { try { player.setVolume(ytVol()); curVol = ytVol(); } catch (_) {} } }));
+  $$(".bgmVol").forEach(r => r.addEventListener("input", () => {
+    volPct = Math.max(0, Math.min(100, +r.value || 0)); LSset("jn_vol2", String(volPct));
+    $$(".bgmVol").forEach(o => { if (o !== r) o.value = r.value; });
+    if (el("rxVolV")) el("rxVolV").textContent = Math.round(volPct) + "%";
+    if (player && ready && unlocked && !held) { try { player.setVolume(ytVol()); curVol = ytVol(); } catch (_) {} }
+  }));
   el("rxMoods").addEventListener("click", e => { const b = e.target.closest("[data-mood]"); if (!b) return; unlocked = true; load({ ids: MOODS[b.dataset.mood] }, true); play(); toast("🎶 " + b.textContent.trim()); });
   el("rxGo").addEventListener("click", () => {
     const t = parseYT(el("rxUrl").value);
@@ -3373,8 +3762,9 @@ const Relax = (() => {
     const t = parseYT(url);
     if (t && !personal && player && ready) load(t, false);
   }
+  applyMode();
   setTimeout(() => { if (src === "yt" && auto) loadApi(); applySource(); paint(); }, 400);
-  return { vol: () => volPct, toggleAll, enterTab, leaveTab, serverDefault, paint };
+  return { vol: () => volPct / 100, toggleAll, enterTab, leaveTab, serverDefault, paint, hold, release };
 })();
 
 /* ============================ MIXER & STUDIO EFFECTS ============================ */
@@ -3405,6 +3795,9 @@ const Mixer = (() => {
   }
   function refresh() {
     const cur = g("mxHist").value, h = S.hist;
+    const mh = g("mgHist"), mcur = mh.value;
+    mh.innerHTML = h.length ? h.map(it => `<option value="${it.id}">${esc((it.voice || "Voice") + " — " + String(it.text || "").slice(0, 28))}${it.dur ? " (" + fmtT(it.dur) + ")" : ""}</option>`).join("") : '<option value="">(History khaali)</option>';
+    if (mcur && h.some(x => String(x.id) === mcur)) mh.value = mcur;
     g("mxHist").innerHTML = h.length ? h.map(it => `<option value="${it.id}">${esc((it.voice || "Voice") + " — " + String(it.text || "").slice(0, 28))}${it.dur ? " (" + fmtT(it.dur) + ")" : ""}</option>`).join("") : '<option value="">(History khaali — pehle voice banao ya file upload karo)</option>';
     if (cur && h.some(x => String(x.id) === cur)) g("mxHist").value = cur;
     g("mxVoiceName").textContent = voiceFile ? "📁 " + voiceFile.name : (h.length ? "History se voice use hogi" : "—");
@@ -3451,8 +3844,8 @@ const Mixer = (() => {
     return ir;
   }
 
-  async function render() {
-    const voice = await getVoice(), music = await getMusic();
+  async function render(cb) {
+    cb && cb(0.02); const voice = await getVoice(); cb && cb(0.08); const music = await getMusic(); cb && cb(0.14);
     const sr = 44100, rev = v("mxRev") / 100, echo = v("mxEcho") / 100, room = v("mxRoom"), echoT = v("mxEchoT"), fb = v("mxEchoFb") / 100;
     const intro = music ? v("mxIntro") : 0, tailUser = music ? v("mxTail") : 0;
     const fxTail = Math.max(rev > 0 ? room * 0.9 : 0, echo > 0 ? Math.min(3, echoT * 5) : 0, 0.4);
@@ -3493,7 +3886,7 @@ const Mixer = (() => {
 
     const lim = off.createDynamicsCompressor(); lim.threshold.value = -2; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = 0.003; lim.release.value = 0.12;
     master.connect(lim); lim.connect(off.destination);
-    return off.startRendering();
+    return renderP(off, total, p => cb && cb(0.15 + 0.8 * p));
   }
 
   function abToWav(buf) {
@@ -3512,12 +3905,12 @@ const Mixer = (() => {
       document.head.appendChild(s); setTimeout(() => rej(new Error("timeout")), 15000);
     });
   }
-  async function toMp3(buf) {
+  async function toMp3(buf, cb) {
     await loadLame();
     const f16 = a => { const o = new Int16Array(a.length); for (let i = 0; i < a.length; i++) { const x = Math.max(-1, Math.min(1, a[i])); o[i] = x < 0 ? x * 0x8000 : x * 0x7fff; } return o; };
     const l = f16(buf.getChannelData(0)), r = buf.numberOfChannels > 1 ? f16(buf.getChannelData(1)) : l;
     const enc = new lamejs.Mp3Encoder(2, buf.sampleRate, 128), out = [], bs = 1152;
-    for (let i = 0; i < l.length; i += bs) { const a = enc.encodeBuffer(l.subarray(i, i + bs), r.subarray(i, i + bs)); if (a.length) out.push(new Int8Array(a)); if (i % (bs * 300) === 0) await new Promise(r2 => setTimeout(r2, 0)); }
+    for (let i = 0; i < l.length; i += bs) { const a = enc.encodeBuffer(l.subarray(i, i + bs), r.subarray(i, i + bs)); if (a.length) out.push(new Int8Array(a)); if (i % (bs * 300) === 0) { if (cb) cb(i / l.length); await new Promise(r2 => setTimeout(r2, 0)); } }
     const fl = enc.flush(); if (fl.length) out.push(new Int8Array(fl));
     return new Blob(out, { type: "audio/mpeg" });
   }
@@ -3525,17 +3918,75 @@ const Mixer = (() => {
   async function ensureRender() {
     if (outBuf && !stale) return true;
     if (busy) return false; busy = true; g("mxPreview").disabled = true; g("mxBarWrap").hidden = false;
-    let p = 6; g("mxBar").style.width = p + "%"; const iv = setInterval(() => { p = Math.min(92, p + 4); g("mxBar").style.width = p + "%"; }, 220);
+    const T = makeTimer("mxTimer", "mxBar"); T.start();
     msg("⏳ Mix ho raha hai…");
     try {
-      outBuf = await render(); outBlob = abToWav(outBuf);
+      outBuf = await render(T.set); T.set(0.97); outBlob = abToWav(outBuf);
       if (wavUrl) URL.revokeObjectURL(wavUrl); wavUrl = URL.createObjectURL(outBlob);
       const pl = g("mxPlayer"); pl.src = wavUrl; g("mxOut").hidden = false;
       g("mxInfo").textContent = fmtT(outBuf.duration) + " min · " + fmtB(outBlob.size) + " (WAV)";
-      stale = false; msg("✅ Taiyaar! Neeche suno aur download karo."); g("mxBar").style.width = "100%";
+      stale = false; msg("✅ Taiyaar! Neeche suno aur download karo."); T.done();
       return true;
-    } catch (e) { msg("❌ " + (e && e.message ? e.message : "Mix nahi ho paya")); return false; }
-    finally { clearInterval(iv); busy = false; g("mxPreview").disabled = false; setTimeout(() => { g("mxBarWrap").hidden = true; }, 700); }
+    } catch (e) { T.fail(); msg("❌ " + (e && e.message ? e.message : "Mix nahi ho paya")); return false; }
+    finally { busy = false; g("mxPreview").disabled = false; setTimeout(() => { g("mxBarWrap").hidden = true; }, 1400); }
+  }
+
+  /* ---- real progress + timer (OfflineAudioContext ko beech-beech mein rok kar % nikalte hain) ---- */
+  function renderP(off, total, cb) {
+    const marks = total > 3 ? Math.min(14, Math.ceil(total / 4)) : 0;
+    for (let i = 1; i <= marks; i++) {
+      try { off.suspend(total * i / (marks + 1)).then(() => { try { cb(i / (marks + 1)); } catch (_) {} off.resume(); }).catch(() => {}); } catch (_) {}
+    }
+    return off.startRendering();
+  }
+  function makeTimer(tid, bid) {
+    const te = g(tid), be = g(bid); let t0 = 0, iv = 0, p = 0;
+    const fm = s => { s = Math.max(0, s); return Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0"); };
+    const draw = () => { const e = (performance.now() - t0) / 1000; let txt = "⏱ " + fm(e) + " · " + Math.round(p * 100) + "%"; if (p > 0.1 && p < 1) txt += " · ~" + fm(e / p - e) + " baaki"; te.textContent = txt; be.style.width = Math.round(p * 100) + "%"; };
+    return {
+      start() { t0 = performance.now(); p = 0.02; te.hidden = false; clearInterval(iv); iv = setInterval(draw, 120); draw(); },
+      set(x) { p = Math.max(p, Math.min(1, x)); },
+      done() { clearInterval(iv); p = 1; te.textContent = "✅ " + ((performance.now() - t0) / 1000).toFixed(1) + " sec mein ho gaya"; be.style.width = "100%"; },
+      fail() { clearInterval(iv); te.textContent = "❌ ruk gaya"; }
+    };
+  }
+
+  /* ---- AUDIO MERGE: kai audio ek file mein jodo ---- */
+  const mg = { items: [], buf: null, blob: null, url: "" };
+  const mgMsg = t => { g("mgMsg").textContent = t || ""; };
+  function mgDraw() {
+    const L = g("mgList");
+    if (!mg.items.length) { L.innerHTML = '<span class="small muted">Abhi koi audio nahi jodi. History se ya apni files se jodo (kam se kam 2).</span>'; return; }
+    L.innerHTML = mg.items.map((it, i) => `<div class="mgrow"><span class="mgn">${i + 1}</span><div class="mgt"><b>${esc(it.name)}</b><span class="small muted">${esc(it.sub || "")}</span></div><div class="row" style="gap:4px;flex-wrap:nowrap"><button class="btn sm" type="button" data-mg="up" data-i="${i}"${i ? "" : " disabled"} aria-label="Upar">▲</button><button class="btn sm" type="button" data-mg="dn" data-i="${i}"${i < mg.items.length - 1 ? "" : " disabled"} aria-label="Neeche">▼</button><button class="btn sm danger" type="button" data-mg="rm" data-i="${i}" aria-label="Hatao">✕</button></div></div>`).join("");
+  }
+  function mgFromHist(it) { return { name: (it.voice || "Voice") + " — " + String(it.text || "").slice(0, 34), sub: (it.dur ? fmtT(it.dur) + " min · " : "") + fmtB(it.blob.size) + " · " + it.ext.toUpperCase(), blob: it.blob }; }
+  async function mgRun() {
+    if (mg.items.length < 2) { toast("Kam se kam 2 audio jodo"); return; }
+    if (busy) { toast("Ek kaam chal raha hai, thoda ruko"); return; }
+    busy = true; g("mgGo").disabled = true; g("mgBarWrap").hidden = false; g("mgOut").hidden = true;
+    const T = makeTimer("mgTimer", "mgBar"); T.start(); mgMsg("⏳ Audio jod raha hoon…");
+    try {
+      const bufs = [];
+      for (let i = 0; i < mg.items.length; i++) { bufs.push(await decode(await mg.items[i].blob.arrayBuffer())); T.set(0.05 + 0.35 * (i + 1) / mg.items.length); }
+      const sr = 44100, gap = parseFloat(g("mgGap").value) || 0, norm = g("mgNorm").checked;
+      const total = bufs.reduce((a, b) => a + b.duration, 0) + gap * (bufs.length - 1) + 0.1;
+      if (total > 60 * 60) throw new Error("Total audio 1 ghante se lambi hai.");
+      const off = new (OAC())(2, Math.ceil(total * sr), sr), master = off.createGain(); master.gain.value = 0.97; master.connect(off.destination);
+      let at = 0.02;
+      for (const b of bufs) {
+        let pk = 0; if (norm) for (let c = 0; c < b.numberOfChannels; c++) { const d = b.getChannelData(c); for (let i = 0; i < d.length; i += 3) { const x = d[i] < 0 ? -d[i] : d[i]; if (x > pk) pk = x; } }
+        const s = off.createBufferSource(); s.buffer = b; const gn = off.createGain(); gn.gain.value = norm && pk > 0.001 ? Math.min(4, 0.92 / pk) : 1;
+        s.connect(gn); gn.connect(master); s.start(at); at += b.duration + gap;
+      }
+      T.set(0.45);
+      mg.buf = await renderP(off, total, p => T.set(0.45 + 0.5 * p));
+      mg.blob = abToWav(mg.buf); T.set(0.98);
+      if (mg.url) URL.revokeObjectURL(mg.url); mg.url = URL.createObjectURL(mg.blob);
+      g("mgPlayer").src = mg.url; g("mgOut").hidden = false;
+      g("mgInfo").textContent = bufs.length + " audio · " + fmtT(mg.buf.duration) + " min · " + fmtB(mg.blob.size) + " (WAV)";
+      T.done(); mgMsg("✅ Merge ho gaya! Neeche suno, download karo ya Mixer mein use karo.");
+    } catch (e) { T.fail(); mgMsg("❌ " + (e && e.message ? e.message : "Merge nahi ho paya")); }
+    finally { busy = false; g("mgGo").disabled = false; setTimeout(() => { g("mgBarWrap").hidden = true; }, 1200); }
   }
 
   // ---- events ----
@@ -3550,12 +4001,45 @@ const Mixer = (() => {
   g("mxDlWav").addEventListener("click", async () => { if (await ensureRender()) { saveBlob(outBlob, "janusia-mix-" + stamp() + ".wav"); toast("⬇️ WAV download shuru"); } });
   g("mxDlMp3").addEventListener("click", async () => {
     if (!(await ensureRender())) return;
-    msg("⏳ MP3 ban raha hai…");
-    try { const b = await toMp3(outBuf); saveBlob(b, "janusia-mix-" + stamp() + ".mp3"); msg("✅ MP3 download shuru (" + fmtB(b.size) + ")"); toast("⬇️ MP3 download shuru"); }
-    catch (_) { saveBlob(outBlob, "janusia-mix-" + stamp() + ".wav"); msg("MP3 engine load nahi hua, isliye WAV de diya (same quality)."); toast("MP3 nahi bana — WAV download kiya"); }
+    msg("⏳ MP3 ban raha hai…"); const T = makeTimer("mxTimer", "mxBar"); g("mxBarWrap").hidden = false; T.start();
+    try { const b = await toMp3(outBuf, T.set); T.done(); saveBlob(b, "janusia-mix-" + stamp() + ".mp3"); msg("✅ MP3 download shuru (" + fmtB(b.size) + ")"); toast("⬇️ MP3 download shuru"); }
+    catch (_) { T.fail(); saveBlob(outBlob, "janusia-mix-" + stamp() + ".wav"); msg("MP3 engine load nahi hua, isliye WAV de diya (same quality)."); toast("MP3 nahi bana — WAV download kiya"); }
   });
+  // ---- merge events ----
+  g("mgList").addEventListener("click", e => {
+    const b = e.target.closest("[data-mg]"); if (!b) return; const i = +b.dataset.i, a = b.dataset.mg, L = mg.items;
+    if (a === "rm") L.splice(i, 1);
+    else if (a === "up" && i > 0) [L[i - 1], L[i]] = [L[i], L[i - 1]];
+    else if (a === "dn" && i < L.length - 1) [L[i + 1], L[i]] = [L[i], L[i + 1]];
+    mgDraw();
+  });
+  g("mgAddH").addEventListener("click", () => { const it = S.hist.find(x => String(x.id) === g("mgHist").value); if (!it) { toast("History khaali hai"); return; } mg.items.push(mgFromHist(it)); mgDraw(); });
+  g("mgAddAll").addEventListener("click", () => { if (!S.hist.length) { toast("History khaali hai"); return; } [...S.hist].reverse().forEach(it => mg.items.push(mgFromHist(it))); mgDraw(); });
+  g("mgFiles").addEventListener("change", e => {
+    [...e.target.files].forEach(f => mg.items.push({ name: f.name, sub: fmtB(f.size), blob: f })); e.target.value = ""; mgDraw();
+  });
+  g("mgClear").addEventListener("click", () => { mg.items = []; g("mgOut").hidden = true; mgMsg(""); mgDraw(); });
+  g("mgGap").addEventListener("input", () => { g("mgGapV").textContent = g("mgGap").value + "s"; });
+  g("mgGo").addEventListener("click", mgRun);
+  g("mgDlWav").addEventListener("click", () => { if (mg.blob) { saveBlob(mg.blob, "janusia-merged-" + stamp() + ".wav"); toast("⬇️ Merged WAV download shuru"); } });
+  g("mgDlMp3").addEventListener("click", async () => {
+    if (!mg.buf) return; const T = makeTimer("mgTimer", "mgBar"); g("mgBarWrap").hidden = false; T.start(); mgMsg("⏳ MP3 ban raha hai…");
+    try { const b = await toMp3(mg.buf, T.set); T.done(); saveBlob(b, "janusia-merged-" + stamp() + ".mp3"); mgMsg("✅ MP3 download shuru (" + fmtB(b.size) + ")"); }
+    catch (_) { T.fail(); saveBlob(mg.blob, "janusia-merged-" + stamp() + ".wav"); mgMsg("MP3 engine load nahi hua, isliye WAV de diya (same quality)."); }
+    setTimeout(() => { g("mgBarWrap").hidden = true; }, 1200);
+  });
+  g("mgUse").addEventListener("click", () => {
+    if (!mg.blob) return; voiceFile = new File([mg.blob], "merged-" + stamp() + ".wav", { type: "audio/wav" }); stale = true; refresh();
+    toast("🎚️ Merged audio ab Mixer ki 'Voice' hai — neeche music/effects lagao"); g("mxPreview").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+  g("mgSave").addEventListener("click", () => {
+    if (!mg.blob) return; addHistory(mg.blob, "wav", mg.buf ? mg.buf.duration : 0, "Merged audio (" + mg.items.length + " clips)", "Merged"); toast("📚 History mein save ho gaya");
+  });
+  let warmed = false;
+  function warm() { if (warmed) return; warmed = true; setTimeout(() => { loadLame().catch(() => {}); }, 1200); }
+  mgDraw();
   paintVals();
-  return { refresh };
+  return { refresh, warm };
 })();
 
 /* ============================ AI LIVE EDITOR ============================ */
@@ -3796,7 +4280,9 @@ renderDiag();
 renderVoices();
 renderHist();
 renderKeyInfo();
+renderKeyList();
 updateCharLimitUI();
+loadHistory();
 GLX.init();
 JanusiaShield.initNetworkAndVpnCheck();
 JanusiaShield.syncPauseUI();
