@@ -9,7 +9,9 @@
 <title>Janusia — 3D AI Voice Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<script>try{if(localStorage.getItem("jn_pb")==="1")document.documentElement.classList.add("walled");var a=localStorage.getItem("jn_lite")||"auto";if(a==="1"||(a==="auto"&&((navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=2)))document.documentElement.classList.add("lite")}catch(e){}</script>
 <style>
 :root{
   --bg:#090410; --bg2:#140824; --ink:#F8F4FF; --muted:#C6B4D8;
@@ -481,42 +483,7 @@ table.ct th,table.ct td{padding:8px;border-bottom:1px solid var(--line);text-ali
 .verTag{display:block;text-align:center;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold);margin-top:8px}
 .bgmBtn{min-width:44px}
 /* ===== Mind Relax + Mixer ===== */
-.rxstage{aspect-ratio:16/9;max-width:560px;width:100%;margin:0 auto;border-radius:16px;border:1px dashed var(--line);display:grid;place-items:center;background:var(--field)}
-.ytdock{position:fixed;z-index:65;border-radius:16px;background:var(--glass);border:1px solid var(--line);box-shadow:0 14px 38px var(--shadow);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden;opacity:var(--ytop,1);transition:opacity .3s,width .25s,transform .25s}
-.ytdock.off{opacity:0 !important;pointer-events:none !important;transform:scale(.96)}
-.ytdock.mini{width:min(228px,70vw)}
-.ytdock.rect{width:min(var(--rw,380px),94vw)}
-.ytdock[data-pos=br]{right:12px;bottom:12px}
-.ytdock[data-pos=bl]{left:12px;bottom:12px}
-.ytdock[data-pos=tr]{right:12px;top:12px}
-.ytdock[data-pos=tl]{left:12px;top:12px}
-@media(max-width:900px){.ytdock[data-pos=br],.ytdock[data-pos=bl]{bottom:92px}}
 /* poori screen background: sabse peeche, click ke aar-paar, 16:9 ko screen par "cover" karta hai */
-.ytdock.bg{inset:0;width:auto;height:auto;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;z-index:1;pointer-events:none}
-.ytdock.bg .ythead{display:none}
-.ytdock.bg .ytwrap{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);aspect-ratio:auto;transform:translate(-50%,-50%);background:transparent;pointer-events:none}
-.ytdock.bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(9,4,16,.55) 100%)}
-.ytwrap:fullscreen{position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;transform:none !important;pointer-events:auto !important;background:#000}
-.ythead{display:flex;align-items:center;gap:6px;padding:5px 7px 5px 12px;cursor:grab;touch-action:none;user-select:none}
-.ythead:active{cursor:grabbing}
-.yttitle{flex:1;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted,inherit)}
-.ytb{appearance:none;border:1px solid var(--line);background:var(--glass2);color:var(--ink);width:26px;height:26px;border-radius:8px;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .15s,transform .15s}
-.ytb:hover{background:var(--glass3);transform:scale(1.08)}
-.ytb.x:hover{background:rgba(248,113,113,.3);border-color:var(--bad)}
-.ytbgx{position:fixed;right:12px;bottom:12px;z-index:66;appearance:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--ink);font-size:12px;line-height:1;cursor:pointer;opacity:.55;display:grid;place-items:center;backdrop-filter:blur(8px);transition:opacity .2s,transform .2s,background .2s}
-.ytbgx:hover{opacity:1;transform:scale(1.12);background:rgba(248,113,113,.35)}
-@media(max-width:900px){.ytbgx{bottom:92px}}
-.ytwrap{position:relative;aspect-ratio:16/9;background:#000}
-.ytwrap #ytPlayer,.ytwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.ytwrap.retro{filter:sepia(.3) saturate(1.18) contrast(1.05) brightness(.97)}
-.ytwrap i{position:absolute;inset:0;pointer-events:none;display:none}
-.ytwrap.retro i{display:block}
-.ytTint{background:linear-gradient(135deg,rgba(255,170,110,.14),rgba(120,70,210,.14));mix-blend-mode:soft-light}
-.ytScan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.30) 0 1px,transparent 1px 3px);opacity:.28}
-.ytVig{background:radial-gradient(ellipse at center,transparent 55%,rgba(25,0,40,.55) 100%);opacity:.55}
-.ytOsd{position:absolute;left:7px;top:5px;pointer-events:none;display:none;font:700 10px/1 "Courier New",monospace;color:#fff;opacity:.5;letter-spacing:.08em;text-shadow:0 0 4px #f0f}
-.ytwrap.retro .ytOsd{display:block}
-.rxset{display:grid;gap:12px;padding:14px;border-radius:16px;background:var(--field);border:1px solid var(--line)}
 .mxgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .mxv{float:right;color:var(--gold);font-weight:800}
 
@@ -557,14 +524,145 @@ audio{border-radius:14px;max-width:100%}
 .mgrow .mgt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13.5px}
 .mgbox{display:grid;gap:12px;padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,.07),rgba(236,72,153,.07));border:1px solid var(--line2)}
 .tmr{font-variant-numeric:tabular-nums;font-weight:800}
-@media(max-width:900px){.ytdock.rect{width:min(var(--rw,380px),72vw)}.ytdock.mini{width:min(190px,56vw)}}
 @media(prefers-reduced-motion:reduce){section[role=tabpanel]:not([hidden]){animation:none}.btn.primary::after{display:none}}
-.rxv{float:right;color:var(--gold);font-weight:800}
-.rxstage{aspect-ratio:auto;max-width:none;min-height:56px;padding:12px;text-align:center}
+/* ===== v5.0: accounts, credits, plans, voice IDs, wall, motion ===== */
+html.walled #app,html.walled #gl,html.walled #authpop,html.walled #surpop,html.walled #fxc{display:none!important}
+#wall{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 30% 18%,#4a0d55,#090410 70%);color:#fff;text-align:center;overflow:auto}
+html.walled #wall{display:flex}
+.wallbox{max-width:440px;width:100%;display:grid;gap:14px;animation:wallIn .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes wallIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.wallic{font-size:68px;line-height:1;animation:wob 2.6s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-6deg) scale(1)}50%{transform:rotate(6deg) scale(1.08)}}
+.wallbox h2{margin:0;font-size:26px;color:#f9a8d4}
+.wallbox p{margin:0;color:#e9d5ff}
+.wallbtns{display:grid;gap:9px}
+.wallbtns a{display:flex;justify-content:center;align-items:center;gap:8px;padding:13px 16px;border-radius:14px;font-weight:800;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 10px 26px rgba(236,72,153,.35);transition:transform .18s}
+.wallbtns a:hover{transform:translateY(-2px)}
+.wallbtns a.alt{background:rgba(255,255,255,.1);box-shadow:none;border:1px solid rgba(255,255,255,.2)}
+.acctchip{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border-radius:14px;border:1px solid var(--line);background:var(--glass2);color:var(--ink);cursor:pointer;font:inherit;text-align:left;transition:transform .2s,border-color .2s,box-shadow .2s}
+.acctchip:hover{transform:translateY(-2px);border-color:var(--pink2);box-shadow:0 10px 22px var(--shadow)}
+.acctchip .av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--violet));font-weight:800;color:#fff;flex:none;font-size:14px}
+.acctchip>span:last-child{min-width:0;display:grid}
+.acctchip b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acctchip small{color:var(--gold);font-weight:800;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mdl{position:fixed;inset:0;z-index:85;display:grid;place-items:center;padding:16px;background:rgba(5,2,10,.7);opacity:0;pointer-events:none;transition:opacity .25s}
+.mdl.show{opacity:1;pointer-events:auto}
+.mdl .mbox{position:relative;width:min(430px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:24px;background:linear-gradient(180deg,rgba(236,72,153,.12),transparent 30%),var(--bg2);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6);transform:translateY(24px) scale(.96);transition:transform .35s cubic-bezier(.2,.9,.2,1.1)}
+.mdl.show .mbox{transform:none}
+.mdl .mx{position:absolute;right:12px;top:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--glass2);color:var(--ink);cursor:pointer;font-size:14px}
+.mdl .mx:hover{background:rgba(248,113,113,.3)}
+.auth-hero{display:grid;justify-items:center;gap:4px;text-align:center;margin-bottom:12px}
+.auth-hero .orb{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:26px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 10px 30px rgba(236,72,153,.5);animation:floaty 3.2s ease-in-out infinite}
+.auth-hero h3{margin:6px 0 0;font-size:21px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--field);border:1px solid var(--line);margin-bottom:12px}
+.seg button{border:0;border-radius:11px;padding:9px;background:transparent;color:var(--muted);font:inherit;font-weight:700;cursor:pointer;transition:background .2s,color .2s}
+.seg button.on{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;box-shadow:0 6px 16px rgba(139,92,246,.4)}
+#authForm{display:grid;gap:11px}
+#authForm input{width:100%}
+.amsg{min-height:20px;font-weight:600}.amsg.bad{color:var(--bad)}.amsg.ok{color:var(--ok)}
+.lnk{background:none;border:0;padding:2px 0;color:var(--pink2);font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:underline}
+.lnk:disabled{opacity:.5;cursor:default;text-decoration:none}
+#aCode{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:26px;letter-spacing:.5em;text-align:center}
+.acctv{display:grid;gap:12px;text-align:center}
+.avbig{width:64px;height:64px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:28px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 0 0 4px rgba(236,72,153,.2),0 12px 28px rgba(139,92,246,.45)}
+.credbig{display:grid;gap:0}.credbig span{font-size:42px;font-weight:800;line-height:1.1;background:linear-gradient(90deg,var(--gold),var(--pink2),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.credbig small{color:var(--muted);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+.cbar{height:8px;border-radius:99px;background:var(--field);overflow:hidden;border:1px solid var(--line)}
+.cbar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.ordr{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:10px;background:var(--field);font-size:12.5px;text-align:left}
+/* plans */
+.plhero{position:relative;overflow:hidden;text-align:center}
+.plhero::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(236,72,153,.18),transparent 30%,rgba(34,211,238,.14),transparent 60%);animation:spin 14s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.plhero>*{position:relative}
+.shim{background:linear-gradient(90deg,var(--pink2),var(--gold),var(--cyan),var(--pink2));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 6s linear infinite}
+@keyframes shim{to{background-position:250% 0}}
+.plstrip{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;margin:14px auto 0;max-width:640px;border-radius:16px;background:var(--field);border:1px solid var(--line2);text-align:left}
+.dpills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:6px 0 2px}
+.dpill{border:1px solid var(--line);background:var(--glass2);color:var(--ink);padding:9px 16px;border-radius:99px;font:inherit;font-weight:800;cursor:pointer;transition:transform .18s,background .2s,box-shadow .2s}
+.dpill:hover{transform:translateY(-2px)}
+.dpill.on{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(139,92,246,.45)}
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;text-align:left}
+.pack{position:relative;display:grid;gap:8px;align-content:start;padding:18px 16px 16px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 40%),var(--glass);border:1px solid var(--line);cursor:pointer;opacity:0;animation:packIn .55s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i,0)*60ms);transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,border-color .22s}
+@keyframes packIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+.pack:hover,.pack:focus-visible{transform:translateY(-6px);border-color:var(--pink2);box-shadow:0 20px 40px var(--shadow),0 0 0 1px var(--pink2) inset;outline:none}
+.pack.hot{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset,0 16px 36px rgba(251,191,36,.18)}
+.pack .ptag{position:absolute;right:12px;top:-10px;padding:3px 10px;border-radius:99px;font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#2a1300;background:linear-gradient(90deg,var(--gold),#fde68a)}
+.pack .pic{font-size:30px;line-height:1;display:inline-block;animation:floaty 3s ease-in-out infinite;animation-delay:calc(var(--i,0)*-.4s)}
+.pack .pn{font-weight:800;font-size:15px;color:var(--pink2)}
+.pack .pp{font-size:30px;font-weight:800;line-height:1.1}
+.pack .pp s{font-size:13px;color:var(--muted);font-weight:600;margin-left:4px}
+.pack .pc{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--gold)}
+.pack .pc small{font-size:12px;color:var(--muted);font-weight:700}
+.pack .pb{display:inline-block;justify-self:start;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:800;color:#052e1c;background:linear-gradient(90deg,#6ee7b7,#a7f3d0);animation:pulseb 2.2s ease-in-out infinite}
+@keyframes pulseb{0%,100%{box-shadow:0 0 0 0 rgba(110,231,183,.5)}50%{box-shadow:0 0 0 7px rgba(110,231,183,0)}}
+.pack .pr{font-size:11.5px;color:var(--muted)}
+.pack .pcta{margin-top:4px;text-align:center;padding:10px;border-radius:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet))}
+.pack .bfn{font-size:11.5px;color:var(--gold);font-weight:700}
+.cust{display:grid;gap:12px;padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(236,72,153,.08));border:1px dashed var(--line2);text-align:left}
+.cust .camt{display:flex;align-items:center;gap:8px;font-size:32px;font-weight:800}
+.cust .camt input{width:150px;font-size:26px;font-weight:800;padding:6px 10px}
+.qchips{display:flex;gap:7px;flex-wrap:wrap}
+.qchips button{border:1px solid var(--line);background:var(--glass2);color:var(--ink);padding:5px 12px;border-radius:99px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+.qchips button:hover{border-color:var(--pink2)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.cgrid div{padding:10px 12px;border-radius:14px;background:var(--field);border:1px solid var(--line)}
+.cgrid small{display:block;color:var(--muted);font-size:11.5px;font-weight:700}
+.cgrid b{font-size:17px;font-variant-numeric:tabular-nums}
+.sumbox{display:grid;gap:5px;padding:12px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line);margin:8px 0;text-align:left}
+.sumbox div{display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+.sumbox div span:first-child{color:var(--muted)}
+.sumbox .tot{border-top:1px dashed var(--line);padding-top:6px;font-weight:800;font-size:15.5px}
+.ordiv{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;font-weight:700;margin:10px 0}
+.ordiv::before,.ordiv::after{content:"";flex:1;height:1px;background:var(--line)}
+/* voice ids */
+.vidgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.vid{position:relative;display:grid;gap:10px;padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.10)),var(--glass);border:1px solid var(--line);opacity:0;animation:packIn .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i,0)*45ms);transition:transform .2s,border-color .2s,box-shadow .2s}
+.vid:hover{transform:translateY(-4px);border-color:var(--pink2);box-shadow:0 14px 30px var(--shadow)}
+.vid-n{font-family:"Space Grotesk",var(--font);font-weight:700;font-size:19px;letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+.vid-n i{font-style:normal;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;font-size:15px;background:linear-gradient(135deg,var(--pink),var(--violet))}
+.vid-id{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;font-size:12.2px;word-break:break-all;padding:9px 11px;border-radius:11px;background:var(--field);border:1px solid var(--line);color:var(--cyan);user-select:all}
+.vid.lk .vid-id{color:var(--muted);filter:blur(3.5px);user-select:none}
+.vid.lk::after{content:"🔒";position:absolute;right:14px;top:12px;font-size:20px;animation:wob 3s ease-in-out infinite}
+.vlock{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border-radius:16px;background:rgba(251,191,36,.08);border:1px dashed var(--line2)}
+/* speed + fx */
+#stSpdIt{cursor:pointer}
+#stSpd.good{color:var(--ok)}#stSpd.mid{color:var(--warn)}#stSpd.low{color:var(--bad)}
+#fxc{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:95}
+.cele{position:fixed;left:50%;top:38%;z-index:96;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:6px;padding:22px 30px;border-radius:26px;text-align:center;background:linear-gradient(135deg,rgba(16,185,129,.95),rgba(6,182,212,.92));color:#fff;box-shadow:0 24px 70px rgba(16,185,129,.5);animation:celeIn .5s cubic-bezier(.2,1.2,.3,1) both,celeOut .5s 2.6s ease-in forwards;pointer-events:none}
+.cele svg{width:64px;height:64px}
+.cele circle{stroke:#fff;stroke-width:3;fill:none;stroke-dasharray:151;stroke-dashoffset:151;animation:dash .6s .15s ease-out forwards}
+.cele path{stroke:#fff;stroke-width:4.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:dash .4s .6s ease-out forwards}
+.cele b{font-size:20px}.cele span{font-size:13px;opacity:.95}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes celeIn{from{opacity:0;transform:translate(-50%,-30%) scale(.5)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes celeOut{to{opacity:0;transform:translate(-50%,-70%) scale(.9)}}
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(70px);opacity:.28;animation:drift 22s ease-in-out infinite alternate}
+.aurora i:nth-child(1){background:#ec4899;left:-12vmax;top:-12vmax}
+.aurora i:nth-child(2){background:#8b5cf6;right:-14vmax;top:10vmax;animation-delay:-7s}
+.aurora i:nth-child(3){background:#22d3ee;left:25vmax;bottom:-22vmax;animation-delay:-13s;opacity:.18}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.18)}}
+.tab[aria-selected=true]::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);background-size:220% 100%;animation:shine 3.4s linear infinite;pointer-events:none}
+@keyframes shine{from{background-position:200% 0}to{background-position:-100% 0}}
+.btn.primary:not(:disabled):active{transform:scale(.97)}
+html.lite *,html.lite *::before,html.lite *::after{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.lite .aurora,html.lite #gl,html.lite .plhero::before,html.lite .tab[aria-selected=true]::after{display:none!important}
+html.lite .pack,html.lite .vid{animation:none;opacity:1}
+html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:none}
+@media(prefers-reduced-motion:reduce){.aurora i,.plhero::before,.pack,.vid,.pack .pic,.pb,.shim,.tab[aria-selected=true]::after,.auth-hero .orb{animation:none!important}.pack,.vid{opacity:1}}
+@media(max-width:600px){.cust .camt{font-size:26px}.cust .camt input{width:120px}.packs{grid-template-columns:1fr 1fr;gap:10px}.pack{padding:14px 12px}.pack .pp{font-size:24px}.pack .pc{font-size:18px}}
+@media(max-width:380px){.packs{grid-template-columns:1fr}}
+.mtop .acctchip{flex:none}
+@media(max-width:900px){.side .acctchip,.side .liteBtn{display:none}}
+@media(max-width:700px){.mtop .acctchip{padding:4px}.mtop .acctchip>span:last-child{display:none}}
+#app{position:relative;z-index:2}
 </style>
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <noscript><p style="position:relative;z-index:5;padding:20px">Janusia chalane ke liye JavaScript on karo.</p></noscript>
 
 <!-- ================= JANUSIA 3D AI STUDIO ================= -->
@@ -575,13 +673,14 @@ audio{border-radius:14px;max-width:100%}
       <div class="brand-orb" aria-hidden="true">J</div>
       <div><span class="brand-name">Janusia</span><span class="subb">3D Voice Studio</span></div>
     </div>
+    <button class="acctchip acctBtn" type="button" style="margin:2px 0 10px" aria-label="Account"></button>
     <nav class="nav" role="tablist" aria-label="Sections">
       <button class="tab" role="tab" data-tab="studio" aria-selected="true">🎙️ Text to Speech</button>
       <button class="tab" role="tab" data-tab="voices" aria-selected="false">🎭 Voices Library</button>
+      <button class="tab" role="tab" data-tab="vids" aria-selected="false">🆔 Voice IDs</button>
       <button class="tab" role="tab" data-tab="history" aria-selected="false">🎧 History</button>
       <button class="tab" role="tab" data-tab="clone" aria-selected="false">🧬 Instant Clone</button>
       <button class="tab" role="tab" data-tab="stt" aria-selected="false">📝 Awaaz se Text</button>
-      <button class="tab" role="tab" data-tab="relax" aria-selected="false">🌿 Mind Relax</button>
       <button class="tab" role="tab" data-tab="mixer" aria-selected="false">🎚️ Mixer &amp; Effects</button>
       <button class="tab" role="tab" data-tab="connect" aria-selected="false">🔑 Connect &amp; Key</button>
       <button class="tab" role="tab" data-tab="plans" aria-selected="false">💎 Plans &amp; Upgrade</button>
@@ -591,7 +690,8 @@ audio{border-radius:14px;max-width:100%}
     <div class="sidefoot">
       <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button><button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button></div>
       <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="100" value="35" style="flex:1" aria-label="Music volume"></label>
-      <span class="verTag">⚡ v4.0 · Shield Pro</span>
+      <button class="btn sm liteBtn" type="button" style="width:100%;margin-top:6px"></button>
+      <span class="verTag">⚡ v5.0 · Updated 21 Nov 2026, 07:23 AM IST</span>
     </div>
   </aside>
 
@@ -601,6 +701,7 @@ audio{border-radius:14px;max-width:100%}
      <h1 class="brand-name" style="flex:1;font-size:23px">Janusia</h1>
      <button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button>
      <button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button>
+     <button class="acctchip acctBtn" type="button" style="width:auto;max-width:48vw;padding:5px 9px" aria-label="Account"></button>
      <button class="btn sm" id="themeBtn2" type="button">🌓 Theme</button>
    </div>
 
@@ -608,7 +709,9 @@ audio{border-radius:14px;max-width:100%}
    <div class="status" id="statusBar" role="status" aria-live="polite" title="Connect & Status kholne ke liye dabao">
     <div class="it"><i class="dot" id="stDot"></i><b id="stText">Connecting...</b></div>
     <div class="it"><span>Free left</span><b id="stLimit" style="color:var(--gold)">250 chars</b></div>
+    <div class="it"><span>💎 Credits</span><b id="stCred" style="color:var(--gold)">Login</b></div>
     <div class="it"><span>Voices</span><b id="stVoices">0</b></div>
+    <div class="it" id="stSpdIt" title="Speed dobara test karo"><span>⚡ Speed</span><b id="stSpd">…</b></div>
     <div class="it"><span>Ping</span><b id="stPing">-</b></div>
     <div class="it"><span>IP</span><b id="stIp">Checking...</b></div>
     <div class="it"><span class="chip ok" id="stSec">🛡️ Shield Active</span></div>
@@ -751,6 +854,19 @@ audio{border-radius:14px;max-width:100%}
     </div>
   </section>
 
+  <!-- ================= VOICE IDs ================= -->
+  <section id="p-vids" role="tabpanel" hidden>
+    <div class="glass grid">
+      <div class="row sb">
+        <div><h2 style="margin:0">🆔 Voice ID Vault</h2><p class="small muted" style="margin:4px 0 0">Janusia ki khaas awaazon ke naam aur ID. Copy karke Clone / Studio mein use karo.</p></div>
+        <span class="chip" id="vidState">🔒 Locked</span>
+      </div>
+      <div class="vlock" id="vidLock"><span style="font-size:26px">🔑</span><span class="small" style="flex:1;min-width:200px">Ye section tab khulta hai jab aap <b>Connect &amp; Key</b> tab mein apni <b>key file upload</b> karte ho. Tab tak ID dhundhli (locked) dikhengi.</span><button class="btn sm primary" id="vidGo" type="button">🔑 Key Upload Karo</button></div>
+      <input id="vidSearch" type="text" placeholder="🔎 Voice ka naam dhundho…" aria-label="Voice search">
+      <div class="vidgrid" id="vidGrid"></div>
+    </div>
+  </section>
+
   <!-- ================= HISTORY ================= -->
   <section id="p-history" role="tabpanel" hidden>
     <div class="glass">
@@ -864,81 +980,6 @@ audio{border-radius:14px;max-width:100%}
   </section>
 
   <!-- ================= CONNECT & API KEY ================= -->
-  <!-- ================= MIND RELAX MODE ================= -->
-  <section id="p-relax" role="tabpanel" hidden>
-    <div class="glass grid">
-      <div class="row sb">
-        <div>
-          <h2 style="margin:0">🌿 Mind Relax Mode</h2>
-          <p class="small muted">YouTube ka gaana/video poori website ke peeche halka (25%) chalta rahta hai — kisi bhi tab mein jao, band nahi hoga. Voice banate waqt sab kuch ruk jata hai, aur suntey waqt gaana dheema ho jata hai.</p>
-        </div>
-        <span class="chip" id="rxState">Ready</span>
-      </div>
-
-      <div class="rxstage" id="rxStage"><span class="small muted">Video background mein chal raha hai…</span></div>
-      <div class="small muted" id="rxNow" style="text-align:center">—</div>
-
-      <div class="row" style="justify-content:center">
-        <button class="btn sm" id="rxPrev" type="button" aria-label="Pichla">⏮</button>
-        <button class="btn primary" id="rxPlay" type="button">▶ Play</button>
-        <button class="btn sm" id="rxNext" type="button" aria-label="Agla">⏭</button>
-        <button class="btn sm" id="rxShow" type="button">📺 Video hatao</button>
-        <button class="btn sm" id="rxFs" type="button">⛶ Fullscreen</button>
-      </div>
-
-      <div class="rxset">
-        <h3 style="margin:0">🎛️ Video Customize</h3>
-        <div class="g3" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
-          <label class="f"><b>🖼️ Video kaise dikhe</b>
-            <select id="rxMode">
-              <option value="bg">Poori screen (background)</option>
-              <option value="rect">Rectangle window</option>
-              <option value="mini">Chhota corner</option>
-            </select></label>
-          <label class="f"><b>💧 Opacity <span class="rxv" id="rxOpV">25%</span></b><input id="rxOp" type="range" min="5" max="100" value="25"></label>
-          <label class="f"><b>🔊 Volume <span class="rxv" id="rxVolV">35%</span></b><input class="bgmVol" type="range" min="0" max="100" value="35" aria-label="Music volume"></label>
-          <label class="f" id="rxSizeBox"><b>📐 Window size</b>
-            <select id="rxSize"><option value="s">Chhota</option><option value="m">Medium</option><option value="l">Bada</option><option value="xl">Bahut bada</option></select></label>
-          <label class="f" id="rxPosBox"><b>📍 Jagah</b>
-            <select id="rxPos"><option value="br">Neeche-Right</option><option value="bl">Neeche-Left</option><option value="tr">Upar-Right</option><option value="tl">Upar-Left</option></select></label>
-          <label class="f"><b>🎞️ Video quality</b>
-            <select id="rxQ"><option value="auto">Auto</option><option value="hd720">720p HD</option><option value="hd1080" selected>1080p Full HD</option><option value="hd1440">1440p (2K)</option><option value="hd2160">2160p (4K)</option><option value="highres">Best (8K tak)</option></select></label>
-          <label class="f"><b>🎵 Music source</b>
-            <select id="rxSource"><option value="yt">YouTube (Mind Relax)</option><option value="local">Janusia Lofi (bgm.mp3)</option><option value="off">Band</option></select></label>
-        </div>
-        <p class="small muted">4K/8K tabhi chalega jab video us quality mein ho aur aapka device + internet support kare — aakhri faisla YouTube ka hota hai. Rectangle mode mein window ko upar wali patti se kheench kar kahin bhi rakh sakte ho. Video par chhota ✕ dabao to video screen se hat jata hai (gaana chalta rahta hai); wapas laane ke liye yahan <b>📺 Video dikhao</b> dabao.</p>
-      </div>
-
-      <div>
-        <b class="small">Mood chuno</b>
-        <div class="row" style="margin-top:8px" id="rxMoods">
-          <button class="btn sm" data-mood="lofi" type="button">🌙 Lo-Fi Chill</button>
-          <button class="btn sm" data-mood="s90" type="button">📼 90s Slowed Reverb</button>
-          <button class="btn sm" data-mood="love" type="button">💖 Romantic Lofi</button>
-        </div>
-        <p class="small muted" style="margin-top:6px">Agar koi video embed band hui to agla apne-aap chal jata hai. Apna favourite gaana neeche link se lagao.</p>
-      </div>
-
-      <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
-        <input id="rxUrl" type="text" style="flex:1;min-width:200px" placeholder="YouTube video ya playlist ka link paste karo" aria-label="YouTube link">
-        <button class="btn primary" id="rxGo" type="button">▶ Chalao</button>
-      </div>
-
-      <div class="row">
-        <label class="check" style="gap:8px"><input id="rxAuto" type="checkbox" checked><span class="small">Website khulte hi gaana apne-aap chale (pehle touch par awaaz aati hai)</span></label>
-        <label class="check" style="gap:8px"><input id="rxRetro" type="checkbox" checked><span class="small">📼 90s VHS look</span></label>
-        <label class="check" style="gap:8px"><input class="sfxChk" type="checkbox" checked><span class="small">🔔 Click sound</span></label>
-      </div>
-
-      <div id="rxOwnerBox" class="row" hidden style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line2)">
-        <span class="small" style="flex-basis:100%">👑 <b>Owner:</b> yahan jo gaana set karoge wo har naye visitor ko default chalega (live/viral gaana yahan lagao).</span>
-        <input id="rxDefUrl" type="text" style="flex:1;min-width:200px" placeholder="Default YouTube link (sabhi users ke liye)">
-        <button class="btn sm primary" id="rxDefSave" type="button">💾 Default Set Karo</button>
-      </div>
-      <p class="small muted">ℹ️ YouTube ke gaane download nahi ho sakte (YouTube ki policy). Download ke liye <b>Mixer &amp; Effects</b> tab mein apni file ya Janusia Lofi ke saath voice mix karo.</p>
-    </div>
-  </section>
-
   <!-- ================= MIXER & EFFECTS ================= -->
   <section id="p-mixer" role="tabpanel" hidden>
     <div class="glass grid">
@@ -1133,15 +1174,15 @@ audio{border-radius:14px;max-width:100%}
     </div>
   </section>
 
-  <!-- ================= PLANS & FLEXIBLE UPGRADE ================= -->
+  <!-- ================= PLANS & CREDITS ================= -->
   <section id="p-plans" role="tabpanel" hidden>
-    <div class="glass" style="text-align:center">
-      <span class="chip gold" style="margin-bottom:8px">✨ Flexible Studio Membership</span>
-      <h2 style="font-size:28px;color:var(--pink2)">💎 Janusia Premium Plans</h2>
-      <p class="small muted" style="margin:6px auto 18px;max-width:640px">Apni awaaz ko banayein aur bhi khaas! Kisi bhi plan par tap karke instant QR scanner se scan karein ya seedha Navi, BHIM, PhonePe, Paytm se pay karein.</p>
+    <div class="glass plhero">
+      <span class="chip gold" style="margin-bottom:8px">✨ Credits &amp; Premium</span>
+      <h2 class="shim" style="font-size:30px;margin:4px 0">💎 Janusia Premium Credits</h2>
+      <p class="small muted" style="margin:6px auto 12px;max-width:640px">Apna pack chuno, validity chuno (7 / 21 / 28 / 30 din) aur Razorpay ya UPI se pay karo. Credits seedha aapke account mein jud jaate hain. 1 character = 1 credit.</p>
+      <div class="plstrip" id="plAcct"></div>
 
-      <!-- Black Friday Animated Banner -->
-      <div class="bf" id="bfBox">
+      <div class="bf" id="bfBox" style="margin-top:16px">
         <div class="bf-spark"><i style="left:8%;animation-delay:0.0s">🖤</i><i style="left:20%;animation-delay:0.6s">✦</i><i style="left:32%;animation-delay:1.1s">🏷️</i><i style="left:44%;animation-delay:1.7s">💥</i><i style="left:56%;animation-delay:2.2s">✦</i><i style="left:68%;animation-delay:2.8s">🖤</i><i style="left:80%;animation-delay:3.3s">🏷️</i><i style="left:92%;animation-delay:3.9s">✦</i></div>
         <span class="bf-tag" id="bfTag">🏷️ SIRF 27 NOVEMBER</span>
         <h3 class="bf-title">BLACK FRIDAY</h3>
@@ -1151,8 +1192,28 @@ audio{border-radius:14px;max-width:100%}
           <div><b data-u="d">00</b><span>DAYS</span></div><div><b data-u="h">00</b><span>HRS</span></div><div><b data-u="m">00</b><span>MIN</span></div><div><b data-u="s">00</b><span>SEC</span></div>
         </div>
       </div>
+    </div>
 
-      <div class="plans" id="planGrid"></div>
+    <div class="glass grid" style="margin-top:16px">
+      <div style="text-align:center"><b>⏳ Validity chuno</b><div class="dpills" id="durPills"></div></div>
+      <div class="packs" id="packGrid"></div>
+    </div>
+
+    <div class="glass grid" style="margin-top:16px">
+      <div><h3 style="margin:0">🎛️ Custom Plan — apni marzi ka amount</h3><p class="small muted" style="margin:4px 0 0">₹30 se ₹20,000 tak kuch bhi. Credits = amount × 20000 ÷ 38. Custom plan par ₹20 platform charge alag se jodta hai.</p></div>
+      <div class="cust">
+        <div class="camt">₹ <input id="cAmt" type="number" min="30" max="20000" step="1" value="500" inputmode="numeric" aria-label="Amount"></div>
+        <input id="cRange" type="range" min="0" max="1000" value="500" aria-label="Amount slider">
+        <div class="qchips" id="cChips"></div>
+        <div class="cgrid">
+          <div><small>Credits milenge</small><b id="cCred">0</b></div>
+          <div><small>Validity</small><b id="cDays">30 din</b></div>
+          <div><small>Platform charge</small><b id="cFee">₹20</b></div>
+          <div><small>Total pay</small><b id="cPay" style="color:var(--gold)">₹0</b></div>
+        </div>
+        <button class="btn primary" id="cBuy" type="button">💳 Custom Plan Kharido</button>
+      </div>
+      <p class="small muted">ℹ️ Credits sirf plan ki validity tak chalte hain. Voice banate hi utne credits kat'te hain jitne characters hain; agar voice na bane to credits wapas aa jaate hain.</p>
     </div>
   </section>
 
@@ -1408,11 +1469,22 @@ audio{border-radius:14px;max-width:100%}
         </div>
       </div>
     </div>
+    <div class="glass grid" style="margin-top:16px" id="accOwner">
+      <div class="row sb"><div><h3 style="margin:0">👥 Accounts &amp; Credits</h3><p class="small muted" style="margin:3px 0 0">Signup hue users, unke credits, kharid. Manual UPI payment ke baad yahin se credits do.</p></div><div class="row"><span class="chip" id="accMail">Mail ?</span><span class="chip" id="accPay">Razorpay ?</span><button class="btn sm" id="accRef" type="button">🔄 Refresh</button></div></div>
+      <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
+        <input id="grEmail" type="text" placeholder="user@gmail.com" style="flex:2;min-width:180px" aria-label="Account email">
+        <input id="grCred" type="number" placeholder="Credits" style="flex:1;min-width:100px" aria-label="Credits">
+        <select id="grDays" style="flex:1;min-width:90px"><option value="7">7 din</option><option value="21">21 din</option><option value="28">28 din</option><option value="30" selected>30 din</option></select>
+        <button class="btn primary" id="grGo" type="button">🎁 Credits Do</button>
+      </div>
+      <div class="small muted" id="accMsg"></div>
+      <div style="overflow:auto"><table class="tbl" style="width:100%;font-size:13px"><thead><tr><th align="left">Email</th><th align="right">Credits</th><th align="left">Expiry</th><th align="right">Gens</th><th align="right">Spent</th><th></th></tr></thead><tbody id="accRows"><tr><td colspan="6" class="muted">Refresh dabao…</td></tr></tbody></table></div>
+    </div>
   </section>
 
   <footer class="lvfoot">
     <span class="lvmade">Made with Janusia</span>
-    <span class="lvver">⚡ Version 3.1 · Shield Pro · Updated Nov 2026</span>
+    <span class="lvver">⚡ Version 5.0 · Updated 21 Nov 2026, 07:23 AM IST</span>
     <span class="lvby">Crafted by <b class="nm">J Ashish Gupta</b></span>
     <span class="lvlinks"><a href="https://youtube.com/@janusiacom?si=QOYkAo7UzLwhLaLL" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#fff"/><rect x="4" y="11" width="40" height="26" rx="8" fill="#FF0000"/><path d="M20 18l12 6-12 6z" fill="#fff"/></svg></span>YouTube</a> <a href="https://www.instagram.com/janusiacom?xtok=MTVicjQ2YW8yNXA3Yg==" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><radialGradient id="gIg" cx=".25" cy="1.05" r="1.2"><stop offset="0" stop-color="#FEDA75"/><stop offset=".25" stop-color="#FA7E1E"/><stop offset=".5" stop-color="#D62976"/><stop offset=".75" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs><rect width="48" height="48" rx="13" fill="url(#gIg)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.500" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg></span>Instagram</a> <a href="https://t.me/Janusia10" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><linearGradient id="gTg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#37AEE2"/><stop offset="1" stop-color="#1E96C8"/></linearGradient></defs><circle cx="24" cy="24" r="24" fill="url(#gTg)"/><g transform="translate(9 9) scale(1.250)"><path fill="#fff" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></g></svg></span>Telegram</a></span>
   </footer>
@@ -1436,6 +1508,9 @@ audio{border-radius:14px;max-width:100%}
     </div>
   </div>
   <p id="surB" class="small muted" style="text-align:left"></p>
+  <div class="sumbox" id="sumBox"></div>
+  <button class="btn primary sbtn" id="rzpBtn" type="button">💳 Razorpay se pay karo (UPI / Card / NetBanking)</button>
+  <div class="ordiv">ya manual UPI QR se</div>
 
 
 
@@ -1466,19 +1541,48 @@ audio{border-radius:14px;max-width:100%}
   <button class="btn sm sbtn" id="surX" type="button">Band karo</button>
 </div></div>
 
-<div id="toast" role="status" aria-live="polite"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<!-- floating Mind Relax mini-player: kisi bhi tab mein gaana chalta rahe -->
-<div id="ytDock" class="ytdock bg" hidden aria-label="Mind Relax video">
-  <div class="ythead"><span id="ytTitle" class="yttitle">Mind Relax</span><button class="ytb" id="ytMode" type="button" title="Video ka style badlo (background / rectangle / mini)" aria-label="Video style">▭</button><button class="ytb x" id="ytX" type="button" title="Video hatao (gaana chalta rahega)" aria-label="Video hatao">✕</button></div>
-  <div class="ytwrap retro" id="ytWrap">
-    <div id="ytPlayer"></div>
-    <i class="ytTint"></i><i class="ytScan"></i><i class="ytVig"></i><span class="ytOsd">▶ PLAY · SP · 90s</span>
+<div id="wall" role="alertdialog" aria-labelledby="wallT"><div class="wallbox">
+  <div class="wallic">🚫</div>
+  <h2 id="wallT">Aapka access band kar diya gaya hai</h2>
+  <p id="wallMsg">Owner ne is device / account ko Janusia se block kiya hai. Agar ye galti se hua hai to neeche se seedha contact karo.</p>
+  <div class="wallbtns">
+    <a href="https://t.me/Janusia10" target="_blank" rel="noopener">📲 Telegram par contact karo</a>
+    <a href="mailto:ashishkr88as@gmail.com?subject=Janusia%20Unblock%20Request" class="alt">✉️ Email bhejo</a>
+    <a href="https://www.instagram.com/janusiacom" target="_blank" rel="noopener" class="alt">📷 Instagram</a>
+    <a href="https://youtube.com/@janusiacom" target="_blank" rel="noopener" class="alt">▶️ YouTube</a>
+  </div>
+</div></div>
+<canvas id="fxc" aria-hidden="true"></canvas>
+<div id="authpop" class="mdl" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="mbox">
+    <button class="mx" id="authX" type="button" aria-label="Band karo">✕</button>
+    <div class="auth-hero"><div class="orb">J</div><h3 id="authTitle">Janusia Account</h3><p class="small muted" id="authSub"></p></div>
+    <div class="seg" id="authSeg"><button type="button" data-m="login" class="on">Login</button><button type="button" data-m="signup">Signup</button></div>
+    <form id="authForm" novalidate>
+      <label class="f" id="fEmail"><b>📧 Gmail</b><input id="aEmail" type="text" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="yourname@gmail.com"></label>
+      <label class="f" id="fPass"><b id="aPassL">🔒 Password</b><input id="aPass" type="password" autocomplete="current-password" placeholder="Kam se kam 8 character"></label>
+      <label class="f" id="fCode" hidden><b>🔢 Email par aaya 6-digit code</b><input id="aCode" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••"></label>
+      <div class="amsg" id="aMsg" role="alert"></div>
+      <button class="btn primary" id="aGo" type="submit">Login</button>
+      <div class="row sb"><button type="button" class="lnk" id="aForgot">Password bhool gaye?</button><button type="button" class="lnk" id="aResend" hidden>Code dobara bhejo</button></div>
+      <p class="small muted" style="margin:0">Sirf <b>@gmail.com</b> chalega — temp / doosre mail allowed nahi.</p>
+    </form>
+    <div class="acctv" id="acctView" hidden>
+      <div class="avbig" id="avBig">A</div>
+      <b id="avEmail"></b>
+      <div class="credbig"><span id="avCred">0</span><small>credits bache</small></div>
+      <div class="cbar"><i id="avBar"></i></div>
+      <div class="small" id="avExp"></div>
+      <label class="check" style="justify-content:center;gap:8px"><input id="avUse" type="checkbox" checked><span class="small">Voice banane mein credits use karo</span></label>
+      <div class="small muted" id="avStats"></div>
+      <div id="avOrders" class="grid" style="gap:6px"></div>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="avBuy" type="button">💎 Plan / Credits lo</button><button class="btn danger" id="avOut" type="button">Logout</button></div>
+    </div>
   </div>
 </div>
-<button id="ytBgX" class="ytbgx" type="button" hidden title="Video hatao (gaana chalta rahega)" aria-label="Video hatao">✕</button>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
 <script>
 "use strict";
 /* =====================================================================
@@ -1491,8 +1595,8 @@ const JanusiaConfig = {
   DEFAULT_API_KEY: "sk_car_x5S6WdwjShAgGXh45hDrRm",
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
-  VERSION: "4.0",
-  VERSION_LABEL: "v4.0 · Shield Pro · Nov 2026",
+  VERSION: "5.0",
+  VERSION_LABEL: "v5.0 · Credits & Accounts · 21 Nov 2026, 07:23 AM IST",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
   BACKEND_URLS: ["https://janusia-shield.th6tfjh.workers.dev", "https://janusia-shield.polished-haze-db97.workers.dev"],
   BACKEND_URL: "https://janusia-shield.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
@@ -1607,7 +1711,41 @@ async function speakWelcomeFemale() {
   } catch (_) {}
 }
 
-/* ============================ LOCAL LOFI (bgm.mp3) — Mind Relax Mode isko control karta hai ============================ */
+/* ============================ v5.0 CORE: storage, lite mode, block wall ============================ */
+const Store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (_) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (_) {} }
+};
+const loadLib = (() => {
+  const cache = {};
+  return url => cache[url] || (cache[url] = new Promise((res, rej) => {
+    const s = document.createElement("script"); s.src = url; s.async = true;
+    s.onload = res; s.onerror = () => { delete cache[url]; rej(new Error("lib")); }; document.head.appendChild(s);
+  }));
+})();
+const LIB = { three: "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js", qr: "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js", rzp: "https://checkout.razorpay.com/v1/checkout.js" };
+const Lite = (() => {
+  const auto = () => (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 2 || !!(navigator.connection && navigator.connection.saveData);
+  let v = Store.get("jn_lite", "auto");
+  const is = () => v === "1" || (v === "auto" && auto());
+  function apply() { document.documentElement.classList.toggle("lite", is()); $$(".liteBtn").forEach(b => { b.textContent = is() ? "⚡ Fast mode: ON" : "✨ Full animation"; }); }
+  function toggle() { v = is() ? "0" : "1"; Store.set("jn_lite", v); apply(); toast(is() ? "⚡ Fast mode ON — site halka aur tez" : "✨ Full animations ON"); if (!is()) { try { GLX.boot(); } catch (_) {} } }
+  function force() { if (!is()) { v = "1"; Store.set("jn_lite", "1"); apply(); toast("⚡ Device dheema laga — Fast mode apne-aap ON kiya"); } }
+  document.addEventListener("click", e => { if (e.target.closest && e.target.closest(".liteBtn")) toggle(); });
+  apply();
+  return { is, toggle, force, apply };
+})();
+const Wall = {
+  show(msg) {
+    Store.set("jn_pb", "1"); document.documentElement.classList.add("walled");
+    if (msg && el("wallMsg")) el("wallMsg").textContent = msg;
+    try { stopAllAudio(); Music.stop(); } catch (_) {}
+  },
+  hide() { if (document.documentElement.classList.contains("walled") || Store.get("jn_pb", "") === "1") { Store.del("jn_pb"); document.documentElement.classList.remove("walled"); } }
+};
+
+/* ============================ LOCAL LOFI (bgm.mp3) ============================ */
 const Music = (() => {
   const SRC = "bgm.mp3", DUCK_RATIO = 0.25;
   let au = null, active = false, started = false, cur = 0, timer = 0, warned = false;
@@ -1769,12 +1907,12 @@ const JanusiaShield = (() => {
 
   /* ---------------- backend calls ---------------- */
   async function call(path, extra, admin, base) {
-    const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 9000);
+    const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), /^\/api\/(auth|pay)/.test(path) ? 25000 : 9000);
     const headers = { "content-type": "application/json" };
     if (admin) headers["x-admin-pass"] = OW.srvPass || OW.pass || "";
     try {
       const r = await fetch((base || BE) + path, { method: "POST", headers, signal: ctrl.signal, cache: "no-store",
-        body: JSON.stringify({ cid, dev: devSig, device: devInfo, tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "", webdriver: !!navigator.webdriver, brave: !!navigator.brave, tab: curTab(), custom: !!S.isCustomKey, ...extra }) });
+        body: JSON.stringify({ cid, dev: devSig, device: devInfo, tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "", webdriver: !!navigator.webdriver, brave: !!navigator.brave, tab: curTab(), custom: !!S.isCustomKey, ...(S.token && (base || BE) === BES[0] ? { token: S.token } : {}), ...extra }) });
       const data = await r.json().catch(() => ({}));
       return { status: r.status, data };
     } finally { clearTimeout(t); }
@@ -1782,11 +1920,12 @@ const JanusiaShield = (() => {
 
   function applyStatus(st) {
     if (!st || !st.ip) return;
-    try { Relax.serverDefault(st.yt); } catch (_) {}
+    if (st.authBad) Auth.clear(); else if (S.token && st.acct) Auth.setAcct(st.acct);
+    if (!st.blocked) Wall.hide();
     remote = st; ip = st.ip; vpnRisk = st.vpnRisk || "Low"; vpnReasons = [];
     beState = "live";
     updateStatusUI(); syncPauseUI(); updateCharLimitUI();
-    if (st.blocked) { blockShown = true; showBanner("Owner ne aapka IP/Device (" + st.ip + ") block kar diya hai.", st.ip); }
+    if (st.blocked) { blockShown = true; Wall.show(); }
     else if (st.vpn && st.vpnBlocked && !S.isCustomKey) { blockShown = true; showBanner("⚠️ VPN/Proxy detect hua. Free voice tab tak band hai jab tak VPN chalu hai — VPN band karke page refresh karein, ya Connect tab mein apni API key lagayein.", st.ip); }
     else if (blockShown) { blockShown = false; hideBanner(); }
   }
@@ -1856,11 +1995,14 @@ const JanusiaShield = (() => {
 
   function deny(d) {
     const msg = d.message || "Request block ho gayi.";
+    if (d.code === "BLOCKED") { Wall.show(); return; }
+    if (d.code === "LOGIN") { Auth.clear(); toast("🔐 " + msg); Auth.open("login"); return; }
+    if (d.code === "NOPLAN" || d.code === "CREDITS") { toast("💎 " + msg.slice(0, 150)); showTab("plans"); return; }
     showBanner(msg, d.ip || ip);
     toast("🚫 " + msg.split(". ")[0].slice(0, 110));
   }
 
-  async function checkBeforeGenerate(textLen, isCustomKey) {
+  async function checkBeforeGenerate(textLen, isCustomKey, useCr) {
     pendingToken = null;
     if (!getApiPause().active || S.owner) { /* ok */ } else { toast("⏳ " + getApiPause().msg); return false; }
     if (busyElsewhere()) { toast("⚠️ Doosre tab mein request chal rahi hai, thoda ruko."); return false; }
@@ -1871,7 +2013,7 @@ const JanusiaShield = (() => {
     }
     if (BE) {
       let res = null;
-      for (let i = 0; i < 2 && !res; i++) { try { res = (await callAny("/api/gate", { chars: textLen, custom: !!isCustomKey })).data; pendingBE = BE; if (!res || (res.ok === undefined)) res = null; } catch (_) { res = null; } }
+      for (let i = 0; i < 2 && !res; i++) { try { if (useCr) { res = (await call("/api/gate", { chars: textLen, custom: false, useCredits: true }, false, BES[0])).data; pendingBE = BES[0]; } else { res = (await callAny("/api/gate", { chars: textLen, custom: !!isCustomKey })).data; pendingBE = BE; } if (!res || (res.ok === undefined)) res = null; } catch (_) { res = null; } }
       if (res) {
         applyStatus(res);
         if (res.ok) { pendingToken = res.token; blockShown = false; hideBanner(); return true; }
@@ -1966,7 +2108,7 @@ const JanusiaShield = (() => {
 
   /* ---------------- admin (owner) ---------------- */
   async function adminFetch(path, body) {
-    const { status, data } = await call(path, body || {}, true);
+    const { status, data } = await call(path, body || {}, true, /\/api\/admin\/(accounts|grant)/.test(path) ? BES[0] : undefined);
     if (status >= 400 || data.ok === false) throw Object.assign(new Error(data.error || ("HTTP " + status)), { status, code: data.code });
     return data;
   }
@@ -2139,7 +2281,8 @@ const JanusiaShield = (() => {
   return {
     initNetworkAndVpnCheck, checkBeforeGenerate, setConcurrency, finish, freeInfo, hasBackend: !!BE,
     setApiPause, syncPauseUI, manualBlock, resetUser, vpnAllow, saveConfig, resetUsage, resetAll, loadAdmin, resumeAdmin, setServerPass, renderAdminPanel, exportCsv,
-    refreshStatus, getApiPause, get ip() { return ip; }
+    refreshStatus, getApiPause, get ip() { return ip; },
+    acall: (p, b) => call(p, b || {}, false, BES[0]), adminAccounts: () => adminFetch("/api/admin/accounts"), adminGrant: (email, credits, days) => adminFetch("/api/admin/grant", { email, credits, days })
   };
 })();
 
@@ -2157,6 +2300,7 @@ const S = {
 };
 
 const currentCharLimit = () => {
+  if (Auth.canUseCredits()) return Math.min(JanusiaConfig.CHAR_LIMIT_PRO, S.acct.credits);
   if (S.isCustomKey) return JanusiaConfig.CHAR_LIMIT_PRO;
   const f = JanusiaShield.freeInfo();
   return f.left > 0 ? f.left : f.limit;   // free user: sirf utne hi chars jitne bache hain
@@ -2167,19 +2311,20 @@ function updateCharLimitUI() {
   const ta = el("txt");
   if (ta) {
     ta.maxLength = lim;
-    if (S.isCustomKey && ta.value.length > lim) ta.value = ta.value.slice(0, lim);
+    if ((S.isCustomKey || Auth.canUseCredits()) && ta.value.length > lim) ta.value = ta.value.slice(0, lim);
   }
   const fi = JanusiaShield.freeInfo();
-  if (el("stLimit")) el("stLimit").textContent = S.isCustomKey ? lim.toLocaleString("en-IN") + " chars" : fi.left + " / " + fi.limit + " free left";
+  if (el("stLimit")) el("stLimit").textContent = Auth.canUseCredits() ? S.acct.credits.toLocaleString("en-IN") + " credits" : S.isCustomKey ? lim.toLocaleString("en-IN") + " chars" : fi.left + " / " + fi.limit + " free left";
   if (el("modeBadge")) {
-    el("modeBadge").className = S.isCustomKey ? "chip ok" : (fi.left > 0 ? "chip gold" : "chip bad");
-    el("modeBadge").textContent = S.isCustomKey ? "Pro Vault: 20,000 chars" : (fi.left > 0 ? `Free: ${fi.left} / ${fi.limit} chars left` : "Free limit poori — key connect karein");
+    el("modeBadge").className = Auth.canUseCredits() ? "chip ok" : S.isCustomKey ? "chip ok" : (fi.left > 0 ? "chip gold" : "chip bad");
+    el("modeBadge").textContent = Auth.canUseCredits() ? "💎 Credits: " + S.acct.credits.toLocaleString("en-IN") + " (max 20,000 / voice)" : S.isCustomKey ? "Pro Vault: 20,000 chars" : (fi.left > 0 ? `Free: ${fi.left} / ${fi.limit} chars left` : "Free limit poori — key connect karein");
   }
   if (el("connModeChip")) {
     el("connModeChip").className = S.isCustomKey ? "chip ok" : "chip gold";
     el("connModeChip").textContent = S.isCustomKey ? "Unlocked: 20,000 Chars" : `Default: ${fi.left} / ${fi.limit} chars left`;
   }
   if (el("unlock20kBtn")) el("unlock20kBtn").hidden = S.isCustomKey;
+  try { Vids.paint(); } catch (_) {}
   upTxt();
 }
 
@@ -2854,7 +2999,7 @@ async function generate() {
   const text = el("txt").value.trim();
   if (!text) { toast("Pehle text likho"); return; }
   S.gating = true; el("gen").disabled = true; let allowed = false;
-  try { allowed = await JanusiaShield.checkBeforeGenerate(text.length, S.isCustomKey); }
+  try { allowed = await JanusiaShield.checkBeforeGenerate(text.length, S.isCustomKey, Auth.canUseCredits()); }
   finally { S.gating = false; el("gen").disabled = false; }
   if (!allowed) { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
   if (!keyOk()) { JanusiaShield.finish(false, 0); toast("Pehle Connect tab mein key lagao"); showTab("connect"); return; }
@@ -2872,7 +3017,7 @@ async function generate() {
   const parts = [], t0 = performance.now(); let bytes = 0, idx = 0;
   log("info", "Generate shuru: " + chunks.length + " hissa, " + text.length + " chars");
   ensureAC();
-  const progText = () => `Hissa ${Math.min(idx + 1, chunks.length)}/${chunks.length}, ${fmtB(bytes)}, ${((performance.now() - t0) / 1000).toFixed(1)} sec`;
+  const progText = () => `Hissa ${Math.min(idx + 1, chunks.length)}/${chunks.length}, ${fmtB(bytes)}, ${((performance.now() - t0) / 1000).toFixed(1)} sec · ⚡ ${fmtB(bytes / Math.max(.5, (performance.now() - t0) / 1000))}/s`;
   const tick = setInterval(() => { el("progTxt").textContent = progText(); }, 500);
   try {
     for (idx = 0; idx < chunks.length; idx++) {
@@ -2888,7 +3033,7 @@ async function generate() {
     addHistory(blob, ext, dur, text);
     el("progTxt").textContent = "Poora hua! " + fmtB(blob.size) + " (" + ((performance.now() - t0) / 1000).toFixed(1) + " sec)";
     log("ok", "Generate poora: " + fmtB(blob.size));
-    madeWith(); successFx();
+    madeWith(); successFx(); Fx.celebrate("Awaaz taiyaar hai! 🎉", fmtB(blob.size) + " · " + ((performance.now() - t0) / 1000).toFixed(1) + " sec");
   } catch (e) {
     liveStop();
     JanusiaShield.finish(parts.length > 0, text.length, S.voiceName);   // kuch bana hi nahi to chars wapas
@@ -3134,163 +3279,429 @@ el("sCopy").addEventListener("click", () => copy(el("sOut").value));
 el("sDl").addEventListener("click", () => { const t = el("sOut").value; if (!t) { toast("Kuch nahi hai"); return; } saveBlob(new Blob([t], { type: "text/plain;charset=utf-8" }), "transcript-" + stamp() + ".txt"); });
 el("sToStudio").addEventListener("click", () => { const t = el("sOut").value; if (!t) { toast("Kuch nahi hai"); return; } el("txt").value = t.slice(0, currentCharLimit()); upTxt(); showTab("studio"); });
 
-/* ============================ PLANS & SCANNER-ONLY CHECKOUT ============================ */
-const PLANS = [
-  { name: "1 Day Starter", amount: 199, old: "₹399", badge: "50% OFF", feat: ["80 minutes voice generate", "20,000 chars per script", "All studio voices access", "HD WAV & MP3 download"], title: "1 Day Starter Plan", body: "₹199 mein 80 minutes voice generate karo, ek din ke liye." },
-  { name: "14 Days Creator", amount: 899, old: "₹1,499", badge: "40% OFF", feat: ["1 hour per day voice generate", "20,000 chars unlocked", "All premium voices", "Fast audio downloads"], title: "14 Days Creator Plan", body: "Roz 1 hour voice generate karo, 14 din tak." },
-  { name: "28 Days Pro", amount: 1499, old: "₹2,499", badge: "MOST POPULAR", featured: true, feat: ["1 hour per day voice generate", "20,000 chars + Instant Clone", "All premium & Hindi voices", "Priority generation speed"], title: "28 Days Pro Plan", body: "Roz 1 hour voice generate karo, 28 din tak. Saari premium awaazein aur Instant Clone ke saath." },
-  { name: "90 Days Studio", amount: 2999, old: "₹4,999", badge: "BEST VALUE", feat: ["1 hour per day voice generate", "Unlimited script sessions", "Instant Clone + STT included", "24/7 Priority support"], title: "90 Days Studio Plan", body: "Roz 1 hour voice generate karo, 90 din tak. Priority generation ke saath." },
-  { name: "1 Year VIP", amount: 9999, old: "₹19,999", badge: "50% OFF", feat: ["1 hour per day voice generate", "All VIP features unlocked", "Dedicated encrypted key file", "VIP Telegram & Call support"], title: "1 Year VIP Plan", body: "Roz 1 hour voice generate karo, pure saal bhar. Dedicated key file ke saath." }
-];
+/* ============================ v5.0: SPEED, CELEBRATION, VOICE IDs ============================ */
+const Speed = (() => {
+  let busy = false;
+  function paint(t, cls) { const b = el("stSpd"); if (b) { b.textContent = t; b.className = cls || ""; } }
+  async function test() {
+    if (busy) return; busy = true; paint("testing…");
+    let mbps = 0, ms = 0;
+    try {
+      const t0 = performance.now();
+      const r = await fetch("bgm.mp3?x=" + Date.now(), { headers: { Range: "bytes=0-299999" }, cache: "no-store" });
+      const t1 = performance.now(), b = await r.arrayBuffer(), t2 = performance.now();
+      ms = Math.round(t1 - t0);
+      if (r.ok && b.byteLength > 50000) mbps = (b.byteLength * 8 / 1e6) / Math.max(.05, (t2 - t0) / 1000);
+    } catch (_) {}
+    if (!mbps && navigator.connection && navigator.connection.downlink) mbps = navigator.connection.downlink;
+    if (!ms) ms = Math.round(S.lastLat || 0);
+    busy = false;
+    if (!mbps && !ms) { paint("offline?", "low"); return; }
+    paint((mbps ? mbps.toFixed(1) + " Mbps" : "–") + (ms ? " · " + ms + "ms" : ""), mbps >= 5 ? "good" : mbps >= 1.5 ? "mid" : mbps ? "low" : "");
+  }
+  return { test };
+})();
 
-const BOOSTS = [
-  { label: "Base Plan Only", add: 0, note: "" },
-  { label: "+7 Days & +30m/day", add: 349, note: " + 7 Days Boost" },
-  { label: "+15 Days & +1hr/day", add: 649, note: " + 15 Days Boost" },
-  { label: "+30 Days VIP Boost", add: 1099, note: " + 30 Days VIP Boost" }
-];
+const Fx = (() => {
+  let cv, cx, ps = [], raf = 0, W = 0, H = 0;
+  const COLS = ["#ec4899", "#fbbf24", "#22d3ee", "#a855f7", "#34d399", "#f472b6"], EMO = ["💖", "✨", "🎉", "🎶", "⭐"];
+  const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function ensure() { if (cv) return; cv = el("fxc"); cx = cv.getContext("2d"); size(); addEventListener("resize", size); }
+  function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+  function add(n, x, y, ang, spread, spd) {
+    for (let i = 0; i < n; i++) {
+      const a = ang + (Math.random() - .5) * spread, v = spd * (.5 + Math.random() * .7), em = Math.random() < .14;
+      ps.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: 4 + Math.random() * 5, c: COLS[(Math.random() * COLS.length) | 0], rot: Math.random() * 6.28, vr: (Math.random() - .5) * .3, life: 1, e: em ? EMO[(Math.random() * EMO.length) | 0] : "" });
+    }
+  }
+  function loop() {
+    cx.clearRect(0, 0, W, H);
+    ps = ps.filter(p => p.life > 0 && p.y < H + 40);
+    for (const p of ps) {
+      p.vy += .22; p.vx *= .992; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= .0065;
+      cx.globalAlpha = Math.max(0, Math.min(1, p.life * 1.6)); cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot);
+      if (p.e) { cx.font = "20px serif"; cx.fillText(p.e, -10, 8); } else { cx.fillStyle = p.c; cx.fillRect(-p.r / 2, -p.r / 3, p.r, p.r * .62); }
+      cx.restore();
+    }
+    cx.globalAlpha = 1;
+    if (ps.length && !document.hidden) raf = requestAnimationFrame(loop); else { raf = 0; cx.clearRect(0, 0, W, H); ps = []; }
+  }
+  function confetti() {
+    if (reduce()) return; ensure(); const n = Lite.is() ? 38 : 90;
+    add(n, W * .12, H * .95, -1.15, .9, 17); add(n, W * .88, H * .95, -2.0, .9, 17); add(Math.round(n / 2), W / 2, H * .45, -1.57, 6.28, 9);
+    if (!raf) raf = requestAnimationFrame(loop);
+  }
+  function chime() {
+    if (Store.get("jn_sfx", "1") === "0") return;
+    try {
+      const C = window.AudioContext || window.webkitAudioContext; if (!C) return; const c = new C(), t = c.currentTime + .02;
+      [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+        const o = c.createOscillator(), g = c.createGain(); o.type = "sine"; o.frequency.value = f;
+        g.gain.setValueAtTime(.0001, t + i * .09); g.gain.exponentialRampToValueAtTime(.12, t + i * .09 + .02); g.gain.exponentialRampToValueAtTime(.0001, t + i * .09 + .5);
+        o.connect(g); g.connect(c.destination); o.start(t + i * .09); o.stop(t + i * .09 + .55);
+      });
+      setTimeout(() => { try { c.close(); } catch (_) {} }, 1600);
+    } catch (_) {}
+  }
+  function celebrate(title, sub) {
+    confetti(); chime();
+    const d = document.createElement("div"); d.className = "cele";
+    d.innerHTML = '<svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M14 27l8 8 16-17"/></svg><b>' + esc(title || "Ho gaya! 🎉") + "</b><span>" + esc(sub || "") + "</span>";
+    document.body.appendChild(d); setTimeout(() => d.remove(), 3200);
+    try { navigator.vibrate && navigator.vibrate([30, 40, 30]); } catch (_) {}
+  }
+  return { celebrate, confetti };
+})();
 
+const Vids = (() => {
+  const RAW = [["Hank", "Zjg3Y2M4OGMtOTA3YS00MjMwLWE4ZmEtYmYxMTIwNTc5MzE3"], ["Hank Janusia", "ZWQ1OTI4MmEtMTY5Yi00ZDgwLTg4ZGEtYmQ1ZWNhNGIwOTFl"], ["Antoni", "NmZkNmUxYTgtMDYyMy00YTE1LWFlN2EtYmNhMDE5MWQ2ZDZm"], ["Rudra", "OWI4M2UyZjgtMjRlMS00MGQyLWExZmMtYWYyM2ZjODM2N2Vh"], ["Rudra 1018", "NmQ5N2Y0YWMtNWM2Ny00MTQ1LWJlN2ItMGY5NGFjNzA1ZmY5"], ["Adam", "NTk4N2E0MGMtYjQ0OS00NWViLTk5OGYtNDA5YWQwMGE5Y2Qw"], ["Adam frim", "ODkwYjkyZDgtNTQzNC00OTE3LWJkYWUtYTliYzY2OTVlOWEw"], ["Jess", "MzIyZmQ3ZDEtNDM3Yy00MmFmLTk2N2EtMzU2ZWIzZGE5MmY3"], ["Viraj", "OTU5ZWFiMzMtNTE3Yi00M2IxLTlhOWUtYWU3YzQyZWQwY2Q2"], ["Osho", "ZDA0MjFlMTMtY2UzZC00MWY2LWE3N2ItNjIwNmMxOGNhM2Vk"], ["Osho hd", "MThmYjAzYjQtZTZhZC00NGQxLTkxODktZWI4NzMyYjgyMjU1"]];
+  const list = RAW.map(([n, b]) => ({ name: n, id: atob(b) }));
+  const unlocked = () => !!(S.isCustomKey || S.owner);
+  function paint() {
+    const g = el("vidGrid"); if (!g) return;
+    const u = unlocked(), q = (el("vidSearch").value || "").trim().toLowerCase();
+    el("vidState").className = u ? "chip ok" : "chip warn"; el("vidState").textContent = u ? "🔓 Unlocked" : "🔒 Locked";
+    el("vidLock").hidden = u;
+    g.innerHTML = list.filter(v => !q || v.name.toLowerCase().includes(q)).map((v, i) => `<div class="vid${u ? "" : " lk"}" style="--i:${i}">
+      <div class="vid-n"><i>🎙️</i>${esc(v.name)}</div>
+      <code class="vid-id">${u ? esc(v.id) : esc(v.id.replace(/[0-9a-f]/g, "•"))}</code>
+      <div class="row"><button class="btn sm" type="button" data-vc="${esc(v.id)}" data-vn="${esc(v.name)}">📋 Copy ID</button><button class="btn sm primary" type="button" data-vu="${esc(v.id)}" data-vn="${esc(v.name)}">🎙️ Use karo</button></div>
+    </div>`).join("") || '<p class="small muted">Koi voice nahi mili.</p>';
+  }
+  function guard() { if (unlocked()) return true; toast("🔒 Pehle Connect & Key tab mein key file upload karo"); return false; }
+  document.addEventListener("click", e => {
+    const c = e.target.closest && e.target.closest("[data-vc]"), u = e.target.closest && e.target.closest("[data-vu]");
+    if (c) { if (guard()) copy(c.dataset.vc, "✅ " + c.dataset.vn + " ki ID copy ho gayi"); }
+    if (u) { if (guard()) { selectVoice({ id: u.dataset.vu, name: u.dataset.vn, language: "" }); toast("🎙️ " + u.dataset.vn + " chuni gayi"); showTab("studio"); } }
+  });
+  el("vidSearch").addEventListener("input", paint);
+  el("vidGo").addEventListener("click", () => showTab("connect"));
+  return { paint };
+})();
+
+/* ============================ v5.0: ACCOUNT / LOGIN / SIGNUP ============================ */
+const Auth = (() => {
+  const TK = "jn_tok";
+  S.token = Store.get(TK, ""); S.acct = null; S.useCr = Store.get("jn_usecr", "1") !== "0";
+  let mode = "login", pend = null, busy = false, cdT = 0;
+  const GM = /^[A-Za-z0-9._]{6,30}@gmail\.com$/i;
+  const canon = e => { e = String(e || "").trim().toLowerCase(); const p = e.split("@"); return p[0].replace(/\./g, "") + "@" + p[1]; };
+  const fmtD = t => new Date(t).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  async function derive(email, pw) {
+    const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: new TextEncoder().encode("janusia:" + canon(email)), iterations: 150000 }, km, 256);
+    return [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  function countTo(n, to, ms) {
+    const from = +n.dataset.v || 0; n.dataset.v = to;
+    if (Lite.is() || from === to) { n.textContent = to.toLocaleString("en-IN"); return; }
+    const t0 = performance.now();
+    (function step(t) { const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 3); n.textContent = Math.round(from + (to - from) * e).toLocaleString("en-IN"); if (k < 1) requestAnimationFrame(step); })(t0);
+  }
+  const msg = (t, k) => { const m = el("aMsg"); m.textContent = t || ""; m.className = "amsg " + (k || ""); };
+  const canUseCredits = () => !!(S.acct && S.acct.active && S.acct.credits > 0 && !S.isCustomKey && S.useCr);
+  const daysLeft = a => Math.max(0, Math.ceil((a.expiresAt - Date.now()) / 864e5));
+
+  function paint() {
+    const a = S.acct, ini = a ? a.email[0].toUpperCase() : "👤";
+    $$(".acctBtn").forEach(b => {
+      b.innerHTML = a ? `<span class="av">${esc(ini)}</span><span><b>${esc(a.email.split("@")[0])}</b><small>${a.active ? "💎 " + a.credits.toLocaleString("en-IN") + " credits · " + daysLeft(a) + " din" : "Plan nahi hai — Plans dekho"}</small></span>` : `<span class="av">👤</span><span><b>Login / Signup</b><small>Gmail se free account</small></span>`;
+    });
+    if (el("stCred")) el("stCred").textContent = a ? (a.active ? a.credits.toLocaleString("en-IN") : "0") : "Login";
+    if (!el("authpop").classList.contains("show")) { try { Plans.paintAcct(); } catch (_) {} return; }
+    if (mode === "account" && a) fillAcct();
+    try { Plans.paintAcct(); } catch (_) {}
+  }
+  function fillAcct() {
+    const a = S.acct; if (!a) return;
+    el("avBig").textContent = a.email[0].toUpperCase(); el("avEmail").textContent = a.email;
+    countTo(el("avCred"), a.active ? a.credits : 0, 900);
+    const last = (a.orders || []).slice(-1)[0], tot = last ? Math.max(last.credits, a.credits) : Math.max(1, a.credits);
+    setTimeout(() => { el("avBar").style.width = Math.min(100, a.active ? a.credits / tot * 100 : 0) + "%"; }, 60);
+    el("avExp").textContent = a.active ? "✅ Plan active — " + fmtD(a.expiresAt) + " tak (" + daysLeft(a) + " din bache)" : (a.expiresAt ? "⌛ Plan " + fmtD(a.expiresAt) + " ko khatam hua" : "Abhi koi plan nahi liya");
+    el("avUse").checked = S.useCr;
+    el("avStats").textContent = "Voices: " + (a.gens || 0) + " · Characters use: " + (a.charsUsed || 0).toLocaleString("en-IN") + " · Kul kharch: ₹" + (a.spent || 0).toLocaleString("en-IN");
+    el("avOrders").innerHTML = (a.orders || []).slice(-3).reverse().map(o => `<div class="ordr"><span>${esc(o.name)}</span><span>+${(o.credits || 0).toLocaleString("en-IN")} · ${fmtD(o.t)}</span></div>`).join("");
+  }
+  function setMode(m) {
+    mode = m; clearInterval(cdT);
+    const acc = m === "account", ver = m === "verify";
+    el("authForm").hidden = acc; el("acctView").hidden = !acc;
+    el("authSeg").hidden = acc || ver || m === "forgot";
+    el("fEmail").hidden = false; el("aEmail").readOnly = ver;
+    el("fPass").hidden = ver; el("fCode").hidden = !ver;
+    el("aForgot").hidden = m !== "login"; el("aResend").hidden = !ver;
+    $$("#authSeg button").forEach(b => b.classList.toggle("on", b.dataset.m === m));
+    el("aPass").autocomplete = m === "login" ? "current-password" : "new-password";
+    el("aPassL").textContent = m === "forgot" ? "🔒 Naya password" : "🔒 Password";
+    el("aGo").textContent = { login: "Login karo", signup: "Account banao (code bhejo)", forgot: "Code bhejo", verify: "Verify karo ✓" }[m] || "";
+    el("authTitle").textContent = { login: "Wapas swagat hai 👋", signup: "Naya Account", forgot: "Password Reset", verify: "Email verify karo", account: "Mera Account" }[m];
+    el("authSub").textContent = { login: "Credits aur plan access karne ke liye login karo", signup: "Sirf @gmail.com — code aapke email par aayega", forgot: "Naya password daalo, code email par aayega", verify: pend ? pend.email + " par 6-digit code bheja gaya (10 min valid)" : "", account: "" }[m];
+    msg("");
+    if (acc) fillAcct();
+    if (ver) { el("aCode").value = ""; setTimeout(() => el("aCode").focus(), 120); cooldown(45); }
+  }
+  function cooldown(s) {
+    const b = el("aResend"); let left = s; b.disabled = true;
+    const tick = () => { b.textContent = left > 0 ? "Dobara bhejo (" + left + "s)" : "Code dobara bhejo"; b.disabled = left > 0; if (left-- <= 0) clearInterval(cdT); };
+    clearInterval(cdT); tick(); cdT = setInterval(tick, 1000);
+  }
+  function open(m) {
+    if (m === "account" && !S.acct) m = "login";
+    if (S.acct && m !== "verify") m = "account";
+    el("authpop").classList.add("show"); setMode(m || "login");
+    if (m !== "account") setTimeout(() => el("aEmail").focus(), 150);
+  }
+  const close = () => { el("authpop").classList.remove("show"); clearInterval(cdT); };
+  function setSession(tok, acct) { S.token = tok; Store.set(TK, tok); S.acct = acct; paint(); updateCharLimitUI(); try { JanusiaShield.refreshStatus("ping"); } catch (_) {} }
+  function clear() { S.token = ""; Store.del(TK); S.acct = null; paint(); updateCharLimitUI(); }
+  function setAcct(a) { S.acct = a || null; paint(); updateCharLimitUI(); }
+
+  async function submit(e) {
+    e.preventDefault(); if (busy) return;
+    const email = el("aEmail").value.trim().toLowerCase(), pw = el("aPass").value;
+    try {
+      busy = true; el("aGo").disabled = true;
+      if (mode === "verify") {
+        const code = el("aCode").value.replace(/\D/g, "");
+        if (code.length !== 6) { msg("6 digit ka code daalo", "bad"); return; }
+        msg("Verify ho raha hai…");
+        const { data } = await JanusiaShield.acall("/api/auth/verify", { email: pend.email, code });
+        if (!data.ok) { msg(data.message || "Code galat hai", "bad"); return; }
+        setSession(data.token, data.account); close();
+        Fx.celebrate(pend.kind === "reset" ? "Password badal gaya! 🔐" : "Account ban gaya! 🎉", "Swagat hai, " + data.account.email.split("@")[0]);
+        pend = null; return;
+      }
+      if (!GM.test(email)) { msg("Sirf sahi @gmail.com email daalo (temp mail allowed nahi).", "bad"); return; }
+      if (pw.length < 8) { msg("Password kam se kam 8 character ka rakho.", "bad"); return; }
+      msg("Surakshit tarike se check ho raha hai…");
+      const pk = await derive(email, pw);
+      if (mode === "login") {
+        const { data } = await JanusiaShield.acall("/api/auth/login", { email, pk });
+        if (!data.ok) { if (data.code === "BLOCKED") { close(); Wall.show(); return; } msg(data.message || "Login nahi hua", "bad"); return; }
+        setSession(data.token, data.account); close(); toast("✅ Login ho gaya"); return;
+      }
+      msg("Code bheja ja raha hai…");
+      const kind = mode === "forgot" ? "reset" : "signup";
+      const { data } = await JanusiaShield.acall(kind === "reset" ? "/api/auth/forgot" : "/api/auth/signup", { email, pk });
+      if (!data.ok) { msg(data.message || "Code nahi bhej paaye", "bad"); return; }
+      pend = { email, pk, kind }; setMode("verify"); msg("📧 Code bhej diya — inbox / spam check karo", "ok");
+    } catch (err) { msg("Server se connect nahi ho paaya. Internet check karo aur dobara try karo.", "bad"); }
+    finally { busy = false; el("aGo").disabled = false; }
+  }
+  async function resend() {
+    if (!pend || busy) return; busy = true;
+    try {
+      const { data } = await JanusiaShield.acall(pend.kind === "reset" ? "/api/auth/forgot" : "/api/auth/signup", { email: pend.email, pk: pend.pk });
+      if (data.ok) { msg("📧 Naya code bheja gaya", "ok"); cooldown(45); } else msg(data.message || "Abhi nahi bhej sakte", "bad");
+    } catch (_) { msg("Network dikkat", "bad"); } finally { busy = false; }
+  }
+  async function logout() {
+    try { await JanusiaShield.acall("/api/auth/logout", { token: S.token }); } catch (_) {}
+    clear(); close(); toast("Logout ho gaya");
+  }
+  $$(".acctBtn").forEach(b => b.addEventListener("click", () => open(S.acct ? "account" : "login")));
+  el("authX").addEventListener("click", close);
+  el("authpop").addEventListener("click", e => { if (e.target === el("authpop")) close(); });
+  el("authForm").addEventListener("submit", submit);
+  el("authSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setMode(b.dataset.m); });
+  el("aForgot").addEventListener("click", () => setMode("forgot"));
+  el("aResend").addEventListener("click", resend);
+  el("avOut").addEventListener("click", logout);
+  el("avBuy").addEventListener("click", () => { close(); showTab("plans"); });
+  el("avUse").addEventListener("change", e => { S.useCr = e.target.checked; Store.set("jn_usecr", S.useCr ? "1" : "0"); updateCharLimitUI(); });
+  paint();
+  // token se account turant wapas laao
+  if (S.token) setTimeout(async () => { try { const { data } = await JanusiaShield.acall("/api/auth/me", { token: S.token }); if (data.ok) setAcct(data.account); else if (data.code === "LOGIN") clear(); } catch (_) {} }, 600);
+  return { open, close, setSession, setAcct, clear, canUseCredits, paint, canon };
+})();
+
+/* ============================ PLANS, CREDITS & CHECKOUT (Razorpay + UPI) ============================ */
 const PAY_ACCOUNTS = [
   { name: "Mrs Sangita Devi", tag: "Primary QR Scanner", pa: atob("OTkzOTAwMDA2M0BpYmw=") },
   { name: "Sangita Dev W/O Jhunna Sah", tag: "Secondary QR Scanner", pa: atob("OTkzOTAwMDA2My0yQHlibA==") }
 ];
+const Plans = (() => {
+  // NOTE: ye numbers worker.js (RATE_*, PACKS) se same hone chahiye — wahi asli charge karta hai.
+  const RC = 20000, RR = 38, FEE = 20, MIN = 30, MAX = 20000, DAYS = [7, 21, 28, 30];
+  const PACKS = [
+    { id: "p30", price: 30, total: 20000, name: "Starter", ic: "🌱" },
+    { id: "p100", price: 100, bonus: 5000, name: "Basic", ic: "⭐" },
+    { id: "p300", price: 300, bonus: 10000, name: "Plus", ic: "🚀" },
+    { id: "p500", price: 500, bonus: 20000, name: "Creator", ic: "🎨", tag: "POPULAR", hot: 1 },
+    { id: "p1000", price: 1000, bonus: 30000, name: "Pro", ic: "💎", tag: "BEST VALUE", hot: 1 },
+    { id: "p1500", price: 1500, bonus: 40000, name: "Pro Max", ic: "🔥" },
+    { id: "p2999", price: 2999, bonus: 60000, name: "Studio", ic: "🎬" },
+    { id: "p5000", price: 5000, bonus: 100000, name: "Business", ic: "🏢" },
+    { id: "p20000", price: 20000, bonus: 250000, name: "Enterprise", ic: "👑" }
+  ];
+  const baseC = p => Math.floor(p * RC / RR), inr = n => "₹" + Math.round(n).toLocaleString("en-IN"), num = n => Math.round(n).toLocaleString("en-IN");
+  let days = 30, cur = null, accIdx = 0, packsDone = false, paying = false;
 
-(() => {
-  const g = el("planGrid"); if (!g) return;
-  let planIdx = 0, accIdx = 0, boostIdx = 0;
-
-  /* Black Friday: 10% OFF sirf 27 November (India time) */
   const IST = 330 * 60000;
   function bfState() {
-    const now = Date.now(), y = new Date(now + IST).getUTCFullYear();
-    const st = yy => Date.UTC(yy, 10, 27) - IST;
-    const s0 = st(y), e0 = s0 + 864e5;
+    const now = Date.now(), y = new Date(now + IST).getUTCFullYear(), st = yy => Date.UTC(yy, 10, 27) - IST, s0 = st(y), e0 = s0 + 864e5;
     if (now >= s0 && now < e0) return { live: true, target: e0 };
     if (now < s0) return { live: false, target: s0 };
     return { live: false, target: st(y + 1) };
   }
-  const bfActive = () => bfState().live;
-  const disc = a => bfActive() ? Math.round(a * 0.9) : a;
-  const totalAmt = () => disc(PLANS[planIdx].amount + BOOSTS[boostIdx].add);
-  const fullTitle = () => PLANS[planIdx].name + BOOSTS[boostIdx].note;
-  const payUri = () => {
-    const a = PAY_ACCOUNTS[accIdx];
-    return "upi://pay?pa=" + encodeURIComponent(a.pa) + "&pn=" + encodeURIComponent(a.name) + "&am=" + totalAmt() + "&cu=INR&tn=" + encodeURIComponent("Janusia " + fullTitle());
-  };
-  const enquiryMsg = () => `Janusia Plan Order\n\nPlan: ${fullTitle()}${bfActive() ? " (Black Friday 10% OFF)" : ""}\nTotal Amount: ₹${totalAmt().toLocaleString("en-IN")}\n\nPayment ke baad screenshot bhej raha hun.`;
-
-  function syncBoostPills() {
-    $$("#boostPills .boost-pill, #modalBoostPills .boost-pill").forEach(b => {
-      b.classList.toggle("on", +b.dataset.b === boostIdx);
-    });
+  const bf = () => bfState().live;
+  function quote(sel) {
+    let price, credits, bonus = 0, fee = 0, name;
+    if (sel.custom) { price = Math.floor(+sel.amount); if (!(price >= MIN && price <= MAX)) return null; credits = baseC(price); fee = FEE; name = "Custom ₹" + price; }
+    else {
+      const p = PACKS.find(x => x.id === sel.pack); if (!p) return null; price = p.price; name = p.name + " ₹" + price;
+      if (p.total) { credits = p.total; bonus = Math.max(0, p.total - baseC(price)); } else { bonus = p.bonus; credits = baseC(price) + bonus; }
+    }
+    const off = bf() ? Math.round(price * .1) : 0;
+    return { name, days: sel.days, price, off, fee, payable: price - off + fee, credits, bonus, base: credits - bonus, sel };
   }
 
-  function renderCards() {
-    const extra = BOOSTS[boostIdx].add;
-    g.innerHTML = PLANS.map((p, i) => {
-      const displayPrice = disc(p.amount + extra);
-      return `<div class="plan${p.featured ? " featured" : ""}" data-i="${i}" tabindex="0" role="button">
-        <div>
-          <span class="badge">${esc(p.badge)}</span>
-          <div class="pname">${esc(p.name)}</div>
-          <div class="pprice">₹${displayPrice.toLocaleString("en-IN")} <s class="pold">${esc(p.old)}</s></div>
-          ${bfActive() ? `<div class="bfn">🖤 Black Friday −10% applied</div>` : ""}
-          <ul>${p.feat.map(f => `<li>${esc(f)}</li>`).join("")}</ul>
-        </div>
-        <div class="pcta">📷 Scan &amp; Pay Now</div>
-      </div>`;
+  function paintAcct() {
+    const b = el("plAcct"); if (!b) return; const a = S.acct;
+    b.innerHTML = a ? `<span>👤 <b>${esc(a.email)}</b></span><span>${a.active ? "💎 <b style='color:var(--gold)'>" + num(a.credits) + "</b> credits · " + Math.max(0, Math.ceil((a.expiresAt - Date.now()) / 864e5)) + " din" : "Abhi plan active nahi"}</span><button class="btn sm" type="button" id="plAcctBtn">Mera Account</button>`
+      : `<span>🔐 Credits kharidne ke liye pehle <b>login / signup</b> karo (sirf Gmail)</span><button class="btn sm primary" type="button" id="plAcctBtn">Login / Signup</button>`;
+  }
+  function renderDays() {
+    el("durPills").innerHTML = DAYS.map(d => `<button class="dpill${d === days ? " on" : ""}" type="button" data-d="${d}">${d} din</button>`).join("");
+    el("cDays").textContent = days + " din";
+  }
+  function renderPacks() {
+    el("packGrid").innerHTML = PACKS.map((p, i) => {
+      const q = quote({ pack: p.id, days }), per = q.payable / q.credits * 1000;
+      return `<div class="pack${p.hot ? " hot" : ""}" data-p="${p.id}" tabindex="0" role="button" style="--i:${i}">
+        ${p.tag ? `<span class="ptag">${p.tag}</span>` : ""}
+        <span class="pic">${p.ic}</span><div class="pn">${esc(p.name)}</div>
+        <div class="pp">${inr(q.price - q.off)}${q.off ? `<s>${inr(q.price)}</s>` : ""}</div>
+        <div class="pc">${num(q.credits)} <small>credits</small></div>
+        ${q.bonus ? `<span class="pb">🎁 +${num(q.bonus)} BONUS</span>` : `<span class="pb" style="animation:none">✨ Shuruaati pack</span>`}
+        <div class="pr">${days} din valid · ≈ ${inr(per)} / 1000 chars</div>
+        ${q.off ? `<div class="bfn">🖤 Black Friday −10%</div>` : ""}
+        <div class="pcta">💳 Kharido</div></div>`;
     }).join("");
   }
+  function custQ() { const a = Math.max(MIN, Math.min(MAX, Math.floor(+el("cAmt").value || MIN))); return quote({ custom: 1, amount: a, days }); }
+  function paintCust() {
+    const q = custQ(); el("cCred").textContent = num(q.credits); el("cFee").textContent = inr(q.fee); el("cPay").textContent = inr(q.payable);
+    el("cDays").textContent = days + " din";
+  }
+  const toAmt = v => Math.round(MIN * Math.pow(MAX / MIN, v / 1000)), toPos = a => Math.round(1000 * Math.log(a / MIN) / Math.log(MAX / MIN));
+  function refresh() { renderDays(); renderPacks(); paintCust(); paintAcct(); }
 
+  /* ---------- checkout ---------- */
+  const payUri = q => { const a = PAY_ACCOUNTS[accIdx]; return "upi://pay?pa=" + encodeURIComponent(a.pa) + "&pn=" + encodeURIComponent(a.name) + "&am=" + q.payable + "&cu=INR&tn=" + encodeURIComponent("Janusia " + q.name); };
+  const enquiry = q => `Janusia Credits Order\n\nAccount: ${S.acct ? S.acct.email : "-"}\nPlan: ${q.name} · ${q.days} din\nCredits: ${num(q.credits)}\nTotal: ${inr(q.payable)}${q.off ? " (Black Friday 10% OFF)" : ""}\n\nPayment ke baad screenshot bhej raha hun.`;
   function renderCheckout() {
-    const p = PLANS[planIdx], tot = totalAmt();
-    el("surT").textContent = fullTitle();
-    el("payTotal").textContent = "₹" + tot.toLocaleString("en-IN");
-    el("paySubTag").textContent = bfActive() ? "🖤 Black Friday 10% OFF applied" : "Scanner Payment";
-    el("surB").textContent = p.body + (boostIdx ? ` (${BOOSTS[boostIdx].label} included)` : "");
+    const q = cur; el("surT").textContent = q.name + " · " + q.days + " din";
+    el("payTotal").textContent = inr(q.payable); el("paySubTag").textContent = q.off ? "🖤 Black Friday 10% OFF" : "Total Payable";
+    el("surB").textContent = "";
+    el("sumBox").innerHTML = `<div><span>Account</span><b>${esc(S.acct.email)}</b></div><div><span>Base credits</span><b>${num(q.base)}</b></div>${q.bonus ? `<div><span>🎁 Bonus</span><b style="color:var(--ok)">+${num(q.bonus)}</b></div>` : ""}<div><span>Kul credits</span><b style="color:var(--gold)">${num(q.credits)}</b></div><div><span>Validity</span><b>${q.days} din</b></div><div><span>Plan price</span><b>${inr(q.price)}</b></div>${q.off ? `<div><span>Black Friday</span><b style="color:var(--ok)">−${inr(q.off)}</b></div>` : ""}${q.fee ? `<div><span>Platform charge</span><b>+${inr(q.fee)}</b></div>` : ""}<div class="tot"><span>Total pay</span><b>${inr(q.payable)}</b></div>`;
     el("accs").innerHTML = PAY_ACCOUNTS.map((a, k) => `<button class="chipbtn${k === accIdx ? " on" : ""}" data-acc="${k}" type="button"><b>${esc(a.name)}</b><span>${esc(a.tag)}</span></button>`).join("");
-    el("qrAmt").textContent = `${fullTitle()} · ₹${tot.toLocaleString("en-IN")}`;
+    el("qrAmt").textContent = q.name + " · " + inr(q.payable);
     const box = el("qrImg"); box.innerHTML = "";
-    if (window.QRCode) new QRCode(box, { text: payUri(), width: 196, height: 196, correctLevel: QRCode.CorrectLevel.M });
-    else box.innerHTML = '<p class="small" style="color:#333">Neeche app button se pay karein.</p>';
+    loadLib(LIB.qr).then(() => { if (cur === q) { box.innerHTML = ""; new QRCode(box, { text: payUri(q), width: 196, height: 196, correctLevel: QRCode.CorrectLevel.M }); } }).catch(() => { box.innerHTML = '<p class="small" style="color:#333">Neeche app button se pay karein.</p>'; });
   }
+  function openCheckout(sel) {
+    if (!S.acct) { toast("🔐 Pehle login / signup karo — credits aapke account mein jodte hain"); Auth.open("signup"); return; }
+    cur = quote({ ...sel, days }); if (!cur) { toast("Amount sahi nahi hai"); return; }
+    renderCheckout(); el("surpop").classList.add("show");
+  }
+  const closeCheckout = () => { el("surpop").classList.remove("show"); cur = null; };
 
-  function openCheckout(i) {
-    planIdx = i;
-    renderCheckout();
-    el("surpop").classList.add("show");
-    const card = g.querySelector(`[data-i="${i}"]`);
-    if (card) {
-      const r = card.getBoundingClientRect();
-      for (let k = 0; k < 10; k++) {
-        const h = document.createElement("span"); h.className = "hfx"; h.textContent = "✦";
-        h.style.left = (r.left + r.width / 2 + (Math.random() * 60 - 30)) + "px"; h.style.top = (r.top + r.height / 2) + "px";
-        h.style.fontSize = (14 + Math.random() * 16) + "px"; h.style.animationDelay = (Math.random() * .3) + "s";
-        document.body.appendChild(h); setTimeout(() => h.remove(), 2600);
+  async function verifyPay(r) {
+    Store.set("jn_pp", JSON.stringify(r));
+    try {
+      const { data } = await JanusiaShield.acall("/api/pay/verify", { order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature });
+      if (data.ok) { Store.del("jn_pp"); Auth.setAcct(data.account); closeCheckout(); Fx.celebrate("Payment ho gaya! 🎉", "Credits aapke account mein jud gaye"); try { refresh(); } catch (_) {} return true; }
+      toast("⚠️ " + (data.message || "Payment verify nahi hui") + " — Contact karo, paisa safe hai");
+    } catch (_) { toast("Network dikkat — payment verify baad mein apne-aap hogi"); }
+    return false;
+  }
+  async function payRzp() {
+    if (paying || !cur) return; paying = true; const b = el("rzpBtn"), t0 = b.textContent; b.disabled = true; b.textContent = "⏳ Order ban raha hai…";
+    try {
+      const s = cur.sel, { data } = await JanusiaShield.acall("/api/pay/order", s.custom ? { custom: true, amount: s.amount, days: s.days } : { pack: s.pack, days: s.days });
+      if (!data.ok) {
+        if (data.code === "LOGIN") { Auth.clear(); Auth.open("login"); }
+        else if (data.code === "NO_PAY") { toast("ℹ️ Auto-payment abhi chalu nahi — neeche UPI QR se pay karke screenshot bhejo"); el("accs").scrollIntoView({ behavior: "smooth", block: "center" }); }
+        else toast("❌ " + (data.message || "Order nahi bana"));
+        return;
       }
-    }
+      await loadLib(LIB.rzp);
+      const rz = new Razorpay({ key: data.keyId, amount: data.amount, currency: "INR", name: "Janusia", description: data.quote.name + " · " + data.quote.days + " din", order_id: data.orderId, prefill: { email: data.email }, theme: { color: "#ec4899" },
+        handler: r => { verifyPay(r); }, modal: { ondismiss: () => { paying = false; } } });
+      rz.on("payment.failed", e => toast("❌ Payment fail: " + ((e.error && e.error.description) || "dobara try karo")));
+      rz.open();
+    } catch (_) { toast("Payment window nahi khuli — internet check karo ya UPI QR use karo"); }
+    finally { paying = false; b.disabled = false; b.textContent = t0; }
   }
 
-  renderCards();
-
-  /* Black Friday countdown */
-  let lastLive = bfActive();
+  /* ---------- Black Friday ---------- */
+  let lastLive = bf();
   function bfTick() {
-    const st = bfState(), box = el("bfBox"); if (!box) return;
-    let d = Math.max(0, st.target - Date.now());
-    const parts = { d: Math.floor(d / 864e5), h: Math.floor(d % 864e5 / 36e5), m: Math.floor(d % 36e5 / 6e4), s: Math.floor(d % 6e4 / 1e3) };
-    box.querySelectorAll("[data-u]").forEach(n => n.textContent = String(parts[n.dataset.u]).padStart(2, "0"));
+    if (document.hidden) return; const st = bfState(), box = el("bfBox"); if (!box) return;
+    const d = Math.max(0, st.target - Date.now()), parts = { d: Math.floor(d / 864e5), h: Math.floor(d % 864e5 / 36e5), m: Math.floor(d % 36e5 / 6e4), s: Math.floor(d % 6e4 / 1e3) };
+    box.querySelectorAll("[data-u]").forEach(n => { n.textContent = String(parts[n.dataset.u]).padStart(2, "0"); });
     box.classList.toggle("live", st.live);
     el("bfTag").textContent = st.live ? "🔥 LIVE NOW — AAJ HI" : "🏷️ SIRF 27 NOVEMBER";
-    el("bfNote").textContent = st.live
-      ? "Aaj sabhi plans par 10% OFF lag gaya hai — price automatic kam ho gayi. Offer khatam hone mein:"
-      : "Sirf 27 November ko sabhi plans par 10% discount. Offer shuru hone mein:";
-    if (st.live !== lastLive) { lastLive = st.live; renderCards(); if (el("surpop").classList.contains("show")) renderCheckout(); }
+    el("bfNote").textContent = st.live ? "Aaj sabhi packs par 10% OFF lag gaya hai. Offer khatam hone mein:" : "Sirf 27 November ko sabhi packs par 10% discount. Offer shuru hone mein:";
+    if (st.live !== lastLive) { lastLive = st.live; refresh(); if (cur) { cur = quote(cur.sel); renderCheckout(); } }
   }
   bfTick(); setInterval(bfTick, 1000);
 
-  document.addEventListener("click", e => {
-    const bp = e.target.closest(".boost-pill");
-    if (bp) {
-      boostIdx = +bp.dataset.b;
-      syncBoostPills();
-      renderCards();
-      if (el("surpop").classList.contains("show")) renderCheckout();
-    }
-  });
-
-  g.addEventListener("click", e => { const c = e.target.closest(".plan"); if (c) openCheckout(+c.dataset.i); });
-  g.addEventListener("keydown", e => { if (e.key === "Enter") { const c = e.target.closest(".plan"); if (c) openCheckout(+c.dataset.i); } });
-  el("accs").addEventListener("click", e => { const b = e.target.closest("[data-acc]"); if (!b) return; accIdx = +b.dataset.acc; renderCheckout(); });
-
-  const close = () => el("surpop").classList.remove("show");
-  el("surX").addEventListener("click", close);
-  el("surpop").addEventListener("click", e => { if (e.target === el("surpop")) close(); });
-
-  const APP_PKG = {
-    navi: "com.naviapp",
-    bhim: "in.org.npci.upiapp",
-    phonepe: "com.phonepe.app",
-    paytm: "net.one97.paytm",
-    gpay: "com.google.android.apps.nbu.paisa.user"
-  };
+  /* ---------- events ---------- */
+  el("durPills").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (!b) return; days = +b.dataset.d; renderDays(); renderPacks(); paintCust(); });
+  const packClick = e => { const c = e.target.closest(".pack"); if (c) openCheckout({ pack: c.dataset.p }); };
+  el("packGrid").addEventListener("click", packClick);
+  el("packGrid").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); packClick(e); } });
+  const chips = [30, 50, 100, 250, 500, 1000, 5000, 10000, 20000];
+  el("cChips").innerHTML = chips.map(a => `<button type="button" data-a="${a}">₹${a.toLocaleString("en-IN")}</button>`).join("");
+  el("cChips").addEventListener("click", e => { const b = e.target.closest("[data-a]"); if (!b) return; el("cAmt").value = b.dataset.a; el("cRange").value = toPos(+b.dataset.a); paintCust(); });
+  el("cRange").addEventListener("input", () => { el("cAmt").value = toAmt(+el("cRange").value); paintCust(); });
+  el("cAmt").addEventListener("input", () => { const a = Math.floor(+el("cAmt").value); if (a >= MIN && a <= MAX) el("cRange").value = toPos(a); paintCust(); });
+  el("cAmt").addEventListener("blur", () => { el("cAmt").value = Math.max(MIN, Math.min(MAX, Math.floor(+el("cAmt").value || MIN))); paintCust(); });
+  el("cBuy").addEventListener("click", () => { const a = Math.floor(+el("cAmt").value); if (!(a >= MIN && a <= MAX)) { toast("Amount ₹30 se ₹20,000 ke beech rakho"); return; } openCheckout({ custom: 1, amount: a }); });
+  document.addEventListener("click", e => { if (e.target.closest && e.target.closest("#plAcctBtn")) Auth.open(S.acct ? "account" : "login"); });
+  el("rzpBtn").addEventListener("click", payRzp);
+  el("accs").addEventListener("click", e => { const b = e.target.closest("[data-acc]"); if (!b || !cur) return; accIdx = +b.dataset.acc; renderCheckout(); });
+  el("surX").addEventListener("click", closeCheckout);
+  el("surpop").addEventListener("click", e => { if (e.target === el("surpop")) closeCheckout(); });
+  const APP_PKG = { navi: "com.naviapp", bhim: "in.org.npci.upiapp", phonepe: "com.phonepe.app", paytm: "net.one97.paytm", gpay: "com.google.android.apps.nbu.paisa.user" };
   el("surpop").addEventListener("click", e => {
-    const b = e.target.closest("[data-app]"); if (!b) return;
-    const u = payUri(), app = b.dataset.app;
-    if (app === "other" || !APP_PKG[app]) {
-      window.location.href = u;
-      return;
-    }
-    window.location.href = "intent://" + u.slice("upi://".length) + "#Intent;scheme=upi;package=" + APP_PKG[app] + ";S.browser_fallback_url=" + encodeURIComponent(u) + ";end";
+    const b = e.target.closest("[data-app]"); if (!b || !cur) return; const u = payUri(cur), app = b.dataset.app;
+    if (app === "other" || !APP_PKG[app]) { location.href = u; return; }
+    location.href = "intent://" + u.slice("upi://".length) + "#Intent;scheme=upi;package=" + APP_PKG[app] + ";S.browser_fallback_url=" + encodeURIComponent(u) + ";end";
   });
+  el("enqTg").addEventListener("click", () => { if (!cur) return; copy(enquiry(cur), "Order details copy ho gayi, Telegram mein paste karo"); window.open("https://t.me/" + CONTACT.telegram, "_blank", "noopener"); });
+  el("enqMail").addEventListener("click", () => { if (!cur) return; location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Janusia Credits Order") + "&body=" + encodeURIComponent(enquiry(cur)); });
+  // pehle ki adhoori payment verify karo
+  setTimeout(() => { try { const r = JSON.parse(Store.get("jn_pp", "null")); if (r && S.token) verifyPay(r); } catch (_) {} }, 2500);
+  refresh();
+  return { refresh, paintAcct };
+})();
 
-  el("enqTg").addEventListener("click", () => {
-    copy(enquiryMsg(), "Order details copy ho gayi, Telegram mein paste karo");
-    window.open("https://t.me/" + CONTACT.telegram, "_blank", "noopener");
+/* ============================ OWNER: accounts & credits ============================ */
+(() => {
+  const msg = t => { el("accMsg").textContent = t; };
+  async function load() {
+    if (!S.owner) { toast("Pehle owner password se kholo"); return; }
+    try {
+      msg("Load ho raha hai…"); const d = await JanusiaShield.adminAccounts();
+      el("accMail").className = d.mail ? "chip ok" : "chip bad"; el("accMail").textContent = d.mail ? "Mail ✓ setup" : "Mail ✗ setup baaki";
+      el("accPay").className = d.pay ? "chip ok" : "chip warn"; el("accPay").textContent = d.pay ? "Razorpay ✓" : "Razorpay ✗ (UPI manual)";
+      const rows = d.accounts || [];
+      el("accRows").innerHTML = rows.length ? rows.map(a => `<tr><td>${esc(a.email)}</td><td align="right"><b>${(a.credits || 0).toLocaleString("en-IN")}</b></td><td>${a.expiresAt ? new Date(a.expiresAt).toLocaleDateString("en-IN") + (a.active ? "" : " ⌛") : "-"}</td><td align="right">${a.gens || 0}</td><td align="right">₹${(a.spent || 0).toLocaleString("en-IN")}</td><td><button class="btn sm danger" type="button" data-ab="${esc(a.email)}">Block</button></td></tr>`).join("") : '<tr><td colspan="6" class="muted">Abhi koi account nahi.</td></tr>';
+      msg(rows.length + " account");
+    } catch (e) { msg("❌ " + e.message); }
+  }
+  el("accRef").addEventListener("click", load);
+  el("grGo").addEventListener("click", async () => {
+    if (!S.owner) { toast("Pehle owner password se kholo"); return; }
+    const email = el("grEmail").value.trim(), credits = Math.floor(+el("grCred").value || 0), days = +el("grDays").value;
+    if (!email || credits <= 0) { toast("Email aur credits daalo"); return; }
+    try { const r = await JanusiaShield.adminGrant(email, credits, days); toast("🎁 " + credits.toLocaleString("en-IN") + " credits de diye → " + r.account.email); el("grCred").value = ""; load(); } catch (e) { toast("❌ " + e.message); }
   });
-  el("enqMail").addEventListener("click", () => {
-    location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Janusia Plan Order") + "&body=" + encodeURIComponent(enquiryMsg());
-  });
+  el("accRows").addEventListener("click", e => { const b = e.target.closest("[data-ab]"); if (b && confirm(b.dataset.ab + " ko block karein?")) JanusiaShield.manualBlock(b.dataset.ab, true); });
 })();
 
 /* ============================ CONTACT ============================ */
@@ -3322,19 +3733,20 @@ const CONTACT = { telegram: "Janusia10", email: "ashishkr88as@gmail.com", youtub
 })();
 
 /* ============================ TABS & THEME ============================ */
-const TABS = ["studio", "voices", "history", "clone", "stt", "relax", "mixer", "connect", "plans", "contact", "owner"];
+const TABS = ["studio", "voices", "vids", "history", "clone", "stt", "mixer", "connect", "plans", "contact", "owner"];
 function showTab(n) {
   TABS.forEach(t => { el("p-" + t).hidden = t !== n; });
   $$(".tab").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === n));
   if (n === "voices") renderVoices();
   if (n === "history") renderHist();
-  if (n === "relax") Relax.enterTab(); else Relax.leaveTab();
+  if (n === "vids") Vids.paint();
+  if (n === "plans") Plans.refresh();
   if (n === "mixer") { Mixer.refresh(); Mixer.warm(); }
   if (n === "owner" && S.owner) { JanusiaShield.renderAdminPanel(); JanusiaShield.loadAdmin(); }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 $$(".tab").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
-el("statusBar").addEventListener("click", () => showTab("connect"));
+el("statusBar").addEventListener("click", e => { if (e.target.closest("#stSpdIt")) { Speed.test(); return; } showTab("connect"); });
 el("connBtn").addEventListener("click", () => connect(false, false, true));
 el("discBtn").addEventListener("click", resetToDefaultKey);
 el("keyInp").addEventListener("keydown", e => { if (e.key === "Enter") connect(false, false, true); });
@@ -3480,291 +3892,23 @@ $$(".bgmBtn").forEach(b => b.addEventListener("click", () => Relax.toggleAll()))
   });
 })();
 
-/* ============================ MIND RELAX MODE (YouTube IFrame API) ============================ */
+/* ============================ LOFI MUSIC CONTROL (Mind Relax hata diya — sirf local bgm.mp3) ============================ */
 const Relax = (() => {
-  const LSget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
-  const LSset = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
-  // Starter moods. Agar koi video embed band ho to agla apne-aap chalta hai. Asli favourite Owner tab / link se set hota hai.
-  const MOODS = { lofi: ["jfKfPfyJRdk"], s90: ["W6o5yisE_AQ"], love: ["EXCkE3jYQfk"] };
-  const FALLBACK = "jfKfPfyJRdk";
-  let src = LSget("jn_src", LSget("janusia_bgm", "1") === "0" ? "off" : "yt");
-  if (!["yt", "local", "off"].includes(src)) src = "yt";
-  let prevSrc = src === "off" ? "yt" : src;
-  let volPct = parseFloat(LSget("jn_vol2", "35")); if (!(volPct >= 0 && volPct <= 100)) volPct = 35;
-  let auto = LSget("jn_rx_auto", "1") === "1", retro = LSget("jn_rx_retro", "1") === "1";
-  const DEFCFG = { mode: "bg", op: { bg: 25, rect: 100, mini: 100 }, size: "m", pos: "br", q: "hd1080", show: true, x: null, y: null };
-  let cfg = (() => {
-    try { const j = JSON.parse(LSget("jn_rx_cfg2", "null")); if (j && typeof j === "object") return { ...DEFCFG, ...j, op: { ...DEFCFG.op, ...(j.op || {}) } }; } catch (_) {}
-    return JSON.parse(JSON.stringify(DEFCFG));
-  })();
-  if (!["bg", "rect", "mini"].includes(cfg.mode)) cfg.mode = "bg";
-  const saveCfg = () => LSset("jn_rx_cfg2", JSON.stringify(cfg));
-  const SIZES = { s: 260, m: 380, l: 560, xl: 820 };
-  const QNAME = { tiny: "144p", small: "240p", medium: "360p", large: "480p", hd720: "720p", hd1080: "1080p", hd1440: "1440p", hd2160: "4K", hd2880: "5K", highres: "8K" };
-  let player = null, ready = false, apiState = "idle", unlocked = false, curVol = 0, srvDefault = "", errCount = 0, lastTarget = null, state = -1, apiTimer = 0;
-  let held = false, heldWas = false;
-  const dock = () => el("ytDock");
-  const ytVol = () => Math.round(volPct);
-
-  function parseYT(u) {
-    u = String(u || "").trim(); if (!u) return null;
-    const list = (u.match(/[?&]list=([\w-]{10,})/) || [])[1];
-    const id = (u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/) || [])[1] || (/^[\w-]{11}$/.test(u) ? u : null);
-    if (list && !/^(RD|UL)/.test(list)) return { list };
-    if (id) return { ids: [id] };
-    return null;
-  }
-  function desired() {
-    try { const l = JSON.parse(LSget("jn_yt_last", "null")); if (l && (l.ids || l.list)) return l; } catch (_) {}
-    const d = parseYT(srvDefault || LSget("jn_yt_def", "")); if (d) return d;
-    return { ids: MOODS.lofi };
-  }
-
-  /* ---------- API load ---------- */
-  function loadApi() {
-    if (apiState === "loading" || apiState === "ready") return;
-    if (window.YT && window.YT.Player) { apiState = "ready"; build(); return; }
-    apiState = "loading";
-    window.onYouTubeIframeAPIReady = () => { clearTimeout(apiTimer); apiState = "ready"; build(); };
-    const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; s.async = true; s.onerror = apiFail;
-    document.head.appendChild(s); apiTimer = setTimeout(() => { if (apiState !== "ready") apiFail(); }, 12000);
-  }
-  function apiFail() {
-    if (apiState === "ready") return; apiState = "failed"; clearTimeout(apiTimer);
-    if (src === "yt") { toast("YouTube load nahi hua — Janusia Lofi chala raha hoon"); setSrc("local"); }
-  }
-
-  /* ---------- player ---------- */
-  function build() {
-    if (player || apiState !== "ready" || src !== "yt") return;
-    const t = desired(); lastTarget = t;
-    const pv = { autoplay: auto && !held ? 1 : 0, mute: 1, controls: 1, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3, loop: 1, disablekb: 1, fs: 1, cc_load_policy: 0 };
-    if (/^https?:$/.test(location.protocol)) pv.origin = location.origin;
-    const cfgY = { width: "100%", height: "100%", playerVars: pv, events: { onReady, onStateChange, onError: onErr } };
-    if (t.list) { pv.listType = "playlist"; pv.list = t.list; } else { cfgY.videoId = t.ids[0]; pv.playlist = t.ids.join(","); }
-    applyMode();
-    try { player = new YT.Player("ytPlayer", cfgY); } catch (_) { apiFail(); }
-  }
-  function applyQuality() {
-    if (!player || !ready) return;
-    const q = cfg.q === "auto" ? "default" : cfg.q;
-    try { if (player.setPlaybackQualityRange && q !== "default") player.setPlaybackQualityRange(q, q); } catch (_) {}
-    try { player.setPlaybackQuality(q); } catch (_) {}
-  }
-  function onReady() {
-    ready = true; try { player.setVolume(ytVol()); curVol = ytVol(); } catch (_) {}
-    applyQuality();
-    if (unlocked && !held) { try { player.unMute(); if (src === "yt") player.playVideo(); } catch (_) {} }
-    paint();
-  }
-  function onStateChange(e) {
-    state = e.data;
-    if (state === 1) {
-      if (held) { try { player.pauseVideo(); } catch (_) {} paint(); return; }
-      errCount = 0; title(); applyQuality(); if (unlocked) { try { player.unMute(); } catch (_) {} }
-    }
-    if (state === 0 && lastTarget && lastTarget.ids && lastTarget.ids.length === 1) { try { player.seekTo(0); if (!held) player.playVideo(); } catch (_) {} }
-    paint();
-  }
-  function onErr() {
-    errCount++;
-    if (errCount > 6) { toast("YouTube video nahi chal pa rahi — Janusia Lofi chala raha hoon"); setSrc("local"); return; }
-    toast("⚠️ Ye video embed nahi ho sakti, agla chala raha hoon");
-    try {
-      const pl = player.getPlaylist && player.getPlaylist();
-      if (pl && pl.length > 1) { player.nextVideo(); return; }
-    } catch (_) {}
-    if (!(lastTarget && lastTarget.ids && lastTarget.ids[0] === FALLBACK)) load({ ids: [FALLBACK] }, false); else setSrc("local");
-  }
-  let vTitle = "";
-  function title() {
-    try { const d = player.getVideoData(); const t = (d && d.title) || ""; if (t) { vTitle = t; el("ytTitle").textContent = t; } } catch (_) {}
-  }
-  function load(t, persist) {
-    lastTarget = t; if (persist) LSset("jn_yt_last", JSON.stringify(t));
-    if (src !== "yt") setSrc("yt");
-    if (!player || !ready) { if (apiState === "idle") loadApi(); return; }
-    try {
-      if (t.list) player.loadPlaylist({ list: t.list, listType: "playlist", index: 0 }); else player.loadPlaylist(t.ids, 0);
-      player.setLoop(true);
-      if (unlocked) { player.unMute(); player.setVolume(ytVol()); }
-    } catch (_) {}
-  }
-
-  /* ---------- play / pause / source ---------- */
-  function play() {
-    if (held) { heldWas = true; return; }
-    if (src === "off") setSrc(prevSrc || "yt");
-    if (src === "local") { Music.start(); return; }
-    unlocked = true;
-    if (!player) { loadApi(); return; }
-    if (ready) { try { player.unMute(); player.setVolume(ytVol()); player.playVideo(); } catch (_) {} }
-  }
-  function pause() { if (src === "local") Music.stop(); else if (player && ready) { try { player.pauseVideo(); } catch (_) {} } }
-  const isPlaying = () => (src === "yt" && state === 1) || (src === "local" && Music.started && !held);
-  function setSrc(v) {
-    if (src !== "off") prevSrc = src; src = v; LSset("jn_src", v); if (v !== "off") LSset("janusia_bgm", "1"); else LSset("janusia_bgm", "0");
-    applySource(); paint();
-  }
-  function applySource() {
-    if (src === "yt") {
-      Music.stop(); applyMode();
-      if (!held && (auto || unlocked)) { if (!player) loadApi(); else if (ready && unlocked) { try { player.unMute(); player.playVideo(); } catch (_) {} } }
-    } else if (src === "local") {
-      if (player && ready) { try { player.pauseVideo(); } catch (_) {} }
-      applyMode(); if (!held && (unlocked || Music.started)) Music.start();
-    } else {
-      if (player && ready) { try { player.pauseVideo(); } catch (_) {} }
-      Music.stop(); applyMode();
-    }
-  }
-  function toggleAll() { if (src === "off") setSrc(prevSrc || "yt"); else setSrc("off"); if (src !== "off") play(); }
-
-  // voice banate waqt sab kuch pura ruk jaye, khatam hote hi wapas chale
-  function hold() { if (held) return; held = true; heldWas = isPlaying() || (src !== "off" && unlocked); if (heldWas) pause(); paint(); }
-  function release() { if (!held) return; held = false; const w = heldWas; heldWas = false; if (w && src !== "off") play(); paint(); }
-
-  // browser: awaaz asli click/touch ke baad hi chalti hai
-  function unlock() {
-    if (unlocked) return;
-    unlocked = true;
-    if (held) return;
-    if (src === "local") Music.start();
-    else if (src === "yt") { if (!player) { if (auto) loadApi(); } else if (ready) { try { player.unMute(); player.setVolume(ytVol()); player.playVideo(); } catch (_) {} } }
-  }
-  ["click", "touchend", "keydown"].forEach(e => addEventListener(e, unlock, { capture: true, passive: true }));
-
-  /* ---------- video window (background / rectangle / mini) ---------- */
-  function clampPos() {
-    const d = dock(); if (!d || cfg.x == null || cfg.mode === "bg") return;
-    const w = d.offsetWidth || 300, h = d.offsetHeight || 200;
-    cfg.x = Math.max(0, Math.min(innerWidth - Math.min(w, innerWidth), cfg.x));
-    cfg.y = Math.max(0, Math.min(innerHeight - Math.min(h, innerHeight), cfg.y));
-  }
-  function applyMode() {
-    const d = dock(); if (!d) return;
-    const vis = src === "yt";
-    d.hidden = !vis;
-    d.classList.remove("bg", "rect", "mini"); d.classList.add(cfg.mode);
-    d.classList.toggle("off", !cfg.show);
-    d.dataset.pos = cfg.pos;
-    d.style.setProperty("--ytop", String((cfg.op[cfg.mode] || 25) / 100));
-    d.style.setProperty("--rw", (SIZES[cfg.size] || 380) + "px");
-    if (cfg.mode !== "bg" && cfg.x != null) { clampPos(); d.style.left = cfg.x + "px"; d.style.top = cfg.y + "px"; d.style.right = "auto"; d.style.bottom = "auto"; }
-    else { d.style.left = d.style.top = d.style.right = d.style.bottom = ""; }
-    const bx = el("ytBgX"); if (bx) bx.hidden = !(vis && cfg.show && cfg.mode === "bg");
-    const w = el("ytWrap"); if (w) w.classList.toggle("retro", retro);
-  }
-  addEventListener("resize", () => { clampPos(); applyMode(); });
-  function enterTab() { el("rxOwnerBox").hidden = !S.owner; paint(); if (src === "yt" && apiState === "idle") loadApi(); }
-  function leaveTab() {}
-
-  // rectangle / mini window ko upar wali patti se kheencho
-  (() => {
-    const d = dock(), hd = d && d.querySelector(".ythead"); if (!hd) return;
-    let drag = null;
-    hd.addEventListener("pointerdown", e => {
-      if (cfg.mode === "bg" || e.target.closest("button")) return;
-      const r = d.getBoundingClientRect(); drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
-      try { hd.setPointerCapture(e.pointerId); } catch (_) {}
-      e.preventDefault();
-    });
-    hd.addEventListener("pointermove", e => {
-      if (!drag) return;
-      cfg.x = e.clientX - drag.dx; cfg.y = e.clientY - drag.dy; clampPos();
-      d.style.left = cfg.x + "px"; d.style.top = cfg.y + "px"; d.style.right = "auto"; d.style.bottom = "auto";
-    });
-    const end = () => { if (drag) { drag = null; saveCfg(); } };
-    hd.addEventListener("pointerup", end); hd.addEventListener("pointercancel", end);
-  })();
-
-  /* ---------- awaaz ducking + volume ---------- */
-  setInterval(() => {
-    if (!player || !ready || src !== "yt" || !unlocked || state !== 1 || held) return;
-    const tgt = voiceActive() ? ytVol() * 0.22 : ytVol();
-    curVol += (tgt - curVol) * 0.25; if (Math.abs(tgt - curVol) < 1) curVol = tgt;
-    try { if (Math.round(curVol) !== Math.round(player.getVolume())) player.setVolume(Math.round(curVol)); } catch (_) {}
-  }, 120);
-
-  /* ---------- UI ---------- */
-  function paint() {
-    $$(".bgmBtn").forEach(b => { const on = src !== "off"; b.textContent = on ? "🎵" : "🔇"; b.setAttribute("aria-pressed", String(on)); b.title = on ? "Music band karo" : "Music chalu karo"; });
+  let on = Store.get("jn_src", "local") !== "off", volPct = parseFloat(Store.get("jn_vol2", "35"));
+  if (!(volPct >= 0 && volPct <= 100)) volPct = 35;
+  let held = false, heldWas = false, unlocked = false;
+  const paint = () => {
+    $$(".bgmBtn").forEach(b => { b.textContent = on ? "🎵" : "🔇"; b.setAttribute("aria-pressed", String(on)); b.title = on ? "Music band karo" : "Music chalu karo"; });
     $$(".bgmVol").forEach(r => { r.value = Math.round(volPct); });
-    if (el("rxVolV")) el("rxVolV").textContent = Math.round(volPct) + "%";
-    if (el("rxSource")) el("rxSource").value = src;
-    if (el("rxAuto")) el("rxAuto").checked = auto;
-    if (el("rxRetro")) el("rxRetro").checked = retro;
-    if (el("rxMode")) el("rxMode").value = cfg.mode;
-    if (el("rxOp")) { el("rxOp").value = cfg.op[cfg.mode]; el("rxOpV").textContent = cfg.op[cfg.mode] + "%"; }
-    if (el("rxSize")) { el("rxSize").value = cfg.size; el("rxSizeBox").hidden = cfg.mode !== "rect"; }
-    if (el("rxPos")) { el("rxPos").value = cfg.pos; el("rxPosBox").hidden = cfg.mode === "bg"; }
-    if (el("rxQ")) el("rxQ").value = cfg.q;
-    if (el("rxShow")) el("rxShow").textContent = cfg.show ? "📺 Video hatao" : "📺 Video dikhao";
-    const w = el("ytWrap"); if (w) w.classList.toggle("retro", retro);
-    const pl = isPlaying();
-    if (el("rxPlay")) el("rxPlay").textContent = pl ? "⏸ Pause" : "▶ Play";
-    if (el("rxState")) { el("rxState").className = held ? "chip warn" : pl ? "chip ok" : "chip"; el("rxState").textContent = src === "off" ? "Music band" : held ? "⏸ Voice ban rahi hai" : pl ? "▶ Chal raha hai" : (src === "yt" && apiState === "loading" ? "Loading…" : "Ruka hua"); }
-    let qn = ""; try { if (player && ready && src === "yt") qn = QNAME[player.getPlaybackQuality()] || ""; } catch (_) {}
-    if (el("rxNow")) el("rxNow").textContent = src === "local" ? "🎵 Janusia Lofi (bgm.mp3)" : (vTitle ? "🎵 " + vTitle + (qn ? " · " + qn : "") : "—");
-    if (el("rxStage")) el("rxStage").innerHTML = src !== "yt" ? '<span class="small muted">Abhi YouTube video off hai (source badla hua hai).</span>' : !cfg.show ? '<span class="small muted">Video screen se hata di gayi hai — gaana chal raha hai. <b>📺 Video dikhao</b> dabao.</span>' : '<span class="small">✅ Video ' + ({ bg: "poori screen par peeche", rect: "rectangle window mein", mini: "chhote corner player mein" }[cfg.mode]) + " dikh raha hai (" + cfg.op[cfg.mode] + "% opacity)</span>";
-  }
-  setInterval(paint, 1500);
-  const sync = () => { saveCfg(); applyMode(); paint(); };
-
-  el("rxPlay").addEventListener("click", () => { if (isPlaying()) pause(); else play(); setTimeout(paint, 400); });
-  el("rxNext").addEventListener("click", () => { try { if (src === "yt" && player && ready) player.nextVideo(); } catch (_) {} });
-  el("rxPrev").addEventListener("click", () => { try { if (src === "yt" && player && ready) player.previousVideo(); } catch (_) {} });
-  el("rxMode").addEventListener("change", e => { cfg.mode = e.target.value; cfg.x = cfg.y = null; cfg.show = true; sync(); });
-  el("rxOp").addEventListener("input", e => { cfg.op[cfg.mode] = Math.max(5, Math.min(100, +e.target.value || 25)); el("rxOpV").textContent = cfg.op[cfg.mode] + "%"; applyMode(); saveCfg(); });
-  el("rxSize").addEventListener("change", e => { cfg.size = e.target.value; cfg.x = cfg.y = null; sync(); });
-  el("rxPos").addEventListener("change", e => { cfg.pos = e.target.value; cfg.x = cfg.y = null; sync(); });
-  el("rxQ").addEventListener("change", e => { cfg.q = e.target.value; saveCfg(); applyQuality(); toast("🎞️ Quality: " + e.target.options[e.target.selectedIndex].text); });
-  function setShow(v) { cfg.show = v; sync(); if (!v) toast("Video hata di — gaana chal raha hai. Wapas laane ke liye Mind Relax tab → 📺 Video dikhao"); }
-  el("rxShow").addEventListener("click", () => setShow(!cfg.show));
-  el("ytX").addEventListener("click", () => setShow(false));
-  el("ytBgX").addEventListener("click", () => setShow(false));
-  el("ytMode").addEventListener("click", () => { cfg.mode = cfg.mode === "bg" ? "rect" : cfg.mode === "rect" ? "mini" : "bg"; cfg.x = cfg.y = null; cfg.show = true; sync(); });
-  el("rxFs").addEventListener("click", () => {
-    if (src !== "yt") { toast("Pehle source YouTube karo"); return; }
-    cfg.show = true; applyMode();
-    const w = el("ytWrap"), f = w.requestFullscreen || w.webkitRequestFullscreen;
-    if (f) { try { const p = f.call(w); if (p && p.catch) p.catch(() => toast("Fullscreen nahi khula")); } catch (_) { toast("Fullscreen nahi khula"); } } else toast("Is browser mein fullscreen nahi hai");
-  });
-  el("rxSource").addEventListener("change", e => { setSrc(e.target.value); if (src !== "off") play(); });
-  el("rxAuto").addEventListener("change", e => { auto = e.target.checked; LSset("jn_rx_auto", auto ? "1" : "0"); });
-  el("rxRetro").addEventListener("change", e => { retro = e.target.checked; LSset("jn_rx_retro", retro ? "1" : "0"); paint(); });
-  $$(".bgmVol").forEach(r => r.addEventListener("input", () => {
-    volPct = Math.max(0, Math.min(100, +r.value || 0)); LSset("jn_vol2", String(volPct));
-    $$(".bgmVol").forEach(o => { if (o !== r) o.value = r.value; });
-    if (el("rxVolV")) el("rxVolV").textContent = Math.round(volPct) + "%";
-    if (player && ready && unlocked && !held) { try { player.setVolume(ytVol()); curVol = ytVol(); } catch (_) {} }
-  }));
-  el("rxMoods").addEventListener("click", e => { const b = e.target.closest("[data-mood]"); if (!b) return; unlocked = true; load({ ids: MOODS[b.dataset.mood] }, true); play(); toast("🎶 " + b.textContent.trim()); });
-  el("rxGo").addEventListener("click", () => {
-    const t = parseYT(el("rxUrl").value);
-    if (!t) { toast("Sahi YouTube link daalo (youtube.com/watch?v=… ya youtu.be/…)"); return; }
-    unlocked = true; load(t, true); play(); el("rxUrl").value = ""; toast("▶ Chal raha hai");
-  });
-  el("rxUrl").addEventListener("keydown", e => { if (e.key === "Enter") el("rxGo").click(); });
-  el("rxDefSave").addEventListener("click", async () => {
-    const url = el("rxDefUrl").value.trim(), t = parseYT(url);
-    if (!t) { toast("Sahi YouTube link daalo"); return; }
-    LSset("jn_yt_def", url); srvDefault = url; LSset("jn_yt_last", "null");
-    await JanusiaShield.saveConfig({ yt: url });
-    unlocked = true; load(t, false); play(); toast("✅ Default gaana set ho gaya");
-  });
-
-  /* ---------- init ---------- */
-  function serverDefault(url) {
-    url = String(url || ""); if (url === srvDefault) return; srvDefault = url;
-    if (el("rxDefUrl") && url && document.activeElement !== el("rxDefUrl")) el("rxDefUrl").value = url;
-    const personal = LSget("jn_yt_last", "null") !== "null";
-    const t = parseYT(url);
-    if (t && !personal && player && ready) load(t, false);
-  }
-  applyMode();
-  setTimeout(() => { if (src === "yt" && auto) loadApi(); applySource(); paint(); }, 400);
-  return { vol: () => volPct / 100, toggleAll, enterTab, leaveTab, serverDefault, paint, hold, release };
+  };
+  function unlock() { if (unlocked) return; unlocked = true; if (on && !held) Music.start(); }
+  ["pointerdown", "keydown", "touchend"].forEach(ev => addEventListener(ev, unlock, { once: true, passive: true, capture: true }));
+  function toggleAll() { on = !on; Store.set("jn_src", on ? "local" : "off"); unlocked = true; if (on && !held) Music.start(); else Music.stop(); paint(); toast(on ? "🎵 Music chalu" : "🔇 Music band"); }
+  function hold() { if (held) return; held = true; heldWas = on && Music.started; Music.stop(); }
+  function release() { if (!held) return; held = false; const w = heldWas; heldWas = false; if (w && on) Music.start(); }
+  $$(".bgmVol").forEach(r => r.addEventListener("input", () => { volPct = Math.max(0, Math.min(100, +r.value || 0)); Store.set("jn_vol2", String(volPct)); $$(".bgmVol").forEach(o => { if (o !== r) o.value = r.value; }); }));
+  paint();
+  return { vol: () => volPct / 100, toggleAll, paint, hold, release, enterTab() {}, leaveTab() {}, serverDefault() {} };
 })();
 
 /* ============================ MIXER & STUDIO EFFECTS ============================ */
@@ -4172,8 +4316,8 @@ const GLX = (() => {
     try {
       if (!window.THREE) return;
       const canvas = el("gl");
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: "default" });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
       scene = new THREE.Scene(); cam = new THREE.PerspectiveCamera(42, 1, .1, 100); cam.position.set(0, 0, 7.5);
       scene.add(new THREE.AmbientLight(0xf3e8ff, .7));
 
@@ -4189,7 +4333,7 @@ const GLX = (() => {
       try {
         const hp = []; for (let i = 0; i <= 36; i++) { const t = i / 36 * Math.PI * 2; hp.push(new THREE.Vector2(Math.pow(Math.sin(t), 3), (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) / 16)); }
         const hg = new THREE.ExtrudeGeometry(new THREE.Shape(hp), { depth: .14, bevelEnabled: false, curveSegments: 2 }); hg.center();
-        const HN = 105; hearts = new THREE.InstancedMesh(hg, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.72 }), HN);
+        const HN = 64; hearts = new THREE.InstancedMesh(hg, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.72 }), HN);
         hearts.instanceMatrix.setUsage(THREE.DynamicDrawUsage); hearts.frustumCulled = false; scene.add(hearts);
         pal = [0xec4899, 0xf472b6, 0xfbbf24, 0x8b5cf6, 0x22d3ee].map(c => new THREE.Color(c));
         for (let i = 0; i < HN; i++) {
@@ -4234,8 +4378,11 @@ const GLX = (() => {
     for (let i = 0; i < n; i++) s += S.freq[i]; return s / n / 255;
   }
 
+  let lastT = 0, slow = 0;
   function frame(t) {
-    requestAnimationFrame(frame); if (!st.ok || document.hidden) return;
+    requestAnimationFrame(frame); if (!st.ok || document.hidden || Lite.is()) return;
+    const dt = t - lastT; if (dt < 28) return; lastT = t;
+    if (dt < 1000) { if (dt > 75) slow++; else if (slow > 0) slow -= .5; if (slow > 30) { Lite.force(); return; } }
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, lv = level(); st.lv += (lv - st.lv) * .18;
     if (pts) pts.rotation.y = reduce ? 0 : t * .00005;
     if (torus1 && torus2 && !reduce) {
@@ -4269,7 +4416,9 @@ const GLX = (() => {
     }
     renderer.render(scene, cam);
   }
-  return { init };
+  let booted = false;
+  function boot() { if (booted || Lite.is()) return; booted = true; loadLib(LIB.three).then(init).catch(() => { booted = false; }); }
+  return { init, boot };
 })();
 
 /* ============================ INITIALIZE ON LOAD ============================ */
@@ -4283,7 +4432,8 @@ renderKeyInfo();
 renderKeyList();
 updateCharLimitUI();
 loadHistory();
-GLX.init();
+setTimeout(() => GLX.boot(), 1200);
+setTimeout(() => Speed.test(), 3500);
 JanusiaShield.initNetworkAndVpnCheck();
 JanusiaShield.syncPauseUI();
 document.title = "Janusia — 3D AI Voice Studio " + JanusiaConfig.VERSION;
