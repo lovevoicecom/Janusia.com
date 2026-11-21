@@ -1915,7 +1915,7 @@ const JanusiaShield = (() => {
   /* ---------------- backend calls ---------------- */
   async function call(path, extra, admin, base) {
     const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), /^\/api\/(auth|pay)/.test(path) ? 25000 : 9000);
-    const headers = { "content-type": "application/json" };
+    const headers = { "content-type": admin ? "application/json" : "text/plain;charset=UTF-8" };
     if (admin) headers["x-admin-pass"] = OW.srvPass || OW.pass || "";
     try {
       const r = await fetch((base || BE) + path, { method: "POST", headers, signal: ctrl.signal, cache: "no-store",
@@ -2289,7 +2289,17 @@ const JanusiaShield = (() => {
     initNetworkAndVpnCheck, checkBeforeGenerate, setConcurrency, finish, freeInfo, hasBackend: !!BE,
     setApiPause, syncPauseUI, manualBlock, resetUser, vpnAllow, saveConfig, resetUsage, resetAll, loadAdmin, resumeAdmin, setServerPass, renderAdminPanel, exportCsv,
     refreshStatus, getApiPause, get ip() { return ip; },
-    acall: (p, b) => call(p, b || {}, false, BES[0]), adminAccounts: () => adminFetch("/api/admin/accounts"), adminGrant: (email, credits, days) => adminFetch("/api/admin/grant", { email, credits, days })
+    acall: async (p, b) => { try { return await call(p, b || {}, false, BES[0]); } catch (e) { return await call(p, b || {}, false, BES[0]); } },
+    diag: async () => {
+      const u = BES[0], host = u.replace(/^https?:\/\//, "");
+      try {
+        const r = await fetch(u + "/", { cache: "no-store" }), d = await r.json().catch(() => null);
+        if (!d) return "Worker " + host + " ne sahi jawab nahi diya (status " + r.status + "). Cloudflare mein worker deploy / URL check karo.";
+        if (d.kv === false) return "Worker chal raha hai par KV binding 'JANUSIA' juda nahi. Cloudflare → Worker → Settings → Bindings → KV namespace add karo (variable name: JANUSIA), phir Deploy.";
+        if (!d.version || parseFloat(d.version) < 5) return "Worker mein purana code chal raha hai (v" + (d.version || "?") + "). Naya worker.js paste karke Deploy karo.";
+        return "Worker theek hai (v" + d.version + ", mail " + (d.mail ? "set" : "NOT set") + "). Internet dobara try karo.";
+      } catch (e) { return "Worker " + host + " khul nahi raha. Worker deploy hua? workers.dev subdomain on hai? URL sahi hai?"; }
+    }, adminAccounts: () => adminFetch("/api/admin/accounts"), adminGrant: (email, credits, days) => adminFetch("/api/admin/grant", { email, credits, days })
   };
 })();
 
@@ -3493,7 +3503,7 @@ const Auth = (() => {
       const { data } = await JanusiaShield.acall(kind === "reset" ? "/api/auth/forgot" : "/api/auth/signup", { email, pk });
       if (!data.ok) { msg(data.message || "Code nahi bhej paaye", "bad"); return; }
       pend = { email, pk, kind }; setMode("verify"); msg("📧 Code bhej diya — inbox / spam check karo", "ok");
-    } catch (err) { msg("Server se connect nahi ho paaya. Internet check karo aur dobara try karo.", "bad"); }
+    } catch (err) { msg("⏳ Server check ho raha hai…"); let d = ""; try { d = await JanusiaShield.diag(); } catch (_) {} msg("❌ " + (d || "Server se connect nahi ho paaya.") + " [" + ((err && err.name) || "err") + "]", "bad"); }
     finally { busy = false; el("aGo").disabled = false; }
   }
   async function resend() {
