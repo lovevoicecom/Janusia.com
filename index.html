@@ -655,6 +655,10 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
 @media(max-width:600px){.cust .camt{font-size:26px}.cust .camt input{width:120px}.packs{grid-template-columns:1fr 1fr;gap:10px}.pack{padding:14px 12px}.pack .pp{font-size:24px}.pack .pc{font-size:18px}}
 @media(max-width:380px){.packs{grid-template-columns:1fr}}
 .mtop .acctchip{flex:none}
+.mlang{width:auto!important;min-width:0;padding:6px 4px!important;font-size:12px!important;flex:none}
+@media(min-width:901px){.mlang{display:none}}
+@media(max-width:900px){.mtop{gap:4px;flex-wrap:nowrap;overflow:hidden}.mtop .brand-name{display:none}.mtop .btn.sm{padding:6px 8px}}
+@media(max-width:900px){.side .langSel{display:none}}
 @media(max-width:900px){.side .acctchip,.side .liteBtn{display:none}}
 @media(max-width:700px){.mtop .acctchip{padding:4px}.mtop .acctchip>span:last-child{display:none}}
 #app{position:relative;z-index:2}
@@ -691,6 +695,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button><button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button></div>
       <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="100" value="35" style="flex:1" aria-label="Music volume"></label>
       <button class="btn sm liteBtn" type="button" style="width:100%;margin-top:6px"></button>
+      <select style="width:100%;margin-top:6px" class="langSel" aria-label="Language"><option value="hing">🌐 Hinglish</option><option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option><option value="bn">🌐 বাংলা</option></select>
       <span class="verTag">⚡ v5.0 · Updated 21 Nov 2026, 07:23 AM IST</span>
     </div>
   </aside>
@@ -702,6 +707,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
      <button class="btn sm bgmBtn" type="button" aria-label="Music on/off">🎵</button>
      <button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button>
      <button class="acctchip acctBtn" type="button" style="width:auto;max-width:48vw;padding:5px 9px" aria-label="Account"></button>
+     <select class="langSel mlang" aria-label="Language"><option value="hing">🌐 Hing</option><option value="en">🌐 EN</option><option value="hi">🌐 हि</option><option value="bn">🌐 বা</option></select>
      <button class="btn sm" id="themeBtn2" type="button">🌓 Theme</button>
    </div>
 
@@ -709,7 +715,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
    <div class="status" id="statusBar" role="status" aria-live="polite" title="Connect & Status kholne ke liye dabao">
     <div class="it"><i class="dot" id="stDot"></i><b id="stText">Connecting...</b></div>
     <div class="it"><span>Free left</span><b id="stLimit" style="color:var(--gold)">250 chars</b></div>
-    <div class="it"><span>💎 Credits</span><b id="stCred" style="color:var(--gold)">Login</b></div>
+    <div class="it"><span>💎 Characters</span><b id="stCred" style="color:var(--gold)">Login</b></div>
     <div class="it"><span>Voices</span><b id="stVoices">0</b></div>
     <div class="it" id="stSpdIt" title="Speed dobara test karo"><span>⚡ Speed</span><b id="stSpd">…</b></div>
     <div class="it"><span>Ping</span><b id="stPing">-</b></div>
@@ -1177,9 +1183,9 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
   <!-- ================= PLANS & CREDITS ================= -->
   <section id="p-plans" role="tabpanel" hidden>
     <div class="glass plhero">
-      <span class="chip gold" style="margin-bottom:8px">✨ Credits &amp; Premium</span>
-      <h2 class="shim" style="font-size:30px;margin:4px 0">💎 Janusia Premium Credits</h2>
-      <p class="small muted" style="margin:6px auto 12px;max-width:640px">Apna pack chuno, validity chuno (7 / 21 / 28 / 30 din) aur Razorpay ya UPI se pay karo. Credits seedha aapke account mein jud jaate hain. 1 character = 1 credit.</p>
+      <span class="chip gold" style="margin-bottom:8px">✨ Characters &amp; Premium</span>
+      <h2 class="shim" style="font-size:30px;margin:4px 0">💎 Janusia Premium Characters</h2>
+      <p class="small muted" style="margin:6px auto 12px;max-width:640px">Apna pack chuno, validity chuno (7 / 21 / 28 / 30 din) aur Razorpay ya UPI se pay karo. Characters seedha aapke account mein jud jaate hain. 1 character = 1 credit.</p>
       <div class="plstrip" id="plAcct"></div>
 
       <div class="bf" id="bfBox" style="margin-top:16px">
@@ -1195,32 +1201,30 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
     </div>
 
     <div class="glass grid" style="margin-top:16px">
-      <div style="text-align:center"><h3 style="margin:0">👑 Premium Plans (Classic)</h3><p class="small muted" style="margin:4px 0 0">Roz 1 ghanta voice wale plans — ab credits ke roop mein. <b>1 ghanta voice = 60,000 credits.</b></p></div>
+      <div style="text-align:center"><h3 style="margin:0">👑 Premium Plans (Classic)</h3><p class="small muted" style="margin:4px 0 0">Roz 1 ghanta voice wale plans — ab characters ke roop mein. <b>1 ghanta voice = 60,000 characters.</b></p></div>
       <div class="dpills" id="boostPills"></div>
       <div class="packs" id="classicGrid"></div>
     </div>
 
     <div class="glass grid" style="margin-top:16px">
-      <div style="text-align:center"><h3 style="margin:0">🎁 Bonus Credit Packs</h3><p class="small muted" style="margin:4px 0 0">Zyada paisa, zyada extra bonus credits. Validity neeche se chuno.</p></div>
+      <div><h3 style="margin:0">🎛️ Custom Plan — apni marzi ka amount</h3><p class="small muted" style="margin:4px 0 0">₹30 se ₹20,000 tak kuch bhi. <b id="cRate"></b> Extra <b>bonus characters sirf Custom Plan mein</b> milte hain — jitna zyada amount, utna zyada bonus. Platform charge ₹20 alag se jodta hai.</p></div>
       <div style="text-align:center"><b>⏳ Validity chuno</b><div class="dpills" id="durPills"></div></div>
-      <div class="packs" id="packGrid"></div>
-    </div>
-
-    <div class="glass grid" style="margin-top:16px">
-      <div><h3 style="margin:0">🎛️ Custom Plan — apni marzi ka amount</h3><p class="small muted" style="margin:4px 0 0">₹30 se ₹20,000 tak kuch bhi. Credits = amount × 20000 ÷ 60. Custom plan par ₹20 platform charge alag se jodta hai.</p></div>
       <div class="cust">
         <div class="camt">₹ <input id="cAmt" type="number" min="30" max="20000" step="1" value="500" inputmode="numeric" aria-label="Amount"></div>
         <input id="cRange" type="range" min="0" max="1000" value="500" aria-label="Amount slider">
         <div class="qchips" id="cChips"></div>
         <div class="cgrid">
-          <div><small>Credits milenge</small><b id="cCred">0</b></div>
+          <div><small>Base characters</small><b id="cBase">0</b></div>
+          <div><small>🎁 Bonus characters</small><b id="cBonus" style="color:var(--ok)">0</b></div>
+          <div><small>Kul characters</small><b id="cCred" style="color:var(--gold)">0</b></div>
           <div><small>Validity</small><b id="cDays">30 din</b></div>
           <div><small>Platform charge</small><b id="cFee">₹20</b></div>
           <div><small>Total pay</small><b id="cPay" style="color:var(--gold)">₹0</b></div>
         </div>
+        <div class="small muted" id="cHint" style="text-align:center"></div>
         <button class="btn primary" id="cBuy" type="button">💳 Custom Plan Kharido</button>
       </div>
-      <p class="small muted">ℹ️ Credits sirf plan ki validity tak chalte hain. Voice banate hi utne credits kat'te hain jitne characters hain; agar voice na bane to credits wapas aa jaate hain.</p>
+      <p class="small muted">ℹ️ Characters sirf plan ki validity tak chalte hain. Voice banate hi utne characters kat'te hain jitna text likha ho; agar voice na bane to characters wapas aa jaate hain. Account mein 📜 History se har katauti dikhti hai.</p>
     </div>
   </section>
 
@@ -1477,15 +1481,17 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       </div>
     </div>
     <div class="glass grid" style="margin-top:16px" id="accOwner">
-      <div class="row sb"><div><h3 style="margin:0">👥 Accounts &amp; Credits</h3><p class="small muted" style="margin:3px 0 0">Signup hue users, unke credits, kharid. Manual UPI payment ke baad yahin se credits do.</p></div><div class="row"><span class="chip" id="accMail">Mail ?</span><span class="chip" id="accPay">Razorpay ?</span><button class="btn sm" id="accRef" type="button">🔄 Refresh</button></div></div>
+      <div class="row sb"><div><h3 style="margin:0">👥 Accounts &amp; Characters</h3><p class="small muted" style="margin:3px 0 0">Signup hue users, unke credits, kharid. Manual UPI payment ke baad yahin se characters do.</p></div><div class="row"><span class="chip" id="accMail">Mail ?</span><span class="chip" id="accPay">Razorpay ?</span><button class="btn sm" id="accRef" type="button">🔄 Refresh</button></div></div>
       <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
         <input id="grEmail" type="text" placeholder="user@gmail.com" style="flex:2;min-width:180px" aria-label="Account email">
-        <input id="grCred" type="number" placeholder="Credits" style="flex:1;min-width:100px" aria-label="Credits">
+        <input id="grCred" type="number" placeholder="Characters" style="flex:1;min-width:100px" aria-label="Characters">
+        <input id="grKey" type="password" placeholder="API Key (optional)" style="flex:2;min-width:150px" aria-label="API key" autocomplete="off">
         <select id="grDays" style="flex:1;min-width:90px"><option value="1">1 din</option><option value="7">7 din</option><option value="14">14 din</option><option value="21">21 din</option><option value="28">28 din</option><option value="30" selected>30 din</option><option value="90">90 din</option><option value="365">365 din</option></select>
-        <button class="btn primary" id="grGo" type="button">🎁 Credits Do</button>
+        <button class="btn primary" id="grGo" type="button">🎁 Characters Bhejo</button>
       </div>
       <div class="small muted" id="accMsg"></div>
-      <div style="overflow:auto"><table class="tbl" style="width:100%;font-size:13px"><thead><tr><th align="left">Email</th><th align="right">Credits</th><th align="left">Expiry</th><th align="right">Gens</th><th align="right">Spent</th><th></th></tr></thead><tbody id="accRows"><tr><td colspan="6" class="muted">Refresh dabao…</td></tr></tbody></table></div>
+      <details class="small muted"><summary>🔑 API key se kisi bhi jagah se characters kaise bhejein?</summary><pre style="white-space:pre-wrap;word-break:break-all;background:var(--field);padding:10px;border-radius:10px">curl -X POST WORKER_URL/api/credit -d '{"key":"AAPKI_API_KEY","email":"user@gmail.com","characters":50000,"days":30}'</pre>API key worker.js ke upar CONF → API_KEY mein hai. Account usi worker par hona chahiye jahan user ne signup kiya.</details>
+      <div style="overflow:auto"><table class="tbl" style="width:100%;font-size:13px"><thead><tr><th align="left">Email</th><th align="right">Characters</th><th align="left">Expiry</th><th align="right">Gens</th><th align="right">Spent</th><th></th></tr></thead><tbody id="accRows"><tr><td colspan="6" class="muted">Refresh dabao…</td></tr></tbody></table></div>
     </div>
   </section>
 
@@ -1552,9 +1558,13 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
   <div class="wallic">🚫</div>
   <h2 id="wallT">Aapka access band kar diya gaya hai</h2>
   <p id="wallMsg">Owner ne is device / account ko Janusia se block kiya hai. Agar ye galti se hua hai to neeche se seedha contact karo.</p>
+  <div class="small" style="opacity:.8">Aapki ID: <code id="wallId" style="user-select:all">—</code></div>
+  <textarea id="wallMsgIn" maxlength="500" rows="3" placeholder="Apna message likho (kya hua, aapka naam)…" style="width:100%;border-radius:14px;padding:11px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2);font:inherit"></textarea>
+  <button class="btn primary" id="wallSend" type="button" style="justify-content:center">📨 Owner ko request bhejo (seedha email)</button>
+  <div class="small" id="wallSt" role="status"></div>
   <div class="wallbtns">
-    <a href="https://t.me/Janusia10" target="_blank" rel="noopener">📲 Telegram par contact karo</a>
-    <a href="mailto:ashishkr88as@gmail.com?subject=Janusia%20Unblock%20Request" class="alt">✉️ Email bhejo</a>
+    <a id="wallTg" href="https://t.me/Janusia10" target="_blank" rel="noopener">📲 Telegram par contact karo</a>
+    <a id="wallMail" href="mailto:ashishkr88as@gmail.com?subject=Janusia%20Unblock%20Request" class="alt">✉️ Email app mein kholo</a>
     <a href="https://www.instagram.com/janusiacom" target="_blank" rel="noopener" class="alt">📷 Instagram</a>
     <a href="https://youtube.com/@janusiacom" target="_blank" rel="noopener" class="alt">▶️ YouTube</a>
   </div>
@@ -1577,13 +1587,15 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
     <div class="acctv" id="acctView" hidden>
       <div class="avbig" id="avBig">A</div>
       <b id="avEmail"></b>
-      <div class="credbig"><span id="avCred">0</span><small>credits bache</small></div>
+      <div class="credbig"><span id="avCred">0</span><small>characters bache</small></div>
       <div class="cbar"><i id="avBar"></i></div>
       <div class="small" id="avExp"></div>
-      <label class="check" style="justify-content:center;gap:8px"><input id="avUse" type="checkbox" checked><span class="small">Voice banane mein credits use karo</span></label>
+      <label class="check" style="justify-content:center;gap:8px"><input id="avUse" type="checkbox" checked><span class="small">Voice banane mein characters use karo</span></label>
       <div class="small muted" id="avStats"></div>
       <div id="avOrders" class="grid" style="gap:6px"></div>
-      <div class="row" style="justify-content:center"><button class="btn primary" id="avBuy" type="button">💎 Plan / Credits lo</button><button class="btn danger" id="avOut" type="button">Logout</button></div>
+      <button class="btn sm" id="avHist" type="button">📜 History — characters kahan gaye / aaye</button>
+      <div id="avLog" class="grid" style="gap:6px;text-align:left" hidden></div>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="avBuy" type="button">💎 Plan / Characters lo</button><button class="btn danger" id="avOut" type="button">Logout</button></div>
     </div>
   </div>
 </div>
@@ -1603,7 +1615,7 @@ const JanusiaConfig = {
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
   VERSION: "5.0",
-  VERSION_LABEL: "v5.0 · Credits & Accounts · 21 Nov 2026, 07:23 AM IST",
+  VERSION_LABEL: "v6.0 · Accounts & Characters · 21 Nov 2026, 07:23 AM IST",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
   BACKEND_URLS: ["https://janusia-v6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
   BACKEND_URL: "https://janusia-v6.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
@@ -1748,6 +1760,14 @@ const Wall = {
     Store.set("jn_pb", "1"); document.documentElement.classList.add("walled");
     if (msg && el("wallMsg")) el("wallMsg").textContent = msg;
     try { stopAllAudio(); Music.stop(); } catch (_) {}
+    try { Wall.fill(); } catch (_) {}
+  },
+  fill() {
+    const id = JanusiaShield.cid || "-", ip = JanusiaShield.ip || "-", em = (S.acct && S.acct.email) || "";
+    const body = "Namaste Owner,\nMera Janusia access block ho gaya hai. Meherbani karke unblock kar dijiye.\n\nDevice ID: " + id + "\nIP: " + ip + (em ? "\nEmail: " + em : "") + "\nNaam: ";
+    el("wallId").textContent = id + " · " + ip;
+    el("wallMail").href = "mailto:ashishkr88as@gmail.com?subject=" + encodeURIComponent("Janusia Unblock Request") + "&body=" + encodeURIComponent(body);
+    el("wallTg").href = "https://t.me/Janusia10?text=" + encodeURIComponent(body);
   },
   hide() { if (document.documentElement.classList.contains("walled") || Store.get("jn_pb", "") === "1") { Store.del("jn_pb"); document.documentElement.classList.remove("walled"); } }
 };
@@ -1914,7 +1934,7 @@ const JanusiaShield = (() => {
 
   /* ---------------- backend calls ---------------- */
   async function call(path, extra, admin, base) {
-    const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), /^\/api\/(auth|pay)/.test(path) ? 25000 : 9000);
+    const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), /^\/api\/(auth|pay|contact)/.test(path) ? 25000 : (path === "/api/gate" && (extra && extra.useCredits)) ? 20000 : 9000);
     const headers = { "content-type": admin ? "application/json" : "text/plain;charset=UTF-8" };
     if (admin) headers["x-admin-pass"] = OW.srvPass || OW.pass || "";
     try {
@@ -2009,6 +2029,7 @@ const JanusiaShield = (() => {
     toast("🚫 " + msg.split(". ")[0].slice(0, 110));
   }
 
+  const rid16 = () => [...crypto.getRandomValues(new Uint8Array(12))].map(b => b.toString(16).padStart(2, "0")).join("");
   async function checkBeforeGenerate(textLen, isCustomKey, useCr) {
     pendingToken = null;
     if (!getApiPause().active || S.owner) { /* ok */ } else { toast("⏳ " + getApiPause().msg); return false; }
@@ -2020,7 +2041,7 @@ const JanusiaShield = (() => {
     }
     if (BE) {
       let res = null;
-      for (let i = 0; i < 2 && !res; i++) { try { if (useCr) { res = (await call("/api/gate", { chars: textLen, custom: false, useCredits: true }, false, BES[0])).data; pendingBE = BES[0]; } else { res = (await callAny("/api/gate", { chars: textLen, custom: !!isCustomKey })).data; pendingBE = BE; } if (!res || (res.ok === undefined)) res = null; } catch (_) { res = null; } }
+      for (let i = 0; i < 2 && !res; i++) { try { if (useCr) { const gid = rid16(); for (let k = 0; k < 2 && !res; k++) { try { res = (await call("/api/gate", { chars: textLen, custom: false, useCredits: true, gid }, false, BES[0])).data; } catch (_) { res = null; } } pendingBE = BES[0]; } else { res = (await callAny("/api/gate", { chars: textLen, custom: !!isCustomKey })).data; pendingBE = BE; } if (!res || (res.ok === undefined)) res = null; } catch (_) { res = null; } }
       if (res) {
         applyStatus(res);
         if (res.ok) { pendingToken = res.token; blockShown = false; hideBanner(); return true; }
@@ -2115,6 +2136,12 @@ const JanusiaShield = (() => {
 
   /* ---------------- admin (owner) ---------------- */
   async function adminFetch(path, body) {
+    if (path === "/api/admin/block") {   // block/unblock SAARE backends par lagao, taaki user kahin se bhi khul/band ho
+      const { status, data } = await call(path, body || {}, true);
+      if (status >= 400 || data.ok === false) throw Object.assign(new Error(data.error || ("HTTP " + status)), { status, code: data.code });
+      await Promise.allSettled(BES.filter(u => u !== BE).map(u => call(path, { ...(body || {}), ids: data.ids || [] }, true, u)));
+      return data;
+    }
     const { status, data } = await call(path, body || {}, true, /\/api\/admin\/(accounts|grant)/.test(path) ? BES[0] : undefined);
     if (status >= 400 || data.ok === false) throw Object.assign(new Error(data.error || ("HTTP " + status)), { status, code: data.code });
     return data;
@@ -2288,7 +2315,8 @@ const JanusiaShield = (() => {
   return {
     initNetworkAndVpnCheck, checkBeforeGenerate, setConcurrency, finish, freeInfo, hasBackend: !!BE,
     setApiPause, syncPauseUI, manualBlock, resetUser, vpnAllow, saveConfig, resetUsage, resetAll, loadAdmin, resumeAdmin, setServerPass, renderAdminPanel, exportCsv,
-    refreshStatus, getApiPause, get ip() { return ip; },
+    refreshStatus, getApiPause, get ip() { return ip; }, get cid() { return cid; },
+    abandon() { if (pendingToken && (pendingBE || BE)) { try { const u = (pendingBE || BE) + "/api/done"; navigator.sendBeacon(u, JSON.stringify({ token: pendingToken, ok: false })); } catch (_) {} } },
     acall: async (p, b) => { try { return await call(p, b || {}, false, BES[0]); } catch (e) { return await call(p, b || {}, false, BES[0]); } },
     diag: async () => {
       const u = BES[0], host = u.replace(/^https?:\/\//, "");
@@ -2331,10 +2359,10 @@ function updateCharLimitUI() {
     if ((S.isCustomKey || Auth.canUseCredits()) && ta.value.length > lim) ta.value = ta.value.slice(0, lim);
   }
   const fi = JanusiaShield.freeInfo();
-  if (el("stLimit")) el("stLimit").textContent = Auth.canUseCredits() ? S.acct.credits.toLocaleString("en-IN") + " credits" : S.isCustomKey ? lim.toLocaleString("en-IN") + " chars" : fi.left + " / " + fi.limit + " free left";
+  if (el("stLimit")) el("stLimit").textContent = Auth.canUseCredits() ? S.acct.credits.toLocaleString("en-IN") + " characters" : S.isCustomKey ? lim.toLocaleString("en-IN") + " chars" : fi.left + " / " + fi.limit + " free left";
   if (el("modeBadge")) {
     el("modeBadge").className = Auth.canUseCredits() ? "chip ok" : S.isCustomKey ? "chip ok" : (fi.left > 0 ? "chip gold" : "chip bad");
-    el("modeBadge").textContent = Auth.canUseCredits() ? "💎 Credits: " + S.acct.credits.toLocaleString("en-IN") + " (max 20,000 / voice)" : S.isCustomKey ? "Pro Vault: 20,000 chars" : (fi.left > 0 ? `Free: ${fi.left} / ${fi.limit} chars left` : "Free limit poori — key connect karein");
+    el("modeBadge").textContent = Auth.canUseCredits() ? "💎 Characters: " + S.acct.credits.toLocaleString("en-IN") + " (max 20,000 / voice)" : S.isCustomKey ? "Pro Vault: 20,000 chars" : (fi.left > 0 ? `Free: ${fi.left} / ${fi.limit} chars left` : "Free limit poori — key connect karein");
   }
   if (el("connModeChip")) {
     el("connModeChip").className = S.isCustomKey ? "chip ok" : "chip gold";
@@ -3422,7 +3450,7 @@ const Auth = (() => {
   function paint() {
     const a = S.acct, ini = a ? a.email[0].toUpperCase() : "👤";
     $$(".acctBtn").forEach(b => {
-      b.innerHTML = a ? `<span class="av">${esc(ini)}</span><span><b>${esc(a.email.split("@")[0])}</b><small>${a.active ? "💎 " + a.credits.toLocaleString("en-IN") + " credits · " + daysLeft(a) + " din" : "Plan nahi hai — Plans dekho"}</small></span>` : `<span class="av">👤</span><span><b>Login / Signup</b><small>Gmail se free account</small></span>`;
+      b.innerHTML = a ? `<span class="av">${esc(ini)}</span><span><b>${esc(a.email.split("@")[0])}</b><small>${a.active ? "💎 " + a.credits.toLocaleString("en-IN") + " characters · " + daysLeft(a) + " din" : "Plan nahi hai — Plans dekho"}</small></span>` : `<span class="av">👤</span><span><b>Login / Signup</b><small>Gmail se free account</small></span>`;
     });
     if (el("stCred")) el("stCred").textContent = a ? (a.active ? a.credits.toLocaleString("en-IN") : "0") : "Login";
     if (!el("authpop").classList.contains("show")) { try { Plans.paintAcct(); } catch (_) {} return; }
@@ -3453,7 +3481,7 @@ const Auth = (() => {
     el("aPassL").textContent = m === "forgot" ? "🔒 Naya password" : "🔒 Password";
     el("aGo").textContent = { login: "Login karo", signup: "Account banao (code bhejo)", forgot: "Code bhejo", verify: "Verify karo ✓" }[m] || "";
     el("authTitle").textContent = { login: "Wapas swagat hai 👋", signup: "Naya Account", forgot: "Password Reset", verify: "Email verify karo", account: "Mera Account" }[m];
-    el("authSub").textContent = { login: "Credits aur plan access karne ke liye login karo", signup: "Sirf @gmail.com — code aapke email par aayega", forgot: "Naya password daalo, code email par aayega", verify: pend ? pend.email + " par 6-digit code bheja gaya (10 min valid)" : "", account: "" }[m];
+    el("authSub").textContent = { login: "Characters aur plan access karne ke liye login karo", signup: "Sirf @gmail.com — code aapke email par aayega", forgot: "Naya password daalo, code email par aayega", verify: pend ? pend.email + " par 6-digit code bheja gaya (10 min valid)" : "", account: "" }[m];
     msg("");
     if (acc) fillAcct();
     if (ver) { el("aCode").value = ""; setTimeout(() => el("aCode").focus(), 120); cooldown(45); }
@@ -3525,12 +3553,33 @@ const Auth = (() => {
   el("aForgot").addEventListener("click", () => setMode("forgot"));
   el("aResend").addEventListener("click", resend);
   el("avOut").addEventListener("click", logout);
+  el("avHist").addEventListener("click", async () => {
+    const box = el("avLog"); box.hidden = !box.hidden; if (box.hidden) return; box.innerHTML = '<div class="small muted">Load ho raha hai…</div>';
+    try {
+      const { data } = await JanusiaShield.acall("/api/auth/me", { token: S.token }); if (!data.ok) { box.innerHTML = '<div class="small muted">Login dobara karo</div>'; return; }
+      setAcct(data.account);
+      box.innerHTML = (data.log || []).map(l => `<div class="ordr"><span>${esc(l.why)}</span><span style="white-space:nowrap;color:${l.d < 0 ? "var(--bad)" : "var(--ok)"};font-weight:800">${l.d < 0 ? "−" : "+"}${Math.abs(l.d).toLocaleString("en-IN")} <small style="color:var(--muted);font-weight:600">· bache ${(l.bal || 0).toLocaleString("en-IN")} · ${new Date(l.t).toLocaleString("en-IN", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" })}</small></span></div>`).join("") || '<div class="small muted">Abhi koi history nahi.</div>';
+    } catch (_) { box.innerHTML = '<div class="small muted">Network dikkat</div>'; }
+  });
   el("avBuy").addEventListener("click", () => { close(); showTab("plans"); });
   el("avUse").addEventListener("change", e => { S.useCr = e.target.checked; Store.set("jn_usecr", S.useCr ? "1" : "0"); updateCharLimitUI(); });
   paint();
   // token se account turant wapas laao
   if (S.token) setTimeout(async () => { try { const { data } = await JanusiaShield.acall("/api/auth/me", { token: S.token }); if (data.ok) setAcct(data.account); else if (data.code === "LOGIN") clear(); } catch (_) {} }, 600);
   return { open, close, setSession, setAcct, clear, canUseCredits, paint, canon };
+})();
+
+/* wall: owner ko seedha email request */
+(() => {
+  const st = t => { el("wallSt").textContent = t; };
+  el("wallSend").addEventListener("click", async () => {
+    const b = el("wallSend"); b.disabled = true; st("Bhej rahe hain…");
+    try {
+      const { data } = await JanusiaShield.acall("/api/contact", { msg: el("wallMsgIn").value.trim() || "Please unblock karein.", email: (S.acct && S.acct.email) || "" });
+      st(data.ok ? "✅ Request owner ko email ho gayi. Thoda intezaar karo, phir page refresh karo." : "❌ " + (data.message || "Nahi gaya — Telegram se contact karo"));
+    } catch (_) { st("❌ Network dikkat — Telegram se contact karo"); }
+    b.disabled = false;
+  });
 })();
 
 /* ============================ PLANS, CREDITS & CHECKOUT (Razorpay + UPI) ============================ */
@@ -3540,18 +3589,9 @@ const PAY_ACCOUNTS = [
 ];
 const Plans = (() => {
   // NOTE: ye numbers worker.js (RATE_*, PACKS) se same hone chahiye — wahi asli charge karta hai.
-  const RC = 20000, RR = 60, FEE = 20, MIN = 30, MAX = 20000, DAYS = [7, 21, 28, 30];
-  const PACKS = [
-    { id: "p30", price: 30, total: 20000, name: "Starter", ic: "🌱" },
-    { id: "p100", price: 100, bonus: 5000, name: "Basic", ic: "⭐" },
-    { id: "p300", price: 300, bonus: 10000, name: "Plus", ic: "🚀" },
-    { id: "p500", price: 500, bonus: 20000, name: "Creator", ic: "🎨", tag: "POPULAR", hot: 1 },
-    { id: "p1000", price: 1000, bonus: 30000, name: "Pro", ic: "💎", tag: "BEST VALUE", hot: 1 },
-    { id: "p1500", price: 1500, bonus: 40000, name: "Pro Max", ic: "🔥" },
-    { id: "p2999", price: 2999, bonus: 60000, name: "Studio", ic: "🎬" },
-    { id: "p5000", price: 5000, bonus: 100000, name: "Business", ic: "🏢" },
-    { id: "p20000", price: 20000, bonus: 250000, name: "Enterprise", ic: "👑" }
-  ];
+  let RC = 20000, RR = 60, FEE = 20, MIN = 30, MAX = 20000, DAYS = [7, 21, 28, 30];
+  let TIERS = [[30, 4211], [100, 5000], [300, 10000], [500, 20000], [1000, 30000], [1500, 40000], [2999, 60000], [5000, 100000], [20000, 250000]];
+  const tierBonus = p => { let b = 0; for (const [a, x] of TIERS) if (p >= a) b = x; return b; };
   const baseC = p => Math.floor(p * RC / RR), inr = n => "₹" + Math.round(n).toLocaleString("en-IN"), num = n => Math.round(n).toLocaleString("en-IN");
   const CLASSIC = [
     { id: "c1", price: 199, credits: 80000, days: 1, name: "1 Day Starter", old: "₹399", badge: "50% OFF", ic: "⚡", feat: ["80 minutes voice", "20,000 chars per script", "All studio voices", "HD WAV & MP3 download"] },
@@ -3579,44 +3619,28 @@ const Plans = (() => {
   const bf = () => bfState().live;
   function quote(sel) {
     let price, credits, bonus = 0, fee = 0, name;
-    if (sel.custom) { price = Math.floor(+sel.amount); if (!(price >= MIN && price <= MAX)) return null; credits = baseC(price); fee = FEE; name = "Custom ₹" + price; }
+    if (sel.custom) { price = Math.floor(+sel.amount); if (!(price >= MIN && price <= MAX)) return null; bonus = tierBonus(price); credits = baseC(price) + bonus; fee = FEE; name = "Custom ₹" + price; }
     else if (sel.classic) {
       const c = CLASSIC.find(x => x.id === sel.classic); if (!c) return null; const b = BOOSTS[sel.boost || 0] || BOOSTS[0];
       price = c.price + b.add; sel = { ...sel, days: c.days + b.days }; bonus = b.perDay * sel.days; credits = c.credits + bonus; name = c.name + b.note;
-    } else {
-      const p = PACKS.find(x => x.id === sel.pack); if (!p) return null; price = p.price; name = p.name + " ₹" + price;
-      if (p.total) { credits = p.total; bonus = Math.max(0, p.total - baseC(price)); } else { bonus = p.bonus; credits = baseC(price) + bonus; }
-    }
+    } else return null;
     const off = bf() ? Math.round(price * .1) : 0;
     return { name, days: sel.days, price, off, fee, payable: price - off + fee, credits, bonus, base: credits - bonus, sel };
   }
 
   function paintAcct() {
     const b = el("plAcct"); if (!b) return; const a = S.acct;
-    b.innerHTML = a ? `<span>👤 <b>${esc(a.email)}</b></span><span>${a.active ? "💎 <b style='color:var(--gold)'>" + num(a.credits) + "</b> credits · " + Math.max(0, Math.ceil((a.expiresAt - Date.now()) / 864e5)) + " din" : "Abhi plan active nahi"}</span><button class="btn sm" type="button" id="plAcctBtn">Mera Account</button>`
-      : `<span>🔐 Credits kharidne ke liye pehle <b>login / signup</b> karo (sirf Gmail)</span><button class="btn sm primary" type="button" id="plAcctBtn">Login / Signup</button>`;
+    b.innerHTML = a ? `<span>👤 <b>${esc(a.email)}</b></span><span>${a.active ? "💎 <b style='color:var(--gold)'>" + num(a.credits) + "</b> characters · " + Math.max(0, Math.ceil((a.expiresAt - Date.now()) / 864e5)) + " din" : "Abhi plan active nahi"}</span><button class="btn sm" type="button" id="plAcctBtn">Mera Account</button>`
+      : `<span>🔐 Characters kharidne ke liye pehle <b>login / signup</b> karo (sirf Gmail)</span><button class="btn sm primary" type="button" id="plAcctBtn">Login / Signup</button>`;
   }
   function renderDays() {
     el("durPills").innerHTML = DAYS.map(d => `<button class="dpill${d === days ? " on" : ""}" type="button" data-d="${d}">${d} din</button>`).join("");
     el("cDays").textContent = days + " din";
   }
-  function renderPacks() {
-    el("packGrid").innerHTML = PACKS.map((p, i) => {
-      const q = quote({ pack: p.id, days }), per = q.payable / q.credits * 1000;
-      return `<div class="pack${p.hot ? " hot" : ""}" data-p="${p.id}" tabindex="0" role="button" style="--i:${i}">
-        ${p.tag ? `<span class="ptag">${p.tag}</span>` : ""}
-        <span class="pic">${p.ic}</span><div class="pn">${esc(p.name)}</div>
-        <div class="pp">${inr(q.price - q.off)}${q.off ? `<s>${inr(q.price)}</s>` : ""}</div>
-        <div class="pc">${num(q.credits)} <small>credits</small></div>
-        ${q.bonus ? `<span class="pb">🎁 +${num(q.bonus)} BONUS</span>` : `<span class="pb" style="animation:none">✨ Shuruaati pack</span>`}
-        <div class="pr">${days} din valid · ≈ ${inr(per)} / 1000 chars</div>
-        ${q.off ? `<div class="bfn">🖤 Black Friday −10%</div>` : ""}
-        <div class="pcta">💳 Kharido</div></div>`;
-    }).join("");
-  }
   function custQ() { const a = Math.max(MIN, Math.min(MAX, Math.floor(+el("cAmt").value || MIN))); return quote({ custom: 1, amount: a, days }); }
   function paintCust() {
-    const q = custQ(); el("cCred").textContent = num(q.credits); el("cFee").textContent = inr(q.fee); el("cPay").textContent = inr(q.payable);
+    const q = custQ(); el("cCred").textContent = num(q.credits); el("cBase").textContent = num(q.base); el("cBonus").textContent = "+" + num(q.bonus);
+    el("cRate").textContent = "Base: ₹" + RR + " = " + num(RC) + " characters."; const nx = TIERS.find(t => t[0] > q.price); el("cHint").textContent = nx ? "💡 ₹" + num(nx[0]) + " ya usse zyada par bonus +" + num(nx[1]) + " characters ho jaayega" : "🏆 Sabse bada bonus laga hua hai"; el("cFee").textContent = inr(q.fee); el("cPay").textContent = inr(q.payable);
     el("cDays").textContent = days + " din";
   }
   const toAmt = v => Math.round(MIN * Math.pow(MAX / MIN, v / 1000)), toPos = a => Math.round(1000 * Math.log(a / MIN) / Math.log(MAX / MIN));
@@ -3628,30 +3652,30 @@ const Plans = (() => {
         <span class="ptag">${c.badge}</span>
         <span class="pic">${c.ic}</span><div class="pn">${esc(c.name)}${boost ? " + Boost" : ""}</div>
         <div class="pp">${inr(q.price - q.off)}<s>${c.old}</s></div>
-        <div class="pc">${num(q.credits)} <small>credits</small></div>
+        <div class="pc">${num(q.credits)} <small>characters</small></div>
         <span class="pb">⏱️ ≈ ${num(Math.round(q.credits / 1000))} min voice · ${q.days} din</span>
         ${c.feat.map(f => `<div class="pr">✔ ${esc(f)}</div>`).join("")}
         ${q.off ? `<div class="bfn">🖤 Black Friday −10%</div>` : ""}
         <div class="pcta">💳 Kharido</div></div>`;
     }).join("");
   }
-  function refresh() { renderDays(); renderClassic(); renderPacks(); paintCust(); paintAcct(); }
+  function refresh() { renderDays(); renderClassic(); paintCust(); paintAcct(); }
 
   /* ---------- checkout ---------- */
   const payUri = q => { const a = PAY_ACCOUNTS[accIdx]; return "upi://pay?pa=" + encodeURIComponent(a.pa) + "&pn=" + encodeURIComponent(a.name) + "&am=" + q.payable + "&cu=INR&tn=" + encodeURIComponent("Janusia " + q.name); };
-  const enquiry = q => `Janusia Credits Order\n\nAccount: ${S.acct ? S.acct.email : "-"}\nPlan: ${q.name} · ${q.days} din\nCredits: ${num(q.credits)}\nTotal: ${inr(q.payable)}${q.off ? " (Black Friday 10% OFF)" : ""}\n\nPayment ke baad screenshot bhej raha hun.`;
+  const enquiry = q => `Janusia Characters Order\n\nAccount: ${S.acct ? S.acct.email : "-"}\nPlan: ${q.name} · ${q.days} din\nCredits: ${num(q.credits)}\nTotal: ${inr(q.payable)}${q.off ? " (Black Friday 10% OFF)" : ""}\n\nPayment ke baad screenshot bhej raha hun.`;
   function renderCheckout() {
     const q = cur; el("surT").textContent = q.name + " · " + q.days + " din";
     el("payTotal").textContent = inr(q.payable); el("paySubTag").textContent = q.off ? "🖤 Black Friday 10% OFF" : "Total Payable";
     el("surB").textContent = "";
-    el("sumBox").innerHTML = `<div><span>Account</span><b>${esc(S.acct.email)}</b></div><div><span>Base credits</span><b>${num(q.base)}</b></div>${q.bonus ? `<div><span>🎁 Bonus</span><b style="color:var(--ok)">+${num(q.bonus)}</b></div>` : ""}<div><span>Kul credits</span><b style="color:var(--gold)">${num(q.credits)}</b></div><div><span>Validity</span><b>${q.days} din</b></div><div><span>Plan price</span><b>${inr(q.price)}</b></div>${q.off ? `<div><span>Black Friday</span><b style="color:var(--ok)">−${inr(q.off)}</b></div>` : ""}${q.fee ? `<div><span>Platform charge</span><b>+${inr(q.fee)}</b></div>` : ""}<div class="tot"><span>Total pay</span><b>${inr(q.payable)}</b></div>`;
+    el("sumBox").innerHTML = `<div><span>Account</span><b>${esc(S.acct.email)}</b></div><div><span>Base characters</span><b>${num(q.base)}</b></div>${q.bonus ? `<div><span>🎁 Bonus</span><b style="color:var(--ok)">+${num(q.bonus)}</b></div>` : ""}<div><span>Kul characters</span><b style="color:var(--gold)">${num(q.credits)}</b></div><div><span>Validity</span><b>${q.days} din</b></div><div><span>Plan price</span><b>${inr(q.price)}</b></div>${q.off ? `<div><span>Black Friday</span><b style="color:var(--ok)">−${inr(q.off)}</b></div>` : ""}${q.fee ? `<div><span>Platform charge</span><b>+${inr(q.fee)}</b></div>` : ""}<div class="tot"><span>Total pay</span><b>${inr(q.payable)}</b></div>`;
     el("accs").innerHTML = PAY_ACCOUNTS.map((a, k) => `<button class="chipbtn${k === accIdx ? " on" : ""}" data-acc="${k}" type="button"><b>${esc(a.name)}</b><span>${esc(a.tag)}</span></button>`).join("");
     el("qrAmt").textContent = q.name + " · " + inr(q.payable);
     const box = el("qrImg"); box.innerHTML = "";
     loadLib(LIB.qr).then(() => { if (cur === q) { box.innerHTML = ""; new QRCode(box, { text: payUri(q), width: 196, height: 196, correctLevel: QRCode.CorrectLevel.M }); } }).catch(() => { box.innerHTML = '<p class="small" style="color:#333">Neeche app button se pay karein.</p>'; });
   }
   function openCheckout(sel) {
-    if (!S.acct) { toast("🔐 Pehle login / signup karo — credits aapke account mein jodte hain"); Auth.open("signup"); return; }
+    if (!S.acct) { toast("🔐 Pehle login / signup karo — characters aapke account mein jodte hain"); Auth.open("signup"); return; }
     cur = quote({ ...sel, days: sel.classic ? 0 : days }); if (!cur) { toast("Amount sahi nahi hai"); return; }
     renderCheckout(); el("surpop").classList.add("show");
   }
@@ -3661,7 +3685,7 @@ const Plans = (() => {
     Store.set("jn_pp", JSON.stringify(r));
     try {
       const { data } = await JanusiaShield.acall("/api/pay/verify", { order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature });
-      if (data.ok) { Store.del("jn_pp"); Auth.setAcct(data.account); closeCheckout(); Fx.celebrate("Payment ho gaya! 🎉", "Credits aapke account mein jud gaye"); try { refresh(); } catch (_) {} return true; }
+      if (data.ok) { Store.del("jn_pp"); Auth.setAcct(data.account); closeCheckout(); Fx.celebrate("Payment ho gaya! 🎉", "Characters aapke account mein jud gaye"); try { refresh(); } catch (_) {} return true; }
       toast("⚠️ " + (data.message || "Payment verify nahi hui") + " — Contact karo, paisa safe hai");
     } catch (_) { toast("Network dikkat — payment verify baad mein apne-aap hogi"); }
     return false;
@@ -3699,14 +3723,11 @@ const Plans = (() => {
   bfTick(); setInterval(bfTick, 1000);
 
   /* ---------- events ---------- */
-  el("durPills").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (!b) return; days = +b.dataset.d; renderDays(); renderPacks(); paintCust(); });
+  el("durPills").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (!b) return; days = +b.dataset.d; renderDays(); paintCust(); });
   el("boostPills").addEventListener("click", e => { const b = e.target.closest("[data-b]"); if (!b) return; boost = +b.dataset.b; renderClassic(); });
   const clsClick = e => { const c = e.target.closest(".pack"); if (c) openCheckout({ classic: c.dataset.c, boost }); };
   el("classicGrid").addEventListener("click", clsClick);
   el("classicGrid").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); clsClick(e); } });
-  const packClick = e => { const c = e.target.closest(".pack"); if (c) openCheckout({ pack: c.dataset.p }); };
-  el("packGrid").addEventListener("click", packClick);
-  el("packGrid").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); packClick(e); } });
   const chips = [30, 50, 100, 250, 500, 1000, 5000, 10000, 20000];
   el("cChips").innerHTML = chips.map(a => `<button type="button" data-a="${a}">₹${a.toLocaleString("en-IN")}</button>`).join("");
   el("cChips").addEventListener("click", e => { const b = e.target.closest("[data-a]"); if (!b) return; el("cAmt").value = b.dataset.a; el("cRange").value = toPos(+b.dataset.a); paintCust(); });
@@ -3726,11 +3747,21 @@ const Plans = (() => {
     location.href = "intent://" + u.slice("upi://".length) + "#Intent;scheme=upi;package=" + APP_PKG[app] + ";S.browser_fallback_url=" + encodeURIComponent(u) + ";end";
   });
   el("enqTg").addEventListener("click", () => { if (!cur) return; copy(enquiry(cur), "Order details copy ho gayi, Telegram mein paste karo"); window.open("https://t.me/" + CONTACT.telegram, "_blank", "noopener"); });
-  el("enqMail").addEventListener("click", () => { if (!cur) return; location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Janusia Credits Order") + "&body=" + encodeURIComponent(enquiry(cur)); });
+  el("enqMail").addEventListener("click", () => { if (!cur) return; location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Janusia Characters Order") + "&body=" + encodeURIComponent(enquiry(cur)); });
   // pehle ki adhoori payment verify karo
   setTimeout(() => { try { const r = JSON.parse(Store.get("jn_pp", "null")); if (r && S.token) verifyPay(r); } catch (_) {} }, 2500);
   refresh();
-  return { refresh, paintAcct };
+  async function loadConf() {   // asli rate/bonus hamesha worker se (website aur server mein fark na ho)
+    try {
+      const { data } = await JanusiaShield.acall("/api/plans", {}); if (!data || !data.ok) return;
+      RC = data.rc; RR = data.rr; FEE = data.fee; MIN = data.min; MAX = data.max; TIERS = data.tiers;
+      (data.classic || []).forEach(c => { const l = CLASSIC.find(x => x.id === c.id); if (l) { l.price = c.price; l.credits = c.credits; l.days = c.days; } });
+      (data.boosts || []).forEach((b, i) => { if (BOOSTS[i]) { BOOSTS[i].add = b.add; BOOSTS[i].days = b.days; BOOSTS[i].perDay = b.perDay; } });
+      refresh();
+    } catch (_) {}
+  }
+  setTimeout(loadConf, 1500);
+  return { refresh, paintAcct, loadConf };
 })();
 
 /* ============================ OWNER: accounts & credits ============================ */
@@ -3747,12 +3778,20 @@ const Plans = (() => {
       msg(rows.length + " account");
     } catch (e) { msg("❌ " + e.message); }
   }
+  el("grKey").value = Store.get("jn_apik", "");
   el("accRef").addEventListener("click", load);
   el("grGo").addEventListener("click", async () => {
-    if (!S.owner) { toast("Pehle owner password se kholo"); return; }
     const email = el("grEmail").value.trim(), credits = Math.floor(+el("grCred").value || 0), days = +el("grDays").value;
-    if (!email || credits <= 0) { toast("Email aur credits daalo"); return; }
-    try { const r = await JanusiaShield.adminGrant(email, credits, days); toast("🎁 " + credits.toLocaleString("en-IN") + " credits de diye → " + r.account.email); el("grCred").value = ""; load(); } catch (e) { toast("❌ " + e.message); }
+    if (!email || characters <= 0) { toast("Email aur characters daalo"); return; }
+    const key = el("grKey").value.trim();
+    try {
+      let r;
+      if (key) {   // API key se bhejna (owner password ki zaroorat nahi)
+        const { data } = await JanusiaShield.acall("/api/credit", { key, email, characters: credits, days });
+        if (!data.ok) throw new Error(data.error || "API key se nahi gaya"); r = data; Store.set("jn_apik", key);
+      } else r = await JanusiaShield.adminGrant(email, credits, days);
+      toast("🎁 " + characters.toLocaleString("en-IN") + " characters bhej diye → " + r.account.email); el("grCred").value = ""; if (S.owner) load();
+    } catch (e) { toast("❌ " + e.message); }
   });
   el("accRows").addEventListener("click", e => { const b = e.target.closest("[data-ab]"); if (b && confirm(b.dataset.ab + " ko block karein?")) JanusiaShield.manualBlock(b.dataset.ab, true); });
 })();
@@ -4485,6 +4524,111 @@ renderKeyInfo();
 renderKeyList();
 updateCharLimitUI();
 loadHistory();
+/* ============================ LANGUAGE: Hinglish / English / हिन्दी / বাংলা ============================ */
+const I18N = (() => {
+  const D = {
+    "🎙️ Text to Speech": ["🎙️ Text to Speech", "🎙️ टेक्स्ट से आवाज़", "🎙️ টেক্সট থেকে ভয়েস"],
+    "🎭 Voices Library": ["🎭 Voices Library", "🎭 आवाज़ों की लाइब्रेरी", "🎭 ভয়েস লাইব্রেরি"],
+    "🆔 Voice IDs": ["🆔 Voice IDs", "🆔 वॉइस ID", "🆔 ভয়েস ID"],
+    "🎧 History": ["🎧 History", "🎧 इतिहास", "🎧 ইতিহাস"],
+    "🧬 Instant Clone": ["🧬 Instant Clone", "🧬 तुरंत क्लोन", "🧬 ইনস্ট্যান্ট ক্লোন"],
+    "📝 Awaaz se Text": ["📝 Voice to Text", "📝 आवाज़ से टेक्स्ट", "📝 ভয়েস থেকে টেক্সট"],
+    "🎚️ Mixer & Effects": ["🎚️ Mixer & Effects", "🎚️ मिक्सर और इफ़ेक्ट", "🎚️ মিক্সার ও ইফেক্ট"],
+    "🔑 Connect & Key": ["🔑 Connect & Key", "🔑 कनेक्ट और की", "🔑 কানেক্ট ও কী"],
+    "💎 Plans & Upgrade": ["💎 Plans & Upgrade", "💎 प्लान और अपग्रेड", "💎 প্ল্যান ও আপগ্রেড"],
+    "💬 Contact": ["💬 Contact", "💬 संपर्क", "💬 যোগাযোগ"],
+    "🌓 Theme Badlo": ["🌓 Change theme", "🌓 थीम बदलो", "🌓 থিম বদলান"],
+    "🌓 Theme": ["🌓 Theme", "🌓 थीम", "🌓 থিম"],
+    "Text to Speech": ["Text to Speech", "टेक्स्ट से आवाज़", "টেক্সট থেকে ভয়েস"],
+    "Awaaz ki setting": ["Voice settings", "आवाज़ की सेटिंग", "ভয়েসের সেটিং"],
+    "Chuni hui awaaz": ["Selected voice", "चुनी हुई आवाज़", "নির্বাচিত ভয়েস"],
+    "🎙️ Awaaz banao": ["🎙️ Generate voice", "🎙️ आवाज़ बनाओ", "🎙️ ভয়েস তৈরি করুন"],
+    "Roko": ["Stop", "रोको", "থামান"], "Paste": ["Paste", "पेस्ट", "পেস্ট"],
+    "✨ Saaf karo": ["✨ Clear", "✨ साफ़ करो", "✨ মুছুন"],
+    "🔓 20,000 Limit Unlock": ["🔓 Unlock 20,000 limit", "🔓 20,000 की सीमा खोलो", "🔓 20,000 সীমা আনলক"],
+    "Model": ["Model", "मॉडल", "মডেল"], "Bhasha": ["Language", "भाषा", "ভাষা"], "Emotion": ["Emotion", "भाव", "আবেগ"],
+    "Output format": ["Output format", "आउटपुट फ़ॉर्मैट", "আউটপুট ফরম্যাট"],
+    "Advance setting": ["Advanced settings", "एडवांस सेटिंग", "অ্যাডভান্স সেটিং"],
+    "🎭 Saari Voices Dekho": ["🎭 Browse all voices", "🎭 सारी आवाज़ें देखो", "🎭 সব ভয়েস দেখুন"],
+    "✨ Natural": ["✨ Natural", "✨ प्राकृतिक", "✨ স্বাভাবিক"], "💖 Romantic": ["💖 Romantic", "💖 रोमांटिक", "💖 রোমান্টিক"],
+    "📖 Storytelling": ["📖 Storytelling", "📖 कहानी", "📖 গল্প বলা"], "🔥 Motivational": ["🔥 Motivational", "🔥 प्रेरणादायक", "🔥 অনুপ্রেরণামূলক"],
+    "🌿 Calm": ["🌿 Calm", "🌿 शांत", "🌿 শান্ত"], "⚡ Energetic": ["⚡ Energetic", "⚡ जोशीला", "⚡ উদ্যমী"],
+    "Voices": ["Voices", "आवाज़ें", "ভয়েস"], "⚡ Speed": ["⚡ Speed", "⚡ स्पीड", "⚡ গতি"], "💎 Characters": ["💎 Characters", "💎 अक्षर", "💎 অক্ষর"],
+    "Login": ["Login", "लॉगिन", "লগইন"], "Signup": ["Signup", "साइनअप", "সাইনআপ"], "Logout": ["Logout", "लॉगआउट", "লগআউট"],
+    "Naya Account": ["New Account", "नया अकाउंट", "নতুন অ্যাকাউন্ট"],
+    "Wapas swagat hai 👋": ["Welcome back 👋", "वापसी पर स्वागत है 👋", "ফিরে আসায় স্বাগতম 👋"],
+    "Login karo": ["Login", "लॉगिन करो", "লগইন করুন"],
+    "Account banao (code bhejo)": ["Create account (send code)", "अकाउंट बनाओ (कोड भेजो)", "অ্যাকাউন্ট তৈরি করুন (কোড পাঠান)"],
+    "Verify karo ✓": ["Verify ✓", "वेरिफ़ाई करो ✓", "যাচাই করুন ✓"],
+    "Mera Account": ["My Account", "मेरा अकाउंट", "আমার অ্যাকাউন্ট"],
+    "Password bhool gaye?": ["Forgot password?", "पासवर्ड भूल गए?", "পাসওয়ার্ড ভুলে গেছেন?"],
+    "Code dobara bhejo": ["Resend code", "कोड दोबारा भेजो", "কোড আবার পাঠান"],
+    "🔒 Password": ["🔒 Password", "🔒 पासवर्ड", "🔒 পাসওয়ার্ড"],
+    "💎 Plan / Characters lo": ["💎 Buy plan / characters", "💎 प्लान / अक्षर लो", "💎 প্ল্যান / অক্ষর কিনুন"],
+    "Login / Signup": ["Login / Signup", "लॉगिन / साइनअप", "লগইন / সাইনআপ"],
+    "Gmail se free account": ["Free account with Gmail", "Gmail से फ्री अकाउंट", "Gmail দিয়ে ফ্রি অ্যাকাউন্ট"],
+    "characters bache": ["characters left", "अक्षर बचे", "অক্ষর বাকি"],
+    "Voice banane mein characters use karo": ["Use characters when generating voice", "आवाज़ बनाने में अक्षर इस्तेमाल करो", "ভয়েস তৈরিতে অক্ষর ব্যবহার করুন"],
+    "📜 History — characters kahan gaye / aaye": ["📜 History — where characters went / came from", "📜 इतिहास — अक्षर कहाँ गए / आए", "📜 ইতিহাস — অক্ষর কোথায় গেল / এল"],
+    "💎 Janusia Premium Characters": ["💎 Janusia Premium Characters", "💎 जनूसिया प्रीमियम अक्षर", "💎 জানুসিয়া প্রিমিয়াম অক্ষর"],
+    "👑 Premium Plans (Classic)": ["👑 Premium Plans (Classic)", "👑 प्रीमियम प्लान (क्लासिक)", "👑 প্রিমিয়াম প্ল্যান (ক্লাসিক)"],
+    "🎛️ Custom Plan — apni marzi ka amount": ["🎛️ Custom Plan — your own amount", "🎛️ कस्टम प्लान — अपनी मर्ज़ी की रकम", "🎛️ কাস্টম প্ল্যান — নিজের পছন্দের অঙ্ক"],
+    "⏳ Validity chuno": ["⏳ Choose validity", "⏳ वैधता चुनो", "⏳ মেয়াদ বেছে নিন"],
+    "💳 Custom Plan Kharido": ["💳 Buy Custom Plan", "💳 कस्टम प्लान खरीदो", "💳 কাস্টম প্ল্যান কিনুন"],
+    "💳 Kharido": ["💳 Buy", "💳 खरीदो", "💳 কিনুন"],
+    "Base characters": ["Base characters", "बेस अक्षर", "বেস অক্ষর"], "🎁 Bonus characters": ["🎁 Bonus characters", "🎁 बोनस अक्षर", "🎁 বোনাস অক্ষর"],
+    "Kul characters": ["Total characters", "कुल अक्षर", "মোট অক্ষর"], "Platform charge": ["Platform charge", "प्लेटफ़ॉर्म चार्ज", "প্ল্যাটফর্ম চার্জ"],
+    "Total pay": ["Total to pay", "कुल भुगतान", "মোট পেমেন্ট"], "Validity": ["Validity", "वैधता", "মেয়াদ"],
+    "Aapka access band kar diya gaya hai": ["Your access has been blocked", "आपका एक्सेस बंद कर दिया गया है", "আপনার অ্যাক্সেস বন্ধ করা হয়েছে"],
+    "Owner ne is device / account ko Janusia se block kiya hai. Agar ye galti se hua hai to neeche se seedha contact karo.": ["The owner has blocked this device / account. If this is a mistake, contact the owner below.", "ओनर ने इस डिवाइस / अकाउंट को ब्लॉक किया है। अगर ये ग़लती से हुआ है तो नीचे से सीधे संपर्क करें।", "মালিক এই ডিভাইস / অ্যাকাউন্ট ব্লক করেছেন। ভুল হলে নিচে থেকে সরাসরি যোগাযোগ করুন।"],
+    "📨 Owner ko request bhejo (seedha email)": ["📨 Send request to owner (direct email)", "📨 ओनर को रिक्वेस्ट भेजो (सीधा ईमेल)", "📨 মালিককে অনুরোধ পাঠান (সরাসরি ইমেল)"],
+    "📲 Telegram par contact karo": ["📲 Contact on Telegram", "📲 टेलीग्राम पर संपर्क करो", "📲 টেলিগ্রামে যোগাযোগ করুন"],
+    "✉️ Email app mein kholo": ["✉️ Open in email app", "✉️ ईमेल ऐप में खोलो", "✉️ ইমেল অ্যাপে খুলুন"]
+  };
+  const PH = {
+    "Voice ID yahan paste karo": ["Paste Voice ID here", "वॉइस ID यहाँ पेस्ट करो", "ভয়েস ID এখানে পেস্ট করুন"],
+    "Apna message likho (kya hua, aapka naam)…": ["Write your message (what happened, your name)…", "अपना संदेश लिखो (क्या हुआ, आपका नाम)…", "আপনার বার্তা লিখুন (কী হয়েছে, আপনার নাম)…"],
+    "🔎 Voice ka naam dhundho…": ["🔎 Search voice name…", "🔎 आवाज़ का नाम खोजो…", "🔎 ভয়েসের নাম খুঁজুন…"]
+  };
+  const IDX = { en: 0, hi: 1, bn: 2 };
+  let lang = Store.get("jn_lang", "hing"), busy = false;
+  if (!["hing", "en", "hi", "bn"].includes(lang)) lang = "hing";
+  const skip = n => { const p = n.parentNode; return !p || /^(SCRIPT|STYLE|TEXTAREA|CODE|PRE|NOSCRIPT)$/.test(p.nodeName); };
+  function doText(n) {
+    if (skip(n)) return;
+    if (n.__t !== undefined && n.data === n.__t) { if (lang === "hing") { n.data = n.__o; n.__t = n.__o; } else { const v = D[n.__o.trim()]; if (v) { const t = n.__o.replace(n.__o.trim(), v[IDX[lang]]); n.data = t; n.__t = t; } } return; }
+    n.__o = n.data; n.__t = n.data;
+    if (lang === "hing") return;
+    const key = n.data.trim(), v = D[key]; if (!v) return;
+    const t = n.data.replace(key, v[IDX[lang]]); n.data = t; n.__t = t;
+  }
+  function doAttr(e) {
+    const o = e.__ph || e.getAttribute("placeholder"); if (!o) return; if (e.__ph === undefined) e.__ph = o;
+    const v = PH[e.__ph]; if (!v) return; e.setAttribute("placeholder", lang === "hing" ? e.__ph : v[IDX[lang]]);
+  }
+  function walk(root) {
+    busy = true;
+    try {
+      const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; const arr = []; while ((n = w.nextNode())) arr.push(n); arr.forEach(doText);
+      (root.querySelectorAll ? root.querySelectorAll("[placeholder]") : []).forEach(doAttr);
+    } finally { busy = false; }
+  }
+  let tm = 0;
+  const mo = new MutationObserver(ms => {
+    if (busy || lang === "hing") return;
+    clearTimeout(tm); tm = setTimeout(() => { mo.disconnect(); walk(document.body); mo.observe(document.body, { childList: true, subtree: true, characterData: true }); }, 60);
+  });
+  function set(l) {
+    lang = l; Store.set("jn_lang", l); document.documentElement.lang = { hing: "hi-Latn", en: "en", hi: "hi", bn: "bn" }[l];
+    $$(".langSel").forEach(s => { s.value = l; });
+    mo.disconnect(); walk(document.body); mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+  document.addEventListener("change", e => { if (e.target.classList && e.target.classList.contains("langSel")) set(e.target.value); });
+  return { set, get: () => lang };
+})();
+
+I18N.set(I18N.get());
+addEventListener("pagehide", () => { try { JanusiaShield.abandon(); } catch (_) {} });
 setTimeout(() => GLX.boot(), 1200);
 setTimeout(() => Speed.test(), 3500);
 JanusiaShield.initNetworkAndVpnCheck();
