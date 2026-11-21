@@ -696,7 +696,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="100" value="35" style="flex:1" aria-label="Music volume"></label>
       <button class="btn sm liteBtn" type="button" style="width:100%;margin-top:6px"></button>
       <select style="width:100%;margin-top:6px" class="langSel" aria-label="Language"><option value="hing">🌐 Hinglish</option><option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option><option value="bn">🌐 বাংলা</option></select>
-      <span class="verTag">⚡ v5.0 · Updated 21 Nov 2026, 07:23 AM IST</span>
+      <span class="verTag">⚡ v6.1 · Updated 22 Nov 2026, 12:10 AM IST</span>
     </div>
   </aside>
 
@@ -1488,6 +1488,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
         <input id="grKey" type="password" placeholder="API Key (optional)" style="flex:2;min-width:150px" aria-label="API key" autocomplete="off">
         <select id="grDays" style="flex:1;min-width:90px"><option value="1">1 din</option><option value="7">7 din</option><option value="14">14 din</option><option value="21">21 din</option><option value="28">28 din</option><option value="30" selected>30 din</option><option value="90">90 din</option><option value="365">365 din</option></select>
         <button class="btn primary" id="grGo" type="button">🎁 Characters Bhejo</button>
+        <button class="btn danger" id="grRef" type="button">↩️ Refund / Wapas Lo</button>
       </div>
       <div class="small muted" id="accMsg"></div>
       <details class="small muted"><summary>🔑 API key se kisi bhi jagah se characters kaise bhejein?</summary><pre style="white-space:pre-wrap;word-break:break-all;background:var(--field);padding:10px;border-radius:10px">curl -X POST WORKER_URL/api/credit -d '{"key":"AAPKI_API_KEY","email":"user@gmail.com","characters":50000,"days":30}'</pre>API key worker.js ke upar CONF → API_KEY mein hai. Account usi worker par hona chahiye jahan user ne signup kiya.</details>
@@ -1614,8 +1615,8 @@ const JanusiaConfig = {
   DEFAULT_API_KEY: "sk_car_x5S6WdwjShAgGXh45hDrRm",
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
-  VERSION: "5.0",
-  VERSION_LABEL: "v6.0 · Accounts & Characters · 21 Nov 2026, 07:23 AM IST",
+  VERSION: "6.1",
+  VERSION_LABEL: "v6.1 · Accounts & Unlimited Characters · Updated 22 Nov 2026, 12:10 AM IST",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
   BACKEND_URLS: ["https://janusia-6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
   BACKEND_URL: "https://janusia-6.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
@@ -2142,7 +2143,7 @@ const JanusiaShield = (() => {
       await Promise.allSettled(BES.filter(u => u !== BE).map(u => call(path, { ...(body || {}), ids: data.ids || [] }, true, u)));
       return data;
     }
-    const { status, data } = await call(path, body || {}, true, /\/api\/admin\/(accounts|grant)/.test(path) ? BES[0] : undefined);
+    const { status, data } = await call(path, body || {}, true, /\/api\/admin\/(accounts|grant|refund)/.test(path) ? BES[0] : undefined);
     if (status >= 400 || data.ok === false) throw Object.assign(new Error(data.error || ("HTTP " + status)), { status, code: data.code });
     return data;
   }
@@ -2327,7 +2328,7 @@ const JanusiaShield = (() => {
         if (!d.version || parseFloat(d.version) < 5) return "Worker mein purana code chal raha hai (v" + (d.version || "?") + "). Naya worker.js paste karke Deploy karo.";
         return "Worker theek hai (v" + d.version + ", mail " + (d.mail ? "set" : "NOT set") + "). Internet dobara try karo.";
       } catch (e) { return "Worker " + host + " khul nahi raha. Worker deploy hua? workers.dev subdomain on hai? URL sahi hai?"; }
-    }, adminAccounts: () => adminFetch("/api/admin/accounts"), adminGrant: (email, credits, days) => adminFetch("/api/admin/grant", { email, credits, days })
+    }, adminAccounts: () => adminFetch("/api/admin/accounts"), adminGrant: (email, credits, days) => adminFetch("/api/admin/grant", { email, credits, days }), adminRefund: (email, characters) => adminFetch("/api/admin/refund", { email, characters })
   };
 })();
 
@@ -3774,26 +3775,45 @@ const Plans = (() => {
       el("accMail").className = d.mail ? "chip ok" : "chip bad"; el("accMail").textContent = d.mail ? "Mail ✓ setup" : "Mail ✗ setup baaki";
       el("accPay").className = d.pay ? "chip ok" : "chip warn"; el("accPay").textContent = d.pay ? "Razorpay ✓" : "Razorpay ✗ (UPI manual)";
       const rows = d.accounts || [];
-      el("accRows").innerHTML = rows.length ? rows.map(a => `<tr><td>${esc(a.email)}</td><td align="right"><b>${(a.credits || 0).toLocaleString("en-IN")}</b></td><td>${a.expiresAt ? new Date(a.expiresAt).toLocaleDateString("en-IN") + (a.active ? "" : " ⌛") : "-"}</td><td align="right">${a.gens || 0}</td><td align="right">₹${(a.spent || 0).toLocaleString("en-IN")}</td><td><button class="btn sm danger" type="button" data-ab="${esc(a.email)}">Block</button></td></tr>`).join("") : '<tr><td colspan="6" class="muted">Abhi koi account nahi.</td></tr>';
+      el("accRows").innerHTML = rows.length ? rows.map(a => `<tr><td>${esc(a.email)} ${a.blocked ? '<span class="chip bad">Blocked</span>' : ''}</td><td align="right"><b>${(a.credits || 0).toLocaleString("en-IN")}</b></td><td>${a.expiresAt ? new Date(a.expiresAt).toLocaleDateString("en-IN") + (a.active ? "" : " ⌛") : "-"}</td><td align="right">${a.gens || 0}</td><td align="right">₹${(a.spent || 0).toLocaleString("en-IN")}</td><td style="white-space:nowrap"><button class="btn sm" type="button" data-fill="${esc(a.email)}">Select</button> ${a.blocked ? `<button class="btn sm ok" type="button" data-aub="${esc(a.email)}">✅ Unblock</button>` : `<button class="btn sm danger" type="button" data-ab="${esc(a.email)}">🚫 Block</button>`}</td></tr>`).join("") : '<tr><td colspan="6" class="muted">Abhi koi account nahi.</td></tr>';
       msg(rows.length + " account");
     } catch (e) { msg("❌ " + e.message); }
   }
   el("grKey").value = Store.get("jn_apik", "");
   el("accRef").addEventListener("click", load);
   el("grGo").addEventListener("click", async () => {
-    const email = el("grEmail").value.trim(), credits = Math.floor(+el("grCred").value || 0), days = +el("grDays").value;
-    if (!email || characters <= 0) { toast("Email aur characters daalo"); return; }
+    const email = el("grEmail").value.trim(), amt = Math.floor(+el("grCred").value || 0), days = +el("grDays").value;
+    if (!email || amt <= 0) { toast("Email aur characters daalo"); return; }
     const key = el("grKey").value.trim();
     try {
       let r;
       if (key) {   // API key se bhejna (owner password ki zaroorat nahi)
-        const { data } = await JanusiaShield.acall("/api/credit", { key, email, characters: credits, days });
+        const { data } = await JanusiaShield.acall("/api/credit", { key, email, characters: amt, days });
         if (!data.ok) throw new Error(data.error || "API key se nahi gaya"); r = data; Store.set("jn_apik", key);
-      } else r = await JanusiaShield.adminGrant(email, credits, days);
-      toast("🎁 " + characters.toLocaleString("en-IN") + " characters bhej diye → " + r.account.email); el("grCred").value = ""; if (S.owner) load();
+      } else r = await JanusiaShield.adminGrant(email, amt, days);
+      toast("🎁 " + amt.toLocaleString("en-IN") + " characters bhej diye → " + r.account.email); el("grCred").value = ""; if (S.acct && Auth.canon(S.acct.email) === Auth.canon(email)) { Auth.setAcct(r.account); } if (S.owner) load();
     } catch (e) { toast("❌ " + e.message); }
   });
-  el("accRows").addEventListener("click", e => { const b = e.target.closest("[data-ab]"); if (b && confirm(b.dataset.ab + " ko block karein?")) JanusiaShield.manualBlock(b.dataset.ab, true); });
+  el("grRef").addEventListener("click", async () => {
+    if (!S.owner) { toast("Pehle owner password se kholo"); return; }
+    const email = el("grEmail").value.trim(), amt = Math.floor(+el("grCred").value || 0);
+    if (!email || amt <= 0) { toast("Refund ke liye Gmail aur characters daalo"); return; }
+    if (!confirm(email + " ke account se " + amt.toLocaleString("en-IN") + " characters wapas lein?")) return;
+    try {
+      const d = await JanusiaShield.adminRefund(email, amt);
+      toast("↩️ " + d.refunded.toLocaleString("en-IN") + " characters wapas le liye gaye");
+      el("grCred").value = ""; if (S.acct && Auth.canon(S.acct.email) === Auth.canon(email)) { Auth.setAcct(d.account); }
+      load();
+    } catch (e) { toast("❌ " + e.message); }
+  });
+  el("accRows").addEventListener("click", async e => {
+    const fill = e.target.closest("[data-fill]");
+    if (fill) { el("grEmail").value = fill.dataset.fill; el("grCred").focus(); toast("Email select ho gaya"); return; }
+    const blk = e.target.closest("[data-ab]");
+    if (blk && confirm(blk.dataset.ab + " ko block karein?")) { await JanusiaShield.manualBlock(blk.dataset.ab, true); load(); return; }
+    const ub = e.target.closest("[data-aub]");
+    if (ub && confirm(ub.dataset.aub + " ko unblock karein?")) { await JanusiaShield.manualBlock(ub.dataset.aub, false); load(); }
+  });
 })();
 
 /* ============================ CONTACT ============================ */
