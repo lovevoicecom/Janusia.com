@@ -696,7 +696,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="100" value="35" style="flex:1" aria-label="Music volume"></label>
       <button class="btn sm liteBtn" type="button" style="width:100%;margin-top:6px"></button>
       <select style="width:100%;margin-top:6px" class="langSel" aria-label="Language"><option value="hing">🌐 Hinglish</option><option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option><option value="bn">🌐 বাংলা</option></select>
-      <span class="verTag">⚡ v6.1 · Updated 22 Nov 2026, 12:10 AM IST</span>
+      <span class="verTag">⚡ v6.1 · Updated 22 Nov 2026, 01:44 AM IST</span>
     </div>
   </aside>
 
@@ -738,7 +738,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
      <p class="small" id="secAlertMsg">Aapke session mein unusual activity detect hui hai.</p>
      <div class="row" style="margin-top:4px">
        <span class="chip bad" id="secAlertIp">ID: Unknown</span>
-       <button class="btn sm primary" type="button" onclick="document.querySelector('[data-tab=connect]').click()">Apni Key File Upload Karein (20,000 Limit)</button>
+       <button class="btn sm primary" type="button" onclick="document.querySelector('[data-tab=connect]').click()">Apni Key File Upload Karein (60,000 Limit)</button>
      </div>
    </div>
 
@@ -774,7 +774,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
           <input type="text" id="hpTrap" name="website_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true">
 
           <div class="txt-wrap" id="txtWrap">
-            <textarea id="txt" maxlength="250" style="min-height:210px" placeholder="Yahan jo bolwana hai wo likho... (Default mode mein 250 characters tak. Connect tab mein key file upload karke 20,000 characters unlock karein!)"></textarea>
+            <textarea id="txt" maxlength="250" style="min-height:210px" placeholder="Yahan jo bolwana hai wo likho... (Default mode mein 250 characters tak. Connect tab mein key file upload karke 60,000 characters unlock karein!)"></textarea>
           </div>
 
           <!-- Character Limit Progress Bar -->
@@ -783,7 +783,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
             <div class="row sb small muted" style="margin-top:6px">
               <span id="txtInfo">0 / 250 characters</span>
               <span class="row" style="gap:6px">
-                <button class="btn sm" id="unlock20kBtn" type="button">🔓 20,000 Limit Unlock</button>
+                <button class="btn sm" id="unlock20kBtn" type="button">🔓 60,000 Limit Unlock</button>
                 <button class="btn sm" id="txtPaste" type="button">Paste</button>
                 <button class="btn sm danger" id="txtClear" type="button">✨ Saaf karo</button>
               </span>
@@ -1104,10 +1104,10 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       <div class="grid">
         <div class="glass grid">
           <div class="row sb">
-            <h2 style="margin:0">API Key Connect (20,000 Chars Unlock)</h2>
+            <h2 style="margin:0">API Key Connect (60,000 Chars Unlock)</h2>
             <span class="chip gold" id="connModeChip">Default: 250 Chars</span>
           </div>
-          <p class="small muted">Default key automatic connected hai (250 characters limit). <b>20,000 characters</b> unlock karne ke liye neeche encrypted key file upload karein (bina password) ya password ke saath API key daalein.</p>
+          <p class="small muted">Default key automatic connected hai (250 characters limit). <b>60,000 characters</b> unlock karne ke liye neeche encrypted key file upload karein (bina password) ya password ke saath API key daalein.</p>
 
           <div class="grid" style="gap:10px;padding:15px;border-radius:16px;background:var(--glass2);border:1px solid var(--line2)">
             <div class="row sb"><b>🗝️ Meri Keys (Key Manager)</b><span class="chip ok">Default hamesha rahegi</span></div>
@@ -1121,7 +1121,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
               <b>1. Key File Upload Karein (Bina Password)</b>
               <span class="chip ok">No Password</span>
             </div>
-            <p class="small muted"><code>.jnkey</code>, <code>.lvkey</code>, <code>.txt</code>, ya <code>.json</code> key file upload karein — turant connect hoga aur 20,000 limit unlock hogi.</p>
+            <p class="small muted"><code>.jnkey</code>, <code>.lvkey</code>, <code>.txt</code>, ya <code>.json</code> key file upload karein — turant connect hoga aur 60,000 limit unlock hogi.</p>
             <label class="btn primary" style="cursor:pointer">📂 Key File Upload Karein<input id="kfFile" type="file" accept=".jnkey,.lvkey,.txt,.json,application/json,text/plain,*/*" hidden></label>
             <div class="small" id="kfInfo" role="status"></div>
           </div>
@@ -1142,7 +1142,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
               <input id="connPw" type="password" autocomplete="off" placeholder="Connect password daalo">
             </label>
             <div class="row">
-              <button class="btn primary" id="connBtn" type="button" style="flex:1">🔑 Connect &amp; 20,000 Unlock</button>
+              <button class="btn primary" id="connBtn" type="button" style="flex:1">🔑 Connect &amp; 60,000 Unlock</button>
               <button class="btn" id="discBtn" type="button">Default Key Par Wapas</button>
             </div>
           </div>
@@ -1616,12 +1616,12 @@ const JanusiaConfig = {
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
   VERSION: "6.1",
-  VERSION_LABEL: "v6.1 · Accounts & Unlimited Characters · Updated 22 Nov 2026, 12:10 AM IST",
+  VERSION_LABEL: "v6.1 · Updated 22 Nov 2026, 01:44 AM IST",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
-  BACKEND_URLS: ["https://janusia-6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
-  BACKEND_URL: "https://janusia-6.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
+  BACKEND_URLS: ["https://janusia-v6.th6tfjh.workers.dev", "https://janusia-6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
+  BACKEND_URL: "https://janusia-v6.th6tfjh.workers.dev",
   CHAR_LIMIT_FREE: 250,
-  CHAR_LIMIT_PRO: 20000,
+  CHAR_LIMIT_PRO: 60000,
   VAULT_SECRET: "Janusia::VaultV2::SITARAM1018::jashishJAH",
   LEGACY_SECRET: "LoveVoice::keyfile::v1::ashish"
 };
@@ -2363,11 +2363,11 @@ function updateCharLimitUI() {
   if (el("stLimit")) el("stLimit").textContent = Auth.canUseCredits() ? S.acct.credits.toLocaleString("en-IN") + " characters" : S.isCustomKey ? lim.toLocaleString("en-IN") + " chars" : fi.left + " / " + fi.limit + " free left";
   if (el("modeBadge")) {
     el("modeBadge").className = Auth.canUseCredits() ? "chip ok" : S.isCustomKey ? "chip ok" : (fi.left > 0 ? "chip gold" : "chip bad");
-    el("modeBadge").textContent = Auth.canUseCredits() ? "💎 Characters: " + S.acct.credits.toLocaleString("en-IN") + " (max 20,000 / voice)" : S.isCustomKey ? "Pro Vault: 20,000 chars" : (fi.left > 0 ? `Free: ${fi.left} / ${fi.limit} chars left` : "Free limit poori — key connect karein");
+    el("modeBadge").textContent = Auth.canUseCredits() ? "💎 Characters: " + S.acct.credits.toLocaleString("en-IN") + " (max 60,000 / voice)" : S.isCustomKey ? "Pro Vault: 60,000 chars" : (fi.left > 0 ? `Free: ${fi.left} / ${fi.limit} chars left` : "Free limit poori — key connect karein");
   }
   if (el("connModeChip")) {
     el("connModeChip").className = S.isCustomKey ? "chip ok" : "chip gold";
-    el("connModeChip").textContent = S.isCustomKey ? "Unlocked: 20,000 Chars" : `Default: ${fi.left} / ${fi.limit} chars left`;
+    el("connModeChip").textContent = S.isCustomKey ? "Unlocked: 60,000 Chars" : `Default: ${fi.left} / ${fi.limit} chars left`;
   }
   if (el("unlock20kBtn")) el("unlock20kBtn").hidden = S.isCustomKey;
   try { Vids.paint(); } catch (_) {}
@@ -2488,7 +2488,7 @@ function renderDiag() {
   const d = el("diag"); let h = "";
   if (S.state === "ok") {
     h = `<div class="row"><span class="chip ok">Connected</span><span class="chip">${S.voices.length} voices</span><span class="chip gold">${currentCharLimit().toLocaleString("en-IN")} chars limit</span></div>
-         <p class="small muted">${S.isCustomKey ? "Aapki encrypted key active hai. 20,000 characters limit unlocked!" : "Default Studio key active hai (250 chars limit). Key file upload karke 20,000 chars unlock karein."}</p>`;
+         <p class="small muted">${S.isCustomKey ? "Aapki encrypted key active hai. 60,000 characters limit unlocked!" : "Default Studio key active hai (250 chars limit). Key file upload karke 60,000 chars unlock karein."}</p>`;
   } else if (S.state === "error" && S.err) {
     const f = friendly(S.err);
     h = `<div class="row"><span class="chip bad">${esc(f.short)}</span>${S.err.status ? `<span class="chip">Code ${S.err.status}</span>` : ""}</div><p>${esc(f.long)}</p><p class="small muted"><b>Upay:</b> ${esc(f.fix)}</p>`;
@@ -2626,7 +2626,7 @@ const KeyStore = (() => {
 function renderKeyInfo() {
   const i = el("kfInfo");
   if (S.isCustomKey) {
-    i.innerHTML = `<span class="chip ok">Pro Active (20,000 chars)</span> ${esc(S.keyLabel)}${S.keyExp ? " · " + esc(new Date(S.keyExp).toLocaleDateString()) + " tak" : ""}`;
+    i.innerHTML = `<span class="chip ok">Pro Active (60,000 chars)</span> ${esc(S.keyLabel)}${S.keyExp ? " · " + esc(new Date(S.keyExp).toLocaleDateString()) + " tak" : ""}`;
   } else {
     i.textContent = "Abhi koi custom key file upload nahi ki gayi (Default 250 chars active).";
   }
@@ -2701,7 +2701,7 @@ function renderKeyList() {
   const box = el("keyList"); if (!box) return;
   const cur = S.keyId || "default";
   const rows = [{ id: "default", label: S.defLabel || "Default Studio Key", def: true }, ...KeyStore.list()];
-  box.innerHTML = rows.map(r => `<div class="keyrow${r.id === cur ? " on" : ""}"><div><b>${r.def ? "🌐" : "🔑"} ${esc(r.label)}</b><span class="small muted">${r.def ? "Website ki apni key · hamesha jodi rehti hai · 250 free chars" : "Is browser mein encrypted · ••" + esc(r.tail || "") + (r.exp ? " · " + esc(new Date(r.exp).toLocaleDateString()) + " tak" : "") + " · 20,000 chars"}</span></div><div class="row" style="gap:6px;flex-wrap:nowrap">${r.id === cur ? '<span class="chip ok">Active ✓</span>' : `<button class="btn sm primary" type="button" data-k="use" data-id="${esc(r.id)}">Use karo</button>`}${r.def ? "" : `<button class="btn sm danger" type="button" data-k="rm" data-id="${esc(r.id)}">Hatao</button>`}</div></div>`).join("");
+  box.innerHTML = rows.map(r => `<div class="keyrow${r.id === cur ? " on" : ""}"><div><b>${r.def ? "🌐" : "🔑"} ${esc(r.label)}</b><span class="small muted">${r.def ? "Website ki apni key · hamesha jodi rehti hai · 250 free chars" : "Is browser mein encrypted · ••" + esc(r.tail || "") + (r.exp ? " · " + esc(new Date(r.exp).toLocaleDateString()) + " tak" : "") + " · 60,000 chars"}</span></div><div class="row" style="gap:6px;flex-wrap:nowrap">${r.id === cur ? '<span class="chip ok">Active ✓</span>' : `<button class="btn sm primary" type="button" data-k="use" data-id="${esc(r.id)}">Use karo</button>`}${r.def ? "" : `<button class="btn sm danger" type="button" data-k="rm" data-id="${esc(r.id)}">Hatao</button>`}</div></div>`).join("");
 }
 el("keyList").addEventListener("click", async e => {
   const b = e.target.closest("[data-k]"); if (!b) return; const id = b.dataset.id;
@@ -2742,7 +2742,7 @@ async function connect(fromFileOrAuto, isSilentDefault = false, playFemaleGreeti
   try {
     await apiJson("/voices", { query: { limit: 1 } });
     setState("ok");
-    if (!isSilentDefault) toast("✅ Connected! 20,000 characters unlock ho gaye!");
+    if (!isSilentDefault) toast("✅ Connected! 60,000 characters unlock ho gaye!");
     log("ok", "Connected (" + S.keyLabel + "), ping " + Math.round(S.lastLat) + " ms");
     if (S.keyId === "new") { try { S.keyId = await KeyStore.add(S.key, S.keyLabel, S.keyExp); KeyStore.setActive(S.keyId); } catch (_) { S.keyId = "temp"; } renderKeyList(); renderKeyInfo(); }
     await loadVoices();
@@ -3595,9 +3595,9 @@ const Plans = (() => {
   const tierBonus = p => { let b = 0; for (const [a, x] of TIERS) if (p >= a) b = x; return b; };
   const baseC = p => Math.floor(p * RC / RR), inr = n => "₹" + Math.round(n).toLocaleString("en-IN"), num = n => Math.round(n).toLocaleString("en-IN");
   const CLASSIC = [
-    { id: "c1", price: 199, credits: 80000, days: 1, name: "1 Day Starter", old: "₹399", badge: "50% OFF", ic: "⚡", feat: ["80 minutes voice", "20,000 chars per script", "All studio voices", "HD WAV & MP3 download"] },
-    { id: "c14", price: 899, credits: 840000, days: 14, name: "14 Days Creator", old: "₹1,499", badge: "40% OFF", ic: "🎨", feat: ["Roz 1 ghanta voice", "20,000 chars unlocked", "All premium voices", "Fast audio downloads"] },
-    { id: "c28", price: 1499, credits: 1680000, days: 28, name: "28 Days Pro", old: "₹2,499", badge: "MOST POPULAR", ic: "🚀", hot: 1, feat: ["Roz 1 ghanta voice", "20,000 chars + Instant Clone", "Premium & Hindi voices", "Priority speed"] },
+    { id: "c1", price: 199, credits: 80000, days: 1, name: "1 Day Starter", old: "₹399", badge: "50% OFF", ic: "⚡", feat: ["80 minutes voice", "60,000 chars per script", "All studio voices", "HD WAV & MP3 download"] },
+    { id: "c14", price: 899, credits: 840000, days: 14, name: "14 Days Creator", old: "₹1,499", badge: "40% OFF", ic: "🎨", feat: ["Roz 1 ghanta voice", "60,000 chars unlocked", "All premium voices", "Fast audio downloads"] },
+    { id: "c28", price: 1499, credits: 1680000, days: 28, name: "28 Days Pro", old: "₹2,499", badge: "MOST POPULAR", ic: "🚀", hot: 1, feat: ["Roz 1 ghanta voice", "60,000 chars + Instant Clone", "Premium & Hindi voices", "Priority speed"] },
     { id: "c90", price: 2999, credits: 5400000, days: 90, name: "90 Days Studio", old: "₹4,999", badge: "BEST VALUE", ic: "🎬", hot: 1, feat: ["Roz 1 ghanta voice", "Unlimited script sessions", "Instant Clone + STT", "24/7 priority support"] },
     { id: "c365", price: 9999, credits: 21900000, days: 365, name: "1 Year VIP", old: "₹19,999", badge: "50% OFF", ic: "👑", feat: ["Roz 1 ghanta voice", "All VIP features", "Dedicated key file", "VIP Telegram & Call support"] }
   ];
@@ -4565,7 +4565,7 @@ const I18N = (() => {
     "🎙️ Awaaz banao": ["🎙️ Generate voice", "🎙️ आवाज़ बनाओ", "🎙️ ভয়েস তৈরি করুন"],
     "Roko": ["Stop", "रोको", "থামান"], "Paste": ["Paste", "पेस्ट", "পেস্ট"],
     "✨ Saaf karo": ["✨ Clear", "✨ साफ़ करो", "✨ মুছুন"],
-    "🔓 20,000 Limit Unlock": ["🔓 Unlock 20,000 limit", "🔓 20,000 की सीमा खोलो", "🔓 20,000 সীমা আনলক"],
+    "🔓 60,000 Limit Unlock": ["🔓 Unlock 60,000 limit", "🔓 60,000 की सीमा खोलो", "🔓 60,000 সীমা আনলক"],
     "Model": ["Model", "मॉडल", "মডেল"], "Bhasha": ["Language", "भाषा", "ভাষা"], "Emotion": ["Emotion", "भाव", "আবেগ"],
     "Output format": ["Output format", "आउटपुट फ़ॉर्मैट", "আউটপুট ফরম্যাট"],
     "Advance setting": ["Advanced settings", "एडवांस सेटिंग", "অ্যাডভান্স সেটিং"],
