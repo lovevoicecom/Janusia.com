@@ -1195,6 +1195,13 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
     </div>
 
     <div class="glass grid" style="margin-top:16px">
+      <div style="text-align:center"><h3 style="margin:0">👑 Premium Plans (Classic)</h3><p class="small muted" style="margin:4px 0 0">Roz 1 ghanta voice wale plans — ab credits ke roop mein. <b>1 ghanta voice = 60,000 credits.</b></p></div>
+      <div class="dpills" id="boostPills"></div>
+      <div class="packs" id="classicGrid"></div>
+    </div>
+
+    <div class="glass grid" style="margin-top:16px">
+      <div style="text-align:center"><h3 style="margin:0">🎁 Bonus Credit Packs</h3><p class="small muted" style="margin:4px 0 0">Zyada paisa, zyada extra bonus credits. Validity neeche se chuno.</p></div>
       <div style="text-align:center"><b>⏳ Validity chuno</b><div class="dpills" id="durPills"></div></div>
       <div class="packs" id="packGrid"></div>
     </div>
@@ -1474,7 +1481,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
         <input id="grEmail" type="text" placeholder="user@gmail.com" style="flex:2;min-width:180px" aria-label="Account email">
         <input id="grCred" type="number" placeholder="Credits" style="flex:1;min-width:100px" aria-label="Credits">
-        <select id="grDays" style="flex:1;min-width:90px"><option value="7">7 din</option><option value="21">21 din</option><option value="28">28 din</option><option value="30" selected>30 din</option></select>
+        <select id="grDays" style="flex:1;min-width:90px"><option value="1">1 din</option><option value="7">7 din</option><option value="14">14 din</option><option value="21">21 din</option><option value="28">28 din</option><option value="30" selected>30 din</option><option value="90">90 din</option><option value="365">365 din</option></select>
         <button class="btn primary" id="grGo" type="button">🎁 Credits Do</button>
       </div>
       <div class="small muted" id="accMsg"></div>
@@ -1598,8 +1605,8 @@ const JanusiaConfig = {
   VERSION: "5.0",
   VERSION_LABEL: "v5.0 · Credits & Accounts · 21 Nov 2026, 07:23 AM IST",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
-  BACKEND_URLS: ["https://janusia-shield.th6tfjh.workers.dev", "https://janusia-shield.polished-haze-db97.workers.dev"],
-  BACKEND_URL: "https://janusia-shield.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
+  BACKEND_URLS: ["https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
+  BACKEND_URL: "https://janusia-v5.polished-haze-db97.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
   CHAR_LIMIT_FREE: 250,
   CHAR_LIMIT_PRO: 20000,
   VAULT_SECRET: "Janusia::VaultV2::SITARAM1018::jashishJAH",
@@ -3536,6 +3543,20 @@ const Plans = (() => {
     { id: "p20000", price: 20000, bonus: 250000, name: "Enterprise", ic: "👑" }
   ];
   const baseC = p => Math.floor(p * RC / RR), inr = n => "₹" + Math.round(n).toLocaleString("en-IN"), num = n => Math.round(n).toLocaleString("en-IN");
+  const CLASSIC = [
+    { id: "c1", price: 199, credits: 80000, days: 1, name: "1 Day Starter", old: "₹399", badge: "50% OFF", ic: "⚡", feat: ["80 minutes voice", "20,000 chars per script", "All studio voices", "HD WAV & MP3 download"] },
+    { id: "c14", price: 899, credits: 840000, days: 14, name: "14 Days Creator", old: "₹1,499", badge: "40% OFF", ic: "🎨", feat: ["Roz 1 ghanta voice", "20,000 chars unlocked", "All premium voices", "Fast audio downloads"] },
+    { id: "c28", price: 1499, credits: 1680000, days: 28, name: "28 Days Pro", old: "₹2,499", badge: "MOST POPULAR", ic: "🚀", hot: 1, feat: ["Roz 1 ghanta voice", "20,000 chars + Instant Clone", "Premium & Hindi voices", "Priority speed"] },
+    { id: "c90", price: 2999, credits: 5400000, days: 90, name: "90 Days Studio", old: "₹4,999", badge: "BEST VALUE", ic: "🎬", hot: 1, feat: ["Roz 1 ghanta voice", "Unlimited script sessions", "Instant Clone + STT", "24/7 priority support"] },
+    { id: "c365", price: 9999, credits: 21900000, days: 365, name: "1 Year VIP", old: "₹19,999", badge: "50% OFF", ic: "👑", feat: ["Roz 1 ghanta voice", "All VIP features", "Dedicated key file", "VIP Telegram & Call support"] }
+  ];
+  const BOOSTS = [
+    { label: "Base Plan", add: 0, days: 0, perDay: 0, note: "" },
+    { label: "+7 Days & +30m/day", add: 349, days: 7, perDay: 30000, note: " + 7 Days Boost" },
+    { label: "+15 Days & +1hr/day", add: 649, days: 15, perDay: 60000, note: " + 15 Days Boost" },
+    { label: "+30 Days VIP Boost", add: 1099, days: 30, perDay: 60000, note: " + 30 Days VIP Boost" }
+  ];
+  let boost = 0;
   let days = 30, cur = null, accIdx = 0, packsDone = false, paying = false;
 
   const IST = 330 * 60000;
@@ -3549,7 +3570,10 @@ const Plans = (() => {
   function quote(sel) {
     let price, credits, bonus = 0, fee = 0, name;
     if (sel.custom) { price = Math.floor(+sel.amount); if (!(price >= MIN && price <= MAX)) return null; credits = baseC(price); fee = FEE; name = "Custom ₹" + price; }
-    else {
+    else if (sel.classic) {
+      const c = CLASSIC.find(x => x.id === sel.classic); if (!c) return null; const b = BOOSTS[sel.boost || 0] || BOOSTS[0];
+      price = c.price + b.add; sel = { ...sel, days: c.days + b.days }; bonus = b.perDay * sel.days; credits = c.credits + bonus; name = c.name + b.note;
+    } else {
       const p = PACKS.find(x => x.id === sel.pack); if (!p) return null; price = p.price; name = p.name + " ₹" + price;
       if (p.total) { credits = p.total; bonus = Math.max(0, p.total - baseC(price)); } else { bonus = p.bonus; credits = baseC(price) + bonus; }
     }
@@ -3586,7 +3610,22 @@ const Plans = (() => {
     el("cDays").textContent = days + " din";
   }
   const toAmt = v => Math.round(MIN * Math.pow(MAX / MIN, v / 1000)), toPos = a => Math.round(1000 * Math.log(a / MIN) / Math.log(MAX / MIN));
-  function refresh() { renderDays(); renderPacks(); paintCust(); paintAcct(); }
+  function renderClassic() {
+    el("boostPills").innerHTML = BOOSTS.map((b, i) => `<button class="dpill${i === boost ? " on" : ""}" type="button" data-b="${i}">${b.label}${b.add ? " (+₹" + b.add + ")" : ""}</button>`).join("");
+    el("classicGrid").innerHTML = CLASSIC.map((c, i) => {
+      const q = quote({ classic: c.id, boost });
+      return `<div class="pack${c.hot ? " hot" : ""}" data-c="${c.id}" tabindex="0" role="button" style="--i:${i}">
+        <span class="ptag">${c.badge}</span>
+        <span class="pic">${c.ic}</span><div class="pn">${esc(c.name)}${boost ? " + Boost" : ""}</div>
+        <div class="pp">${inr(q.price - q.off)}<s>${c.old}</s></div>
+        <div class="pc">${num(q.credits)} <small>credits</small></div>
+        <span class="pb">⏱️ ≈ ${num(Math.round(q.credits / 1000))} min voice · ${q.days} din</span>
+        ${c.feat.map(f => `<div class="pr">✔ ${esc(f)}</div>`).join("")}
+        ${q.off ? `<div class="bfn">🖤 Black Friday −10%</div>` : ""}
+        <div class="pcta">💳 Kharido</div></div>`;
+    }).join("");
+  }
+  function refresh() { renderDays(); renderClassic(); renderPacks(); paintCust(); paintAcct(); }
 
   /* ---------- checkout ---------- */
   const payUri = q => { const a = PAY_ACCOUNTS[accIdx]; return "upi://pay?pa=" + encodeURIComponent(a.pa) + "&pn=" + encodeURIComponent(a.name) + "&am=" + q.payable + "&cu=INR&tn=" + encodeURIComponent("Janusia " + q.name); };
@@ -3603,7 +3642,7 @@ const Plans = (() => {
   }
   function openCheckout(sel) {
     if (!S.acct) { toast("🔐 Pehle login / signup karo — credits aapke account mein jodte hain"); Auth.open("signup"); return; }
-    cur = quote({ ...sel, days }); if (!cur) { toast("Amount sahi nahi hai"); return; }
+    cur = quote({ ...sel, days: sel.classic ? 0 : days }); if (!cur) { toast("Amount sahi nahi hai"); return; }
     renderCheckout(); el("surpop").classList.add("show");
   }
   const closeCheckout = () => { el("surpop").classList.remove("show"); cur = null; };
@@ -3620,7 +3659,7 @@ const Plans = (() => {
   async function payRzp() {
     if (paying || !cur) return; paying = true; const b = el("rzpBtn"), t0 = b.textContent; b.disabled = true; b.textContent = "⏳ Order ban raha hai…";
     try {
-      const s = cur.sel, { data } = await JanusiaShield.acall("/api/pay/order", s.custom ? { custom: true, amount: s.amount, days: s.days } : { pack: s.pack, days: s.days });
+      const s = cur.sel, { data } = await JanusiaShield.acall("/api/pay/order", s.custom ? { custom: true, amount: s.amount, days: s.days } : s.classic ? { classic: s.classic, boost: s.boost || 0 } : { pack: s.pack, days: s.days });
       if (!data.ok) {
         if (data.code === "LOGIN") { Auth.clear(); Auth.open("login"); }
         else if (data.code === "NO_PAY") { toast("ℹ️ Auto-payment abhi chalu nahi — neeche UPI QR se pay karke screenshot bhejo"); el("accs").scrollIntoView({ behavior: "smooth", block: "center" }); }
@@ -3651,6 +3690,10 @@ const Plans = (() => {
 
   /* ---------- events ---------- */
   el("durPills").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (!b) return; days = +b.dataset.d; renderDays(); renderPacks(); paintCust(); });
+  el("boostPills").addEventListener("click", e => { const b = e.target.closest("[data-b]"); if (!b) return; boost = +b.dataset.b; renderClassic(); });
+  const clsClick = e => { const c = e.target.closest(".pack"); if (c) openCheckout({ classic: c.dataset.c, boost }); };
+  el("classicGrid").addEventListener("click", clsClick);
+  el("classicGrid").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); clsClick(e); } });
   const packClick = e => { const c = e.target.closest(".pack"); if (c) openCheckout({ pack: c.dataset.p }); };
   el("packGrid").addEventListener("click", packClick);
   el("packGrid").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); packClick(e); } });
