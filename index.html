@@ -1207,7 +1207,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
     </div>
 
     <div class="glass grid" style="margin-top:16px">
-      <div><h3 style="margin:0">🎛️ Custom Plan — apni marzi ka amount</h3><p class="small muted" style="margin:4px 0 0">₹30 se ₹20,000 tak kuch bhi. Credits = amount × 20000 ÷ 38. Custom plan par ₹20 platform charge alag se jodta hai.</p></div>
+      <div><h3 style="margin:0">🎛️ Custom Plan — apni marzi ka amount</h3><p class="small muted" style="margin:4px 0 0">₹30 se ₹20,000 tak kuch bhi. Credits = amount × 20000 ÷ 60. Custom plan par ₹20 platform charge alag se jodta hai.</p></div>
       <div class="cust">
         <div class="camt">₹ <input id="cAmt" type="number" min="30" max="20000" step="1" value="500" inputmode="numeric" aria-label="Amount"></div>
         <input id="cRange" type="range" min="0" max="1000" value="500" aria-label="Amount slider">
@@ -1605,8 +1605,8 @@ const JanusiaConfig = {
   VERSION: "5.0",
   VERSION_LABEL: "v5.0 · Credits & Accounts · 21 Nov 2026, 07:23 AM IST",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
-  BACKEND_URLS: ["https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
-  BACKEND_URL: "https://janusia-v5.polished-haze-db97.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
+  BACKEND_URLS: ["https://janusia-v6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
+  BACKEND_URL: "https://janusia-v6.th6tfjh.workers.dev",   // <-- yahan apna Worker URL daalein, jaise "https://janusia-shield.YOURNAME.workers.dev"
   CHAR_LIMIT_FREE: 250,
   CHAR_LIMIT_PRO: 20000,
   VAULT_SECRET: "Janusia::VaultV2::SITARAM1018::jashishJAH",
@@ -3540,7 +3540,7 @@ const PAY_ACCOUNTS = [
 ];
 const Plans = (() => {
   // NOTE: ye numbers worker.js (RATE_*, PACKS) se same hone chahiye — wahi asli charge karta hai.
-  const RC = 20000, RR = 38, FEE = 20, MIN = 30, MAX = 20000, DAYS = [7, 21, 28, 30];
+  const RC = 20000, RR = 60, FEE = 20, MIN = 30, MAX = 20000, DAYS = [7, 21, 28, 30];
   const PACKS = [
     { id: "p30", price: 30, total: 20000, name: "Starter", ic: "🌱" },
     { id: "p100", price: 100, bonus: 5000, name: "Basic", ic: "⭐" },
