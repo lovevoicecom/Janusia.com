@@ -742,7 +742,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
       <label class="small muted" style="display:flex;align-items:center;gap:8px;margin-top:6px">🎵 Volume <input class="bgmVol" type="range" min="0" max="100" value="35" style="flex:1" aria-label="Music volume"></label>
       <button class="btn sm liteBtn" type="button" style="width:100%;margin-top:6px"></button>
       <select style="width:100%;margin-top:6px" class="langSel" aria-label="Language"><option value="hing">🌐 Hinglish</option><option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option><option value="bn">🌐 বাংলা</option></select>
-      <span class="verTag">⚡ v6.3 · Updated 22 Nov 2026, 08:21 PM IST</span>
+      <span class="verTag">⚡ v6.4 · Updated 22 Nov 2026</span>
     </div>
   </aside>
 
@@ -1546,6 +1546,8 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
         <button class="btn" id="grAll" type="button">📤 Send Full Available Balance</button>
         <button class="btn danger" id="grRef" type="button">↩️ Refund / Wapas Lo</button>
       </div>
+      <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn sm" id="engRef" type="button">⚙️ Voice Engine Keys</button><button class="btn sm" id="engAdd" type="button">➕ Upar wali key engine me jodo</button><span class="small muted">Credits se voice isi pool ki working keys se banti hai (Check Key Balance / Credits Bhejo se bhi auto-save).</span></div>
+      <div class="small" id="engList" style="display:grid;gap:6px"></div>
       <div class="ototal" id="accTotal"></div>
       <div class="small muted" id="accMsg"></div>
       <details class="small muted"><summary>🔑 API key se kisi bhi jagah se characters kaise bhejein?</summary><pre style="white-space:pre-wrap;word-break:break-all;background:var(--field);padding:10px;border-radius:10px">curl -X POST WORKER_URL/api/credit -d '{"key":"AAPKI_API_KEY","email":"user@gmail.com","characters":50000,"days":30}'</pre>API key worker.js ke upar CONF → API_KEY mein hai. Account usi worker par hona chahiye jahan user ne signup kiya.</details>
@@ -1555,7 +1557,7 @@ html.lite .pack .pic,html.lite .pb,html.lite .shim,html.lite .wallic{animation:n
 
   <footer class="lvfoot">
     <span class="lvmade">Made with Janusia</span>
-    <span class="lvver">⚡ v6.3 · Updated 22 Nov 2026, 08:21 PM IST</span>
+    <span class="lvver">⚡ v6.4 · Updated 22 Nov 2026</span>
     <span class="lvby">Crafted by <b class="nm">J Ashish Gupta</b></span>
     <span class="lvlinks"><a href="https://youtube.com/@janusiacom?si=QOYkAo7UzLwhLaLL" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#fff"/><rect x="4" y="11" width="40" height="26" rx="8" fill="#FF0000"/><path d="M20 18l12 6-12 6z" fill="#fff"/></svg></span>YouTube</a> <a href="https://www.instagram.com/janusiacom?xtok=MTVicjQ2YW8yNXA3Yg==" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><radialGradient id="gIg" cx=".25" cy="1.05" r="1.2"><stop offset="0" stop-color="#FEDA75"/><stop offset=".25" stop-color="#FA7E1E"/><stop offset=".5" stop-color="#D62976"/><stop offset=".75" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs><rect width="48" height="48" rx="13" fill="url(#gIg)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.500" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg></span>Instagram</a> <a href="https://t.me/Janusia10" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><linearGradient id="gTg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#37AEE2"/><stop offset="1" stop-color="#1E96C8"/></linearGradient></defs><circle cx="24" cy="24" r="24" fill="url(#gTg)"/><g transform="translate(9 9) scale(1.250)"><path fill="#fff" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></g></svg></span>Telegram</a></span>
   </footer>
@@ -1688,8 +1690,8 @@ const JanusiaConfig = {
   DEFAULT_API_KEY: "sk_car_x5S6WdwjShAgGXh45hDrRm",
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
-  VERSION: "6.3",
-  VERSION_LABEL: "v6.3 · Updated 22 Nov 2026, 08:21 PM IST",
+  VERSION: "6.4",
+  VERSION_LABEL: "v6.4 · Updated 22 Nov 2026",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
   BACKEND_URLS: ["https://janusia-6.th6tfjh.workers.dev", "https://janusia-v6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
   BACKEND_URL: "https://janusia-6.th6tfjh.workers.dev",
@@ -2216,7 +2218,7 @@ const JanusiaShield = (() => {
       await Promise.allSettled(BES.filter(u => u !== BE).map(u => call(path, { ...(body || {}), ids: data.ids || [] }, true, u)));
       return data;
     }
-    const { status, data } = await call(path, body || {}, true, /\/api\/(admin\/(accounts|grant|refund|unblock-24h)|credit|key-balance)/.test(path) ? BES[0] : undefined);
+    const { status, data } = await call(path, body || {}, true, /\/api\/(admin\/(accounts|grant|refund|unblock-24h|engine)|credit|key-balance)/.test(path) ? BES[0] : undefined);
     if (status >= 400 || data.ok === false) throw Object.assign(new Error(data.error || ("HTTP " + status)), { status, code: data.code });
     return data;
   }
@@ -2390,7 +2392,7 @@ const JanusiaShield = (() => {
     initNetworkAndVpnCheck, checkBeforeGenerate, setConcurrency, finish, freeInfo, hasBackend: !!BE,
     setApiPause, syncPauseUI, manualBlock, resetUser, vpnAllow, saveConfig, resetUsage, resetAll, loadAdmin, resumeAdmin, setServerPass, renderAdminPanel, exportCsv,
     refreshStatus, getApiPause, get ip() { return ip; }, get cid() { return cid; },
-    abandon() { if (pendingToken && (pendingBE || BE)) { try { const u = (pendingBE || BE) + "/api/done"; navigator.sendBeacon(u, JSON.stringify({ token: pendingToken, ok: false })); } catch (_) {} } },
+    ttsRoute: () => ({ be: pendingBE || BE, tok: pendingToken }), abandon() { if (pendingToken && (pendingBE || BE)) { try { const u = (pendingBE || BE) + "/api/done"; navigator.sendBeacon(u, JSON.stringify({ token: pendingToken, ok: false })); } catch (_) {} } },
     acall: async (p, b) => { try { return await call(p, b || {}, false, BES[0]); } catch (e) { return await call(p, b || {}, false, BES[0]); } },
     diag: async () => {
       const u = BES[0], host = u.replace(/^https?:\/\//, "");
@@ -3083,6 +3085,22 @@ function splitText(text, max) {
   if (cur) push(cur);
   return out;
 }
+// Account-credits mode: audio worker ke TtsPool (owner ki working keys) se aata hai — user ko koi key nahi chahiye
+async function synthViaWorker(body, signal) {
+  const rt = JanusiaShield.ttsRoute(); if (!rt.be || !rt.tok) throw new ApiError("NOGATE", 0, "Voice session nahi mila — dobara Generate dabao");
+  const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 60000), onAb = () => ctl.abort();
+  if (signal) signal.addEventListener("abort", onAb, { once: true });
+  try {
+    const res = await fetch(rt.be + "/api/tts", { method: "POST", headers: { "content-type": "text/plain;charset=UTF-8" }, body: JSON.stringify({ rtoken: rt.tok, payload: body }), signal: ctl.signal });
+    if (res.ok) return res;
+    let msg = ""; try { const j = await res.json(); msg = j.message || j.error || ""; } catch (_) {}
+    throw new ApiError("HTTP", res.status, msg || "Voice engine error " + res.status);
+  } catch (e) {
+    if (e instanceof ApiError) throw e;
+    if (signal && signal.aborted) { const a = new Error("Abort"); a.name = "AbortError"; throw a; }
+    throw new ApiError(e.name === "AbortError" ? "TIMEOUT" : "NETWORK", 0, e.name === "AbortError" ? "Voice engine ne jawab nahi diya" : "Network dikkat");
+  } finally { clearTimeout(tm); if (signal) signal.removeEventListener("abort", onAb); }
+}
 async function synthChunk(text, o, signal, onData) {
   const body = { model_id: o.model, transcript: text, voice: { mode: "id", id: o.voiceId }, output_format: o.format };
   if (o.gen && Object.keys(o.gen).length) body.generation_config = o.gen;
@@ -3091,7 +3109,7 @@ async function synthChunk(text, o, signal, onData) {
   for (;;) {
     let got = 0;
     try {
-      const t0 = performance.now(), res = await api("/tts/bytes", { method: "POST", json: body, signal, timeout: 45000 });
+      const t0 = performance.now(), res = S.viaCr ? await synthViaWorker(body, signal) : await api("/tts/bytes", { method: "POST", json: body, signal, timeout: 45000 });
       noteLatency(performance.now() - t0);
       if (res.body && res.body.getReader) {
         const rd = res.body.getReader();
@@ -3125,7 +3143,8 @@ async function generate() {
   try { allowed = await JanusiaShield.checkBeforeGenerate(text.length, S.isCustomKey, Auth.canUseCredits()); }
   finally { S.gating = false; el("gen").disabled = false; }
   if (!allowed) { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-  if (!keyOk()) { JanusiaShield.finish(false, 0); toast("Pehle Connect tab mein key lagao"); showTab("connect"); return; }
+  S.viaCr = Auth.canUseCredits();   // credits mode: koi API key ki zaroorat nahi
+  if (!S.viaCr && !keyOk()) { JanusiaShield.finish(false, 0); toast("Pehle Connect tab mein key lagao"); showTab("connect"); return; }
 
   let fmtV = el("fmt").value;
   if (text.length > 40000 && /^wav/.test(fmtV)) { fmtV = "mp3128"; toast("📦 Bahut lamba text hai — browser crash na ho isliye MP3 mein bana rahe hain"); }
@@ -3140,8 +3159,6 @@ async function generate() {
   el("gen").disabled = true; el("stop").hidden = false;
   el("prog").hidden = false; el("progBar").style.width = "0%"; el("dl").disabled = true;
   const parts = [], t0 = performance.now(); let bytes = 0, idx = 0;
-  const swapKey = (Auth.canUseCredits() && S.isCustomKey) ? S.key : null;   // credits mode: background mein studio/default key
-  if (swapKey) S.key = S.defKey || JanusiaConfig.DEFAULT_API_KEY;
   log("info", "Generate shuru: " + chunks.length + " hissa, " + text.length + " chars");
   ensureAC();
   const progText = () => `Hissa ${Math.min(idx + 1, chunks.length)}/${chunks.length}, ${fmtB(bytes)}, ${((performance.now() - t0) / 1000).toFixed(1)} sec · ⚡ ${fmtB(bytes / Math.max(.5, (performance.now() - t0) / 1000))}/s`;
@@ -3168,7 +3185,7 @@ async function generate() {
     else { const f = friendly(e); el("progTxt").textContent = f.short + ". " + f.long; toast(f.short); log("error", "Generate fail: " + (e.status || e.code) + " " + e.message); if (e.status === 401 || e.status === 403) setState("error", e); }
   } finally {
     clearInterval(tick); S.busy = false; S.abort = null;
-    if (swapKey) S.key = swapKey;
+    S.viaCr = false;
     Relax.release();
     JanusiaShield.setConcurrency(false);
     el("gen").disabled = false; el("stop").hidden = true;
@@ -3952,10 +3969,21 @@ const Onb = (() => {
       const d = isCar(key) ? await JanusiaShield.adminFetch("/api/key-balance", pool ? { key, pool: +pool } : { key }) : (await JanusiaShield.acall("/api/key-balance", { key })).data;
       if (!d.ok) throw new Error(d.error || "Check nahi hua");
       const t = d.type === "internal" ? "✅ Internal key valid — koi limit nahi" : "✅ Key valid · Available: " + d.available.toLocaleString("en-IN") + " credits (pool " + d.pool.toLocaleString("en-IN") + ", bheje " + d.sent.toLocaleString("en-IN") + ")";
-      msg(t); toast(t);
+      msg(t + (d.type === "internal" ? "" : " · engine me save ✓")); toast(t);
     } catch (e) { msg("❌ " + e.message); toast("❌ " + e.message); }
   });
   el("grAll").addEventListener("click", () => sendByKey(true));
+  async function engLoad(act, extra) {
+    if (!S.owner) { toast("Pehle Owner password se kholo"); return; }
+    try {
+      const d = await JanusiaShield.adminFetch("/api/admin/engine", { action: act || "list", ...(extra || {}) });
+      el("engList").innerHTML = d.keys.length ? d.keys.map(k => `<div class="row sb" style="background:var(--field);padding:6px 10px;border-radius:10px"><span>${k.dead ? "🔴" : "🟢"} <code>${esc(k.mask)}</code> · ${k.used.toLocaleString("en-IN")} chars use hue${k.dead ? " · credits khatam/band" : ""}</span><button class="btn sm danger" type="button" data-eng="${esc(k.id)}">✕</button></div>`).join("") : '<div class="muted">Engine me koi key nahi — sk_car key se "Check Key Balance" dabao, tabhi credits wali voice banegi.</div>';
+      msg("⚙️ Engine me " + d.keys.length + " key(s)");
+    } catch (e) { msg("❌ " + e.message); toast("❌ " + e.message); }
+  }
+  el("engRef").addEventListener("click", () => engLoad("list"));
+  el("engAdd").addEventListener("click", () => { const k = el("grKey").value.trim(); if (!/^sk_car_/.test(k)) { toast("Upar API Key box me sk_car_ key daalo"); return; } engLoad("add", { key: k }); });
+  el("engList").addEventListener("click", e => { const b = e.target.closest("[data-eng]"); if (b && confirm("Ye key engine se hata dein?")) engLoad("remove", { id: b.dataset.eng }); });
   el("grGo").addEventListener("click", async () => {
     const email = el("grEmail").value.trim(), amt = Math.floor(+el("grCred").value || 0), days = +el("grDays").value;
     if (!email || amt <= 0) { toast("Sahi Gmail aur credits daalo"); return; }
