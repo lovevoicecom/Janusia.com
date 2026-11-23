@@ -146,7 +146,8 @@ audio{width:100%;margin-top:8px;border-radius:10px}
 "use strict";
 /* ================= CONFIG (yahin se sab badlo) ================= */
 const API_BASE   = "https://sangitadevi99as--janusia-voice-clone-voicecloner-web-app.modal.run";
-let ENDPOINT   = (function(){try{return localStorage.getItem("jn_ep")||"/clone"}catch(_){return "/clone"}})();          // "/synthesize" ya "/generate" bhi ho sakta hai
+const SECRET_KEY = "janusia2026";          // backend /start ke liye
+const POLL_MS = 3000, START_RETRIES = 2, START_RETRY_MS = 4000;
 const PASS_HASH  = "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee";   // SHA-256 (plain password code mein nahi hai)
 const SESSION_KEY = "jn_rudra_session";
 const CHUNK_MIN = 220, CHUNK_MAX = 250;        // characters per segment
@@ -303,147 +304,139 @@ const Studio = (() => {
     } catch (_) { $q("refDur").textContent = "Audio decode nahi hua — doosri file try karo"; }
   }
 
-  /* ---- server call ---- */
-  function errExplain(status, msg, ms) {
+  /* ---- server call (async job: /start -> /status/{id} -> /download/{id}) ---- */
+  const base = () => API_BASE.replace(/\/+$/, "");
+  function errExplain(status, msg) {
+    const sv = msg ? "\nServer: " + String(msg).slice(0, 200) : "";
     if (status === 0) return "Server tak request nahi pahunchi.\n• GPU server cold-start ho sakta hai (pehli request 30–90 sec leti hai) — dobara try karo.\n• Ya Modal app band/URL galat/CORS block ho sakta hai.\n• Internet check karo.";
-    if (status === 404) return "Endpoint nahi mila (404). Code ke upar ENDPOINT = \"" + ENDPOINT + "\" ko \"/synthesize\" ya \"/generate\" karke try karo.";
-    if (status === 405) return "Method allowed nahi (405). Endpoint ka path ya HTTP method backend se match nahi kar raha.";
+    if (status === 404) return "Job ya route nahi mila (404). Server restart hua ho to job gum ho jata hai — naya Voice Clone shuru karo." + sv;
+    if (status === 405) return "Method allowed nahi (405). /start POST, /status aur /download GET hone chahiye.";
     if (status === 413) return "File / data bahut bada (413). Reference audio chhota karo.";
-    if (status === 422 || status === 400) return "Backend ne data reject kiya (" + status + "). Field names: speaker_wav, text, language, speed. " + (msg ? "\nServer: " + msg.slice(0, 200) : "");
-    if (status === 401 || status === 403) return "Access denied (" + status + "). Backend par auth/CORS settings check karo.";
+    if (status === 422 || status === 400) return "Backend ne data reject kiya (" + status + "). Fields: secret_key, speaker_wav, text, lang, speed." + sv;
+    if (status === 401 || status === 403) return "Access denied (" + status + "). secret_key ya backend auth check karo." + sv;
     if (status === 429) return "Bahut zyada requests (429). Thoda ruk kar resume karo.";
-    if (status >= 500) return "GPU server error (" + status + "). " + (msg ? "\nServer: " + msg.slice(0, 200) : "") + "\nModal dashboard → Logs check karo; resume dabao.";
-    return "Error " + status + (msg ? ": " + msg.slice(0, 200) : "");
+    if (status >= 500) return "GPU server error (" + status + ")." + sv + "\nModal dashboard → Logs check karo.";
+    return "Error " + status + sv;
   }
-  async function readAudio(res) {
-    const ct = (res.headers.get("content-type") || "").toLowerCase();
-    if (ct.includes("json")) {
-      const j = await res.json(), b64 = j.audio_base64 || j.audio || j.wav_base64;
-      if (b64) { const bin = atob(String(b64).replace(/^data:[^,]+,/, "")), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; }
-      const url = j.audio_url || j.url; if (url) { const r2 = await fetch(url); if (!r2.ok) throw Object.assign(new Error("audio_url fetch fail"), { status: r2.status }); return await r2.arrayBuffer(); }
-      throw Object.assign(new Error(j.error || j.detail || "Response mein audio nahi mila"), { status: 502 });
+  async function httpErr(res) { let m = ""; try { m = await res.text(); } catch (_) {} return Object.assign(new Error(m || ("HTTP " + res.status)), { status: res.status, body: m }); }
+  async function startJob(signal, onCold) {
+    for (let a = 0; a <= START_RETRIES; a++) {
+      const fd = new FormData();
+      fd.append("secret_key", SECRET_KEY); fd.append("speaker_wav", ref, ref.name);
+      fd.append("text", job.text); fd.append("lang", job.lang); fd.append("speed", String(job.speed));
+      const cold = setTimeout(onCold, 9000);
+      try {
+        const res = await fetch(base() + "/start", { method: "POST", body: fd, mode: "cors", signal });
+        if (!res.ok) throw await httpErr(res);
+        const j = await res.json(), id = j.job_id || j.id || j.jobId;
+        if (!id) throw Object.assign(new Error("job_id nahi mila: " + JSON.stringify(j).slice(0, 120)), { status: 502 });
+        return String(id);
+      } catch (e) {
+        if (signal.aborted) throw Object.assign(new Error("cancel"), { cancelled: true });
+        if (e.status) throw e;
+        if (a < START_RETRIES) { log("Server tak nahi pahunchi (cold-start?) — " + (START_RETRY_MS / 1000) + "s baad retry " + (a + 1) + "/" + START_RETRIES, "e"); await sleep(START_RETRY_MS); }
+        else throw Object.assign(new Error(e.message || "Failed to fetch"), { status: 0 });
+      } finally { clearTimeout(cold); }
     }
-    return await res.arrayBuffer();
   }
-  async function synth(text, lang, speed, signal, onCold) {
-    const fd = new FormData();
-    fd.append("speaker_wav", ref, ref.name); fd.append("text", text); fd.append("language", lang); fd.append("speed", String(speed));
-    const local = new AbortController(), kill = setTimeout(() => local.abort("timeout"), REQ_TIMEOUT_MS), cold = setTimeout(onCold, 9000);
-    const onAbort = () => local.abort("user"); signal.addEventListener("abort", onAbort);
-    try {
-      let res = await fetch(API_BASE.replace(/\/+$/, "") + ENDPOINT, { method: "POST", body: fd, mode: "cors", signal: local.signal });
-      if (res.status === 404 || res.status === 405) {
-        // Auto-discover: server ka openapi.json padho, warna common naam try karo
-        let cands = [];
-        try { const o = await (await fetch(API_BASE.replace(/\/+$/, "") + "/openapi.json", { signal: local.signal })).json();
-          for (const k in (o.paths || {})) if (o.paths[k].post) cands.push(k); } catch (_) {}
-        ["/clone", "/synthesize", "/generate", "/tts", "/clone_voice", "/voice_clone", "/api/clone", "/api/tts", "/infer", "/predict", "/"].forEach(function (c) { if (cands.indexOf(c) < 0) cands.push(c); });
-        for (const c of cands) {
-          if (c === ENDPOINT) continue;
-          let r2; try { r2 = await fetch(API_BASE.replace(/\/+$/, "") + c, { method: "POST", body: fd, mode: "cors", signal: local.signal }); } catch (e2) { if (local.signal.aborted) throw e2; log("Try " + c + ": " + (e2.message || "blocked"), "e"); continue; }
-          if (r2.status !== 404 && r2.status !== 405) { ENDPOINT = c; try { localStorage.setItem("jn_ep", c); } catch (_) {} log("Sahi endpoint mil gaya: " + c, "o"); res = r2; break; }
-        }
-      }
-      if (!res.ok) { let m = ""; try { m = await res.text(); } catch (_) {} throw Object.assign(new Error(m || ("HTTP " + res.status)), { status: res.status, body: m }); }
-      const buf = await readAudio(res);
-      if (!buf || buf.byteLength < 1000) throw Object.assign(new Error("Khali / bahut chhota audio mila"), { status: 502 });
-      return buf;
-    } catch (e) {
-      if (e.status) throw e;
-      if (local.signal.aborted && local.signal.reason === "timeout") throw Object.assign(new Error("timeout"), { status: 504, timeout: true });
+  const DONE = ["completed", "complete", "done", "success", "finished"], FAIL = ["failed", "error", "failure"];
+  function readProg(j) {
+    let pct = j.progress != null ? +j.progress : j.percent != null ? +j.percent : NaN;
+    const cur = +(j.current_chunk != null ? j.current_chunk : j.done_chunks != null ? j.done_chunks : NaN), tot = +(j.total_chunks != null ? j.total_chunks : j.chunks != null ? j.chunks : NaN);
+    if (isNaN(pct) && !isNaN(cur) && tot > 0) pct = cur / tot * 100;
+    else if (!isNaN(pct) && pct <= 1 && String(j.progress).indexOf(".") >= 0) pct *= 100;
+    return { pct: isNaN(pct) ? null : Math.max(0, Math.min(100, Math.round(pct))), cur: isNaN(cur) ? null : cur, tot: isNaN(tot) ? null : tot, msg: j.message || j.msg || j.detail || "" };
+  }
+  function showProg(pr, st) {
+    const pct = pr.pct != null ? pr.pct : (job.lastPct || 0); job.lastPct = pct;
+    $q("bar").style.width = pct + "%"; $q("pct").textContent = pct + "%";
+    $q("segTxt").textContent = pr.tot ? "Segment " + Math.min(pr.tot, (pr.cur || 0) + (pr.cur < pr.tot ? 1 : 0)) + " of " + pr.tot : (st || "Chal raha hai…");
+    const el = (Date.now() - job.t0) / 1000, eta = pct > 3 && pct < 100 ? el / pct * (100 - pct) : 0;
+    $q("timeTxt").textContent = "⏱ " + fmtT(el) + (eta ? " · ETA ~" + fmtT(eta) : "");
+    $q("snip").innerHTML = "🛰️ Status: <b>" + esc(st || "…") + "</b>" + (pr.msg ? "<br>" + esc(String(pr.msg).slice(0, 200)) : "");
+  }
+  async function pollJob(signal) {
+    let lastMsg = "", netFails = 0;
+    for (;;) {
       if (signal.aborted) throw Object.assign(new Error("cancel"), { cancelled: true });
-      throw Object.assign(new Error(e.message || "network"), { status: 0 });
-    } finally { clearTimeout(kill); clearTimeout(cold); signal.removeEventListener("abort", onAbort); }
-  }
-  async function decode(buf) {
-    if (!ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext, r = wavRate(buf) || 0;
-      try { ctx = r >= 8000 && r <= 96000 ? new AC({ sampleRate: r }) : new AC(); } catch (_) { ctx = new AC(); }
-      rate = ctx.sampleRate;
+      let res;
+      try { res = await fetch(base() + "/status/" + encodeURIComponent(job.id), { cache: "no-store", mode: "cors", signal }); netFails = 0; }
+      catch (e) {
+        if (signal.aborted) throw Object.assign(new Error("cancel"), { cancelled: true });
+        if (++netFails > 5) throw Object.assign(new Error(e.message || "network"), { status: 0 });
+        log("Status check fail (" + netFails + "/5) — dobara…", "e"); await sleep(POLL_MS); continue;
+      }
+      if (!res.ok) { if (res.status >= 500 && ++netFails <= 5) { await sleep(POLL_MS); continue; } throw await httpErr(res); }
+      let j = {}; try { j = await res.json(); } catch (_) {}
+      const st = String(j.status || j.state || "").toLowerCase(), pr = readProg(j);
+      showProg(pr, st);
+      const line = st + "|" + pr.pct + "|" + pr.msg;
+      if (line !== lastMsg) { lastMsg = line; log("Status: " + (st || "?") + (pr.pct != null ? " · " + pr.pct + "%" : "") + (pr.tot ? " · chunk " + (pr.cur || 0) + "/" + pr.tot : "") + (pr.msg ? " · " + String(pr.msg).slice(0, 100) : ""), "o"); }
+      if (FAIL.indexOf(st) >= 0) throw Object.assign(new Error("job-failed"), { status: 500, msg: j.error || j.message || j.detail || "Backend job fail hui", jobFail: true });
+      if (DONE.indexOf(st) >= 0) return;
+      await sleep(POLL_MS);
     }
-    const ab = await ctx.decodeAudioData(buf.slice(0));
-    return toMonoInt16(ab);
   }
 
   /* ---- main job ---- */
   function setRunning(b) {
     running = b; $q("go").disabled = b; $q("cancel").style.display = b ? "" : "none"; $q("go").textContent = b ? "⏳ Ban rahi hai…" : "🎙️ Voice Clone Karo";
-    $q("resume").style.display = !b && job && job.done.some(x => !x) && job.done.some(x => x) ? "" : "none";
+    $q("resume").style.display = !b && job && !job.finished ? "" : "none";
     if (b) { try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(w => { wake = w; }).catch(() => {}); } catch (_) {} }
     else if (wake) { try { wake.release(); } catch (_) {} wake = null; }
-  }
-  function progress(i, total, t0, snippet, extra) {
-    const pct = total ? Math.round(i / total * 100) : 0;
-    $q("bar").style.width = pct + "%"; $q("pct").textContent = pct + "%";
-    $q("segTxt").textContent = i >= total ? "Poora hua ✅" : "Segment " + Math.min(total, i + 1) + " of " + total;
-    const el = (Date.now() - t0) / 1000, eta = i > 0 ? el / i * (total - i) : 0;
-    $q("timeTxt").textContent = "⏱ " + fmtT(el) + (i > 0 && i < total ? " · ETA ~" + fmtT(eta) : "");
-    if (snippet != null) $q("snip").innerHTML = "🗣️ " + esc(snippet.length > 160 ? snippet.slice(0, 160) + "…" : snippet);
-    if (extra) $q("snip").innerHTML += "<br><span class='chip warn' style='margin-top:6px'>" + esc(extra) + "</span>";
   }
   async function run(resume) {
     if (running) return;
     diag("");
-    if (!ref) { toast("Pehle reference voice upload karo"); return; }
-    const text = $q("txt").value;
     if (!resume) {
-      if (!text.trim()) { toast("Script likho"); return; }
-      const chunks = chunkText(text); if (!chunks.length) { toast("Script khali hai"); return; }
-      job = { chunks, done: new Array(chunks.length).fill(null), lang: $q("lang").value, speed: +$q("speed").value, pause: +$q("pause").value, t0: Date.now() };
-      ctx = null; rate = 0; $q("log").innerHTML = ""; $q("out").classList.remove("show");
-      log("Script " + chunks.length + " segments mein baanta gaya (" + chunks.reduce((a, c) => a + c.length, 0).toLocaleString("en-IN") + " chars).");
+      if (!ref) { toast("Pehle reference voice upload karo"); return; }
+      const text = $q("txt").value.trim();
+      if (!text) { toast("Script likho"); return; }
+      job = { id: "", text, lang: $q("lang").value, speed: +$q("speed").value, t0: Date.now(), lastPct: 0, finished: false };
+      $q("log").innerHTML = ""; $q("out").classList.remove("show");
+      log("Poori script (" + text.length.toLocaleString("en-IN") + " chars) ek hi /start call mein bheji ja rahi hai — chunking + stitching server karega.");
     } else if (!job) return;
-    job.pause = +$q("pause").value;
+    else if (!job.id && !ref) { toast("Pehle reference voice upload karo"); return; }
     ctrl = new AbortController(); setRunning(true); $q("progCard").style.display = "";
-    const total = job.chunks.length; let doneCount = job.done.filter(Boolean).length;
-    progress(doneCount, total, job.t0, "");
+    showProg({ pct: job.lastPct }, job.id ? "resume" : "start");
     try {
-      for (let i = 0; i < total; i++) {
-        if (job.done[i]) continue;
-        if (ctrl.signal.aborted) throw Object.assign(new Error("cancel"), { cancelled: true });
-        let ok = false, lastErr = null;
-        for (let a = 0; a <= RETRIES && !ok; a++) {
-          try {
-            progress(doneCount, total, job.t0, job.chunks[i], a ? "Retry " + a + "/" + RETRIES : "");
-            const t1 = Date.now();
-            const buf = await synth(job.chunks[i], job.lang, job.speed, ctrl.signal, () => { progress(doneCount, total, job.t0, job.chunks[i], "GPU cold-start ho raha hai — 30–90 sec lag sakte hain…"); log("Server cold-start lag raha hai, intezaar…"); });
-            job.done[i] = await decode(buf); ok = true; doneCount++;
-            log("Segment " + (i + 1) + "/" + total + " ✓ (" + ((Date.now() - t1) / 1000).toFixed(1) + "s)", "o");
-          } catch (e) {
-            if (e.cancelled) throw e;
-            lastErr = e; log("Segment " + (i + 1) + " fail: " + (e.timeout ? "timeout" : (e.status || "network")) + " " + String(e.message).slice(0, 80), "e");
-            if (e.status === 404 || e.status === 405 || e.status === 422 || e.status === 400 || e.status === 413 || e.status === 401 || e.status === 403) break;   // retry se theek nahi hoga
-            if (a < RETRIES) await sleep(2000 * (a + 1));
-          }
-        }
-        if (!ok) { const e = lastErr || {}; throw Object.assign(new Error("segment-fail"), { status: e.timeout ? 504 : (e.status || 0), msg: e.body || e.message, seg: i + 1 }); }
-        progress(doneCount, total, job.t0, job.chunks[i]);
-      }
+      if (!job.id) {
+        $q("snip").textContent = "🚀 Job shuru ho rahi hai…";
+        job.id = await startJob(ctrl.signal, () => { $q("snip").innerHTML = "<span class='chip warn'>GPU cold-start ho raha hai — 30–90 sec lag sakte hain…</span>"; log("Server cold-start ho raha hai…"); });
+        log("Job shuru: " + job.id, "o");
+      } else log("Job " + job.id + " par dobara status le rahe hain…");
+      await pollJob(ctrl.signal);
       finish();
     } catch (e) {
-      if (e.cancelled) { log("Roka gaya. Ab tak ki segments save hain — Resume dabao.", "e"); toast("Roka gaya"); }
-      else { diag("Segment " + (e.seg || "?") + " par ruk gaya.\n" + errExplain(e.status, e.msg) + "\n\n▶ “Resume” dabao — pehle ke " + doneCount + " segments dobara nahi banenge."); toast("Error — detail neeche"); }
+      if (e.cancelled) { log("Poll roka gaya. Job server par chal rahi hai — Resume dabao.", "e"); toast("Roka gaya"); }
+      else {
+        if (e.jobFail || e.status === 404) { if (job) { job.id = ""; } }
+        diag((job && job.id ? "Job " + job.id + " par ruk gaya.\n" : "Job shuru nahi ho payi.\n") + errExplain(e.status, e.msg) + (job && job.id ? "\n\n▶ “Resume” dabao — wahin se status check hoga." : "\n\n▶ “Resume” dabao — dobara /start chalega."));
+        toast("Error — detail neeche");
+      }
     } finally { setRunning(false); }
   }
-  function finish() {
-    const total = job.chunks.length, gap = new Int16Array(Math.round(job.pause * rate)), parts = [];
-    job.done.forEach((p, i) => { parts.push(p); if (i < total - 1 && gap.length) parts.push(gap); });
-    const { blob, samples } = buildWav(parts, rate);
-    if (outUrl) URL.revokeObjectURL(outUrl); outUrl = URL.createObjectURL(blob);
-    $q("outAudio").src = outUrl; $q("dl").href = outUrl;
-    const d = new Date(), p = n => String(n).padStart(2, "0");
-    $q("dl").download = "janusia-rudra-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + "-" + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()) + ".wav";
-    $q("outInfo").textContent = "⏱ " + fmtT(samples / rate) + " · " + fmtB(blob.size) + " · " + rate + " Hz · 16-bit PCM WAV";
-    $q("out").classList.add("show"); progress(total, total, job.t0, "");
-    log("Final WAV taiyaar: " + fmtT(samples / rate) + " (" + fmtB(blob.size) + ")", "o"); toast("✅ Voice taiyaar — Download karo");
+  async function finish() {
+    job.finished = true;
+    const url = base() + "/download/" + encodeURIComponent(job.id), d = new Date(), p = n => String(n).padStart(2, "0");
+    $q("outAudio").src = url; $q("dl").href = url; $q("dl").download = "rudra_studio_voice.mp3";
+    $q("outInfo").textContent = "🎧 Final MP3 server se aa raha hai — niche play ya download karo.";
+    $q("out").classList.add("show"); showProg({ pct: 100 }, "completed"); $q("segTxt").textContent = "Poora hua ✅";
+    log("Final MP3 taiyaar: " + url, "o"); toast("✅ Voice taiyaar — Download karo");
     $q("out").scrollIntoView({ behavior: "smooth", block: "center" });
+    // cross-origin par download attribute kaam nahi karta, isliye blob se rudra_studio_voice.mp3 banate hain
+    try {
+      const r = await fetch(url, { mode: "cors" }); if (!r.ok) throw 0;
+      const bl = await r.blob(); if (outUrl) URL.revokeObjectURL(outUrl); outUrl = URL.createObjectURL(new Blob([bl], { type: "audio/mpeg" }));
+      $q("dl").href = outUrl; $q("outAudio").src = outUrl; $q("outInfo").textContent = "⏱ Final MP3 · " + fmtB(bl.size);
+    } catch (_) { log("Direct link se hi play/download chalega.", "e"); }
   }
   async function testServer() {
     const b = $q("test"); b.disabled = true; const t0 = Date.now(); diag("");
     log("Server test: " + API_BASE + " …");
     try {
       const c = new AbortController(), k = setTimeout(() => c.abort(), 90000);
-      const r = await fetch(API_BASE.replace(/\/+$/, "") + "/", { method: "GET", mode: "cors", signal: c.signal }); clearTimeout(k);
+      const r = await fetch(base() + "/status/ping", { method: "GET", mode: "cors", signal: c.signal }); clearTimeout(k);
       const s = ((Date.now() - t0) / 1000).toFixed(1);
       $q("srv").className = "chip ok"; $q("srv").textContent = "● Server online (" + r.status + ", " + s + "s)"; log("Server jawab diya: HTTP " + r.status + " in " + s + "s", "o"); toast("Server online ✅");
     } catch (e) {
@@ -508,7 +501,7 @@ const Studio = (() => {
 
   <section class="card full">
     <div class="row sb"><h2 style="margin:0">📝 Script (Hindi / Hinglish / English)</h2><span class="row"><button class="btn sm" id="sample" type="button">Sample</button><button class="btn sm danger" id="clear" type="button">Saaf</button></span></div>
-    <p class="sub" style="margin-top:4px">10–20 minute ki lambi script bhi paste kar sakte ho — apne-aap ${CHUNK_MIN}–${CHUNK_MAX} character ke segments mein tootegi (।  .  ?  ! par).</p>
+    <p class="sub" style="margin-top:4px">10–20 minute ki lambi script bhi paste kar sakte ho — server apne-aap segments mein todkar jod dega.</p>
     <textarea id="txt" spellcheck="false" placeholder="यहाँ अपनी स्क्रिप्ट लिखो या paste करो… नमस्ते दोस्तों। Aaj hum ek nayi kahani sunenge."></textarea>
     <div class="stats">
       <div class="stat"><small>Characters</small><b id="sChars">0</b></div>
@@ -535,7 +528,7 @@ const Studio = (() => {
     <h2>✅ Final Audio</h2>
     <p class="sub" id="outInfo"></p>
     <audio id="outAudio" controls preload="auto"></audio>
-    <div class="row" style="margin-top:12px"><a class="btn pri" id="dl" href="#" download="janusia-rudra.wav">⬇️ Download WAV</a></div>
+    <div class="row" style="margin-top:12px"><a class="btn pri" id="dl" href="#" download="rudra_studio_voice.mp3">⬇️ Download MP3</a></div>
   </section>
 </main>`;
     bind(); updateText();
