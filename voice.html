@@ -146,7 +146,7 @@ audio{width:100%;margin-top:8px;border-radius:10px}
 "use strict";
 /* ================= CONFIG (yahin se sab badlo) ================= */
 const API_BASE   = "https://sangitadevi99as--janusia-voice-clone-voicecloner-web-app.modal.run";
-const ENDPOINT   = "/clone";          // "/synthesize" ya "/generate" bhi ho sakta hai
+let ENDPOINT   = (function(){try{return localStorage.getItem("jn_ep")||"/clone"}catch(_){return "/clone"}})();          // "/synthesize" ya "/generate" bhi ho sakta hai
 const PASS_HASH  = "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee";   // SHA-256 (plain password code mein nahi hai)
 const SESSION_KEY = "jn_rudra_session";
 const CHUNK_MIN = 220, CHUNK_MAX = 250;        // characters per segment
@@ -331,7 +331,19 @@ const Studio = (() => {
     const local = new AbortController(), kill = setTimeout(() => local.abort("timeout"), REQ_TIMEOUT_MS), cold = setTimeout(onCold, 9000);
     const onAbort = () => local.abort("user"); signal.addEventListener("abort", onAbort);
     try {
-      const res = await fetch(API_BASE.replace(/\/+$/, "") + ENDPOINT, { method: "POST", body: fd, mode: "cors", signal: local.signal });
+      let res = await fetch(API_BASE.replace(/\/+$/, "") + ENDPOINT, { method: "POST", body: fd, mode: "cors", signal: local.signal });
+      if (res.status === 404 || res.status === 405) {
+        // Auto-discover: server ka openapi.json padho, warna common naam try karo
+        let cands = [];
+        try { const o = await (await fetch(API_BASE.replace(/\/+$/, "") + "/openapi.json", { signal: local.signal })).json();
+          for (const k in (o.paths || {})) if (o.paths[k].post) cands.push(k); } catch (_) {}
+        ["/clone", "/synthesize", "/generate", "/tts", "/clone_voice", "/voice_clone", "/api/clone", "/api/tts", "/infer", "/predict", "/"].forEach(function (c) { if (cands.indexOf(c) < 0) cands.push(c); });
+        for (const c of cands) {
+          if (c === ENDPOINT) continue;
+          const r2 = await fetch(API_BASE.replace(/\/+$/, "") + c, { method: "POST", body: fd, mode: "cors", signal: local.signal });
+          if (r2.status !== 404 && r2.status !== 405) { ENDPOINT = c; try { localStorage.setItem("jn_ep", c); } catch (_) {} log("Sahi endpoint mil gaya: " + c, "o"); res = r2; break; }
+        }
+      }
       if (!res.ok) { let m = ""; try { m = await res.text(); } catch (_) {} throw Object.assign(new Error(m || ("HTTP " + res.status)), { status: res.status, body: m }); }
       const buf = await readAudio(res);
       if (!buf || buf.byteLength < 1000) throw Object.assign(new Error("Khali / bahut chhota audio mila"), { status: 502 });
