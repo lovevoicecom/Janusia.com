@@ -340,7 +340,7 @@ const Studio = (() => {
         ["/clone", "/synthesize", "/generate", "/tts", "/clone_voice", "/voice_clone", "/api/clone", "/api/tts", "/infer", "/predict", "/"].forEach(function (c) { if (cands.indexOf(c) < 0) cands.push(c); });
         for (const c of cands) {
           if (c === ENDPOINT) continue;
-          const r2 = await fetch(API_BASE.replace(/\/+$/, "") + c, { method: "POST", body: fd, mode: "cors", signal: local.signal });
+          let r2; try { r2 = await fetch(API_BASE.replace(/\/+$/, "") + c, { method: "POST", body: fd, mode: "cors", signal: local.signal }); } catch (e2) { if (local.signal.aborted) throw e2; log("Try " + c + ": " + (e2.message || "blocked"), "e"); continue; }
           if (r2.status !== 404 && r2.status !== 405) { ENDPOINT = c; try { localStorage.setItem("jn_ep", c); } catch (_) {} log("Sahi endpoint mil gaya: " + c, "o"); res = r2; break; }
         }
       }
