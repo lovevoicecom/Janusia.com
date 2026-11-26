@@ -826,7 +826,7 @@ html.paused *{animation-play-state:paused!important}
       <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button></div>
       <button class="btn sm liteBtn" type="button" style="width:100%;margin-top:6px"></button>
       <select style="width:100%;margin-top:6px" class="langSel" aria-label="Language"><option value="hing">🌐 Hinglish</option><option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option><option value="bn">🌐 বাংলা</option></select>
-      <span class="verTag">⚡ v6.7 · Updated 26 Nov 2026</span>
+      <span class="verTag">⚡ v6.8 · Updated 26 Nov 2026</span>
     </div>
   </aside>
 
@@ -927,8 +927,9 @@ html.paused *{animation-play-state:paused!important}
           </div>
         </div>
 
-        <div class="glass">
-          <h2>Awaaz ki setting</h2>
+        <details class="glass" id="vset">
+          <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><h2 style="margin:0">⚙️ Awaaz ki setting</h2><span class="small muted" id="vsetSum">Tap karke kholo</span></summary>
+          <div style="height:12px"></div>
           <div class="g2">
             <label class="f"><b>Bhasha</b><select id="lang"></select></label>
             <label class="f"><b>Emotion</b><select id="emo"></select></label>
@@ -954,7 +955,7 @@ html.paused *{animation-play-state:paused!important}
               <p class="small muted" style="align-self:end">🔇 Awaaz banne ke baad apne-aap nahi chalegi — jab chaho ▶ dabakar suno. Banate waqt gaana/music pura ruk jata hai.</p><input id="live" type="checkbox" hidden>
             </div>
           </details>
-        </div>
+        </details>
 
         <div class="row">
           <button class="btn primary" id="gen" type="button" style="flex:1;min-height:56px;font-size:17px">🎙️ Awaaz banao</button>
@@ -1751,7 +1752,7 @@ html.paused *{animation-play-state:paused!important}
 
   <footer class="lvfoot">
     <span class="lvmade">Made with Janusia</span>
-    <span class="lvver">⚡ v6.7 · Updated 26 Nov 2026</span>
+    <span class="lvver">⚡ v6.8 · Updated 26 Nov 2026</span>
     <span class="lvby">Crafted by <b class="nm">J Ashish Gupta</b></span>
     <span class="lvlinks"><a href="https://youtube.com/@janusiacom?si=QOYkAo7UzLwhLaLL" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#fff"/><rect x="4" y="11" width="40" height="26" rx="8" fill="#FF0000"/><path d="M20 18l12 6-12 6z" fill="#fff"/></svg></span>YouTube</a> <a href="https://www.instagram.com/janusiacom?xtok=MTVicjQ2YW8yNXA3Yg==" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><radialGradient id="gIg" cx=".25" cy="1.05" r="1.2"><stop offset="0" stop-color="#FEDA75"/><stop offset=".25" stop-color="#FA7E1E"/><stop offset=".5" stop-color="#D62976"/><stop offset=".75" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs><rect width="48" height="48" rx="13" fill="url(#gIg)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.500" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg></span>Instagram</a> <a href="https://t.me/Janusia10" target="_blank" rel="noopener"><span class="plogo"><svg viewBox="0 0 48 48"><defs><linearGradient id="gTg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#37AEE2"/><stop offset="1" stop-color="#1E96C8"/></linearGradient></defs><circle cx="24" cy="24" r="24" fill="url(#gTg)"/><g transform="translate(9 9) scale(1.250)"><path fill="#fff" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></g></svg></span>Telegram</a></span>
   </footer>
@@ -1801,6 +1802,12 @@ html.paused *{animation-play-state:paused!important}
     <button class="btn gold sbtn app" data-app="other" type="button"><span class="plogo"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="10" fill="#fff"/><rect x="8" y="13" width="32" height="22" rx="4" fill="#F59E0B"/><rect x="8" y="18" width="32" height="5" fill="#7C2D12"/><rect x="12" y="28" width="10" height="3" rx="1.500" fill="#fff"/></svg></span><span>Other App</span></button>
   </div>
 
+  <div class="sumbox" id="utrBox" style="display:grid;gap:8px;margin-top:12px">
+    <b style="font-size:14px">✅ Payment ke baad UTR / Transaction ID daalo</b>
+    <input id="planUtrInp" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30" placeholder="UTR / Transaction ID (12 digit)" aria-label="UTR number">
+    <button class="btn primary sbtn" id="planPaidBtn" type="button">✅ Maine pay kar diya</button>
+    <span class="small muted">Owner payment check karke aapke account mein characters jod dega.</span>
+  </div>
   <div class="row2">
     <button class="btn sbtn" id="enqTg" type="button">📲 Telegram Screenshot</button>
     <button class="btn sbtn" id="enqMail" type="button">✉️ Email Screenshot</button>
@@ -1885,8 +1892,8 @@ const JanusiaConfig = {
   DEFAULT_API_KEY: "sk_car_x5S6WdwjShAgGXh45hDrRm",
   REMOTE_KEY_FILES: ["./api-key.txt", "./janusia-key.jnkey", "./key.json"],
   MASTER_PASS_SHA256: "121fa2aef94dbce52432fe74be6d7fa4f97b09fb03e29f88c4a73e84d66ea4ee",
-  VERSION: "6.7",
-  VERSION_LABEL: "v6.7 · Updated 26 Nov 2026",
+  VERSION: "6.8",
+  VERSION_LABEL: "v6.8 · Updated 26 Nov 2026",
   // Dono Worker chalte hain: pehla URL pehle try hota hai, wo na chale to agla apne-aap use hota hai. Koi bhi hata/badal sakte ho.
   BACKEND_URLS: ["https://janusia-6.th6tfjh.workers.dev", "https://janusia-v6.th6tfjh.workers.dev", "https://janusia-v5.polished-haze-db97.workers.dev", "https://janusia-shield.th6tfjh.workers.dev"],
   BACKEND_URL: "https://janusia-6.th6tfjh.workers.dev",
@@ -2004,7 +2011,7 @@ async function speakWelcomeFemale(custom) {
 /* ============================ v5.0 CORE: storage, lite mode, block wall ============================ */
 const TTS = (() => {   // voice engine ka model server (worker) se aata hai — UI me koi model choose nahi hota
   let m = ""; try { m = localStorage.getItem("jn_ttsm") || ""; } catch (_) {}
-  return { get: () => m, set(v) { if (v && /^[A-Za-z0-9._-]{3,40}$/.test(v)) { m = v; try { localStorage.setItem("jn_ttsm", v); } catch (_) {} } } };
+  return { get: () => m || "sonic-3", set(v) { if (v && /^[A-Za-z0-9._-]{3,40}$/.test(v)) { m = v; try { localStorage.setItem("jn_ttsm", v); } catch (_) {} } } };
 })();
 const Store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } },
@@ -3896,7 +3903,7 @@ const Auth = (() => {
 /* ============================ PLANS, CREDITS & CHECKOUT (UPI QR) ============================ */
 const PAY_ACCOUNTS = [
   { name: "Mrs Sangita Devi", tag: "Primary QR Scanner", pa: atob("OTkzOTAwMDA2M0BpYmw=") },
-  { name: "Sangita Dev W/O Jhunna Sah", tag: "Secondary QR Scanner", pa: atob("OTkzOTAwMDA2My0yQHlibA==") }
+  { name: "Mrs Sangita Devi", tag: "Secondary QR Scanner", pa: atob("OTkzOTAwMDA2My0yQHlibA==") }
 ];
 const Plans = (() => {
   // NOTE: ye numbers worker.js (RATE_*, PACKS) se same hone chahiye — wahi asli charge karta hai.
@@ -4039,6 +4046,20 @@ const Plans = (() => {
   el("curTog").addEventListener("click", e => { const b = e.target.closest("[data-cu]"); if (!b) return; cu = b.dataset.cu; Store.set("jn_cu", cu); refresh(); if (cur) renderCheckout(); });
   document.addEventListener("click", e => { if (e.target.closest && e.target.closest("#plAcctBtn")) Auth.open(S.acct ? "account" : "login"); });
   el("accs").addEventListener("click", e => { const b = e.target.closest("[data-acc]"); if (!b || !cur) return; accIdx = +b.dataset.acc; renderCheckout(); });
+  async function claimUtr() {
+    const b = el("planPaidBtn"), inp = el("planUtrInp"), utr = String(inp.value || "").trim().replace(/\s+/g, "").toUpperCase();
+    if (!cur) { toast("Pehle plan chuno"); return; }
+    if (!/^[A-Z0-9]{10,25}$/.test(utr)) { toast("Sahi UTR / Transaction ID daalo (kam se kam 10 character)"); inp.focus(); return; }
+    if (!S.acct) { toast("Pehle login karo"); closeCheckout(); Auth.open("login"); return; }
+    const q = cur, a = PAY_ACCOUNTS[accIdx], t0 = b.textContent; b.disabled = true; b.textContent = "⏳ Bhej rahe hain…";
+    try {
+      const s = cur.sel, { data } = await JanusiaShield.acall("/api/pay/claim-utr", { utr, amount: q.payable, plan: q.name, days: q.days, credits: q.credits, custom: !!s.custom, pack: s.classic || "", account: a.name, tag: a.tag });
+      if (data && data.ok) { inp.value = ""; closeCheckout(); Fx.celebrate("UTR mil gaya! ✅", "Owner verify karke characters jod dega"); toast("✅ Aapki payment request bhej di gayi"); }
+      else toast("❌ " + ((data && (data.message || data.error)) || "UTR submit nahi hua. Dobara try karo ya Telegram par contact karo."));
+    } catch (_) { toast("Network dikkat — dobara try karo ya Telegram par screenshot bhejo"); }
+    finally { b.disabled = false; b.textContent = t0; }
+  }
+  el("planPaidBtn").addEventListener("click", claimUtr);
   el("surX").addEventListener("click", closeCheckout);
   el("surpop").addEventListener("click", e => { if (e.target === el("surpop")) closeCheckout(); });
   const APP_PKG = { navi: "com.naviapp", bhim: "in.org.npci.upiapp", phonepe: "com.phonepe.app", paytm: "net.one97.paytm", gpay: "com.google.android.apps.nbu.paisa.user" };
@@ -4054,6 +4075,8 @@ const Plans = (() => {
   async function loadConf() {   // asli rate/bonus hamesha worker se (website aur server mein fark na ho)
     try {
       const { data } = await JanusiaShield.acall("/api/plans", {}); if (!data || !data.ok) return;
+      if (data.tts) TTS.set(data.tts);
+      if (!(+data.rc > 0) || !(+data.max > 0) || !(+data.rr > 0) || !Array.isArray(data.tiers)) return;   // adhoora jawab — purane rate hi rakho
       if (data.tts) TTS.set(data.tts);
       RC = data.rc; RCF = data.rcf || RCF; RR = data.rr; FEE = data.fee; FEEA = data.feeAbove == null ? FEEA : data.feeAbove; MIN = data.min; MINF = data.minFirst == null ? MINF : data.minFirst; MAX = data.max; TIERS = data.tiers; USD = data.usd || USD; STARTER = data.starter || STARTER;
       (data.classic || []).forEach(c => { const l = CLASSIC.find(x => x.id === c.id); if (l) { l.price = c.price; l.credits = c.credits; l.days = c.days; } });
@@ -5361,6 +5384,11 @@ const Merge = (() => {
   el("fmClear").addEventListener("click", () => { files = []; paint(); el("fmOut").hidden = true; });
   el("fmGo").addEventListener("click", go); paint();
   return { add };
+})();
+
+(function () {   // voice settings ka chhota summary (card band ho tab bhi dikhe)
+  const sum = () => { try { const l = el("lang"), e = el("emo"), f = el("fmt"); el("vsetSum").textContent = [l.selectedOptions[0] && l.selectedOptions[0].text, e.selectedOptions[0] && e.selectedOptions[0].text, f.selectedOptions[0] && f.selectedOptions[0].text.split(" ")[0] + " " + (f.selectedOptions[0].text.match(/\d+(\.\d+)? ?k?Hz|\d+ kbps/i) || [""])[0], (+el("spd").value).toFixed(2) + "x"].filter(Boolean).join(" · "); } catch (_) {} };
+  ["lang", "emo", "fmt", "spd", "vol"].forEach(i => { const n = el(i); if (n) { n.addEventListener("change", sum); n.addEventListener("input", sum); } }); setTimeout(sum, 1200); setTimeout(sum, 3500);
 })();
 
 /* ============================ INITIALIZE ON LOAD ============================ */
