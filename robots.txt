@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://lovevoicecom.github.io/Janusia.com/sitemap.xml
+
+Sitemap: https://janusia.in/sitemap.xml
