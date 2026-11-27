@@ -792,6 +792,137 @@ html.paused *{animation-play-state:paused!important}
 .mgItem b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mgItem button{min-width:34px}
 </style>
+<style id="jn-pro">
+/* ===== JANUSIA PRO UI — clean, neutral style ===== */
+:root{
+  --bg:#0f0f10; --bg2:#0f0f10; --ink:#f4f4f5; --muted:#9a9aa2;
+  --glass:#171718; --glass2:#1f1f21; --glass3:#262629;
+  --line:#2c2c30; --line2:#3a3a40;
+  --pink:#f4f4f5; --pink2:#e4e4e7; --violet:#a1a1aa; --cyan:#a1a1aa; --deep:#27272a; --gold:#d9b25f;
+  --ok:#34d399; --bad:#f87171; --warn:#fbbf24; --field:#111112; --shadow:rgba(0,0,0,.35);
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;
+  --btnbg:#f4f4f5; --btnink:#0f0f10;
+}
+body.light{
+  --bg:#ffffff; --bg2:#ffffff; --ink:#111113; --muted:#6b6b73;
+  --glass:#ffffff; --glass2:#f4f4f5; --glass3:#ececee;
+  --line:#e4e4e7; --line2:#d4d4d8;
+  --pink:#111113; --pink2:#27272a; --violet:#52525b; --cyan:#52525b; --deep:#e4e4e7; --gold:#9a6b00;
+  --ok:#059669; --bad:#dc2626; --warn:#b45309; --field:#fafafa; --shadow:rgba(0,0,0,.06);
+  --btnbg:#111113; --btnink:#ffffff;
+}
+body{background:var(--bg)!important;font-size:15px;font-weight:400;line-height:1.55}
+#gl,.jbg,.aurora{display:none!important}
+.glass,.glass:hover{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:18px;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;transform:none}
+h1,h2,h3{font-weight:650;letter-spacing:-.01em}
+h2{font-size:18px}
+.btn,.btn.sm{border-radius:9px;border:1px solid var(--line2);background:var(--glass);color:var(--ink);box-shadow:none;font-weight:550;min-height:40px}
+.btn.sm{min-height:34px;padding:5px 12px;font-size:13px}
+.btn:hover:not(:disabled){transform:none;background:var(--glass2);filter:none}
+.btn:active:not(:disabled){transform:none;box-shadow:none;background:var(--glass3)}
+.btn.primary,.btn.gold{background:var(--btnbg);color:var(--btnink);border-color:var(--btnbg);box-shadow:none}
+.btn.primary:hover:not(:disabled),.btn.gold:hover:not(:disabled){background:var(--btnbg);filter:opacity(.88)}
+.btn.primary::after{display:none!important}
+.btn.danger{color:var(--bad);border-color:var(--line2);background:transparent}
+.btn.success,#gen.success{background:var(--ok)!important;border-color:var(--ok)!important;color:#fff!important}
+input[type=text],input[type=password],input[type=number],input[type=url],input[type=email],input[type=datetime-local],select,textarea{background:var(--field);border:1px solid var(--line2);border-radius:9px;padding:10px 12px;font-weight:450}
+input:focus,select:focus,textarea:focus{border-color:var(--ink);box-shadow:none}
+input[type=range]{accent-color:var(--ink)}
+textarea{line-height:1.7}
+label.f{font-weight:500}label.f b{font-weight:600}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+/* layout */
+.shell{max-width:1240px;gap:20px;padding:20px 16px}
+.side{background:var(--glass);border:1px solid var(--line);border-radius:14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:16px 12px;gap:10px}
+.brand-name{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--ink);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.brand .subb{color:var(--muted);letter-spacing:.06em;font-weight:500;font-size:11px}
+.brand-logo{border-radius:8px}
+.tab{border-radius:8px;font-weight:500;font-size:14px;padding:9px 12px;color:var(--muted);border:0}
+.tab:hover,.tab:not([aria-selected=true]):hover{background:var(--glass2);color:var(--ink);transform:none}
+.tab[aria-selected=true]{background:var(--glass3);color:var(--ink);box-shadow:none;border:0;font-weight:600}
+.tab[aria-selected=true]::after{display:none}
+section[role=tabpanel]:not([hidden]){animation:none}
+.chip{border-radius:6px;font-weight:500;background:var(--glass2);border:1px solid var(--line);color:var(--muted)}
+.chip.gold,.chip.warn,.chip.pro{color:var(--gold)}
+.chip.ok{color:var(--ok)}.chip.bad{color:var(--bad)}
+.status{border-radius:12px;box-shadow:none;backdrop-filter:none;background:var(--glass)}
+.status .dot.ok,.status .dot.bad,.status .dot.warn{box-shadow:none}
+.mtop{padding:4px 0}
+.sidefoot .verTag,.verTag{color:var(--muted);font-size:11.5px;font-weight:500}
+.cust,.cust:hover{background:var(--glass2)!important;border:1px solid var(--line2)!important}
+/* studio */
+.studio{max-width:860px;margin:0 auto;width:100%}
+.studioCard{display:grid;gap:14px;padding:20px}
+.studioCard>*{min-width:0}
+.voicebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--field)}
+.vsum{min-width:0}
+.vsum .vn{font-size:15px;font-weight:650;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vsum .vmeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:3px}
+.vsum .idbox{font:11.5px ui-monospace,Menlo,monospace;color:var(--muted);background:none;border:0;padding:0;word-break:break-all}
+.vidin{border:1px dashed var(--line2);border-radius:10px;padding:8px 12px}
+.vidin summary{cursor:pointer;font-size:13px;color:var(--muted);font-weight:500}
+.vidin label{margin-top:10px}
+.modebar{margin:0}
+#useModeSeg{border-radius:9px;background:var(--field);border:1px solid var(--line2);padding:3px}
+#useModeSeg button{border-radius:7px;font-weight:550;color:var(--muted)}
+#useModeSeg button.on{background:var(--btnbg);color:var(--btnink);box-shadow:none}
+.txt-wrap{border-radius:10px}
+.studioCard textarea{border-radius:10px;font-size:15.5px}
+.bar,.msProg{height:4px;border-radius:99px;background:var(--glass3);border:0;overflow:hidden}
+.bar i,.msProg i{background:var(--ink)!important;box-shadow:none!important;border-radius:99px}
+.vsetBox{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--field)}
+.vsetBox>summary{list-style:none}
+.vsetBox>summary::-webkit-details-marker{display:none}
+.vsetBox h2{font-size:14px!important;font-weight:600}
+.prebtn{border-radius:7px;background:var(--glass2);border:1px solid var(--line);color:var(--muted);font-weight:500;box-shadow:none}
+.prebtn.on{background:var(--btnbg);color:var(--btnink);border-color:var(--btnbg)}
+.outBox{display:grid;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--field)}
+.outBox.flash{border-color:var(--ok)}
+#vizCanvas{width:100%;height:44px;border-radius:8px;background:transparent}
+.outBox audio{width:100%;height:42px;border-radius:8px}
+#gen{width:100%;min-height:50px;font-size:15.5px;font-weight:600;border-radius:10px}
+.studioCard .row:has(#gen){flex-wrap:nowrap}
+@media(max-width:900px){
+  .shell{padding:12px 12px 92px}
+  .side{border-radius:12px;padding:6px;left:8px;right:8px;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+  .tab{padding:8px 12px;font-size:13px;white-space:nowrap}
+  .studioCard{padding:14px}
+}
+
+/* compact studio — Generate button pehli screen par */
+@media(max-width:900px){
+  .mtop{flex-wrap:nowrap}.stBtnRow{display:none}
+  .studioCard{gap:10px;padding:12px}
+  .studioCard>.row.sb{flex-wrap:nowrap;margin-bottom:0!important}
+  .studioCard>.row.sb h2{font-size:16px}
+  #sample{min-width:0!important;max-width:120px;padding:6px 8px;font-size:13px}
+  .voicebar{padding:8px 10px}.vsum .idbox{display:none}
+  .vsum .vn{font-size:14px}
+  #useModeSeg button{padding:8px 6px;font-size:12.5px}
+  .modebar{display:grid;gap:8px}
+  .studioCard textarea{min-height:96px!important;font-size:15px}
+  #unlock20kBtn{display:none}
+  .studioCard .row.sb.small{gap:6px}
+}
+/* toast, popups */
+#toast{border-radius:10px;background:var(--glass3);border:1px solid var(--line2);box-shadow:0 8px 30px rgba(0,0,0,.3);color:var(--ink)}
+#surpop .sbox,.sbox{border-radius:14px;background:var(--glass);border:1px solid var(--line2);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+/* footer + legal */
+.lvfoot{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:center;padding:18px 8px;margin-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;background:none;box-shadow:none}
+.lvfoot a{color:var(--muted);text-decoration:none;font-weight:500}
+.lvfoot a:hover{color:var(--ink)}
+.lvfoot .lvlegal{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;width:100%;order:-1;font-size:13px}
+.lvfoot .plogo{display:none}
+.lvfoot .lvlinks{display:flex;gap:14px}
+#legalPop{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.6);display:none;align-items:flex-start;justify-content:center;padding:4vh 12px;overflow:auto}
+#legalPop.on{display:flex}
+#legalPop .lbox{background:var(--glass);color:var(--ink);border:1px solid var(--line2);border-radius:14px;max-width:760px;width:100%;padding:22px 22px 26px}
+#legalPop h2{font-size:22px;margin:0 0 4px}
+#legalPop h4{margin:18px 0 4px;font-size:15px}
+#legalPop p,#legalPop li{color:var(--muted);font-size:14px;line-height:1.7}
+#legalPop ul{padding-left:20px;margin:6px 0}
+#legalPop .ltabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 4px}
+</style>
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
@@ -809,18 +940,18 @@ html.paused *{animation-play-state:paused!important}
     </div>
     <button class="acctchip acctBtn" type="button" style="margin:2px 0 10px" aria-label="Account"></button>
     <nav class="nav" role="tablist" aria-label="Sections">
-      <button class="tab" role="tab" data-tab="studio" aria-selected="true">🎙️ Text to Speech</button>
-      <button class="tab" role="tab" data-tab="voices" aria-selected="false">🎭 Voices Library</button>
-      <button class="tab" role="tab" data-tab="vids" aria-selected="false">🆔 Voice IDs</button>
-      <button class="tab" role="tab" data-tab="history" aria-selected="false">🎧 History</button>
-      <button class="tab" role="tab" data-tab="clone" aria-selected="false">🧬 Instant Clone</button>
-      <button class="tab" role="tab" data-tab="stt" aria-selected="false">📝 Awaaz se Text</button>
-      <button class="tab" role="tab" data-tab="mixer" aria-selected="false">🎚️ Mixer &amp; Effects</button>
-      <button class="tab" role="tab" data-tab="eleven" aria-selected="false">🎙️ ElevenLabs</button>
-      <button class="tab" role="tab" data-tab="connect" aria-selected="false">🔑 Connect &amp; Key</button>
-      <button class="tab" role="tab" data-tab="plans" aria-selected="false">💎 Plans &amp; Upgrade</button>
-      <button class="tab" role="tab" data-tab="contact" aria-selected="false">💬 Contact</button>
-      <button class="tab" role="tab" data-tab="owner" aria-selected="false">👑 Owner</button>
+      <button class="tab" role="tab" data-tab="studio" aria-selected="true">Text to Speech</button>
+      <button class="tab" role="tab" data-tab="voices" aria-selected="false">Voices Library</button>
+      <button class="tab" role="tab" data-tab="vids" aria-selected="false">Voice IDs</button>
+      <button class="tab" role="tab" data-tab="history" aria-selected="false">History</button>
+      <button class="tab" role="tab" data-tab="clone" aria-selected="false">Instant Clone</button>
+      <button class="tab" role="tab" data-tab="stt" aria-selected="false">Awaaz se Text</button>
+      <button class="tab" role="tab" data-tab="mixer" aria-selected="false">Mixer &amp; Effects</button>
+      <button class="tab" role="tab" data-tab="eleven" aria-selected="false">ElevenLabs</button>
+      <button class="tab" role="tab" data-tab="connect" aria-selected="false">Connect &amp; Key</button>
+      <button class="tab" role="tab" data-tab="plans" aria-selected="false">Plans &amp; Upgrade</button>
+      <button class="tab" role="tab" data-tab="contact" aria-selected="false">Contact</button>
+      <button class="tab" role="tab" data-tab="owner" aria-selected="false">Owner</button>
     </nav>
     <div class="sidefoot">
       <div class="row" style="flex-wrap:nowrap;gap:8px"><button class="btn sm" id="themeBtn" type="button" style="flex:1">🌓 Theme Badlo</button><button class="btn sm sfxBtn" type="button" aria-label="Click sound">🔔</button></div>
@@ -875,9 +1006,8 @@ html.paused *{animation-play-state:paused!important}
 
   <!-- ================= STUDIO ================= -->
   <section id="p-studio" role="tabpanel">
-    <div class="cols">
-      <div class="grid">
-        <div class="glass">
+    <div class="studio">
+      <div class="glass studioCard">
           <div class="row sb" style="margin-bottom:8px">
             <h2 style="margin:0">Text to Speech</h2>
             <div class="row" style="gap:8px">
@@ -891,16 +1021,15 @@ html.paused *{animation-play-state:paused!important}
             </div>
           </div>
 
-          <!-- Quick Mood Presets -->
-          <div class="presets" id="moodPresets" aria-label="Quick voice mood">
-            <button type="button" class="prebtn on" data-emo="" data-spd="1">✨ Natural</button>
-            <button type="button" class="prebtn" data-emo="affectionate" data-spd="0.95">💖 Romantic</button>
-            <button type="button" class="prebtn" data-emo="contemplative" data-spd="0.95">📖 Storytelling</button>
-            <button type="button" class="prebtn" data-emo="determined" data-spd="1.05">🔥 Motivational</button>
-            <button type="button" class="prebtn" data-emo="calm" data-spd="0.9">🌿 Calm</button>
-            <button type="button" class="prebtn" data-emo="excited" data-spd="1.1">⚡ Energetic</button>
-          </div>
 
+        <div class="voicebar">
+          <div id="vsum" class="vsum"></div>
+          <button class="btn sm" id="goVoices" type="button">Voice badlo</button>
+        </div>
+        <details class="vidin"><summary>Voice ID se connect karo</summary>
+          <label class="f" style="margin-top:12px"><b>Voice ID se connect karo</b>
+            <div class="row" style="flex-wrap:nowrap"><input id="vidInp" type="text" placeholder="Voice ID yahan paste karo" autocapitalize="off" spellcheck="false"><button class="btn sm" id="vidSet" type="button">Set</button></div></label>
+        </details>
           <!-- Honeypot anti-bot field -->
           <input type="text" id="hpTrap" name="website_url" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true">
 
@@ -910,7 +1039,7 @@ html.paused *{animation-play-state:paused!important}
               <select id="limSel" aria-label="Character limit"><option value="20000">20,000 (20k · ≈20 min)</option><option value="30000">30,000 (30k · ≈30 min)</option><option value="60000">60,000 (60k · ≈60 min)</option><option value="unl">♾️ Unlimited (120,000+)</option></select></label>
           </div>
           <div class="txt-wrap" id="txtWrap">
-            <textarea id="txt" maxlength="250" style="min-height:210px" placeholder="Yahan jo bolwana hai wo likho... (Default mode mein 250 characters tak. Login karke credits lo ya Connect tab mein key file upload karo — 20k / 30k / 60k / Unlimited limit chuno!)"></textarea>
+            <textarea id="txt" maxlength="250" style="min-height:130px" placeholder="Yahan apna text likho…"></textarea>
           </div>
 
           <!-- Character Limit Progress Bar -->
@@ -925,11 +1054,40 @@ html.paused *{animation-play-state:paused!important}
               </span>
             </div>
           </div>
+
+        <div class="row">
+          <button class="btn primary" id="gen" type="button" style="flex:1;min-height:56px;font-size:17px">Generate voice</button>
+          <button class="btn danger" id="stop" type="button" hidden>Roko</button>
+        </div>
+        <div class="outBox" id="outBox">
+          
+          <canvas id="vizCanvas" width="420" height="56" aria-hidden="true"></canvas>
+          <div id="prog" hidden style="margin-bottom:12px">
+            <div class="bar"><i id="progBar"></i></div>
+            <div class="small muted" id="progTxt" style="margin-top:6px"></div>
+          </div>
+          <audio id="player" controls preload="metadata"></audio>
+          <div class="row" style="margin-top:12px">
+            <button class="btn primary" id="dl" type="button" disabled>⬇️ Download</button>
+            <button class="btn" id="goHist" type="button">History dekho</button>
+            <span class="small muted" id="outInfo">Abhi koi audio nahi.</span>
+          </div>
         </div>
 
-        <details class="glass" id="vset">
+        <details class="vsetBox" id="vset">
           <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><h2 style="margin:0">⚙️ Awaaz ki setting</h2><span class="small muted" id="vsetSum">Tap karke kholo</span></summary>
           <div style="height:12px"></div>
+          <!-- Quick Mood Presets -->
+          <div class="presets" id="moodPresets" aria-label="Quick voice mood">
+            <button type="button" class="prebtn on" data-emo="" data-spd="1">✨ Natural</button>
+            <button type="button" class="prebtn" data-emo="affectionate" data-spd="0.95">💖 Romantic</button>
+            <button type="button" class="prebtn" data-emo="contemplative" data-spd="0.95">📖 Storytelling</button>
+            <button type="button" class="prebtn" data-emo="determined" data-spd="1.05">🔥 Motivational</button>
+            <button type="button" class="prebtn" data-emo="calm" data-spd="0.9">🌿 Calm</button>
+            <button type="button" class="prebtn" data-emo="excited" data-spd="1.1">⚡ Energetic</button>
+          </div>
+
+
           <div class="g2">
             <label class="f"><b>Bhasha</b><select id="lang"></select></label>
             <label class="f"><b>Emotion</b><select id="emo"></select></label>
@@ -957,35 +1115,7 @@ html.paused *{animation-play-state:paused!important}
           </details>
         </details>
 
-        <div class="row">
-          <button class="btn primary" id="gen" type="button" style="flex:1;min-height:56px;font-size:17px">🎙️ Awaaz banao</button>
-          <button class="btn danger" id="stop" type="button" hidden>Roko</button>
-        </div>
-      </div>
 
-      <div class="grid">
-        <div class="glass">
-          <h2>Chuni hui awaaz</h2>
-          <div id="vsum" class="grid" style="gap:6px"></div>
-          <label class="f" style="margin-top:12px"><b>Voice ID se connect karo</b>
-            <div class="row" style="flex-wrap:nowrap"><input id="vidInp" type="text" placeholder="Voice ID yahan paste karo" autocapitalize="off" spellcheck="false"><button class="btn sm" id="vidSet" type="button">Set</button></div></label>
-          <div class="row" style="margin-top:10px"><button class="btn sm primary" id="goVoices" type="button">🎭 Saari Voices Dekho</button></div>
-        </div>
-
-        <div class="glass" id="outBox">
-          <h2>Output &amp; 3D Wave Visualizer</h2>
-          <canvas id="vizCanvas" width="420" height="56" aria-hidden="true"></canvas>
-          <div id="prog" hidden style="margin-bottom:12px">
-            <div class="bar"><i id="progBar"></i></div>
-            <div class="small muted" id="progTxt" style="margin-top:6px"></div>
-          </div>
-          <audio id="player" controls preload="metadata"></audio>
-          <div class="row" style="margin-top:12px">
-            <button class="btn primary" id="dl" type="button" disabled>⬇️ Download</button>
-            <button class="btn" id="goHist" type="button">History dekho</button>
-            <span class="small muted" id="outInfo">Abhi koi audio nahi.</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1716,7 +1846,6 @@ html.paused *{animation-play-state:paused!important}
           </div>
         </div>
       </div>
-    </div>
     <div class="glass grid" style="margin-top:16px" id="accOwner">
       <div class="row sb"><div><h3 style="margin:0">👥 Accounts &amp; Characters</h3><p class="small muted" style="margin:3px 0 0">Signup hue users, unke credits, kharid. Manual UPI payment ke baad yahin se characters do.</p></div><div class="row"><span class="chip" id="accMail">Mail ?</span><span class="chip" id="accPay">Payment: UPI QR</span><button class="btn sm" id="accRef" type="button">🔄 Refresh</button></div></div>
       <div class="row" style="background:var(--field);padding:12px;border-radius:14px;border:1px solid var(--line)">
@@ -1748,9 +1877,11 @@ html.paused *{animation-play-state:paused!important}
       </div>
       <div class="grid" id="elOwnList" style="gap:12px"><span class="small muted">Orders load ho rahe hain…</span></div>
     </div>
+    </div>
   </section>
 
   <footer class="lvfoot">
+    <span class="lvlegal"><a href="#terms" data-legal="terms">Terms</a><a href="#privacy" data-legal="privacy">Privacy Policy</a><a href="#refund" data-legal="refund">Refund &amp; Cancellation</a></span>
     <span class="lvmade">Made with Janusia</span>
     <span class="lvver">⚡ v6.8 · Updated 26 Nov 2026</span>
     <span class="lvby">Crafted by <b class="nm">J Ashish Gupta</b></span>
@@ -1759,6 +1890,41 @@ html.paused *{animation-play-state:paused!important}
     <section class="glass" style="margin-top:18px" aria-label="About Janusia"><h2 style="margin:0 0 6px;font-size:18px">Janusia — 3D AI Voice Studio</h2><p class="small muted" style="line-height:1.7">Janusia (janusia.in) ek advanced AI voice generator hai: realistic text to speech in Hindi, Hinglish aur English, instant voice cloning, audio merge aur studio effects — YouTube videos, reels aur content creation ke liye.</p></section>
   </main>
  </div>
+</div>
+
+
+<div id="legalPop" role="dialog" aria-modal="true" aria-label="Policies" hidden>
+  <div class="lbox">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><b style="font-size:13px;color:var(--muted)">Janusia · janusia.in</b><button class="btn sm" type="button" id="legalX">Band karo</button></div>
+    <div class="ltabs"><button class="btn sm" type="button" data-lg="terms">Terms of Service</button><button class="btn sm" type="button" data-lg="privacy">Privacy Policy</button><button class="btn sm" type="button" data-lg="refund">Refund &amp; Cancellation</button></div>
+    <div id="lg-terms">
+      <h2>Terms of Service</h2><p>Last updated: 26 Nov 2026</p>
+      <h4>1. Service</h4><p>Janusia (janusia.in) ek online AI voice studio hai: text-to-speech, voice library, audio tools aur custom voice orders. Website use karke aap in terms ko maante hain.</p>
+      <h4>2. Account aur credits</h4><ul><li>Credits/characters ke liye login zaroori hai. Apna password aur OTP kisi se share na karein.</li><li>Credits aapke account ke liye hain, transfer ya resell nahi ho sakte.</li><li>Free mode mein limited characters milte hain; limit aur rates website par dikhaye gaye plan ke hisaab se badal sakte hain.</li></ul>
+      <h4>3. Sahi use</h4><p>Aap kisi ki awaaz uski ijazat ke bina clone nahi karenge, dhokha-dhadi, jhoothi khabar, harassment, ya kisi kanoon ke khilaf content nahi banayenge. Bot/VPN se limit bypass karne ki koshish par account block ho sakta hai.</p>
+      <h4>4. Content ki zimmedari</h4><p>Jo text aap likhte ya upload karte hain aur jo audio banta hai, uski zimmedari aapki hai. Public use se pehle rights check karna aapka kaam hai.</p>
+      <h4>5. Payment</h4><p>Payment UPI/QR se hota hai. Payment ke baad UTR bhejna zaroori hai; verify hone ke baad credits ya plan activate hota hai. Galat UTR ya fake claim par account band ho sakta hai.</p>
+      <h4>6. ElevenLabs custom orders</h4><p>Is section mein aap script, voice name, Voice ID, model aur deadline bhejte hain. Owner price batata hai; payment ke baad kaam shuru hota hai aur audio aapko isi tab mein milta hai. Time deadline ke aas-paas rakha jata hai, par guarantee voice provider ki availability par bhi nirbhar hai.</p>
+      <h4>7. Availability</h4><p>Service &ldquo;jaisi hai waisi&rdquo; di jati hai. Maintenance, provider limit ya network ki wajah se kabhi-kabhi rukawat ho sakti hai.</p>
+      <h4>8. Badlav</h4><p>Terms badle ja sakte hain; naya version isi page par date ke saath dikhega. Sawal ke liye Contact tab ya ashishkr88as@gmail.com par likhein.</p>
+    </div>
+    <div id="lg-privacy" hidden>
+      <h2>Privacy Policy</h2><p>Last updated: 26 Nov 2026</p>
+      <h4>Hum kya jama karte hain</h4><ul><li>Account: naam, email, aur login ka record.</li><li>Use: kitne characters/credits use hue, kab, aur kaun si voice.</li><li>Security: IP address aur basic device info, taaki abuse aur VPN/bot misuse roka ja sake.</li><li>Orders/payments: ElevenLabs order ka text, deadline aur UTR number.</li></ul>
+      <h4>Kaise use karte hain</h4><p>Sirf service chalane, credits ginne, payment verify karne, support dene aur abuse rokne ke liye. Hum aapka data bechte nahi.</p>
+      <h4>Third-party services</h4><p>Awaaz banane ke liye text hamare voice engine provider ke paas process hota hai. Hosting Cloudflare/GitHub Pages par hai. Email OTP bhejne ke liye email service use hoti hai.</p>
+      <h4>Aapki API key</h4><p>Agar aap apni key connect karte hain to wo aapke browser mein encrypted hokar rehti hai aur seedhe provider ko jati hai.</p>
+      <h4>Cookies / storage</h4><p>Hum login, theme aur history ke liye browser storage use karte hain. Browser data clear karne par ye hat jata hai.</p>
+      <h4>Aapke adhikar</h4><p>Account ya data hatwane ke liye ashishkr88as@gmail.com par mail karein; hum jaldi se jaldi karenge.</p>
+    </div>
+    <div id="lg-refund" hidden>
+      <h2>Refund &amp; Cancellation</h2><p>Last updated: 26 Nov 2026</p>
+      <h4>Credits</h4><ul><li>Agar voice nahi bani (engine error), to us request ke credits apne-aap wapas ho jate hain.</li><li>Jo audio ban chuki hai, uske credits wapas nahi hote.</li><li>Mile hue credits ka cash refund nahi hota; galat payment ya double payment par proof (UTR/screenshot) ke saath sampark karein.</li></ul>
+      <h4>Plans</h4><p>Plan activate hone ke baad unused time/credits ka refund nahi hota. Activate na hua ho to 7 din ke andar UTR ke saath bata dein, hum verify karke refund ya activation karenge.</p>
+      <h4>ElevenLabs custom orders</h4><ul><li>Kaam shuru hone se pehle order cancel kar sakte hain; payment hui ho to refund diya jayega.</li><li>Kaam shuru/poora hone ke baad refund nahi, par audio mein galti hui to hum free mein dobara banayenge.</li></ul>
+      <h4>Kaise sampark karein</h4><p>Email: ashishkr88as@gmail.com · Telegram: t.me/Janusia10. Refund approve hone par 5-7 working din mein original UPI par bheja jata hai.</p>
+    </div>
+  </div>
 </div>
 
 <!-- 3D Floating Celebration Card ("Made with Janusia") -->
@@ -2733,6 +2899,7 @@ function friendly(e) {
   if (e.code === "NETWORK") return { short: "Network dikkat", long: "Server tak request nahi pahunchi.", fix: "Internet check karo, VPN ya ad-blocker band karo." };
   if (e.code === "TIMEOUT") return { short: "Server slow hai", long: "Server ne time par jawab nahi diya.", fix: "Thodi der baad dobara try karo." };
   const s = e.status;
+  if (S.viaCr && (s === 401 || s === 402 || s === 403 || s === 429 || s >= 500)) return { short: "Voice engine abhi busy/band hai", long: "Janusia ki server-side engine key ka limit ya credit khatam ho sakta hai. Aapke credits wapas kar diye gaye hain." + (m ? " (" + m + ")" : ""), fix: "Thodi der baad try karo, ya Connect tab mein apni key lagao. Owner: Owner tab mein engine keys check karo." };
   if (s === 401 || s === 403) return { short: "Key invalid hai", long: "API key galat ya expire ho gayi hai. " + m, fix: "Nayi key file upload karo." };
   if (s === 402) return { short: "Credits khatam", long: "Is API key ke credits khatam ho gaye hain. " + m, fix: "Nayi key file upload karo." };
   if (s === 404) return { short: "Voice nahi mili", long: "Chuni hui Voice ID nahi mili. " + m, fix: "Voices Library se koi doosri awaaz chuno." };
@@ -3177,9 +3344,8 @@ el("vreload").addEventListener("click", () => { if (!keyOk()) { toast("Pehle con
 function selectVoice(v) { try { if (UI67.byUser()) UI67.voiceBanner(v.name); } catch (_) {} S.voiceId = v.id; S.voiceName = v.name; S.voiceLang = v.language || ""; try { localStorage.setItem("jn_kv_" + (S.keyId || "default"), JSON.stringify({ id: v.id })); } catch (_) {} renderVsum(); renderVoices(); }
 function renderVsum() {
   const v = S.voices.find(x => x.id === S.voiceId);
-  el("vsum").innerHTML = `<div class="vn" style="font-size:18px;font-weight:800;color:var(--pink2)">${esc(S.voiceName)}</div>
-    <div class="row" style="gap:6px">${S.voiceLang ? `<span class="chip">${esc(LN(S.voiceLang))}</span>` : ""}${v && v.gender ? `<span class="chip">${GL_[v.gender] || ""}</span>` : ""}${v && v.is_owner ? '<span class="chip pro">⭐ Pro</span>' : ""}</div>
-    <div class="idbox">${esc(S.voiceId)}</div>`;
+  el("vsum").innerHTML = `<div class="vn">${esc(S.voiceName)}</div>
+    <div class="vmeta">${S.voiceLang ? `<span class="chip">${esc(LN(S.voiceLang))}</span>` : ""}${v && v.gender ? `<span class="chip">${GL_[v.gender] || ""}</span>` : ""}${v && v.is_owner ? '<span class="chip pro">Pro</span>' : ""}<span class="idbox">${esc(S.voiceId)}</span></div>`;
 }
 el("vidSet").addEventListener("click", () => {
   const id = el("vidInp").value.trim(); if (id.length < 8) { toast("Sahi Voice ID daalo"); return; }
@@ -3258,8 +3424,8 @@ function floatToWav(chunks, sr) {
 /* ============================ 3D "MADE WITH JANUSIA" CELEBRATION ============================ */
 function successFx() {
   const g = el("gen"), ob = el("outBox");
-  clearTimeout(successFx._t); g.classList.add("success"); g.textContent = "✅ Awaaz Taiyaar Hai!"; ob.classList.add("flash");
-  successFx._t = setTimeout(() => { g.classList.remove("success"); g.textContent = "🎙️ Awaaz banao"; ob.classList.remove("flash"); }, 3200);
+  clearTimeout(successFx._t); g.classList.add("success"); g.textContent = "Awaaz taiyaar hai"; ob.classList.add("flash"); try { ob.scrollIntoView({ block: "nearest", behavior: "smooth" }); } catch (_) {}
+  successFx._t = setTimeout(() => { g.classList.remove("success"); g.textContent = "Generate voice"; ob.classList.remove("flash"); }, 3200);
 }
 function madeWith() {
   const box = el("madeBy"); if (!box) return;
@@ -5389,6 +5555,26 @@ const Merge = (() => {
 (function () {   // voice settings ka chhota summary (card band ho tab bhi dikhe)
   const sum = () => { try { const l = el("lang"), e = el("emo"), f = el("fmt"); el("vsetSum").textContent = [l.selectedOptions[0] && l.selectedOptions[0].text, e.selectedOptions[0] && e.selectedOptions[0].text, f.selectedOptions[0] && f.selectedOptions[0].text.split(" ")[0] + " " + (f.selectedOptions[0].text.match(/\d+(\.\d+)? ?k?Hz|\d+ kbps/i) || [""])[0], (+el("spd").value).toFixed(2) + "x"].filter(Boolean).join(" · "); } catch (_) {} };
   ["lang", "emo", "fmt", "spd", "vol"].forEach(i => { const n = el(i); if (n) { n.addEventListener("change", sum); n.addEventListener("input", sum); } }); setTimeout(sum, 1200); setTimeout(sum, 3500);
+})();
+
+(function () {   // Terms / Privacy / Refund pages
+  const pop = document.getElementById("legalPop"); if (!pop) return;
+  const secs = ["terms", "privacy", "refund"];
+  function show(k) {
+    if (secs.indexOf(k) < 0) k = "terms";
+    secs.forEach(x => { const n = document.getElementById("lg-" + x); if (n) n.hidden = x !== k; });
+    pop.hidden = false; pop.classList.add("on"); pop.scrollTop = 0;
+    try { history.replaceState(null, "", "#" + k); } catch (_) {}
+  }
+  function hide() { pop.classList.remove("on"); pop.hidden = true; try { history.replaceState(null, "", location.pathname + location.search); } catch (_) {} }
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-legal]"); if (a) { e.preventDefault(); show(a.getAttribute("data-legal")); return; }
+    const t = e.target.closest("[data-lg]"); if (t) { show(t.getAttribute("data-lg")); return; }
+    if (e.target === pop || e.target.id === "legalX") hide();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !pop.hidden) hide(); });
+  const h = (location.hash || "").slice(1); if (secs.indexOf(h) >= 0) show(h);
+  window.JanusiaLegal = { show, hide };
 })();
 
 /* ============================ INITIALIZE ON LOAD ============================ */
